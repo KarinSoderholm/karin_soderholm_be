@@ -34,6 +34,7 @@ RSpec.describe "/patterns", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
+
       Pattern.create! valid_attributes
       get patterns_url, headers: valid_headers, as: :json
       expect(response).to be_successful
