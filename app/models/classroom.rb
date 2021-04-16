@@ -5,8 +5,8 @@ class Classroom < ApplicationRecord
   validates :date, presence: true
   validates :time, presence: true
   validates :location, presence: true
-  validates :requirements, presence: true
-  validates :tools_needed, presence: true
+  # validates :requirements, presence: true
+  # validates :tools_needed, presence: true
   validates :active, presence: true
   validates :cost, presence: true
 end
