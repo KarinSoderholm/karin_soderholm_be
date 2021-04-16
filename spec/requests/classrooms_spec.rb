@@ -33,15 +33,109 @@ RSpec.describe "/classrooms", type: :request do
   }
 
   describe "GET /index" do
-    it "renders a successful response" do
+    it "renders a successful response without requirements or tools" do
+      valid_attributes =  {
+        name: "Crochet 101",
+        description: "The basics of crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "02:43:16.644577",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
       Classroom.create! valid_attributes
       get classrooms_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json).to be_an Array
+      first = json[0]
+      expect(first).to be_a Hash
+      expect(first[:id]).to be_an Integer
+      expect(first[:name]).to be_a String
+      expect(first[:description]).to be_a String
+      expect(first[:image]).to be_a String
+      expect(first[:date]).to be_a String
+      expect(first[:time]).to be_a String
+      expect(first[:cost]).to be_a Float
+      expect(first[:active]).to eq(true)
+    end
+
+    it "renders a successful response with requirements or tools" do
+      valid_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
+      classroom = Classroom.create! valid_attributes
+      #
+      # requirement_attributes = {
+      #   name: "Crochet 101",
+      #   classroom_id: classroom.id
+      # }
+      #
+      # requirement = Requirement.create! requirement_attributes
+      #
+      # tool_attributes = {
+      #   name: "Crochet hooks",
+      #   classroom_id: classroom.id
+      # }
+      #
+      # tool = Tool.create! tool_attributes
+
+      # classroom_attributes =  {
+      #   name: "Crochet 201",
+      #   description: "The intermediate course about crochet",
+      #   image: "https://i.imgur.com/Q1VOgmfb.jpg",
+      #   date: "2021-04-18",
+      #   time: "02:43:16.644577",
+      #   location: "123 Main St., Wheat Ridge, CO 80033",
+      #   requirements: requirement.id,
+      #   tools_needed: tool.id,
+      #   active: true,
+      #   cost: 65.00
+      # }
+      # classroom2 = Classroom.create! classroom_attributes
+
+      get classrooms_url, headers: valid_headers, as: :json
+      expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json).to be_an Array
+      first = json[0]
+      expect(first).to be_a Hash
+      expect(first[:id]).to be_an Integer
+      expect(first[:name]).to be_a String
+      expect(first[:description]).to be_a String
+      expect(first[:image]).to be_a String
+      expect(first[:date]).to be_a String
+      expect(first[:time]).to be_a String
+      expect(first[:cost]).to be_a Float
+      expect(first[:active]).to eq(true)
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
+      valid_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
       classroom = Classroom.create! valid_attributes
       get classroom_url(classroom), as: :json
       expect(response).to be_successful
@@ -51,6 +145,17 @@ RSpec.describe "/classrooms", type: :request do
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Classroom" do
+        valid_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
         expect {
           post classrooms_url,
                params: { classroom: valid_attributes }, headers: valid_headers, as: :json
@@ -58,6 +163,17 @@ RSpec.describe "/classrooms", type: :request do
       end
 
       it "renders a JSON response with the new classroom" do
+        valid_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
         post classrooms_url,
              params: { classroom: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
@@ -67,6 +183,17 @@ RSpec.describe "/classrooms", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Classroom" do
+        invalid_attributes =  {
+          name: "Crochet 201",
+          description: "",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
         expect {
           post classrooms_url,
                params: { classroom: invalid_attributes }, as: :json
@@ -74,6 +201,17 @@ RSpec.describe "/classrooms", type: :request do
       end
 
       it "renders a JSON response with errors for the new classroom" do
+        invalid_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: nil,
+          cost: 65.00
+        }
+
         post classrooms_url,
              params: { classroom: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
@@ -84,40 +222,151 @@ RSpec.describe "/classrooms", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      # let(:new_attributes) {
+      #   skip("Add a hash of attributes valid for your model")
+      # }
 
       it "updates the requested classroom" do
+        valid_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
         classroom = Classroom.create! valid_attributes
+
+        new_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-20",
+          time: "11:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
         patch classroom_url(classroom),
               params: { classroom: new_attributes }, headers: valid_headers, as: :json
         classroom.reload
-        skip("Add assertions for updated state")
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_an String
+        expect(json[:description]).to be_an String
+        expect(json[:image]).to be_an String
+        expect(json[:date]).to be_an String
+        expect(json[:date]).to eq("2021-04-20")
+        expect(json[:date]).to_not eq("2021-04-18")
+        expect(json[:time]).to be_an String
+        expect(json[:time]).to eq("2000-01-01T11:00:00.000Z")
+        expect(json[:time]).to_not eq("22:00")
+        expect(json[:location]).to be_an String
+        expect(json[:cost]).to be_an Float
+        expect(json[:active]).to eq(true)
       end
 
       it "renders a JSON response with the classroom" do
+        valid_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
         classroom = Classroom.create! valid_attributes
+
+        new_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-20",
+          time: "02:43:16.644577",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: false,
+          cost: 85.00
+        }
+
         patch classroom_url(classroom),
               params: { classroom: new_attributes }, headers: valid_headers, as: :json
+
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:name]).to be_a String
+        expect(json[:description]).to be_a String
+        expect(json[:image]).to be_a String
+        expect(json[:date]).to be_a String
+        expect(json[:time]).to be_a String
+        expect(json[:location]).to be_a String
+        expect(json[:cost]).to be_a Float
+        expect(json[:active]).to eq(false)
       end
     end
 
     context "with invalid parameters" do
       it "renders a JSON response with errors for the classroom" do
+        valid_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
         classroom = Classroom.create! valid_attributes
+
+        invalid_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "",
+          date: "2021-04-20",
+          time: "11:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: false,
+          cost: nil
+        }
+
         patch classroom_url(classroom),
               params: { classroom: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:image]).to eq(["can't be blank"])
+        expect(json[:cost]).to eq(["can't be blank"])
+        expect(response.status).to eq(422)  
       end
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested classroom" do
+      valid_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
       classroom = Classroom.create! valid_attributes
       expect {
         delete classroom_url(classroom), headers: valid_headers, as: :json
