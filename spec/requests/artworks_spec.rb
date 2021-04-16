@@ -17,6 +17,14 @@ RSpec.describe "/artworks", type: :request do
   # Artwork. As you add validations to Artwork, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
+  # # @valid_attributes = {
+  #   name: "Peaceful Prairie",
+  #   description: "Inspired by the eastern plains of Colorado",
+  #   image: "https://i.imgur.com/KntRJfab.jpg",
+  #   create_date: "2021-01-12 02:43:16.644577",
+  #   sell_date: nil,
+  #   cost: 350.00,
+  #   available: true
     skip("Add a hash of attributes valid for your model")
   }
 
@@ -34,27 +42,109 @@ RSpec.describe "/artworks", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
+      valid_attributes = {
+        name: "Peaceful Prairie",
+        description: "Inspired by the eastern plains of Colorado",
+        image: "https://i.imgur.com/KntRJfab.jpg",
+        create_date: "2021-01-12 02:43:16.644577",
+        sell_date: nil,
+        cost: 350.00,
+        available: true
+      }
+      valid_attributes1 = {
+        name: "Crazy Calm",
+        description: "The calm that comes over you in by a high mountain lake",
+        image: "https://i.imgur.com/QV39L4Pb.jpg",
+        create_date: "2021-01-12 02:43:16.644577",
+        sell_date: nil,
+        cost: 450.00,
+        available: true
+      }
+
       Artwork.create! valid_attributes
+      Artwork.create! valid_attributes1
       get artworks_url, headers: valid_headers, as: :json
+
       expect(response).to be_successful
+      expect(response.body).to be_a String
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json.count).to eq 2
+      expect(json[0][:name]).to be_a String
+      expect(json[0][:name]).to eq("Peaceful Prairie")
+      expect(json[0][:description]).to be_a String
+      expect(json[0][:description]).to eq("Inspired by the eastern plains of Colorado")
+      expect(json[0][:description]).to_not eq("The calm that comes over you in by a high mountain lake")
+      expect(json[0][:image]).to be_a String
+      expect(json[0][:image]).to eq("https://i.imgur.com/KntRJfab.jpg")
+      expect(json[0][:create_date]).to be_a String
+      expect(json[0][:create_date]).to eq("2021-01-12")
+      expect(json[0][:sell_date]).to eq(nil)
+      expect(json[0][:cost]).to be_a Float
+      expect(json[0][:cost]).to eq(350.00)
+      expect(json[0][:cost]).to_not eq(450.00)
+      expect(json[0][:available]).to eq(true)
+      # binding.pry
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
+      valid_attributes = {
+        name: "Peaceful Prairie",
+        description: "Inspired by the eastern plains of Colorado",
+        image: "https://i.imgur.com/KntRJfab.jpg",
+        create_date: "2021-01-12 02:43:16.644577",
+        sell_date: nil,
+        cost: 350.00,
+        available: true
+      }
       artwork = Artwork.create! valid_attributes
       get artwork_url(artwork), as: :json
       expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json[:name]).to be_a String
+      expect(json[:description]).to be_a String
+      expect(json[:image]).to be_a String
+      expect(json[:create_date]).to be_a String
+      expect(json[:sell_date]).to eq(nil)
+      expect(json[:cost]).to be_a Float
+      expect(json[:available]).to eq(true)
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Artwork" do
+        peaceful_prairie = {
+          name: "Peaceful Prairie",
+          description: "Inspired by the eastern plains of Colorado",
+          image: "https://i.imgur.com/KntRJfab.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: 350.00,
+          available: true
+        }
+
+        artwork = Artwork.create! peaceful_prairie
+        valid_attributes = {
+          name: "Crazy Calm",
+          description: "The calm that comes over you in by a high mountain lake",
+          image: "https://i.imgur.com/QV39L4Pb.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: 550.00,
+          available: true
+        }
+
+        json = post artworks_url, params: { artwork: valid_attributes }, headers: valid_headers, as: :json
+
         expect {
           post artworks_url,
                params: { artwork: valid_attributes }, headers: valid_headers, as: :json
         }.to change(Artwork, :count).by(1)
+        expect(json).to eq(201)
       end
 
       it "renders a JSON response with the new artwork" do
@@ -67,6 +157,15 @@ RSpec.describe "/artworks", type: :request do
 
     context "with invalid parameters" do
       it "does not create a new Artwork" do
+        invalid_attributes = {
+          name: "Crazy Calm",
+          description: "The calm that comes over you in by a high mountain lake",
+          image: "https://i.imgur.com/QV39L4Pb.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: nil,
+          available: nil
+        }
         expect {
           post artworks_url,
                params: { artwork: invalid_attributes }, as: :json
