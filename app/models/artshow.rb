@@ -1,0 +1,2 @@
+class Artshow < ApplicationRecord
+end
