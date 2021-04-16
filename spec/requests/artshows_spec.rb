@@ -34,23 +34,73 @@ RSpec.describe "/artshows", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
+      valid_attributes = {
+        name: "Casting Shadows",
+        location: "Denver Art Museum",
+        start_date: "2021-01-12",
+        end_date: "2021-04-15",
+        entry_fee: nil
+      }
+
       Artshow.create! valid_attributes
       get artshows_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_a Array
+      first = json[0]
+      expect(first[:id]).to be_an Integer
+      expect(first[:name]).to be_a String
+      expect(first[:name]).to eq("Casting Shadows")
+      expect(first[:location]).to be_a String
+      expect(first[:location]).to eq("Denver Art Museum")
+      expect(first[:start_date]).to be_a String
+      expect(first[:start_date]).to eq("2021-01-12")
+      expect(first[:end_date]).to be_a String
+      expect(first[:end_date]).to eq("2021-04-15")
+      expect(first[:entry_fee]).to eq(nil)
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
+      valid_attributes = {
+        name: "Casting Shadows",
+        location: "Denver Art Museum",
+        start_date: "2021-01-12",
+        end_date: "2021-04-15",
+        entry_fee: nil
+      }
+
       artshow = Artshow.create! valid_attributes
       get artshow_url(artshow), as: :json
       expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_a Hash
+      expect(json[:id]).to be_an Integer
+      expect(json[:name]).to be_a String
+      expect(json[:name]).to eq("Casting Shadows")
+      expect(json[:location]).to be_a String
+      expect(json[:location]).to eq("Denver Art Museum")
+      expect(json[:start_date]).to be_a String
+      expect(json[:start_date]).to eq("2021-01-12")
+      expect(json[:end_date]).to be_a String
+      expect(json[:end_date]).to eq("2021-04-15")
+      expect(json[:entry_fee]).to eq(nil)
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Artshow" do
+        valid_attributes = {
+          name: "Casting Shadows",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: nil
+        }
+
         expect {
           post artshows_url,
                params: { artshow: valid_attributes }, headers: valid_headers, as: :json
@@ -58,15 +108,44 @@ RSpec.describe "/artshows", type: :request do
       end
 
       it "renders a JSON response with the new artshow" do
+        valid_attributes = {
+          name: "Casting Shadows",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: nil
+        }
+
         post artshows_url,
              params: { artshow: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.status).to eq(201)
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq("Casting Shadows")
+        expect(json[:location]).to be_a String
+        expect(json[:location]).to eq("Denver Art Museum")
+        expect(json[:start_date]).to be_a String
+        expect(json[:start_date]).to eq("2021-01-12")
+        expect(json[:end_date]).to be_a String
+        expect(json[:end_date]).to eq("2021-04-15")
+        expect(json[:entry_fee]).to eq(nil)
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Artshow" do
+        invalid_attributes = {
+          name: "",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: nil
+        }
         expect {
           post artshows_url,
                params: { artshow: invalid_attributes }, as: :json
@@ -74,54 +153,140 @@ RSpec.describe "/artshows", type: :request do
       end
 
       it "renders a JSON response with errors for the new artshow" do
+        invalid_attributes = {
+          name: "",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: nil
+        }
+
         post artshows_url,
              params: { artshow: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:name]).to eq(["can't be blank"])
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      # let(:new_attributes) {
+      #   skip("Add a hash of attributes valid for your model")
+      # }
 
       it "updates the requested artshow" do
+        valid_attributes = {
+          name: "Casting Shadows",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: nil
+        }
+
         artshow = Artshow.create! valid_attributes
+
+        new_attributes = {
+          name: "Casting Shadows",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: 100.00
+        }
+
         patch artshow_url(artshow),
               params: { artshow: new_attributes }, headers: valid_headers, as: :json
         artshow.reload
-        skip("Add assertions for updated state")
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:entry_fee]).to be_a Float
+        expect(json[:entry_fee]).to eq(100.00)
       end
 
       it "renders a JSON response with the artshow" do
+        valid_attributes = {
+          name: "Casting Shadows",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: nil
+        }
+
+        new_attributes = {
+          name: "Casting Shadows",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: 100.00
+        }
+
         artshow = Artshow.create! valid_attributes
         patch artshow_url(artshow),
               params: { artshow: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:entry_fee]).to be_a Float
+        expect(json[:entry_fee]).to eq(100.00)
+        expect(json[:entry_fee]).to_not eq(nil)
       end
     end
 
     context "with invalid parameters" do
       it "renders a JSON response with errors for the artshow" do
+        valid_attributes = {
+          name: "Casting Shadows",
+          location: "Denver Art Museum",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: nil
+        }
+
+        invalid_attributes = {
+          name: "Casting Shadows",
+          location: "",
+          start_date: "2021-01-12",
+          end_date: "2021-04-15",
+          entry_fee: 100.00
+        }
+
         artshow = Artshow.create! valid_attributes
         patch artshow_url(artshow),
               params: { artshow: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(json).to be_a Hash
+        expect(json[:location]).to be_an Array
+        expect(json[:location]).to eq(["can't be blank"])
       end
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested artshow" do
+      valid_attributes = {
+        name: "Casting Shadows",
+        location: "Denver Art Museum",
+        start_date: "2021-01-12",
+        end_date: "2021-04-15",
+        entry_fee: nil
+      }
+
       artshow = Artshow.create! valid_attributes
       expect {
         delete artshow_url(artshow), headers: valid_headers, as: :json
       }.to change(Artshow, :count).by(-1)
+      expect(response.body).to eq("")
+      expect(response.status).to eq(204)
     end
   end
 end
