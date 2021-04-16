@@ -10,20 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_215815) do
+ActiveRecord::Schema.define(version: 2021_04_16_032601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artist_statements", force: :cascade do |t|
+    t.string "name"
+    t.text "statement"
+    t.bigint "artwork_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artwork_id"], name: "index_artist_statements_on_artwork_id"
+  end
+
+  create_table "artshow_artworks", force: :cascade do |t|
+    t.bigint "artshow_id"
+    t.bigint "artwork_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artshow_id"], name: "index_artshow_artworks_on_artshow_id"
+    t.index ["artwork_id"], name: "index_artshow_artworks_on_artwork_id"
+  end
+
+  create_table "artshows", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.date "start_date"
+    t.date "end_date"
+    t.float "entry_fee"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "artworks", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "image"
-    t.string "materials"
     t.date "create_date"
     t.date "sell_date"
     t.float "cost"
-    t.string "art_shows"
     t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,16 +74,64 @@ ActiveRecord::Schema.define(version: 2021_04_15_215815) do
     t.string "name"
     t.string "description"
     t.string "image"
-    t.string "fabric"
     t.string "url"
     t.string "category"
     t.boolean "available"
-    t.string "pattern_name"
     t.date "origin_date"
-    t.float "pattern_cost"
     t.float "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "fabrics", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.bigint "clothing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clothing_id"], name: "index_fabrics_on_clothing_id"
+  end
+
+  create_table "materials", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.bigint "artwork_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artwork_id"], name: "index_materials_on_artwork_id"
+  end
+
+  create_table "patterns", force: :cascade do |t|
+    t.string "name"
+    t.string "designer"
+    t.bigint "clothing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clothing_id"], name: "index_patterns_on_clothing_id"
+  end
+
+  create_table "requirements", force: :cascade do |t|
+    t.string "name"
+    t.bigint "classroom_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_requirements_on_classroom_id"
+  end
+
+  create_table "tools", force: :cascade do |t|
+    t.string "name"
+    t.bigint "classroom_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_tools_on_classroom_id"
+  end
+
+  add_foreign_key "artist_statements", "artworks"
+  add_foreign_key "artshow_artworks", "artshows"
+  add_foreign_key "artshow_artworks", "artworks"
+  add_foreign_key "fabrics", "clothings"
+  add_foreign_key "materials", "artworks"
+  add_foreign_key "patterns", "clothings"
+  add_foreign_key "requirements", "classrooms"
+  add_foreign_key "tools", "classrooms"
 end
