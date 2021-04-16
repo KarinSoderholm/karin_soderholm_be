@@ -8,8 +8,8 @@ RSpec.describe Classroom, type: :model do
     it { should validate_presence_of :date }
     it { should validate_presence_of :time }
     it { should validate_presence_of :location }
-    it { should validate_presence_of :requirements }
-    it { should validate_presence_of :tools_needed }
+    # it { should validate_presence_of :requirements }
+    # it { should validate_presence_of :tools_needed }
     it { should validate_presence_of :active }
     it { should validate_presence_of :cost }
   end
