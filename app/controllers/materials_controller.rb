@@ -16,7 +16,6 @@ class MaterialsController < ApplicationController
   # POST /materials
   def create
     @material = Material.new(material_params)
-
     if @material.save
       render json: @material, status: :created, location: @material
     else
