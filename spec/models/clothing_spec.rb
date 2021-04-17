@@ -11,4 +11,9 @@ RSpec.describe Clothing, type: :model do
     it { should validate_presence_of :origin_date }
     it { should validate_presence_of :cost }
   end
+
+  describe 'relationships' do
+    it { should have_many :fabrics }
+    it { should have_many :patterns }
+  end
 end

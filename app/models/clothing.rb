@@ -1,4 +1,7 @@
 class Clothing < ApplicationRecord
+  has_many :fabrics
+  has_many :patterns
+  
   validates :name, presence: true
   validates :description, presence: true
   validates :image, presence: true
