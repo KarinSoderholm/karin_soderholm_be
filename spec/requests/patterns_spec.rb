@@ -34,51 +34,207 @@ RSpec.describe "/patterns", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
+      clothing_attributes = {
+        name: "Gizzelle Dress",
+        description: "A funky flowy dress designed to make you stand out!",
+        image: "https://imgur.com/gallery/WHhUl",
+        url: "karin.soderholm.com",
+        category: "Dress",
+        available: false,
+        origin_date: "2020-10-18",
+        cost: 350.00
+      }
+      clothing = Clothing.create! clothing_attributes
+
+      valid_attributes = {
+        name: "Bufferington Street Dress",
+        designer: "Emma Hastings",
+        clothing_id: clothing.id
+      }
 
       Pattern.create! valid_attributes
       get patterns_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_an Array
+
+      first = json[0]
+      expect(first[:id]).to be_an Integer
+      expect(first[:name]).to be_an String
+      expect(first[:name]).to eq(valid_attributes[:name])
+      expect(first[:name]).to_not eq(nil)
+      expect(first[:designer]).to be_an String
+      expect(first[:designer]).to eq(valid_attributes[:designer])
+      expect(first[:designer]).to_not eq(nil)
+      expect(first[:clothing_id]).to be_an Integer
+      expect(first[:clothing_id]).to eq(valid_attributes[:clothing_id])
+      expect(first[:clothing_id]).to_not eq(nil)
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
+      clothing_attributes = {
+        name: "Gizzelle Dress",
+        description: "A funky flowy dress designed to make you stand out!",
+        image: "https://imgur.com/gallery/WHhUl",
+        url: "karin.soderholm.com",
+        category: "Dress",
+        available: false,
+        origin_date: "2020-10-18",
+        cost: 350.00
+      }
+      clothing = Clothing.create! clothing_attributes
+
+      valid_attributes = {
+        name: "Bufferington Street Dress",
+        designer: "Emma Hastings",
+        clothing_id: clothing.id
+      }
+
       pattern = Pattern.create! valid_attributes
       get pattern_url(pattern), as: :json
       expect(response).to be_successful
+      expect(response.status).to eq(200)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_a Hash
+      expect(json[:id]).to be_an Integer
+      expect(json[:name]).to be_an String
+      expect(json[:name]).to eq(valid_attributes[:name])
+      expect(json[:name]).to_not eq(nil)
+      expect(json[:designer]).to be_an String
+      expect(json[:designer]).to eq(valid_attributes[:designer])
+      expect(json[:designer]).to_not eq(nil)
+      expect(json[:clothing_id]).to be_an Integer
+      expect(json[:clothing_id]).to eq(valid_attributes[:clothing_id])
+      expect(json[:clothing_id]).to_not eq(nil)
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Pattern" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Bufferington Street Dress",
+          designer: "Emma Hastings",
+          clothing_id: clothing.id
+        }
+
         expect {
           post patterns_url,
                params: { pattern: valid_attributes }, headers: valid_headers, as: :json
         }.to change(Pattern, :count).by(1)
+        expect(response.status).to eq(201)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_an String
+        expect(json[:name]).to eq(valid_attributes[:name])
+        expect(json[:name]).to_not eq(nil)
+        expect(json[:designer]).to be_an String
+        expect(json[:designer]).to eq(valid_attributes[:designer])
+        expect(json[:designer]).to_not eq(nil)
+        expect(json[:clothing_id]).to be_an Integer
+        expect(json[:clothing_id]).to eq(valid_attributes[:clothing_id])
+        expect(json[:clothing_id]).to_not eq(nil)
       end
 
       it "renders a JSON response with the new pattern" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Bufferington Street Dress",
+          designer: "Emma Hastings",
+          clothing_id: clothing.id
+        }
+
         post patterns_url,
              params: { pattern: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.status).to eq(201)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_an String
+        expect(json[:name]).to eq(valid_attributes[:name])
+        expect(json[:name]).to_not eq(nil)
+        expect(json[:designer]).to be_an String
+        expect(json[:designer]).to eq(valid_attributes[:designer])
+        expect(json[:designer]).to_not eq(nil)
+        expect(json[:clothing_id]).to be_an Integer
+        expect(json[:clothing_id]).to eq(valid_attributes[:clothing_id])
+        expect(json[:clothing_id]).to_not eq(nil)
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Pattern" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        invalid_attributes = {
+          name: "Bufferington Street Dress",
+          designer: "",
+          clothing_id: clothing.id
+        }
+
         expect {
           post patterns_url,
                params: { pattern: invalid_attributes }, as: :json
         }.to change(Pattern, :count).by(0)
+        expect(response.status).to eq(422)
       end
 
       it "renders a JSON response with errors for the new pattern" do
+        invalid_attributes = {
+          name: "Bufferington Street Dress",
+          designer: "Emma Hastings",
+          clothing_id: nil
+        }
+
         post patterns_url,
              params: { pattern: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json[:clothing]).to eq(["must exist"])
       end
     end
   end
@@ -90,39 +246,172 @@ RSpec.describe "/patterns", type: :request do
       }
 
       it "updates the requested pattern" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Bufferington Street Dress",
+          designer: "Emma Hastings",
+          clothing_id: clothing.id
+        }
+
         pattern = Pattern.create! valid_attributes
+
+        new_attributes = {
+          name: "Kungsgarten Dress",
+          designer: "Emma Hastings",
+          clothing_id: clothing.id
+        }
         patch pattern_url(pattern),
               params: { pattern: new_attributes }, headers: valid_headers, as: :json
         pattern.reload
-        skip("Add assertions for updated state")
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_an String
+        expect(json[:name]).to eq(new_attributes[:name])
+        expect(json[:name]).to_not eq(valid_attributes[:name])
+        expect(json[:designer]).to be_an String
+        expect(json[:designer]).to eq(new_attributes[:designer])
+        expect(json[:clothing_id]).to be_an Integer
+        expect(json[:clothing_id]).to eq(new_attributes[:clothing_id])
       end
 
       it "renders a JSON response with the pattern" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Bufferington Street Dress",
+          designer: "Emma Hastings",
+          clothing_id: clothing.id
+        }
+
         pattern = Pattern.create! valid_attributes
+
+        dress_attributes = {
+          name: "Sonja Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Designer Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 450.00
+        }
+        dress = Clothing.create! clothing_attributes
+
+        new_attributes = {
+          name: "Bufferington Street Dress",
+          designer: "Emma Hastings",
+          clothing_id: dress.id
+        }
         patch pattern_url(pattern),
               params: { pattern: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_an String
+        expect(json[:name]).to eq(new_attributes[:name])
+        expect(json[:name]).to_not eq(nil)
+        expect(json[:designer]).to be_an String
+        expect(json[:designer]).to eq(new_attributes[:designer])
+        expect(json[:designer]).to_not eq(nil)
+        expect(json[:clothing_id]).to be_an Integer
+        expect(json[:clothing_id]).to eq(new_attributes[:clothing_id])
+        expect(json[:clothing_id]).to_not eq(pattern.clothing_id)
+        expect(json[:clothing_id]).to_not eq(nil)
       end
     end
 
     context "with invalid parameters" do
       it "renders a JSON response with errors for the pattern" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Bufferington Street Dress",
+          designer: "Emma Hastings",
+          clothing_id: clothing.id
+        }
+
         pattern = Pattern.create! valid_attributes
+
+        invalid_attributes = {
+          name: "",
+          designer: "Emma Hastings",
+          clothing_id: clothing.id
+        }
         patch pattern_url(pattern),
               params: { pattern: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json[:name]).to eq(["can't be blank"])
       end
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested pattern" do
+      clothing_attributes = {
+        name: "Gizzelle Dress",
+        description: "A funky flowy dress designed to make you stand out!",
+        image: "https://imgur.com/gallery/WHhUl",
+        url: "karin.soderholm.com",
+        category: "Dress",
+        available: false,
+        origin_date: "2020-10-18",
+        cost: 350.00
+      }
+      clothing = Clothing.create! clothing_attributes
+
+      valid_attributes = {
+        name: "Bufferington Street Dress",
+        designer: "Emma Hastings",
+        clothing_id: clothing.id
+      }
+
       pattern = Pattern.create! valid_attributes
       expect {
         delete pattern_url(pattern), headers: valid_headers, as: :json
       }.to change(Pattern, :count).by(-1)
+      expect(response.body).to eq("")
+      expect(response.status).to eq(204)
     end
   end
 end
