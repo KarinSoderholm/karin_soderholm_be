@@ -10,4 +10,11 @@ RSpec.describe Artwork, type: :model do
     it { should validate_presence_of :cost }
     it { should validate_inclusion_of(:available).in_array([true, false]) }
   end
+
+  describe 'relationships' do
+    it { should have_many :materials }
+    it { should have_many :artshow_artworks }
+    it { should have_many(:artshows).through :artshow_artworks }
+    it { should have_one :artist_statement }
+  end
 end
