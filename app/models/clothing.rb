@@ -1,7 +1,7 @@
 class Clothing < ApplicationRecord
-  has_many :fabrics
-  has_many :patterns
-  
+  has_many :fabrics, dependent: :destroy
+  has_many :patterns, dependent: :destroy
+
   validates :name, presence: true
   validates :description, presence: true
   validates :image, presence: true

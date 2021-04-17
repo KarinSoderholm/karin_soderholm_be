@@ -1,8 +1,8 @@
 class Artwork < ApplicationRecord
-  has_many :artshow_artworks
+  has_many :artshow_artworks, dependent: :destroy
   has_many :artshows, through: :artshow_artworks
-  has_many :materials
-  has_one :artist_statement
+  has_many :materials, dependent: :destroy
+  has_one :artist_statement, dependent: :destroy
 
   validates :name, presence: true
   validates :description, presence: true

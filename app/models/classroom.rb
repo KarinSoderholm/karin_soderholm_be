@@ -1,7 +1,7 @@
 class Classroom < ApplicationRecord
-  has_many :tools
-  has_many :requirements
-  
+  has_many :tools, dependent: :destroy
+  has_many :requirements, dependent: :destroy
+
   validates :name, presence: true
   validates :description, presence: true
   validates :image, presence: true
