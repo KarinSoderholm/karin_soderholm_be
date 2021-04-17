@@ -76,34 +76,6 @@ RSpec.describe "/classrooms", type: :request do
       }
 
       classroom = Classroom.create! valid_attributes
-      #
-      # requirement_attributes = {
-      #   name: "Crochet 101",
-      #   classroom_id: classroom.id
-      # }
-      #
-      # requirement = Requirement.create! requirement_attributes
-      #
-      # tool_attributes = {
-      #   name: "Crochet hooks",
-      #   classroom_id: classroom.id
-      # }
-      #
-      # tool = Tool.create! tool_attributes
-
-      # classroom_attributes =  {
-      #   name: "Crochet 201",
-      #   description: "The intermediate course about crochet",
-      #   image: "https://i.imgur.com/Q1VOgmfb.jpg",
-      #   date: "2021-04-18",
-      #   time: "02:43:16.644577",
-      #   location: "123 Main St., Wheat Ridge, CO 80033",
-      #   requirements: requirement.id,
-      #   tools_needed: tool.id,
-      #   active: true,
-      #   cost: 65.00
-      # }
-      # classroom2 = Classroom.create! classroom_attributes
 
       get classrooms_url, headers: valid_headers, as: :json
       expect(response).to be_successful
@@ -349,7 +321,7 @@ RSpec.describe "/classrooms", type: :request do
         expect(json).to be_a Hash
         expect(json[:image]).to eq(["can't be blank"])
         expect(json[:cost]).to eq(["can't be blank"])
-        expect(response.status).to eq(422)  
+        expect(response.status).to eq(422)
       end
     end
   end
