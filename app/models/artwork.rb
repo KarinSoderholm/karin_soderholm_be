@@ -1,4 +1,5 @@
 class Artwork < ApplicationRecord
+  has_many :artshow_artworks
   has_many :artshows, through: :artshow_artworks
   has_many :materials
   has_one :artist_statement
