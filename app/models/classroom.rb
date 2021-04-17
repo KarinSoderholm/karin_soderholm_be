@@ -1,4 +1,7 @@
 class Classroom < ApplicationRecord
+  has_many :tools
+  has_many :requirements
+  
   validates :name, presence: true
   validates :description, presence: true
   validates :image, presence: true

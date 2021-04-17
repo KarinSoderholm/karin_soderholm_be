@@ -11,4 +11,9 @@ RSpec.describe Classroom, type: :model do
     it { should validate_inclusion_of(:active).in_array([true, false]) }
     it { should validate_presence_of :cost }
   end
+
+  describe 'relationships' do
+    it { should have_many :tools }
+    it { should have_many :requirements }
+  end
 end
