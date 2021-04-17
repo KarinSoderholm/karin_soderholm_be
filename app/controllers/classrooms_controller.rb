@@ -4,7 +4,7 @@ class ClassroomsController < ApplicationController
   # GET /classrooms
   def index
     @classrooms = Classroom.all
-
+# binding.pry
     render json: @classrooms
   end
 

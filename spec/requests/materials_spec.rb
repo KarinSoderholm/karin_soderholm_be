@@ -34,23 +34,93 @@ RSpec.describe "/materials", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
+      artwork_attributes = {
+        name: "Crazy Calm",
+        description: "The calm that comes over you in by a high mountain lake",
+        image: "https://i.imgur.com/QV39L4Pb.jpg",
+        create_date: "2021-01-12 02:43:16.644577",
+        sell_date: nil,
+        cost: 550.00,
+        available: true
+      }
+      artwork = Artwork.create! artwork_attributes
+
+      valid_attributes = {
+        name: "Linen",
+        category: "Fabric",
+        artwork_id: artwork.id
+      }
+
       Material.create! valid_attributes
       get materials_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_an Array
+      first = json[0]
+      expect(first).to be_a Hash
+      expect(first[:id]).to be_an Integer
+      expect(first[:name]).to be_a String
+      expect(first[:name]).to eq("Linen")
+      expect(first[:category]).to be_a String
+      expect(first[:category]).to eq("Fabric")
+      expect(first[:artwork_id]).to be_an Integer
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
+      artwork_attributes = {
+        name: "Crazy Calm",
+        description: "The calm that comes over you in by a high mountain lake",
+        image: "https://i.imgur.com/QV39L4Pb.jpg",
+        create_date: "2021-01-12 02:43:16.644577",
+        sell_date: nil,
+        cost: 550.00,
+        available: true
+      }
+      artwork = Artwork.create! artwork_attributes
+
+      valid_attributes = {
+        name: "Linen",
+        category: "Fabric",
+        artwork_id: artwork.id
+      }
+
       material = Material.create! valid_attributes
       get material_url(material), as: :json
       expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_a Hash
+      expect(json[:id]).to be_an Integer
+      expect(json[:name]).to be_a String
+      expect(json[:name]).to eq("Linen")
+      expect(json[:category]).to be_a String
+      expect(json[:category]).to eq("Fabric")
+      expect(json[:artwork_id]).to be_an Integer
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Material" do
+        artwork_attributes = {
+          name: "Crazy Calm",
+          description: "The calm that comes over you in by a high mountain lake",
+          image: "https://i.imgur.com/QV39L4Pb.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: 550.00,
+          available: true
+        }
+        artwork = Artwork.create! artwork_attributes
+
+        valid_attributes = {
+          name: "Linen",
+          category: "Fabric",
+          artwork_id: artwork.id
+        }
+
         expect {
           post materials_url,
                params: { material: valid_attributes }, headers: valid_headers, as: :json
@@ -58,15 +128,56 @@ RSpec.describe "/materials", type: :request do
       end
 
       it "renders a JSON response with the new material" do
+        artwork_attributes = {
+          name: "Crazy Calm",
+          description: "The calm that comes over you in by a high mountain lake",
+          image: "https://i.imgur.com/QV39L4Pb.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: 550.00,
+          available: true
+        }
+        artwork = Artwork.create! artwork_attributes
+
+        valid_attributes = {
+          name: "Linen",
+          category: "Fabric",
+          artwork_id: artwork.id
+        }
+
         post materials_url,
              params: { material: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
+
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_a String
+        expect(json[:category]).to be_a String
+        expect(json[:artwork_id]).to be_an Integer
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Material" do
+        artwork_attributes = {
+          name: "Crazy Calm",
+          description: "The calm that comes over you in by a high mountain lake",
+          image: "https://i.imgur.com/QV39L4Pb.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: 550.00,
+          available: true
+        }
+        artwork = Artwork.create! artwork_attributes
+
+        invalid_attributes = {
+          name: "",
+          category: "Fabric",
+          artwork_id: artwork.id
+        }
+
         expect {
           post materials_url,
                params: { material: invalid_attributes }, as: :json
@@ -74,29 +185,88 @@ RSpec.describe "/materials", type: :request do
       end
 
       it "renders a JSON response with errors for the new material" do
+        invalid_attributes = {
+          name: "Linen",
+          category: "Fabric",
+          artwork_id: nil
+        }
+
         post materials_url,
              params: { material: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      # let(:new_attributes) {
+      #   skip("Add a hash of attributes valid for your model")
+      # }
 
       it "updates the requested material" do
+        artwork_attributes = {
+          name: "Crazy Calm",
+          description: "The calm that comes over you in by a high mountain lake",
+          image: "https://i.imgur.com/QV39L4Pb.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: 550.00,
+          available: true
+        }
+        artwork = Artwork.create! artwork_attributes
+
+        valid_attributes = {
+          name: "Linen",
+          category: "Fabric",
+          artwork_id: artwork.id
+        }
+
         material = Material.create! valid_attributes
+
+        new_attributes = {
+          name: "Linen-Cotton Blend",
+          category: "Fabric",
+          artwork_id: artwork.id
+        }
+
         patch material_url(material),
               params: { material: new_attributes }, headers: valid_headers, as: :json
         material.reload
-        skip("Add assertions for updated state")
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq("Linen-Cotton Blend")
+        expect(json[:name]).to_not eq("Linen")
       end
 
       it "renders a JSON response with the material" do
+        artwork_attributes = {
+          name: "Crazy Calm",
+          description: "The calm that comes over you in by a high mountain lake",
+          image: "https://i.imgur.com/QV39L4Pb.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: 550.00,
+          available: true
+        }
+        artwork = Artwork.create! artwork_attributes
+
+        valid_attributes = {
+          name: "Linen",
+          category: "Fabric",
+          artwork_id: artwork.id
+        }
+
+        new_attributes = {
+          name: "Linen-Cotton Blend",
+          category: "Fabric",
+          artwork_id: artwork.id
+        }
+
         material = Material.create! valid_attributes
         patch material_url(material),
               params: { material: new_attributes }, headers: valid_headers, as: :json
@@ -107,6 +277,29 @@ RSpec.describe "/materials", type: :request do
 
     context "with invalid parameters" do
       it "renders a JSON response with errors for the material" do
+        artwork_attributes = {
+          name: "Crazy Calm",
+          description: "The calm that comes over you in by a high mountain lake",
+          image: "https://i.imgur.com/QV39L4Pb.jpg",
+          create_date: "2021-01-12 02:43:16.644577",
+          sell_date: nil,
+          cost: 550.00,
+          available: true
+        }
+        artwork = Artwork.create! artwork_attributes
+
+        valid_attributes = {
+          name: "Linen",
+          category: "Fabric",
+          artwork_id: artwork.id
+        }
+
+        invalid_attributes = {
+          name: "Linen-Cotton Blend",
+          category: "Fabric",
+          artwork_id: nil
+        }
+
         material = Material.create! valid_attributes
         patch material_url(material),
               params: { material: invalid_attributes }, headers: valid_headers, as: :json
@@ -118,10 +311,29 @@ RSpec.describe "/materials", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested material" do
+      artwork_attributes = {
+        name: "Crazy Calm",
+        description: "The calm that comes over you in by a high mountain lake",
+        image: "https://i.imgur.com/QV39L4Pb.jpg",
+        create_date: "2021-01-12 02:43:16.644577",
+        sell_date: nil,
+        cost: 550.00,
+        available: true
+      }
+      artwork = Artwork.create! artwork_attributes
+
+      valid_attributes = {
+        name: "Linen",
+        category: "Fabric",
+        artwork_id: artwork.id
+      }
+
       material = Material.create! valid_attributes
       expect {
         delete material_url(material), headers: valid_headers, as: :json
       }.to change(Material, :count).by(-1)
+      expect(response.status).to eq(204)
+      expect(response.status).to_not eq(404)
     end
   end
 end

@@ -34,39 +34,142 @@ RSpec.describe "/requirements", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
+      classroom_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
+      classroom = Classroom.create! classroom_attributes
+
+      valid_attributes = {
+        name: "Crochet 101",
+        classroom_id: classroom.id
+      }
+
       Requirement.create! valid_attributes
       get requirements_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_an Array
+
+      first = json[0]
+      expect(first[:id]).to be_an Integer
+      expect(first[:name]).to be_a String
+      expect(first[:name]).to eq(valid_attributes[:name])
+      expect(first[:classroom_id]).to be_an Integer
+      expect(first[:classroom_id]).to eq(classroom[:id])
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
+      classroom_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
+      classroom = Classroom.create! classroom_attributes
+
+      valid_attributes = {
+        name: "Crochet 101",
+        classroom_id: classroom.id
+      }
+
       requirement = Requirement.create! valid_attributes
       get requirement_url(requirement), as: :json
       expect(response).to be_successful
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_a Hash
+      expect(json[:id]).to be_an Integer
+      expect(json[:name]).to be_a String
+      expect(json[:name]).to eq(valid_attributes[:name])
+      expect(json[:classroom_id]).to be_an Integer
+      expect(json[:classroom_id]).to eq(classroom[:id])
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Requirement" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet 101",
+          classroom_id: classroom.id
+        }
+
         expect {
           post requirements_url,
                params: { requirement: valid_attributes }, headers: valid_headers, as: :json
         }.to change(Requirement, :count).by(1)
+        expect(response.status).to eq(201)
       end
 
       it "renders a JSON response with the new requirement" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet 101",
+          classroom_id: classroom.id
+        }
+
         post requirements_url,
              params: { requirement: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.status).to eq(201)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq(valid_attributes[:name])
+        expect(json[:classroom_id]).to be_an Integer
+        expect(json[:classroom_id]).to eq(classroom[:id])
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Requirement" do
+        invalid_attributes = {
+          name: "Crochet 101",
+          classroom_id: nil
+        }
+
         expect {
           post requirements_url,
                params: { requirement: invalid_attributes }, as: :json
@@ -74,10 +177,32 @@ RSpec.describe "/requirements", type: :request do
       end
 
       it "renders a JSON response with errors for the new requirement" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        invalid_attributes = {
+          name: "",
+          classroom_id: classroom.id
+        }
+
         post requirements_url,
              params: { requirement: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:name]).to eq(["can't be blank"])
       end
     end
   end
@@ -89,15 +214,70 @@ RSpec.describe "/requirements", type: :request do
       }
 
       it "updates the requested requirement" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet 101",
+          classroom_id: classroom.id
+        }
+
         requirement = Requirement.create! valid_attributes
+
+        new_attributes = {
+          name: "Beginning Crochet",
+          classroom_id: classroom.id
+        }
+
         patch requirement_url(requirement),
               params: { requirement: new_attributes }, headers: valid_headers, as: :json
         requirement.reload
-        skip("Add assertions for updated state")
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_an Integer
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq(new_attributes[:name])
+        expect(json[:name]).to_not eq(valid_attributes[:name])
+        expect(json[:classroom_id]).to be_a Integer
       end
 
       it "renders a JSON response with the requirement" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet 101",
+          classroom_id: classroom.id
+        }
+
         requirement = Requirement.create! valid_attributes
+
+        new_attributes = {
+          name: "Beginning Crochet",
+          classroom_id: classroom.id
+        }
+
         patch requirement_url(requirement),
               params: { requirement: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
@@ -107,17 +287,63 @@ RSpec.describe "/requirements", type: :request do
 
     context "with invalid parameters" do
       it "renders a JSON response with errors for the requirement" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet 101",
+          classroom_id: classroom.id
+        }
+
         requirement = Requirement.create! valid_attributes
+
+        invalid_attributes = {
+          name: "Beginning Crochet",
+          classroom_id: nil
+        }
+
         patch requirement_url(requirement),
               params: { requirement: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:classroom]).to eq(["must exist"])
       end
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested requirement" do
+      classroom_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
+      classroom = Classroom.create! classroom_attributes
+
+      valid_attributes = {
+        name: "Crochet 101",
+        classroom_id: classroom.id
+      }
+
       requirement = Requirement.create! valid_attributes
       expect {
         delete requirement_url(requirement), headers: valid_headers, as: :json

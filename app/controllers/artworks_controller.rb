@@ -4,7 +4,6 @@ class ArtworksController < ApplicationController
   # GET /artworks
   def index
     @artworks = Artwork.all
-
     render json: @artworks
   end
 
@@ -16,10 +15,10 @@ class ArtworksController < ApplicationController
   # POST /artworks
   def create
     @artwork = Artwork.new(artwork_params)
-
     if @artwork.save
       render json: @artwork, status: :created, location: @artwork
     else
+      # flash.alert = "Cannot leave manditory fields empty. Please try again"
       render json: @artwork.errors, status: :unprocessable_entity
     end
   end
@@ -46,6 +45,6 @@ class ArtworksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def artwork_params
-      params.require(:artwork).permit(:name, :description, :image, :materials, :create_date, :sell_date, :cost, :art_shows)
+      params.require(:artwork).permit(:name, :description, :image, :materials, :create_date, :sell_date, :cost, :available, :art_shows)
     end
 end

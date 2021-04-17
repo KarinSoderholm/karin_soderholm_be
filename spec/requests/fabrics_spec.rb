@@ -34,50 +34,191 @@ RSpec.describe "/fabrics", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
+      clothing_attributes = {
+        name: "Gizzelle Dress",
+        description: "A funky flowy dress designed to make you stand out!",
+        image: "https://imgur.com/gallery/WHhUl",
+        url: "karin.soderholm.com",
+        category: "Dress",
+        available: false,
+        origin_date: "2020-10-18",
+        cost: 350.00
+      }
+      clothing = Clothing.create! clothing_attributes
+
+      valid_attributes = {
+        name: "Green Linen",
+        category: "Linen",
+        clothing_id: clothing.id
+      }
+
       Fabric.create! valid_attributes
       get fabrics_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+      expect(response.status).to eq(200)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_an Array
+      first = json[0]
+      expect(first[:name]).to be_a String
+      expect(first[:name]).to eq(valid_attributes[:name])
+      expect(first[:name]).to_not eq(nil)
+      expect(first[:category]).to be_a String
+      expect(first[:category]).to eq(valid_attributes[:category])
+      expect(first[:category]).to_not eq(nil)
+      expect(first[:clothing_id]).to be_a Integer
+      expect(first[:clothing_id]).to eq(valid_attributes[:clothing_id])
+      expect(first[:clothing_id]).to_not eq(nil)
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
+      clothing_attributes = {
+        name: "Gizzelle Dress",
+        description: "A funky flowy dress designed to make you stand out!",
+        image: "https://imgur.com/gallery/WHhUl",
+        url: "karin.soderholm.com",
+        category: "Dress",
+        available: false,
+        origin_date: "2020-10-18",
+        cost: 350.00
+      }
+      clothing = Clothing.create! clothing_attributes
+
+      valid_attributes = {
+        name: "Green Linen",
+        category: "Linen",
+        clothing_id: clothing.id
+      }
+
       fabric = Fabric.create! valid_attributes
       get fabric_url(fabric), as: :json
       expect(response).to be_successful
+      expect(response.status).to eq(200)
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_a Hash
+      expect(json[:name]).to be_a String
+      expect(json[:name]).to eq(valid_attributes[:name])
+      expect(json[:name]).to_not eq(nil)
+      expect(json[:category]).to be_a String
+      expect(json[:category]).to eq(valid_attributes[:category])
+      expect(json[:category]).to_not eq(nil)
+      expect(json[:clothing_id]).to be_a Integer
+      expect(json[:clothing_id]).to eq(valid_attributes[:clothing_id])
+      expect(json[:clothing_id]).to_not eq(nil)
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Fabric" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Green Linen",
+          category: "Linen",
+          clothing_id: clothing.id
+        }
+
         expect {
           post fabrics_url,
                params: { fabric: valid_attributes }, headers: valid_headers, as: :json
         }.to change(Fabric, :count).by(1)
+        expect(response.status).to eq(201)
       end
 
       it "renders a JSON response with the new fabric" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Green Linen",
+          category: "Linen",
+          clothing_id: clothing.id
+        }
+
         post fabrics_url,
              params: { fabric: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.status).to eq(201)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq(valid_attributes[:name])
+        expect(json[:name]).to_not eq(nil)
+        expect(json[:category]).to be_a String
+        expect(json[:category]).to eq(valid_attributes[:category])
+        expect(json[:category]).to_not eq(nil)
+        expect(json[:clothing_id]).to be_a Integer
+        expect(json[:clothing_id]).to eq(valid_attributes[:clothing_id])
+        expect(json[:clothing_id]).to_not eq(nil)
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Fabric" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        invalid_attributes = {
+          name: "",
+          category: "Linen",
+          clothing_id: clothing.id
+        }
+
         expect {
           post fabrics_url,
                params: { fabric: invalid_attributes }, as: :json
         }.to change(Fabric, :count).by(0)
+        expect(response.status).to eq(422)
       end
 
       it "renders a JSON response with errors for the new fabric" do
+        invalid_attributes = {
+          name: "Green Linen",
+          category: "Linen",
+          clothing_id: nil
+        }
+
         post fabrics_url,
              params: { fabric: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:clothing]).to eq(["must exist"])
       end
     end
   end
@@ -89,39 +230,171 @@ RSpec.describe "/fabrics", type: :request do
       }
 
       it "updates the requested fabric" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Green Linen",
+          category: "Linen",
+          clothing_id: clothing.id
+        }
+
         fabric = Fabric.create! valid_attributes
+
+        new_attributes = {
+          name: "Forrest Green Linen",
+          category: "Linen",
+          clothing_id: clothing.id
+        }
+
         patch fabric_url(fabric),
               params: { fabric: new_attributes }, headers: valid_headers, as: :json
         fabric.reload
-        skip("Add assertions for updated state")
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq(new_attributes[:name])
+        expect(json[:name]).to_not eq(valid_attributes[:name])
+        expect(json[:category]).to be_a String
+        expect(json[:category]).to eq(new_attributes[:category])
+        expect(json[:clothing_id]).to be_a Integer
+        expect(json[:clothing_id]).to eq(valid_attributes[:clothing_id])
       end
 
       it "renders a JSON response with the fabric" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Green Linen",
+          category: "Linen",
+          clothing_id: clothing.id
+        }
+
         fabric = Fabric.create! valid_attributes
+
+        another_clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        another_clothing = Clothing.create! another_clothing_attributes
+
+        new_attributes = {
+          name: "Green Linen",
+          category: "Linen",
+          clothing_id: another_clothing.id
+        }
+
         patch fabric_url(fabric),
               params: { fabric: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:id]).to be_a Integer
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq(new_attributes[:name])
+        expect(json[:category]).to be_a String
+        expect(json[:category]).to eq(new_attributes[:category])
+        expect(json[:clothing_id]).to be_a Integer
+        expect(json[:clothing_id]).to eq(new_attributes[:clothing_id])
+        expect(json[:clothing_id]).to_not eq(fabric.clothing_id)
       end
     end
 
     context "with invalid parameters" do
       it "renders a JSON response with errors for the fabric" do
+        clothing_attributes = {
+          name: "Gizzelle Dress",
+          description: "A funky flowy dress designed to make you stand out!",
+          image: "https://imgur.com/gallery/WHhUl",
+          url: "karin.soderholm.com",
+          category: "Dress",
+          available: false,
+          origin_date: "2020-10-18",
+          cost: 350.00
+        }
+        clothing = Clothing.create! clothing_attributes
+
+        valid_attributes = {
+          name: "Green Linen",
+          category: "Linen",
+          clothing_id: clothing.id
+        }
+
         fabric = Fabric.create! valid_attributes
+
+        invalid_attributes = {
+          name: "Green Linen",
+          category: "Linen",
+          clothing_id: nil
+        }
         patch fabric_url(fabric),
               params: { fabric: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
+
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:clothing]).to eq(["must exist"])
       end
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested fabric" do
+      clothing_attributes = {
+        name: "Gizzelle Dress",
+        description: "A funky flowy dress designed to make you stand out!",
+        image: "https://imgur.com/gallery/WHhUl",
+        url: "karin.soderholm.com",
+        category: "Dress",
+        available: false,
+        origin_date: "2020-10-18",
+        cost: 350.00
+      }
+      clothing = Clothing.create! clothing_attributes
+
+      valid_attributes = {
+        name: "Green Linen",
+        category: "Linen",
+        clothing_id: clothing.id
+      }
+
       fabric = Fabric.create! valid_attributes
       expect {
         delete fabric_url(fabric), headers: valid_headers, as: :json
       }.to change(Fabric, :count).by(-1)
+      expect(response.body).to eq("")
+      expect(response.status).to eq(204)
     end
   end
 end

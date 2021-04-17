@@ -34,70 +34,260 @@ RSpec.describe "/tools", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Tool.create! valid_attributes
+      classroom_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
+      classroom = Classroom.create! classroom_attributes
+
+      valid_attributes = {
+        name: "Crochet Hook",
+        classroom_id: classroom.id
+      }
+
+      tool = Tool.create! valid_attributes
       get tools_url, headers: valid_headers, as: :json
       expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_a Array
+      first = json[0]
+      expect(first[:id]).to be_a Integer
+      expect(first[:id]).to eq(tool.id)
+      expect(first[:name]).to be_a String
+      expect(first[:name]).to eq(tool.name)
+      expect(first[:classroom_id]).to be_a Integer
+      expect(first[:classroom_id]).to eq(tool.classroom_id)
     end
   end
 
   describe "GET /show" do
     it "renders a successful response" do
+      classroom_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
+      classroom = Classroom.create! classroom_attributes
+
+      valid_attributes = {
+        name: "Crochet Hook",
+        classroom_id: classroom.id
+      }
+
       tool = Tool.create! valid_attributes
       get tool_url(tool), as: :json
       expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to be_a Hash
+      expect(json[:id]).to be_a Integer
+      expect(json[:id]).to eq(tool.id)
+      expect(json[:name]).to be_a String
+      expect(json[:name]).to eq(tool.name)
+      expect(json[:classroom_id]).to be_a Integer
+      expect(json[:classroom_id]).to eq(tool.classroom_id)
     end
   end
 
   describe "POST /create" do
     context "with valid parameters" do
       it "creates a new Tool" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet Hook",
+          classroom_id: classroom.id
+        }
+
         expect {
           post tools_url,
                params: { tool: valid_attributes }, headers: valid_headers, as: :json
         }.to change(Tool, :count).by(1)
+        expect(response.status).to eq(201)
       end
 
       it "renders a JSON response with the new tool" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet Hook",
+          classroom_id: classroom.id
+        }
+
         post tools_url,
              params: { tool: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq("Crochet Hook")
+        expect(json[:classroom_id]).to be_a Integer
+        expect(json[:classroom_id]).to eq(classroom.id)
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Tool" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        invalid_attributes = {
+          name: "Crochet Hook",
+          classroom_id: nil
+        }
+
         expect {
           post tools_url,
                params: { tool: invalid_attributes }, as: :json
         }.to change(Tool, :count).by(0)
+        expect(response.status).to eq(422)
       end
 
       it "renders a JSON response with errors for the new tool" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        invalid_attributes = {
+          name: "",
+          classroom_id: classroom.id
+        }
+
         post tools_url,
              params: { tool: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:name]).to eq(["can't be blank"])
       end
     end
   end
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      # let(:new_attributes) {
+      #   skip("Add a hash of attributes valid for your model")
+      # }
 
       it "updates the requested tool" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet Hook",
+          classroom_id: classroom.id
+        }
+
         tool = Tool.create! valid_attributes
+
+        new_attributes = {
+          name: "Crochet Hook Bundle #1",
+          classroom_id: classroom.id
+        }
+
         patch tool_url(tool),
               params: { tool: new_attributes }, headers: valid_headers, as: :json
         tool.reload
-        skip("Add assertions for updated state")
+        expect(response.status).to eq(200)
+        json = JSON.parse(response.body, symbolize_names: true)
+        expect(json).to be_a Hash
+        expect(json[:name]).to be_a String
+        expect(json[:name]).to eq("Crochet Hook Bundle #1")
+        expect(json[:name]).to_not eq("Crochet Hook")
+        expect(json[:classroom_id]).to be_a Integer
       end
 
       it "renders a JSON response with the tool" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet Hook",
+          classroom_id: classroom.id
+        }
+
         tool = Tool.create! valid_attributes
+
+        new_attributes = {
+          name: "Crochet Hook Bundle #1",
+          classroom_id: classroom.id
+        }
+
         patch tool_url(tool),
               params: { tool: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
@@ -107,21 +297,71 @@ RSpec.describe "/tools", type: :request do
 
     context "with invalid parameters" do
       it "renders a JSON response with errors for the tool" do
+        classroom_attributes =  {
+          name: "Crochet 201",
+          description: "The intermediate course about crochet",
+          image: "https://i.imgur.com/Q1VOgmfb.jpg",
+          date: "2021-04-18",
+          time: "22:00",
+          location: "123 Main St., Wheat Ridge, CO 80033",
+          active: true,
+          cost: 65.00
+        }
+
+        classroom = Classroom.create! classroom_attributes
+
+        valid_attributes = {
+          name: "Crochet Hook",
+          classroom_id: classroom.id
+        }
+
         tool = Tool.create! valid_attributes
+
+        invalid_attributes = {
+          name: "",
+          classroom_id: classroom.id
+        }
+
         patch tool_url(tool),
               params: { tool: invalid_attributes }, headers: valid_headers, as: :json
+
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")
+        expect(response.status).to eq(422)
+        json = JSON.parse(response.body, symbolize_names: true)
+
+        expect(json).to be_a Hash
+        expect(json[:name]).to eq(["can't be blank"])
       end
     end
   end
 
   describe "DELETE /destroy" do
     it "destroys the requested tool" do
+      classroom_attributes =  {
+        name: "Crochet 201",
+        description: "The intermediate course about crochet",
+        image: "https://i.imgur.com/Q1VOgmfb.jpg",
+        date: "2021-04-18",
+        time: "22:00",
+        location: "123 Main St., Wheat Ridge, CO 80033",
+        active: true,
+        cost: 65.00
+      }
+
+      classroom = Classroom.create! classroom_attributes
+
+      valid_attributes = {
+        name: "Crochet Hook",
+        classroom_id: classroom.id
+      }
+
       tool = Tool.create! valid_attributes
       expect {
         delete tool_url(tool), headers: valid_headers, as: :json
       }.to change(Tool, :count).by(-1)
+      expect(response.status).to eq(204)
+      expect(response.body).to eq("")
     end
   end
 end
