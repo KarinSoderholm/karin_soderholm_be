@@ -1,0 +1,36 @@
+<%= flash[:notice] %>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th>Create Date</th>
+      <th>Sell Date</th>
+      <th>Cost</th>
+      <th>Available</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @artworks %>
+      <% @artworks.each do |artwork| %>
+      <tr>
+        <td><%= artwork.name %></td>
+        <td><%= artwork.description %></td>
+        <td><%= artwork.image %></td>
+        <td><%= artwork.create_date %></td>
+        <td><%= artwork.sell_date %></td>
+        <td><%= artwork.cost %></td>
+        <td><%= artwork.available %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<div>
+  <%= form_tag import_admin_artworks_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag 'Import CSV' %>
+  <% end %>
+</div>
