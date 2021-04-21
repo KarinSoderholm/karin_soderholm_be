@@ -1,0 +1,18 @@
+<h1>Karin's Clothing</h1>
+
+<% if @clothings %>
+  <% @clothings.each do |clothing| %>
+    <h2><%= clothing.name %></h2>
+    <% if clothing.available %>
+      <%= link_to(image_tag(clothing.image), clothing_path(clothing), id: 'clothing') %>
+    <% else %>
+      <%= image_tag(clothing.image) %>
+    <% end %>
+    <h3>Description: <%= clothing.description %></h3>
+    <h3>This garment is <%= clothing.availability? %></h3>
+    <h3>Cost: <%= number_to_currency(clothing.cost) %></h3>
+    <br>
+  <% end %>
+<% else %>
+  <h3>There are no garments available at this time! Check back soon!</h3>
+<% end %>
