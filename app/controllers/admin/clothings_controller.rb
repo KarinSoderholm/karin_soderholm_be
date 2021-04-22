@@ -10,12 +10,13 @@ class Admin::ClothingsController < Admin::BaseController
   def index
     @clothings = Clothing.all
 
-    render json: @clothings
+    # render json: @clothings
   end
 
   # GET /clothings/1
   def show
-    render json: @clothing
+    set_clothing
+    # render json: @clothing
   end
 
   # POST /clothings
@@ -23,24 +24,36 @@ class Admin::ClothingsController < Admin::BaseController
     @clothing = Clothing.new(clothing_params)
 
     if @clothing.save
-      render json: @clothing, status: :created, location: @clothing
+      flash[:success] = "Hooray! You have successfully added a Garment to the Collection!"
+      redirect_to admin_clothings_path
+      # render json: @clothing, status: :created, location: @clothing
     else
-      render json: @clothing.errors, status: :unprocessable_entity
+      flash.now[:alert] = "Please check to make sure the fields are all filled in properly. Try again"
+      render :new
+      # render json: @clothing.errors, status: :unprocessable_entity
     end
   end
 
+  def edit
+    @clothing = Clothing.find(params[:id])
+  end
   # PATCH/PUT /clothings/1
   def update
+    # binding.pry
     if @clothing.update(clothing_params)
-      render json: @clothing
+      @clothing = Clothing.find(params[:id])
+      # render json: @clothing
     else
-      render json: @clothing.errors, status: :unprocessable_entity
+      # render json: @clothing.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /clothings/1
   def destroy
-    @clothing.destroy
+    if @clothing.destroy
+      flash[:alert] = "You have successfully destroyed your Garment from the Collection"
+      redirect_to admin_clothings_path
+    end
   end
 
   private
@@ -51,6 +64,18 @@ class Admin::ClothingsController < Admin::BaseController
 
     # Only allow a trusted parameter "white list" through.
     def clothing_params
-      params.require(:clothing).permit(:name, :description, :image, :fabric, :url, :category, :available, :pattern_name, :origin_date, :pattern_cost, :cost)
+      if !params[:clothing].nil?
+        params.require(:clothing).permit(:name, :description, :image, :fabric, :url, :category, :available, :pattern_name, :origin_date, :pattern_cost, :cost)
+      else
+        hash = {}
+        hash[:name] = params[:name]
+        hash[:description] = params[:description]
+        hash[:image] = params[:image]
+        hash[:category] = params[:category]
+        hash[:available] = params[:available]
+        hash[:origin_date] = params[:origin_date]
+        hash[:cost] = params[:cost]
+        return hash
+      end
     end
 end

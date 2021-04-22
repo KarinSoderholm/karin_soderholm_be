@@ -3,7 +3,7 @@ class Admin::ClassroomsController < Admin::BaseController
   before_action :set_classroom, only: [:show, :update, :destroy]
 
   def import
-    binding.pry
+    # binding.pry
     Classroom.import(params[:file])
     redirect_to root_url, notice: "Classroom Data Imported Successfully!"
   end
@@ -12,12 +12,12 @@ class Admin::ClassroomsController < Admin::BaseController
   def index
     @classrooms = Classroom.all
 # binding.pry
-    render json: @classrooms
+    # render json: @classrooms
   end
 
   # GET /classrooms/1
   def show
-    render json: @classroom
+    # render json: @classroom
   end
 
   # POST /classrooms
@@ -25,29 +25,44 @@ class Admin::ClassroomsController < Admin::BaseController
     @classroom = Classroom.new(classroom_params)
 
     if @classroom.save
-      render json: @classroom, status: :created, location: @classroom
+      flash[:success] = 'Congrats! A new Workshop was created!'
+      redirect_to admin_classrooms_path
+      # render json: @classroom, status: :created, location: @classroom
     else
-      render json: @classroom.errors, status: :unprocessable_entity
+      flash[:message] = 'All fields must be filled out. There is a missing field. Try again'
+      render :new
+      # render json: @classroom.errors, status: :unprocessable_entity
     end
   end
 
+  def edit
+    @classroom = Classroom.find(params[:id])
+  end
   # PATCH/PUT /classrooms/1
   def update
     if @classroom.update(classroom_params)
-      render json: @classroom
+      flash[:success] = 'Congrats! A new Workshop was created!'
+      redirect_to admin_classrooms_path
+      # render json: @classroom
     else
-      render json: @classroom.errors, status: :unprocessable_entity
+      flash[:message] = 'All fields must be filled out. There is a missing field. Try again'
+      render :edit
+      # render json: @classroom.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /classrooms/1
   def destroy
-    @classroom.destroy
+    @classroom = Classroom.find(params[:id])
+    if @classroom.destroy
+      flash[:success] = 'The Workshop was removed!'
+      redirect_to admin_classrooms_path
+    end
   end
 
-  def flash
-    {}
-  end
+  # def flash
+  #   {}
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -57,6 +72,19 @@ class Admin::ClassroomsController < Admin::BaseController
 
     # Only allow a trusted parameter "white list" through.
     def classroom_params
-      params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :requirements, :tools_needed, :cost, :active)
+      if !params[:classroom].nil?
+        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :requirements, :tools_needed, :cost, :active)
+      else
+        hash = {}
+        hash[:name] = params[:name]
+        hash[:description] = params[:description]
+        hash[:image] = params[:image]
+        hash[:date] = params[:date]
+        hash[:time] = params[:time]
+        hash[:location] = params[:location]
+        hash[:cost] = params[:cost]
+        hash[:active] = params[:active]
+        return hash
+      end
     end
 end
