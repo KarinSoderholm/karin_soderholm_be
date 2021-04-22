@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :welcome, :path => '/', only: :index
 
   namespace :admin do
+    resources :dashboard, :path => '/', only: :index
     resources :requirements
     resources :tools
     resources :patterns
@@ -25,7 +26,9 @@ Rails.application.routes.draw do
       patch '/:id/ship', action: :ship
       get '/:id/fulfill/:order_item_id', action: :fulfill
     end
-    resources :emails, only: [:index, :show]
+    resources :emails do
+      collection { post :import }
+    end
   end
 
   scope controller: :sessions do
