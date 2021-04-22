@@ -1,0 +1,16 @@
+<h1>Garment: <%= @clothing.name %></h1>
+<section id='navigation-links-individual'>
+  <%= link_to 'My Garments', '/admin/clothings' %>
+  <%= link_to 'Edit Discount', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
+  <%= link_to 'Delete Discount', "/admin/clothings/#{@clothing.id}", method: :delete %>
+</section>
+
+<section id="garment-details">
+  <p>Garment Description: <%= @clothing.description %></p>
+  <p>Garment Image: <%= image_tag(@clothing.image) %></p>
+  <p>Link to Etsy url: <%= @clothing.url %></p>
+  <p>Garemnt Category: <%= @clothing.category %></p>
+  <p>Garemnt's availability: <%= @clothing.availability? %></p>
+  <p>Garemnt's creation date: <%= (@clothing.origin_date).strftime("%A, %d %b %Y") %></p>
+  <p>Garemnt's MSRP: <%= number_to_currency(@clothing.cost) %></p>
+</section>
