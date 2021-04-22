@@ -30,4 +30,12 @@ class Artwork < ApplicationRecord
       "unavailable. Someone beat you to the punch! Check out all the other options available."
     end
   end
+
+  def self.total_sold
+    where(available: false).count
+  end
+
+  def self.total_available
+    where(available: true).count
+  end
 end

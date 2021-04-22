@@ -28,4 +28,20 @@ class Classroom < ApplicationRecord
   def format_time(time)
     # binding.pry
   end
+
+  def active_status
+    if active?
+      message = 'Active'
+    else
+      message = 'Inactive'
+    end
+  end
+
+  def self.active_classrooms
+    where(active: true).count
+  end
+
+  def self.inactive_classrooms
+    where(active: false).count
+  end
 end

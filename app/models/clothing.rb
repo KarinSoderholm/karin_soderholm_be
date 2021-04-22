@@ -26,6 +26,14 @@ class Clothing < ApplicationRecord
       "available! Click the picture for more details!"
     else
       "unavailable. It was so popular, we don't have any more at this time. Check back soon for more inventory."
-    end 
+    end
+  end
+
+  def self.total_sold
+    where(available: false).count
+  end
+
+  def self.total_available
+    where(available: true).count
   end
 end
