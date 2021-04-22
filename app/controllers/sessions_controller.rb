@@ -34,9 +34,7 @@ class SessionsController < ApplicationController
     if current_admin?
       redirect_to admin_dashboard_index_path
     else
-      # redirect_to "/users/#{user.id}"
-      # redirect_to profile_path
-      redirect_to '/'
+      redirect_to profile_path
     end
   end
 end
