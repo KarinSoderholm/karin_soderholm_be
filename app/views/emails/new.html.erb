@@ -1,0 +1,9 @@
+<h4>Get the latest news from Karin! Sign up here for exclusive information: </h4>
+<%= form_tag '/emails' do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+
+  <%= label_tag :email_address %>
+  <%= text_field_tag :email_address %>
+  <%= submit_tag "Join Karin's Community" %>
+<% end %>
