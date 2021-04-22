@@ -1,5 +1,7 @@
 <h1>Karin Soderholm</h1>
 
-<%= link_to 'Artwork', artworks_path %>
-<%= link_to 'Workshops', classrooms_path %>
-<%= link_to 'Clothing', '/clothings' %>
+
+
+<p><%= button_to 'Artworks', artworks_path, method: :get %></p>
+<p><%= button_to 'Garments', clothings_path, method: :get  %></p>
+<p><%= button_to 'Workshops', classrooms_path, method: :get  %></p>
