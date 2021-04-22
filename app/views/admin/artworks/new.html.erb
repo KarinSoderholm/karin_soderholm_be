@@ -1,0 +1,31 @@
+<h1>Create a new Artwork!</h1>
+
+<h3><%= link_to 'My Artworks', admin_artworks_path, method: :get %></h3>
+
+<%= form_tag '/admin/artworks'  do %>
+  <%= label_tag 'Name of Artwork: '%>
+  <%= text_field_tag :name %>
+
+  <%= label_tag 'Description of Artwork: '%>
+  <%= text_field_tag :description %>
+
+  <%= label_tag 'Image of Artwork: '%>
+  <%= text_field_tag :image %>
+
+  <%= label_tag 'Artwork was created on: '%>
+  <%= date_field_tag :create_date %>
+  <br>
+  <%= label_tag 'Artwork was sold on: '%>
+  <%= date_field_tag :sell_date %>
+  <br>
+  <%= label_tag 'Cost: '%>
+  <%= number_field_tag :cost, nil, min: 1, max: 100000 %>
+  <br>
+  <%= label_tag 'Artwork is available (true/false): '%>
+  <%= label_tag 'True'%>
+  <%= radio_button_tag :available, true %>
+  <%= label_tag 'False'%>
+  <%= radio_button_tag :available, false %>
+
+  <%= submit_tag 'Submit Artwork' %>
+<% end %>
