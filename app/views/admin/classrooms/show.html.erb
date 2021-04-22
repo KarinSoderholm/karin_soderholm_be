@@ -1,0 +1,16 @@
+<h1>Workshop: <%= @classroom.name%></h1>
+<section id='navigation-links-individual'>
+  <%= link_to 'My Workshops', '/admin/classrooms' %>
+  <%= link_to 'Edit Workshop', "/admin/classrooms/#{@classroom.id}/edit", method: :get %>
+  <%= link_to 'Delete Workshop', "/admin/classrooms/#{@classroom.id}", method: :delete %>
+</section>
+
+<section id="garment-details">
+  <p>Workshop Description: <%= @classroom.description %></p>
+  <p>Workshop Image: <%= image_tag(@classroom.image) %></p>
+  <p>Workshop Date: <%= (@classroom.date).strftime("%A, %d %b %Y") %></p>
+  <p>Workshop Time: <%= (@classroom.time).strftime("%I : %M %p") %></p>
+  <p>Workshop Location: <%= @classroom.location %></p>
+  <p>Workshop's availability: <%= @classroom.active_status %></p>
+  <p>Workshop's Cost: <%= number_to_currency(@classroom.cost) %></p>
+</section>

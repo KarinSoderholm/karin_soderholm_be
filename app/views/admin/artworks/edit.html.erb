@@ -1,0 +1,30 @@
+<h2><%= @artwork.name %> Edit Page</h2>
+<%# <%= form_tag "/admin/artworks/#{@artwork.id}", method: :patch do %>
+<%= form_for ([:admin, @artwork]) do |f| %>
+
+  <%= f.label 'Name of Artwork: '%>
+  <%= f.text_field :name %>
+
+  <%= f.label 'Description of Artwork: '%>
+  <%= f.text_field :description %>
+
+  <%= f.label 'Image of Artwork: '%>
+  <%= f.text_field :image %>
+
+  <%= f.label 'Artwork was created on: '%>
+  <%= f.date_field :create_date %>
+  <br>
+  <%= f.label 'Artwork was sold on: '%>
+  <%= f.date_field :sell_date %>
+  <br>
+  <%= f.label 'Cost: '%>
+  <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %>
+  <br>
+  <%= f.label 'Artwork is available (true/false): '%>
+  <%= f.label 'True'%>
+  <%= f.radio_button :available, true %>
+  <%= f.label 'False'%>
+  <%= f.radio_button :available, false %>
+
+  <%= f.submit 'Update Artwork' %>
+<% end %>

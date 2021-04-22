@@ -1,0 +1,31 @@
+<h1>Create a new Workshop!</h1>
+
+<h3><%= link_to 'My Workshops', '/admin/classrooms' %></h3>
+
+<%= form_tag '/admin/classrooms'  do %>
+  <%= label_tag 'Name of Workshop: '%>
+  <%= text_field_tag :name %>
+
+  <%= label_tag 'Description of Workshop: '%>
+  <%= text_field_tag :description %>
+
+  <%= label_tag 'Image for the Workshop: '%>
+  <%= text_field_tag :image %>
+
+  <%= label_tag 'Date of Workshop: '%>
+  <%= date_field_tag :date %>
+  <br>
+  <%= label_tag 'Time of Workshop: '%>
+  <%= time_field_tag :time %>
+  <br>
+  <%= label_tag 'Location for the Workshop: '%>
+  <%= text_field_tag :location %>
+
+  <%= label_tag 'Cost: '%>
+  <%= text_field_tag :cost, nil, min: 1, max: 100000 %>
+
+  <%= label_tag 'Workshop is available (true/false): '%>
+  <%= text_field_tag :active %>
+
+  <%= submit_tag 'Submit Workshop' %>
+<% end %>

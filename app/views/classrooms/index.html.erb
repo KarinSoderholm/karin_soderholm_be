@@ -1,0 +1,20 @@
+<h1>Karin's Workshops</h1>
+
+<% if @classrooms %>
+  <% @classrooms.each do |classroom| %>
+    <h2><%= classroom.name %></h2>
+    <% if classroom.active %>
+      <%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %>
+    <% else %>
+      <%= image_tag(classroom.image) %>
+    <% end%>
+    <h3>Description: <%= classroom.description %></h3>
+    <h3>Date: <%= (classroom.date).strftime("%A, %d %b %Y") %></h3>
+    <h3>Time: <%= (classroom.time).strftime("%I : %M %p" ) %></h3>
+    <h3>Location: <%= classroom.location %></h3>
+    <h3>Cost: <%= number_to_currency(classroom.cost) %></h3>
+    <br>
+  <% end %>
+<% else %>
+  <h3>There are no workshops available at this time! Check back soon!</h3>
+<% end %>

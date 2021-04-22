@@ -1,0 +1,34 @@
+<h1>Create a new Garment!</h1>
+<h3><%= link_to 'My Garments', '/admin/clothings' %></h3>
+<%= form_tag '/admin/clothings'  do %>
+  <%= label_tag 'Name of Garment: '%>
+  <%= text_field_tag :name %>
+
+  <%= label_tag 'Description of Garment: '%>
+  <%= text_field_tag :description %>
+
+  <%= label_tag 'Image of Garment: '%>
+  <%= text_field_tag :image %>
+
+  <%= label_tag 'Link to Garment (optional): '%>
+  <%= text_field_tag :url %>
+
+  <%= label_tag 'Category of Garment: '%>
+  <%= text_field_tag :category %>
+  <%# <%= select_tag 'Categorgies', raw("<option>Outer Wear</option><option>Dress</option><option>Shirt</option><option>Under Garments</option><option>Pants</option>"), multiple: true, prompt: "Select something", :onchange => "this.form.submit()" %>
+
+  <%= label_tag 'Garment is available (true/false): '%>
+  <%= label_tag 'True'%>
+  <%= radio_button_tag :available, true %>
+  <%= label_tag 'False'%>
+  <%= radio_button_tag :available, false %>
+  <br>
+  <%= label_tag 'Garment was created on: '%>
+  <%= date_field_tag :origin_date %>
+  <br>
+  <%= label_tag 'Cost: '%>
+  <%= number_field_tag :cost, nil, min: 1, max: 100000 %>
+  <br>
+  <%= submit_tag 'Submit Garment' %>
+<% end %>
+<h3></h3>
