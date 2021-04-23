@@ -17,3 +17,11 @@
   <p>Artwork's availability: <%= @artwork.availability? %></p>
   <p>Artwork's MSRP: <%= number_to_currency(@artwork.cost) %></p>
 </section>
+
+<section id="add-artshows">
+  <p><%= button_to "Add Artshows to #{@artwork.name}" %></p>
+</section>
+
+<section id="add-materials">
+  <p><%= button_to "Add Materials used in making #{@artwork.name}" %></p>
+</section>

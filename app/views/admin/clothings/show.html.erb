@@ -14,3 +14,11 @@
   <p>Garemnt's creation date: <%= (@clothing.origin_date).strftime("%A, %d %b %Y") %></p>
   <p>Garemnt's MSRP: <%= number_to_currency(@clothing.cost) %></p>
 </section>
+
+<section id="add-pattern">
+  <p><%= button_to "Add pattern used to make #{@clothing.name}" %></p>
+</section>
+
+<section id="add-materials">
+  <p><%= button_to "Add Fabrics used in making #{@clothing.name}" %></p>
+</section>
