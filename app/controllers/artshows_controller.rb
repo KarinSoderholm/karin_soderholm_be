@@ -5,12 +5,12 @@ class ArtshowsController < ApplicationController
   def index
     @artshows = Artshow.all
 
-    render json: @artshows
+    # render json: @artshows
   end
 
   # GET /artshows/1
   def show
-    render json: @artshow
+    # render json: @artshow
   end
 
   # POST /artshows
@@ -22,20 +22,24 @@ class ArtshowsController < ApplicationController
     else
       render json: @artshow.errors, status: :unprocessable_entity
     end
-  end
+  # end
 
   # PATCH/PUT /artshows/1
   def update
     if @artshow.update(artshow_params)
-      render json: @artshow
+      # render json: @artshow
     else
-      render json: @artshow.errors, status: :unprocessable_entity
+      # render json: @artshow.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /artshows/1
   def destroy
-    @artshow.destroy
+    if @artshow.destroy
+
+    else
+
+    end
   end
 
   private

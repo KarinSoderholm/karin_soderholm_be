@@ -8,7 +8,6 @@ class Admin::ArtworksController < Admin::BaseController
   end
   # GET /artworks
   def index
-    # binding.pry
     @artworks = Artwork.all
     # render json: @artworks
   end
@@ -41,15 +40,26 @@ class Admin::ArtworksController < Admin::BaseController
   # PATCH/PUT /artworks/1
   def update
     if @artwork.update(artwork_params)
+      flash[:success] = 'You did it! You edited your artwork data!'
+      redirect_to admin_artworks_path
       # render json: @artwork
     else
+      flash.now[:error] = "Cannot leave manditory fields empty. Please try again"
+      render :edit
       # render json: @artwork.errors, status: :unprocessable_entity
     end
   end
 
+  def alert
+    @artwork = Artwork.find(params[:artwork_id])
+  end
+
   # DELETE /artworks/1
   def destroy
-    @artwork.destroy
+    if @artwork.destroy
+      flash[:success] = 'The Workshop was successfully removed!'
+      redirect_to admin_artworks_path
+    end
   end
 
   private

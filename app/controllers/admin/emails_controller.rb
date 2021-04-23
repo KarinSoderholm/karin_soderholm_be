@@ -42,8 +42,14 @@ class Admin::EmailsController < Admin::BaseController
 
   end
 
+  def alert
+    @email = Email.find(params[:email_id])
+  end
+
   def destroy
     email = Email.find(params[:id])
+      # flash[:alert] = 'You are about to delete a contact. Are you sure you want to do that?'
+      # render :alert
     if email.destroy
       flash[:success] = 'You have successfully deleted this email address!'
       redirect_to admin_emails_path

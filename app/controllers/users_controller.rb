@@ -36,13 +36,12 @@ class UsersController < ApplicationController
       flash[:notice] = 'Profile has been updated!'
       redirect_to profile_path
     else
-      generate_flash(@user)
+      @user.errors.messages.each do |key, value|
+        error = value[0]
+        flash.now[:error] = "The #{key} #{error}! Please try again"
+      end
       render :edit
     end
-  end
-
-  def flash
-    {}
   end
 
   private

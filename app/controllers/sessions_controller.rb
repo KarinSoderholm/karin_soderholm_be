@@ -23,10 +23,6 @@ class SessionsController < ApplicationController
     redirect_to welcome_index_path
   end
 
-  def flash
-    {}
-  end
-
   private
 
   def login_redirect(user)
