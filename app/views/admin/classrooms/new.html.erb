@@ -2,15 +2,16 @@
 
 <h3><%= link_to 'My Workshops', '/admin/classrooms' %></h3>
 
-<%= form_tag '/admin/classrooms'  do %>
+<%= form_tag '/admin/classrooms', multipart: true  do %>
   <%= label_tag 'Name of Workshop: '%>
   <%= text_field_tag :name %>
 
   <%= label_tag 'Description of Workshop: '%>
   <%= text_field_tag :description %>
 
-  <%= label_tag 'Image for the Workshop: '%>
-  <%= text_field_tag :image %>
+  <%# <%= label_tag 'Image for the Workshop: '%>
+  <%# <%= text_field_tag :image %>
+
 
   <%= label_tag 'Date of Workshop: '%>
   <%= date_field_tag :date %>
@@ -22,10 +23,18 @@
   <%= text_field_tag :location %>
 
   <%= label_tag 'Cost: '%>
-  <%= text_field_tag :cost, nil, min: 1, max: 100000 %>
-
-  <%= label_tag 'Workshop is available (true/false): '%>
-  <%= text_field_tag :active %>
-
+  <%= number_field_tag :cost, nil, min: 1, max: 100000 %>
+  <br>
+  <%= label_tag 'Workshop is available (yes/no): '%>
+  <%= label_tag 'Yes'%>
+  <%= radio_button_tag :active, true %>
+  <%= label_tag 'No'%>
+  <%= radio_button_tag :active, false %>
+  <br>
+  <%= label_tag 'Image for Workshop: '%>
+  <%= file_field_tag :image %>
+  <%# # <%= file_field_tag :photo  %>
+  <br>
+  <br>
   <%= submit_tag 'Submit Workshop' %>
 <% end %>

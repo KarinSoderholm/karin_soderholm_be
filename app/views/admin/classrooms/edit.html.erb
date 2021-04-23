@@ -8,8 +8,8 @@
   <%= f.label 'Description of Workshop: '%>
   <%= f.text_field :description %>
 
-  <%= f.label 'Image of Workshop: '%>
-  <%= f.text_field :image %>
+  <%# <%= f.label 'Image of Workshop: '%>
+  <%# <%= f.text_field :image %>
 
   <%= f.label 'Date of Workshop: '%>
   <%= f.date_field :date %>
@@ -20,14 +20,18 @@
   <%= f.label 'Location of Workshop: '%>
   <%= f.text_field :location %>
 
-  <%= f.label 'Workshop is available (true/false): ' %>
-  <%= f.label 'True'%>
+  <%= f.label 'Workshop is available (yes/no): ' %>
+  <%= f.label 'Yes'%>
   <%= f.radio_button :active, true %>
-  <%= f.label 'False'%>
+  <%= f.label 'No'%>
   <%= f.radio_button :active, false %>
   <br>
   <%= f.label 'Cost: '%>
   <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %>
 
+  <%= f.label 'Image for Workshop: '%>
+  <%= f.file_field :photo %>
+  <br>
+  <br>
   <%= f.submit 'Update Workshop' %>
 <% end %>
