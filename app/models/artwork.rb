@@ -25,9 +25,9 @@ class Artwork < ApplicationRecord
 
   def availability?
     if self.available
-      "available! Click the picture for more details!"
+      "available!"
     else
-      "unavailable. Someone beat you to the punch! Check out all the other options available."
+      "unavailable."
     end
   end
 
