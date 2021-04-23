@@ -12,7 +12,8 @@
   <%= f.text_field :image %>
 
   <%= f.label 'Artwork was created on: '%>
-  <%= f.date_field :create_date %>
+  <%# <%= f.date_field :create_date %>
+  <%= f.date_select(:create_date, start_date: 1995, discard_day: true, discard_month: true)%>
   <br>
   <%= f.label 'Artwork was sold on: '%>
   <%= f.date_field :sell_date %>
@@ -20,10 +21,10 @@
   <%= f.label 'Cost: '%>
   <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %>
   <br>
-  <%= f.label 'Artwork is available (true/false): '%>
-  <%= f.label 'True'%>
+  <%= f.label 'Artwork is available (yes/no): '%>
+  <%= f.label 'Yes'%>
   <%= f.radio_button :available, true %>
-  <%= f.label 'False'%>
+  <%= f.label 'No'%>
   <%= f.radio_button :available, false %>
 
   <%= f.submit 'Update Artwork' %>

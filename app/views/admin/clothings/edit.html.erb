@@ -17,14 +17,15 @@
   <%= f.label 'Category of Garment: '%>
   <%= f.text_field :category %>
 
-  <%= f.label 'Garment is available (true/false): '%>
-  <%= f.label 'True'%>
+  <%= f.label 'Garment is available (yes/no): '%>
+  <%= f.label 'Yes'%>
   <%= f.radio_button :available, true %>
-  <%= f.label 'False'%>
+  <%= f.label 'No'%>
   <%= f.radio_button :available, false %>
   <br>
   <%= f.label 'Garment was created on: '%>
-  <%= f.date_field :origin_date %>
+  <%# <%= f.date_field :origin_date %>
+  <%= f.date_select(:origin_date, start_date: 1995, discard_day: true, discard_month: true)%>
   <br>
   <%= f.label 'Cost: '%>
   <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %>
