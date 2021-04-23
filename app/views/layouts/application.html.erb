@@ -46,13 +46,15 @@
         <p class="notice-flash"><%= message %></p>
       <% elsif type ==  'error' %>
         <p class="error-flash"><%= message %></p>
+      <% elsif type ==  'message' %>
+        <p class="message-flash"><%= message %></p>
       <% else %>
         <p><%= message %></p>
       <% end %>
     <% end %>
 
     <%= yield %>
-    <% if !current_admin? %>
+    <% if !current_user || !current_admin?   %>
       <nav class = 'bottomnav'>
         <h4>Get the latest news from Karin! Sign up here for exclusive information: </h4>
         <%= form_tag '/emails' do %>
