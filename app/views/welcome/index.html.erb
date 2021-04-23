@@ -1,7 +1,23 @@
 <h1>Karin Soderholm</h1>
 
 
+<section class="art-layout">
+  <% @artworks.each do |artwork| %>
+    <p class="art-image"><%= image_tag(artwork.image) %></p>
+  <% end %>
+  <p><%= button_to 'Artworks', artworks_path, method: :get %></p>
+</section>
 
-<p><%= button_to 'Artworks', artworks_path, method: :get %></p>
+<section class="garment-layout">
+  <% @clothings.each do |clothing| %>
+    <p class="garment-image"><%= image_tag(clothing.image) %></p>
+  <% end %>
 <p><%= button_to 'Garments', clothings_path, method: :get  %></p>
+</section>
+
+<section class="workshop-layout">
+  <% @classrooms.each do |classroom| %>
+    <p class="workshop-image"><%= image_tag(classroom.image) %></p>
+  <% end %>
 <p><%= button_to 'Workshops', classrooms_path, method: :get  %></p>
+</section>
