@@ -3,40 +3,28 @@ class Admin::ClassroomsController < Admin::BaseController
   before_action :set_classroom, only: [:show, :update, :destroy]
   require 'csv'
   def import
-    # binding.pry
     Classroom.import(params[:file])
-    redirect_to root_url, notice: "Classroom Data Imported Successfully!"
+    redirect_to admin_classrooms_path, notice: "Classroom Data Imported Successfully!"
   end
 
   # GET /classrooms
   def index
     @classrooms = Classroom.all
-# binding.pry
     # render json: @classrooms
   end
 
   # GET /classrooms/1
   def show
-    # render json: @classroom
   end
 
   # POST /classrooms
   def create
-    # if !classroom_params[:photo].empty?
-    #   classroom_params[:image] = classroom_params[:photo]
-    # end
-    binding.pry
     classroom = Classroom.new(classroom_params)
-    # classroom.photo.attach(params[:photo])
-    # binding.pry
-    # @classroom.photo.attach(io: File.open('app/assets/images'), filename: '', content_type: 'image/png')
     if classroom.save
-      binding.pry
       flash[:success] = 'Congrats! A new Workshop was created!'
       redirect_to admin_classrooms_path
       # render json: @classroom, status: :created, location: @classroom
     else
-      binding.pry
       flash[:message] = 'All fields must be filled out. There is a missing field. Try again'
       render :new
       # render json: @classroom.errors, status: :unprocessable_entity
@@ -48,15 +36,12 @@ class Admin::ClassroomsController < Admin::BaseController
   end
   # PATCH/PUT /classrooms/1
   def update
-    # binding.pry
     if @classroom.update(classroom_params)
-      flash[:success] = 'Congrats! A new Workshop was created!'
-      # binding.pry
+      flash[:success] = 'Congrats! The Workshop was updated!'
       redirect_to admin_classrooms_path
       # render json: @classroom
     else
       flash[:message] = 'All fields must be filled out. There is a missing field. Try again'
-      # binding.pry
       render :edit
       # render json: @classroom.errors, status: :unprocessable_entity
     end
@@ -73,10 +58,6 @@ class Admin::ClassroomsController < Admin::BaseController
       redirect_to admin_classrooms_path
     end
   end
-
-  # def flash
-  #   {}
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -98,7 +79,6 @@ class Admin::ClassroomsController < Admin::BaseController
         hash[:location] = params[:location]
         hash[:cost] = params[:cost]
         hash[:active] = params[:active]
-        # hash[:photo] = params[:photo]
         return hash
       end
     end
