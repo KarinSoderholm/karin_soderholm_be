@@ -2,33 +2,33 @@
 <%# <%= form_tag "/admin/clothings/#{@clothing.id}", method: :patch do %>
 <%= form_for ([:admin, @clothing]) do |f| %>
 
-  <%= f.label 'Name of Garment: '%>
-  <%= f.text_field :name %>
+  <%= f.label 'Name of Garment: '%><br>
+  <%= f.text_field :name %><br>
 
-  <%= f.label 'Description of Garment: '%>
-  <%= f.text_field :description %>
+  <%= f.label 'Description of Garment: '%><br>
+  <%= f.text_field :description %><br>
 
-  <%= f.label 'Image of Garment: '%>
-  <%= f.text_field :image %>
+  <%= f.label 'Link to Garment (optional): '%><br>
+  <%= f.text_field :url %><br>
 
-  <%= f.label 'Link to Garment (optional): '%>
-  <%= f.text_field :url %>
-
-  <%= f.label 'Category of Garment: '%>
-  <%= f.text_field :category %>
+  <%= f.label 'Category of Garment: '%><br>
+  <%= f.text_field :category %><br>
 
   <%= f.label 'Garment is available (yes/no): '%>
   <%= f.label 'Yes'%>
   <%= f.radio_button :available, true %>
   <%= f.label 'No'%>
-  <%= f.radio_button :available, false %>
+  <%= f.radio_button :available, false %><br>
   <br>
-  <%= f.label 'Garment was created on: '%>
-  <%# <%= f.date_field :origin_date %>
-  <%= f.date_select(:origin_date, start_date: 1995, discard_day: true, discard_month: true)%>
+  <%= f.label 'Garment was created on: '%><br>
+  <%= f.date_field :origin_date %>
+  <%# # <%# <%= f.date_select(:origin_date, start_date: 1995, discard_day: true, discard_month: true)%>  %>
   <br>
-  <%= f.label 'Cost: '%>
-  <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %>
+  <%= f.label 'Cost: '%><br>
+  <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>
+
+  <%= f.label 'Image of Garment: '%><br>
+  <%= f.file_field :image %><br>
 
   <%= f.submit 'Update Garment' %>
 <% end %>
