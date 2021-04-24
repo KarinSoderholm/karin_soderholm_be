@@ -27,7 +27,13 @@
         <td><%= link_to "Edit #{artwork.name}", "/admin/artworks/#{artwork.id}/edit", method: :get %></td>
         <td><%= link_to "Delete #{artwork.name}", "/admin/artworks/#{artwork.id}/alert", method: :get %></td>
         <td><%= artwork.description %></td>
-        <td><%= image_tag(artwork.image) %></td>
+        <% if !artwork.image.nil? %>
+          <td><%= image_tag(artwork.image) %></td>
+        <% elsif !artwork.images.nil? %>
+          <td><%= image_tag(artwork.images[0]) %></td>
+        <% else %>
+          <td>There is no image to display </td>
+        <% end %>
         <td><%= artwork.create_date.strftime("%A, %d %b %Y") %></td>
         <% if !artwork.sell_date.nil?%>
           <td><%= artwork.sell_date.strftime("%A, %d %b %Y") %></td>
@@ -44,9 +50,9 @@
 
 <p><%= button_to 'Add a New Artwork', new_admin_artwork_path, method: :get  %></p>
 
-<div>
+<div class="import-csv">
   <%= form_tag import_admin_artworks_path, multipart: true do %>
     <%= file_field_tag :file %>
-    <%= submit_tag 'Import CSV' %>
+    <%= submit_tag 'Import Spreadsheet' %>
   <% end %>
 </div>
