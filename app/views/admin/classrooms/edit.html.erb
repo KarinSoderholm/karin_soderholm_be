@@ -2,32 +2,33 @@
 
 <%= form_for ([:admin, @classroom]) do |f| %>
 
-  <%= f.label 'Name of Workshop: '%>
-  <%= f.text_field :name %>
+  <%= f.label 'Name of Workshop: '%><br>
+  <%= f.text_field :name %><br>
 
-  <%= f.label 'Description of Workshop: '%>
-  <%= f.text_field :description %>
+  <%= f.label 'Description of Workshop: '%><br>
+  <%= f.text_field :description %><br>
 
-  <%= f.label 'Image of Workshop: '%>
-  <%= f.text_field :image %>
+  <%= f.label 'Date of Workshop: '%><br>
+  <%= f.date_field :date %><br>
 
-  <%= f.label 'Date of Workshop: '%>
-  <%= f.date_field :date %>
-
-  <%= f.label 'Time of Workshop: '%>
-  <%= f.time_field :time %>
+  <%= f.label 'Time of Workshop: '%><br>
+  <%= f.time_field :time %><br>
   <br>
-  <%= f.label 'Location of Workshop: '%>
-  <%= f.text_field :location %>
+  <%= f.label 'Location of Workshop: '%><br>
+  <%= f.text_field :location %><br>
 
-  <%= f.label 'Workshop is available (true/false): ' %>
-  <%= f.label 'True'%>
+  <%= f.label 'Workshop is available (yes/no): ' %>
+  <%= f.label 'Yes'%>
   <%= f.radio_button :active, true %>
-  <%= f.label 'False'%>
-  <%= f.radio_button :active, false %>
+  <%= f.label 'No'%>
+  <%= f.radio_button :active, false %><br>
   <br>
-  <%= f.label 'Cost: '%>
-  <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %>
+  <%= f.label 'Cost: '%><br>
+  <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>
 
+  <%= f.label 'Image for Workshop: '%>
+  <%= f.file_field :image %>
+  <br>
+  <br>
   <%= f.submit 'Update Workshop' %>
 <% end %>

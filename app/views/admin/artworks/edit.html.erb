@@ -2,29 +2,30 @@
 <%# <%= form_tag "/admin/artworks/#{@artwork.id}", method: :patch do %>
 <%= form_for ([:admin, @artwork]) do |f| %>
 
-  <%= f.label 'Name of Artwork: '%>
-  <%= f.text_field :name %>
+  <%= f.label 'Name of Artwork: '%><br>
+  <%= f.text_field :name %><br>
 
-  <%= f.label 'Description of Artwork: '%>
-  <%= f.text_field :description %>
+  <%= f.label 'Description of Artwork: '%><br>
+  <%= f.text_field :description %><br>
 
-  <%= f.label 'Image of Artwork: '%>
-  <%= f.text_field :image %>
-
-  <%= f.label 'Artwork was created on: '%>
+  <%= f.label 'Artwork was created on: '%><br>
   <%= f.date_field :create_date %>
+  <%# # <%= f.date_select(:create_date, start_date: 1995, discard_day: true, discard_month: true) %>
   <br>
-  <%= f.label 'Artwork was sold on: '%>
-  <%= f.date_field :sell_date %>
+  <%= f.label 'Artwork was sold on: '%><br>
+  <%= f.date_field :sell_date %><br>
   <br>
-  <%= f.label 'Cost: '%>
-  <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %>
+  <%= f.label 'Cost: '%><br>
+  <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>
   <br>
-  <%= f.label 'Artwork is available (true/false): '%>
-  <%= f.label 'True'%>
+  <%= f.label 'Artwork is available (yes/no): '%>
+  <%= f.label 'Yes'%>
   <%= f.radio_button :available, true %>
-  <%= f.label 'False'%>
-  <%= f.radio_button :available, false %>
+  <%= f.label 'No'%>
+  <%= f.radio_button :available, false %><br>
+
+  <%= f.label 'Image of Artwork: '%><br>
+  <%= f.file_field :image %><br>
 
   <%= f.submit 'Update Artwork' %>
 <% end %>

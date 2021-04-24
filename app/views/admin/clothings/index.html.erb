@@ -25,8 +25,9 @@
       <tr>
         <td><%= link_to "#{clothing.name}",  "/admin/clothings/#{clothing.id}", method: :get%></td>
         <td><%= link_to 'Edit Garment', "/admin/clothings/#{clothing.id}/edit", method: :get %></td>
-        <td><%= link_to 'Delete Garment', "/admin/clothings/#{clothing.id}", method: :delete %></td>
+        <td><%= link_to 'Delete Garment', "/admin/clothings/#{clothing.id}/alert", method: :get %></td>
         <td><%= clothing.description %></td>
+        <!-- <td>No image to display</td> -->
         <td><%= image_tag(clothing.image) %></td>
         <td><%= clothing.url %></td>
         <td><%= clothing.category %></td>
@@ -44,9 +45,9 @@
 <p><%= button_to 'Add a New Garment', new_admin_clothing_path, method: :get  %></p>
 
 
-<div>
+<div class="import-csv">
   <%= form_tag import_admin_clothings_path, multipart: true do %>
     <%= file_field_tag :file %>
-    <%= submit_tag 'Import CSV' %>
+    <%= submit_tag 'Import Spreadsheet' %>
   <% end %>
 </div>

@@ -14,12 +14,15 @@ Rails.application.routes.draw do
     resources :materials
     resources :classrooms do
       collection { post :import }
+      get '/alert' => :alert
     end
     resources :artworks do
       collection { post :import }
+      get '/alert' => :alert
     end
     resources :clothings do
       collection { post :import }
+      get '/alert' => :alert
     end
     resources :users, only: [:index, :show]
     resource :orders do
@@ -28,6 +31,7 @@ Rails.application.routes.draw do
     end
     resources :emails do
       collection { post :import }
+      get '/alert' => :alert
     end
   end
 

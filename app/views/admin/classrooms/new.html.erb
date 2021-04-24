@@ -2,30 +2,39 @@
 
 <h3><%= link_to 'My Workshops', '/admin/classrooms' %></h3>
 
-<%= form_tag '/admin/classrooms'  do %>
-  <%= label_tag 'Name of Workshop: '%>
-  <%= text_field_tag :name %>
+<%= form_tag '/admin/classrooms', multipart: true  do %>
+  <%= label_tag 'Name of Workshop: '%><br>
+  <%= text_field_tag :name %><br>
 
-  <%= label_tag 'Description of Workshop: '%>
-  <%= text_field_tag :description %>
+  <%= label_tag 'Description of Workshop: '%><br>
+  <%= text_field_tag :description %><br>
 
-  <%= label_tag 'Image for the Workshop: '%>
-  <%= text_field_tag :image %>
+  <%# <%= label_tag 'Image for the Workshop: '%>
+  <%# <%= text_field_tag :image %>
 
-  <%= label_tag 'Date of Workshop: '%>
-  <%= date_field_tag :date %>
+
+  <%= label_tag 'Date of Workshop: '%><br>
+  <%= date_field_tag :date %><br>
   <br>
-  <%= label_tag 'Time of Workshop: '%>
-  <%= time_field_tag :time %>
+  <%= label_tag 'Time of Workshop: '%><br>
+  <%= time_field_tag :time %><br>
   <br>
-  <%= label_tag 'Location for the Workshop: '%>
-  <%= text_field_tag :location %>
+  <%= label_tag 'Location for the Workshop: '%><br>
+  <%= text_field_tag :location %><br>
 
-  <%= label_tag 'Cost: '%>
-  <%= text_field_tag :cost, nil, min: 1, max: 100000 %>
-
-  <%= label_tag 'Workshop is available (true/false): '%>
-  <%= text_field_tag :active %>
-
+  <%= label_tag 'Cost: '%><br>
+  <%= number_field_tag :cost, nil, min: 1, max: 100000 %><br>
+  <br>
+  <%= label_tag 'Workshop is available (yes/no): '%>
+  <%= label_tag 'Yes'%>
+  <%= radio_button_tag :active, true %>
+  <%= label_tag 'No'%>
+  <%= radio_button_tag :active, false %><br>
+  <br>
+  <%= label_tag 'Image for Workshop: '%><br>
+  <%= file_field_tag :image %>
+  <%# # <%= file_field_tag :photo  %>
+  <br>
+  <br>
   <%= submit_tag 'Submit Workshop' %>
 <% end %>

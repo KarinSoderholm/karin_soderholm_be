@@ -1,20 +1,26 @@
-<h1>Karin's Workshops</h1>
+<h1>Workshops</h1>
 
+<div class="classrooms-layout">
 <% if @classrooms %>
   <% @classrooms.each do |classroom| %>
+    <div class="classroom-container">
     <h2><%= classroom.name %></h2>
+    <div class="clothing-border">
     <% if classroom.active %>
-      <%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %>
+      <p class="classroom-image"><%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %></p>
     <% else %>
-      <%= image_tag(classroom.image) %>
+      <p class="classroom-image"><%= image_tag(classroom.image) %></p>
     <% end%>
-    <h3>Description: <%= classroom.description %></h3>
+    <!-- <h3>Description: <%= classroom.description %></h3> -->
     <h3>Date: <%= (classroom.date).strftime("%A, %d %b %Y") %></h3>
     <h3>Time: <%= (classroom.time).strftime("%I : %M %p" ) %></h3>
     <h3>Location: <%= classroom.location %></h3>
-    <h3>Cost: <%= number_to_currency(classroom.cost) %></h3>
+    <h3>Cost: <div class="cost"><%= number_to_currency(classroom.cost) %></div></h3>
+    </div>
     <br>
   <% end %>
+  </div>
 <% else %>
   <h3>There are no workshops available at this time! Check back soon!</h3>
 <% end %>
+</div>

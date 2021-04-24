@@ -14,3 +14,11 @@
   <p>Workshop's availability: <%= @classroom.active_status %></p>
   <p>Workshop's Cost: <%= number_to_currency(@classroom.cost) %></p>
 </section>
+
+<section id="add-requirements">
+  <p><%= button_to 'Add Requirements to a Workshop' %></p>
+</section>
+
+<section id="add-tools">
+  <p><%= button_to 'Add Tools needed for a Workshop' %></p>
+</section>

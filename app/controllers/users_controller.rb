@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Welcome, #{@user.name}!"
+      flash[:success] = "Welcome, #{@user.name}!"
       redirect_to profile_path
     else
       generate_flash(@user)
@@ -36,13 +36,12 @@ class UsersController < ApplicationController
       flash[:notice] = 'Profile has been updated!'
       redirect_to profile_path
     else
-      generate_flash(@user)
+      @user.errors.messages.each do |key, value|
+        error = value[0]
+        flash.now[:error] = "The #{key} #{error}! Please try again"
+      end
       render :edit
     end
-  end
-
-  def flash
-    {}
   end
 
   private

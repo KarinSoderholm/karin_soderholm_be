@@ -3,6 +3,7 @@ class Clothing < ApplicationRecord
 
   has_many :fabrics, dependent: :destroy
   has_many :patterns, dependent: :destroy
+  has_one_attached :image
 
   validates :name, presence: true
   validates :description, presence: true
@@ -23,9 +24,9 @@ class Clothing < ApplicationRecord
 
   def availability?
     if self.available
-      "available! Click the picture for more details!"
+      "available!"
     else
-      "unavailable. It was so popular, we don't have any more at this time. Check back soon for more inventory."
+      "unavailable."
     end
   end
 

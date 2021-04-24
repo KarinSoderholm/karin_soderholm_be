@@ -1,0 +1,7 @@
+<h1>FLASH</h1>
+<div class="flash-message">
+  <h4>You are about to delete a garment. Are you sure you want to do that?</h4>
+
+  <%= button_to 'Yes, Delete Garment!', "/admin/clothings/#{@clothing.id}", method: :delete  %>
+  <%= button_to 'Oops, Good catch!', "/admin/clothings", method: :get   %>
+</div>

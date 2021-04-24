@@ -8,7 +8,6 @@ class Admin::ArtworksController < Admin::BaseController
   end
   # GET /artworks
   def index
-    # binding.pry
     @artworks = Artwork.all
     # render json: @artworks
   end
@@ -23,8 +22,8 @@ class Admin::ArtworksController < Admin::BaseController
   end
   # POST /artworks
   def create
-    @artwork = Artwork.new(artwork_params)
-    if @artwork.save
+    artwork = Artwork.new(artwork_params)
+    if artwork.save
       flash[:success] = 'You did it! You created a new art piece in the database!'
       redirect_to admin_artworks_path
       # render json: @artwork, status: :created, location: @artwork
@@ -41,15 +40,26 @@ class Admin::ArtworksController < Admin::BaseController
   # PATCH/PUT /artworks/1
   def update
     if @artwork.update(artwork_params)
+      flash[:success] = 'You did it! You edited your artwork data!'
+      redirect_to admin_artworks_path
       # render json: @artwork
     else
+      flash.now[:error] = "Cannot leave manditory fields empty. Please try again"
+      render :edit
       # render json: @artwork.errors, status: :unprocessable_entity
     end
   end
 
+  def alert
+    @artwork = Artwork.find(params[:artwork_id])
+  end
+
   # DELETE /artworks/1
   def destroy
-    @artwork.destroy
+    if @artwork.destroy
+      flash[:success] = 'The Workshop was successfully removed!'
+      redirect_to admin_artworks_path
+    end
   end
 
   private
@@ -61,12 +71,13 @@ class Admin::ArtworksController < Admin::BaseController
     # Only allow a trusted parameter "white list" through.
     def artwork_params
       if !params[:artwork].nil?
-        params.require(:artwork).permit(:name, :description, :image, :materials, :create_date, :sell_date, :cost, :available, :art_shows)
+        params.require(:artwork).permit(:name, :description, :image, :materials, :create_date, :sell_date, :cost, :available, :art_shows, images: [])
       else
         hash = {}
         hash[:name] = params[:name]
         hash[:description] = params[:description]
         hash[:image] = params[:image]
+        # hash[:images] = params[:images]
         hash[:create_date] = params[:create_date]
         hash[:sell_date] = params[:sell_date]
         hash[:cost] = params[:cost]

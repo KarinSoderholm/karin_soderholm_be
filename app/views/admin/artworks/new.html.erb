@@ -2,30 +2,34 @@
 
 <h3><%= link_to 'My Artworks', admin_artworks_path, method: :get %></h3>
 
-<%= form_tag '/admin/artworks'  do %>
-  <%= label_tag 'Name of Artwork: '%>
-  <%= text_field_tag :name %>
+<%= form_tag '/admin/artworks', multipart: true do %>
+  <%= label_tag 'Name of Artwork: '%><br>
+  <%= text_field_tag :name %><br>
 
-  <%= label_tag 'Description of Artwork: '%>
-  <%= text_field_tag :description %>
+  <%= label_tag 'Description of Artwork: '%><br>
+  <%= text_field_tag :description %><br>
 
-  <%= label_tag 'Image of Artwork: '%>
-  <%= text_field_tag :image %>
 
-  <%= label_tag 'Artwork was created on: '%>
-  <%= date_field_tag :create_date %>
+  <%= label_tag 'Artwork was created on: '%><br>
+  <%= date_field_tag :create_date %><br>
+  <%# <%= date_select(:create_date, start_date: 1995, discard_day: true, discard_month: true)%>
+  <!-- _select(:create_date, start_date: 1995, discard_day: true, discard_month: true)%> -->
   <br>
-  <%= label_tag 'Artwork was sold on: '%>
-  <%= date_field_tag :sell_date %>
+  <%= label_tag 'Artwork was sold on: '%><br>
+  <%= date_field_tag :sell_date %><br>
   <br>
-  <%= label_tag 'Cost: '%>
-  <%= number_field_tag :cost, nil, min: 1, max: 100000 %>
+  <%= label_tag 'Cost: '%><br>
+  <%= number_field_tag :cost, nil, min: 1, max: 100000 %><br>
   <br>
-  <%= label_tag 'Artwork is available (true/false): '%>
-  <%= label_tag 'True'%>
+  <%= label_tag 'Artwork is available (yes / no): '%>
+  <%= label_tag 'Yes'%>
   <%= radio_button_tag :available, true %>
-  <%= label_tag 'False'%>
-  <%= radio_button_tag :available, false %>
+  <%= label_tag 'No'%>
+  <%= radio_button_tag :available, false %><br>
+
+  <%= label_tag 'Image of Artwork: '%><br>
+  <%= file_field_tag :image %><br>
+  <%# # <%= file_field_tag :images %>
 
   <%= submit_tag 'Submit Artwork' %>
 <% end %>

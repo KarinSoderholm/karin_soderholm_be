@@ -1,30 +1,26 @@
 # class ClassroomsController < ApplicationController
 class Admin::ClassroomsController < Admin::BaseController
   before_action :set_classroom, only: [:show, :update, :destroy]
-
+  require 'csv'
   def import
-    # binding.pry
     Classroom.import(params[:file])
-    redirect_to root_url, notice: "Classroom Data Imported Successfully!"
+    redirect_to admin_classrooms_path, notice: "Classroom Data Imported Successfully!"
   end
 
   # GET /classrooms
   def index
     @classrooms = Classroom.all
-# binding.pry
     # render json: @classrooms
   end
 
   # GET /classrooms/1
   def show
-    # render json: @classroom
   end
 
   # POST /classrooms
   def create
-    @classroom = Classroom.new(classroom_params)
-
-    if @classroom.save
+    classroom = Classroom.new(classroom_params)
+    if classroom.save
       flash[:success] = 'Congrats! A new Workshop was created!'
       redirect_to admin_classrooms_path
       # render json: @classroom, status: :created, location: @classroom
@@ -41,7 +37,7 @@ class Admin::ClassroomsController < Admin::BaseController
   # PATCH/PUT /classrooms/1
   def update
     if @classroom.update(classroom_params)
-      flash[:success] = 'Congrats! A new Workshop was created!'
+      flash[:success] = 'Congrats! The Workshop was updated!'
       redirect_to admin_classrooms_path
       # render json: @classroom
     else
@@ -51,6 +47,9 @@ class Admin::ClassroomsController < Admin::BaseController
     end
   end
 
+  def alert
+    @classroom = Classroom.find(params[:classroom_id])
+  end
   # DELETE /classrooms/1
   def destroy
     @classroom = Classroom.find(params[:id])
@@ -59,10 +58,6 @@ class Admin::ClassroomsController < Admin::BaseController
       redirect_to admin_classrooms_path
     end
   end
-
-  # def flash
-  #   {}
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -73,7 +68,7 @@ class Admin::ClassroomsController < Admin::BaseController
     # Only allow a trusted parameter "white list" through.
     def classroom_params
       if !params[:classroom].nil?
-        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :requirements, :tools_needed, :cost, :active)
+        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :requirements, :tools_needed, :cost, :active, :photo)
       else
         hash = {}
         hash[:name] = params[:name]

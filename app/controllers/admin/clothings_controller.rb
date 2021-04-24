@@ -9,13 +9,20 @@ class Admin::ClothingsController < Admin::BaseController
   # GET /clothings
   def index
     @clothings = Clothing.all
-
+    if @clothings.nil?
+      flash[:message] = "There are no garments in your collection! Please add some!"
+      redirect_to admin_dashboard_index
+    end
     # render json: @clothings
   end
 
   # GET /clothings/1
   def show
     set_clothing
+    if @clothing.nil?
+      flash[:message] = "That garment is no longer available."
+      redirect_to admin_clothings_path  
+    end
     # render json: @clothing
   end
 
@@ -41,11 +48,18 @@ class Admin::ClothingsController < Admin::BaseController
   def update
     # binding.pry
     if @clothing.update(clothing_params)
-      @clothing = Clothing.find(params[:id])
+      flash[:success] = "Hooray! You have successfully updated your Garment!"
+      redirect_to admin_clothings_path
       # render json: @clothing
     else
+      flash.now[:alert] = "Please check to make sure the fields are all filled in properly. Try again"
+      render :edit
       # render json: @clothing.errors, status: :unprocessable_entity
     end
+  end
+
+  def alert
+    @clothing = Clothing.find(params[:clothing_id])
   end
 
   # DELETE /clothings/1

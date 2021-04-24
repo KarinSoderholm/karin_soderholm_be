@@ -1,18 +1,29 @@
-<h1>Karin's Clothing</h1>
+<h1>Garments</h1>
 
+<div class="clothings-layout">
 <% if @clothings %>
   <% @clothings.each do |clothing| %>
+  <div class="clothing-container">
     <h2><%= clothing.name %></h2>
+    <div class="clothing-border">
     <% if clothing.available %>
-      <%= link_to(image_tag(clothing.image), clothing_path(clothing), id: 'clothing') %>
+      <p class="clothing-image"><%= link_to(image_tag(clothing.image), clothing_path(clothing), id: 'clothing') %></p>
     <% else %>
-      <%= image_tag(clothing.image) %>
+      <p class="clothing-image"><%= image_tag(clothing.image) %></p>
     <% end %>
-    <h3>Description: <%= clothing.description %></h3>
-    <h3>This garment is <%= clothing.availability? %></h3>
-    <h3>Cost: <%= number_to_currency(clothing.cost) %></h3>
+    <!-- <h3>Description: <%= clothing.description %></h3> -->
+    <h3>This garment is <div class="availability"><%= clothing.availability? %></div></h3>
+    <% if clothing.available %>
+      <h5>Click the picture for more details!</h5>
+      <h3>Cost: <div class="cost"><%= number_to_currency(clothing.cost) %></div></h3>
+    <% else %>
+      <h5>It was so popular, we don't have any more at this time. Check back soon for more inventory.</h5>
+    <% end %>
+    </div>
     <br>
   <% end %>
+  </div>
 <% else %>
   <h3>There are no garments available at this time! Check back soon!</h3>
 <% end %>
+</div>

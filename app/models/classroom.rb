@@ -3,6 +3,8 @@ class Classroom < ApplicationRecord
 
   has_many :tools, dependent: :destroy
   has_many :requirements, dependent: :destroy
+  # has_one_attached :photo
+  has_one_attached :image
 
   validates :name, presence: true
   validates :description, presence: true
@@ -14,19 +16,11 @@ class Classroom < ApplicationRecord
   validates :cost, presence: true
 
   def self.import(file)
-    CSV.foreact(file.path, headers: true) do |row|
+    CSV.foreach(file.path, headers: true) do |row|
       Classroom.create! row.to_hash
       # requirement
       # tool
     end
-  end
-
-  def format_date(date)
-    # binding.pry
-  end
-
-  def format_time(time)
-    # binding.pry
   end
 
   def active_status

@@ -10,14 +10,22 @@
 
 <section class="art-layout">
   <% @artworks.each do |artwork| %>
-    <p class="art-image"><%= image_tag(artwork.image) %></p>
+    <% if !artwork.image.nil? || !artwork.image.empty?%>
+      <p class="art-image"><%= image_tag(artwork.image) %></p>
+    <% else %>
+      <p>No Image to display</p>
+    <% end %>
   <% end %>
   <p><%= button_to 'My Art', admin_artworks_path, method: :get  %></p>
-</section>
+</section> 
 
 <section class="workshop-layout">
   <% @classrooms.each do |classroom| %>
-    <p class="workshop-image"><%= image_tag(classroom.image) %></p>
+    <%# <% if classroom.image.nil? %>
+      <%# <!-- <p class="workshop-image"><%= image_tag(classroom.photo) %>
+    <%# <% else %>
+      <p class="workshop-image"><%= image_tag(classroom.image) %></p>
+    <%# <% end %>
   <% end %>
   <p><%= button_to 'My Workshops', admin_classrooms_path, method: :get  %></p>
 </section>
