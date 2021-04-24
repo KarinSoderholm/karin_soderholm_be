@@ -1,1 +1,35 @@
 <h1><%= @classroom.name %></h1>
+<div class="classroom-container">
+  <div class="classroom-description-container">
+    <section class="classroom-description">
+      <%= @classroom.description %>
+    </section>
+  </div>
+
+  <div class="classroom-date-container">
+    <section class="classroom-date">
+      <%= (@classroom.date).strftime("%A, %b %d %Y") %>
+    </section>
+  </div>
+
+  <div class="classroom-time-container">
+    <section class="classroom-time">
+      <%= (@classroom.time).strftime("%I : %M %p" ) %>
+    </section>
+  </div>
+
+  <div class="classroom-location-container">
+    <section class="classroom-location">
+      <%= @classroom.location %>
+    </section>
+  </div>
+
+  <div class="classroom-cost-container">
+    <section class="classroom-cost">
+      <%= number_to_currency(@classroom.cost) %>
+    </section>
+  </div>
+</div>
+
+<button type "submit" class="btn btn-outline-info" aria-pressed="true">Enroll</button>
+<%= button_to 'Sign Me Up!', registration_path, method: :get, class: "btn btn-outline-info" %>
