@@ -3,6 +3,7 @@ class Clothing < ApplicationRecord
 
   has_many :fabrics, dependent: :destroy
   has_many :patterns, dependent: :destroy
+  has_one_attached :image
 
   validates :name, presence: true
   validates :description, presence: true

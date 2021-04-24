@@ -5,14 +5,17 @@ class Artwork < ApplicationRecord
   has_many :artshows, through: :artshow_artworks
   has_many :materials, dependent: :destroy
   has_one :artist_statement, dependent: :destroy
+  # has_many_attached :images
+  has_one_attached :image
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :image, presence: true
+  validates :image, presence: false
   validates :create_date, presence: true
   validates :sell_date, presence: false
   validates :cost, presence: true
   validates :available, inclusion: [true, false]
+  validates :images, presences: false
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
