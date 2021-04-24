@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Welcome, #{@user.name}!"
+      flash[:success] = "Welcome, #{@user.name}!"
       redirect_to profile_path
     else
       generate_flash(@user)
