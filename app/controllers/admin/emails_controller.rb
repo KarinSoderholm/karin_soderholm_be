@@ -1,7 +1,7 @@
 class Admin::EmailsController < Admin::BaseController
   def import
     Email.import(params[:file])
-    redirect_to root_url, notice: "Email Data Imported Successfully!"
+    redirect_to admin_dashboard_index_path, notice: "Email Data Imported Successfully!"
   end
 
   def index
@@ -21,7 +21,10 @@ class Admin::EmailsController < Admin::BaseController
       flash[:success] = "You successfully added a new email to your database!"
       redirect_to admin_emails_path
     else
-      generate_flash(@email)
+      @email.errors.messages.each do |key, value|
+        error = value[0]
+        flash.now[:error] = "The #{key} #{error}! Please try again"
+      end
       render :new
     end
   end
@@ -32,11 +35,12 @@ class Admin::EmailsController < Admin::BaseController
 
   def update
     @email = Email.find(params[:id])
+    # binding.pry
     if @email.update(email_params)
       flash[:success] = 'Email has been updated!'
       redirect_to admin_emails_path
     else
-      flash[:alert] = 'Unable to process this change. Please try again!'
+      flash.now[:alert] = 'Unable to process this change. Please try again!'
       render :edit
     end
 
@@ -48,8 +52,6 @@ class Admin::EmailsController < Admin::BaseController
 
   def destroy
     email = Email.find(params[:id])
-      # flash[:alert] = 'You are about to delete a contact. Are you sure you want to do that?'
-      # render :alert
     if email.destroy
       flash[:success] = 'You have successfully deleted this email address!'
       redirect_to admin_emails_path
@@ -59,10 +61,13 @@ class Admin::EmailsController < Admin::BaseController
   private
 
   def email_params
-    hash = {}
-    hash[:name] = params[:name]
-    hash[:email_address] = params[:email_address]
-    return hash
-    # params.require(:email).permit(:email_address, :name)
+    if params[:email]
+      params.require(:email).permit(:email_address, :name)
+    else
+      hash = {}
+      hash[:name] = params[:name]
+      hash[:email_address] = params[:email_address]
+      return hash
+    end
   end
 end
