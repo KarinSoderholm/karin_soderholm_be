@@ -1,0 +1,29 @@
+<h3>Please fill out this form!</h3>
+<%= form_for @user do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :address %><br>
+  <%= f.text_field :address %><br>
+
+  <%= f.label :city %><br>
+  <%= f.text_field :city %><br>
+
+  <%= f.label :state %><br>
+  <%= f.text_field :state %><br>
+
+  <%= f.label :zip %><br>
+  <%= f.text_field :zip %><br>
+
+  <%= f.label :email %>
+  <!-- <input type="email" class="form-control" placeholder="Username" aria-describedby="sizing-addon1"> -->
+  <%= f.email_field :email %><br>
+
+  <%= f.label :password %><br>
+  <%= f.password_field :password %><br>
+
+  <%= f.label :password_confirmation %><br>
+  <%= f.password_field :password_confirmation %><br>
+
+  <%= f.submit 'Register' %>
+<% end %>
