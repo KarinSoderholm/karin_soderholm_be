@@ -24,7 +24,10 @@ Rails.application.routes.draw do
       collection { post :import }
       get '/alert' => :alert
     end
-    resources :users, only: [:index, :show]
+    resources :users do
+      get '/edit_password' => :edit_password
+      get '/profile_edit/:user_id' => :profile_edit
+    end
     resource :orders do
       patch '/:id/ship', action: :ship
       get '/:id/fulfill/:order_item_id', action: :fulfill
@@ -32,6 +35,9 @@ Rails.application.routes.draw do
     resources :emails do
       collection { post :import }
       get '/alert' => :alert
+    end
+    resources :profiles do
+      get '/edit_password' => :edit_password
     end
   end
 
@@ -69,5 +75,4 @@ Rails.application.routes.draw do
   resources :artworks
   resources :clothings
   resources :emails
-  # root to: 'artworks#index'
 end
