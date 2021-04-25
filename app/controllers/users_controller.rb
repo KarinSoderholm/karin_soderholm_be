@@ -31,22 +31,40 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_user
-    if @user.update(user_params)
-      flash[:notice] = 'Profile has been updated!'
-      redirect_to profile_path
-    else
-      @user.errors.messages.each do |key, value|
-        error = value[0]
-        flash.now[:error] = "The #{key} #{error}! Please try again"
+    if params[:user][:email] !=  current_user.email
+      @user = User.find(params[:id])
+      if @user.update(user_params)
+        flash[:notice] = "#{@user.name}'s profile has been updated!"
+        redirect_to admin_users_path
+      else
+        @user.errors.messages.each do |key, value|
+          error = value[0]
+          flash.now[:error] = "The #{key} #{error}! Please try again"
+        end
+        render :edit
       end
-      render :edit
+    else
+      @user = current_user
+      if @user.update(user_params)
+        flash[:notice] = 'Your profile has been updated!'
+        if current_user.admin?
+          redirect_to admin_user_path
+        else
+          redirect_to profile_path
+        end
+      else
+        @user.errors.messages.each do |key, value|
+          error = value[0]
+          flash.now[:error] = "The #{key} #{error}! Please try again"
+        end
+        render :edit
+      end
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password)
+    params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password, :role)
   end
 end
