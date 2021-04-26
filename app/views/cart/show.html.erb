@@ -1,0 +1,47 @@
+<h2>My Cart</h2>
+
+<% if cart.items.empty? %>
+  <p>Your Cart is Empty!</p>
+<% else %>
+<h3>The cart contains <%= cart.count %> item(s).</h3>
+  <% cart.contents.each do |item_hash, quantity| %>
+    <% item = cart.find_item(item_hash) %>
+      <section id='item-<%= item.id%>'>
+        <% if item.class == Classroom %>
+          <h2><%= link_to item.name, "/classrooms/#{item.id}" %></h2>
+        <% elsif item.class == Artwork %>
+          <h2><%= link_to item.name, "/artworks/#{item.id}" %></h2>
+        <% elsif item.class == Clothing %>
+          <h2><%= link_to item.name, "/clothings/#{item.id}" %></h2>
+        <% end %>
+        <%= image_tag(item.image) %>
+        <p><strong>Price:</strong> <%= number_to_currency(item.cost) %></p>
+        <p><strong>Quantity:</strong> <%= quantity %></p>
+        <%# <% if cart.applied_discount(item) %>
+          <%# <!-- <p><strong>Merchant Discount: </strong><%= cart.applied_discount(item) %>
+        <%# <% elsif item.discounts.empty? %>
+          <!-- <p>There are no discounts available at this moment</p> -->
+        <%# <% else %>
+          <!-- <p><strong>Merchant Discount(s) Available:</strong></p> -->
+          <%# <% item.discounts.each do |discount| %>
+            <%# <!-- <p><%= discount.description %>
+          <%# <% end %>
+        <%# <% end %>
+        <p>Subtotal: <%= number_to_currency(cart.subtotal_of(item_hash)) %></p>
+
+        <%= button_to 'More of This!', "/cart/more/#{item.id}", method: :patch unless cart.limit_reached?(item.id) %>
+        <%= button_to 'Less of This!', "/cart/less/#{item.id}", method: :patch %>
+        <%= button_to 'Remove', "/cart/#{item.id}", method: :delete %>
+      </section>
+    <% end %>
+    <p><strong>Cart Total:</strong> <%= number_to_currency(cart.grand_total) %></p>
+
+  <section id='checkout'>
+    <% if current_user %>
+      <%= button_to 'Check Out', '/orders' %>
+    <% else %>
+      <p>You must <%= link_to 'register', registration_path %> or <%= link_to 'log in', login_path %> to checkout.</p>
+    <% end %>
+  </section>
+  <%= button_to 'Empty Cart', '/cart', method: :delete %>
+<% end %>
