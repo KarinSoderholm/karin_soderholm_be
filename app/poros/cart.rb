@@ -12,7 +12,7 @@ class Cart
     elsif item_hash.keys.include?(:artwork)
      item = Artwork.find(item_hash[:artwork])
     elsif item_hash.keys.include?(:clothing)
-      item = Clothing.find(item_id)
+      item = Clothing.find(item_hash[:clothing])
     else
      flash[:error] = 'That item is not in our sytem. Please try again'
     end
@@ -43,7 +43,7 @@ class Cart
     @contents.each do |item_hash, quantity|
       item = find_item(item_hash)
       grand_total += (item.cost) * quantity
-    end 
+    end
     grand_total
   end
 
