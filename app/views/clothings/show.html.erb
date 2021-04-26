@@ -1,6 +1,12 @@
 <h1><%= @clothing.name %></h1>
 
 <div class="clothing-container">
+  <div class="clothing-image-container">
+    <section class="clothing-image">
+      <%= image_tag(@clothing.image) %>
+    </section>
+  </div>
+
   <div class="clothing-description-container">
     <section class="clothing-description">
       <%= @clothing.description %>

@@ -1,1 +1,22 @@
 <h1><%= @artwork.name %></h1>
+
+<div class="artwork-container">
+  <div class="artwork-image-container">
+    <section class="artwork-image">
+      <%= image_tag(@artwork.image) %>
+    </section>
+  </div>
+
+  <div class="artwork-description-container">
+    <section class="artwork-description">
+      <%= @artwork.description %>
+    </section>
+  </div>
+
+  <div class="artwork-cost-container">
+    <section class="artwork-cost">
+      <%= number_to_currency(@artwork.cost) %>
+    </section>
+  </div>
+</div>
+<%= button_to 'Buy Me!', "/cart/artwork/#{@artwork.id}", method: :post %>
