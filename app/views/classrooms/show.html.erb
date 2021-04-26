@@ -32,4 +32,4 @@
 </div>
 
 <button type "submit" class="btn btn-outline-info" aria-pressed="true">Enroll</button>
-<%= button_to 'Sign Me Up!', registration_path, method: :get, class: "btn btn-outline-info" %>
+<%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %>

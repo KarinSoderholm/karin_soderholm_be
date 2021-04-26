@@ -1,5 +1,6 @@
 # class FabricsController < ApplicationController
 class Admin::FabricsController < Admin::BaseController
+  requrie 'csv'
   before_action :set_fabric, only: [:show, :update, :destroy]
 
   # GET /fabrics

@@ -1,0 +1,35 @@
+<h1><%= @user.name %></h1>
+<h3>Total number of people in the Community: <%= @users.count %></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Edit User</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @users %>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= link_to 'Edit User', "/admin/users/#{current_user.id}/profile_edit/#{user.id}" %></td>
+        <!-- <td><%= link_to 'Delete Garment', "/admin/users/#{user.id}/alert", method: :get %></td> -->
+        <td><%= user.address %></td>
+        <!-- <td>No image to display</td> -->
+        <td><%= user.city %></td>
+        <td><%= user.state %></td>
+        <td><%= user.zip %></td>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

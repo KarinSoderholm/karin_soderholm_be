@@ -1,5 +1,5 @@
 class Admin::EmailsController < Admin::BaseController
-  def import
+  def import  
     Email.import(params[:file])
     redirect_to admin_dashboard_index_path, notice: "Email Data Imported Successfully!"
   end

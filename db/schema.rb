@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_24_181820) do
+ActiveRecord::Schema.define(version: 2021_04_25_230602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,50 @@ ActiveRecord::Schema.define(version: 2021_04_24_181820) do
     t.index ["artwork_id"], name: "index_materials_on_artwork_id"
   end
 
+  create_table "order_artworks", force: :cascade do |t|
+    t.bigint "artwork_id"
+    t.bigint "order_id"
+    t.float "price"
+    t.integer "quantity"
+    t.boolean "fulfilled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artwork_id"], name: "index_order_artworks_on_artwork_id"
+    t.index ["order_id"], name: "index_order_artworks_on_order_id"
+  end
+
+  create_table "order_classrooms", force: :cascade do |t|
+    t.bigint "classroom_id"
+    t.bigint "order_id"
+    t.float "price"
+    t.integer "quantity"
+    t.boolean "fulfilled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_order_classrooms_on_classroom_id"
+    t.index ["order_id"], name: "index_order_classrooms_on_order_id"
+  end
+
+  create_table "order_clothings", force: :cascade do |t|
+    t.bigint "clothing_id"
+    t.bigint "order_id"
+    t.float "price"
+    t.integer "quantity"
+    t.boolean "fulfilled", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clothing_id"], name: "index_order_clothings_on_clothing_id"
+    t.index ["order_id"], name: "index_order_clothings_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "status"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "patterns", force: :cascade do |t|
     t.string "name"
     t.string "designer"
@@ -174,6 +218,13 @@ ActiveRecord::Schema.define(version: 2021_04_24_181820) do
   add_foreign_key "artshow_artworks", "artworks"
   add_foreign_key "fabrics", "clothings"
   add_foreign_key "materials", "artworks"
+  add_foreign_key "order_artworks", "artworks"
+  add_foreign_key "order_artworks", "orders"
+  add_foreign_key "order_classrooms", "classrooms"
+  add_foreign_key "order_classrooms", "orders"
+  add_foreign_key "order_clothings", "clothings"
+  add_foreign_key "order_clothings", "orders"
+  add_foreign_key "orders", "users"
   add_foreign_key "patterns", "clothings"
   add_foreign_key "requirements", "classrooms"
   add_foreign_key "tools", "classrooms"

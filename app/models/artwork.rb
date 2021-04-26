@@ -1,6 +1,6 @@
 class Artwork < ApplicationRecord
   require 'csv'
-
+  
   has_many :artshow_artworks, dependent: :destroy
   has_many :artshows, through: :artshow_artworks
   has_many :materials, dependent: :destroy

@@ -1,3 +1,40 @@
 class Order < ApplicationRecord
+  has_many :order_arts
+  has_many :order_classrooms
+  has_many :order_clothings
+
+  has_many :arts, through: :order_artworks
+  has_many :clothings, through: :order_clothings
+  has_many :classrooms, through: :order_classrooms
+
   belongs_to :user
+  enum status: ['pending', 'packaged', 'shipped', 'cancelled']
+
+  def grand_total
+    order_items.sum('price * quantity')
+  end
+
+  def count_of_items
+    order_items.sum(:quantity)
+  end
+
+  def self.by_status
+    order(:status)
+  end
+
+  def count_of_items
+    order_items.sum(:quantity)
+  end
+
+  def cancel
+    update(status: 'cancelled')
+    order_items.each do |order_item|
+      order_item.update(fulfilled: false)
+      order_item.item.update(inventory: order_item.item.inventory + order_item.quantity)
+    end
+  end
+
+  def is_packaged?
+    update(status: 1) if order_items.distinct.pluck(:fulfilled) == [true]
+  end
 end
