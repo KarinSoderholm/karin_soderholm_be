@@ -15,7 +15,6 @@
         <%= link_to image_tag("KarinBestLogo.png", class: 'logo-image'), welcome_index_path %>
         <%# <%= link_to 'Home', welcome_index_path %>
         <%# <%= link_to 'app/assests/images/KarinBestLogo.png', welcome_index_path %>
-      <%# <%= link_to 'Register', registration_path unless current_user %>
       <p><%= link_to 'Log In', login_path unless current_user %></p>
       <%= link_to 'Workshops', '/classrooms' %>
       <%= link_to 'Garments', '/clothings' %>
@@ -27,7 +26,7 @@
           <%= link_to 'Profile', profile_path %>
         <% end %>
         <p class='logged-in-user-logout'><%= link_to 'Log Out', logout_path %></p>
-        <%# <%= link_to "Cart: #{cart.count}", cart_path unless current_user && current_admin? %>
+        <%= link_to "Cart: #{cart.count}", cart_path unless current_user && current_admin? %>
         <p class="logged-in-user">Logged in as <%= current_user.name %></p>
         <% if current_admin? %>
           <%= link_to 'Admin Dashboard', admin_dashboard_index_path %>
