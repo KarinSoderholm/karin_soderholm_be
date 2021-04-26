@@ -17,7 +17,19 @@ class Classroom < ApplicationRecord
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
-      Classroom.create! row.to_hash
+      params = {}
+      row.to_hash.map do |k, v|
+        if k == "active" && v == "TRUE"
+          params[k.to_sym] = true
+        elsif k == 'active' && v == "FALSE"
+          params[k.to_sym] = false
+        elsif k == "cost "
+          params[:cost] = v.to_f
+        else
+          params[k.to_sym] = v.to_s
+        end
+      end
+      return params
       # requirement
       # tool
     end
