@@ -1,0 +1,11 @@
+<h1>All my orders</h1>
+<% @orders.each do |order| %>
+  <section id="order-<%= order.id %>">
+    <%= link_to order.id, "/profile/orders/#{order.id}" %>
+    <p>Created On: <%= order.created_at.localtime.strftime('%m/%d/%y') %></p>
+    <p>Updated On: <%= order.created_at.localtime.strftime('%m/%d/%y') %></p>
+    <p>Status: <%= order.status %></p>
+    <p><%= order.count_of_items %> items</p>
+    <p>Total: <%= number_to_currency(order.grand_total) %></p>
+  </section>
+<% end %>
