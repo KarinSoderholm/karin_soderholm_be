@@ -65,7 +65,9 @@ Rails.application.routes.draw do
   end
 
   resource :cart, only: [:show], controller: 'cart' do
-    post ':item_id', :action => 'add_item'
+    post '/classroom/:classroom_id', :action => 'add_item'
+    post '/clothing/:clothing_id', :action => 'add_item'
+    post '/artwork/:artwork_id', :action => 'add_item'
     delete '', :action => 'empty'
     patch ':change/:item_id', :action => 'update_quantity'
     delete ':item_id', :action => 'remove_item'
