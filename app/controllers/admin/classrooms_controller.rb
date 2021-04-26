@@ -3,8 +3,28 @@ class Admin::ClassroomsController < Admin::BaseController
   before_action :set_classroom, only: [:show, :update, :destroy]
   require 'csv'
   def import
-    Classroom.import(params[:file])
-    redirect_to admin_classrooms_path, notice: "Classroom Data Imported Successfully!"
+    classroom_data = Classroom.import(params[:file])
+
+    if classroom_params.keys == classroom_data.keys
+      @classroom = Classroom.create!(classroom_data)
+      redirect_to admin_classrooms_path, notice: "Classroom Data Imported Successfully!"
+    else
+      improved = classroom_data.map do |k, v|
+        if !classroom_params.keys.include?(k)
+          classroom_data.delete(k)
+        end
+      end
+      # binding.pry
+      @classroom = Classroom.new
+      binding.pry
+      if @classroom.save
+        redirect_to admin_classrooms_path, notice: "Classroom Data Imported Successfully!"
+      else
+        binding.pry
+        redirect_to admin_classrooms_path, alert: "Classroom Data Could not be imported. Please try again"
+      end
+    end
+
   end
 
   # GET /classrooms
@@ -17,6 +37,9 @@ class Admin::ClassroomsController < Admin::BaseController
   def show
   end
 
+  def new
+
+  end
   # POST /classrooms
   def create
     classroom = Classroom.new(classroom_params)

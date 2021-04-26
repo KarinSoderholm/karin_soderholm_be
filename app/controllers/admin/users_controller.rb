@@ -31,7 +31,6 @@ class Admin::UsersController < Admin::BaseController
   def update
     if @user.update(user_params)
       flash[:notice] = 'Profile has been updated!'
-      binding.pry
       redirect_to "/admin/users/#{current_user.id}"
     else
       @user.errors.messages.each do |key, value|
