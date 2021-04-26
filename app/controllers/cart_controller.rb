@@ -2,16 +2,24 @@ class CartController < ApplicationController
   before_action :exclude_admin
 
   def add_item
-    item = Item.find(params[:item_id])
-    session[:cart] ||= {}
-    if cart.limit_reached?(item.id)
-      flash[:notice] = "You have all the item's inventory in your cart already!"
-    else
-      cart.add_item(item.id.to_s)
-      session[:cart] = cart.contents
-      flash[:notice] = "#{item.name} has been added to your cart!"
+    helper_hash = {}
+    if params[:classroom_id]
+      item = Classroom.find(params[:classroom_id])
+      helper_hash[:classroom] = item.id
+    elsif params[:clothing_id]
+      item = Clothing.find(params[:clothing_id])
+      helper_hash[:clothing] = item.id
+    elsif params[:artwork_id]
+      item = Artwork.find(params[:artwork_id])
+      helper_hash[:artwork] = item.id
     end
-    redirect_to items_path
+
+    session[:cart] ||= {}
+    cart.add_item(helper_hash)
+    session[:cart] = cart.contents
+    flash[:notice] = "#{item.name} has been added to your cart!"
+  
+    redirect_to cart_path
   end
 
   def show
