@@ -23,7 +23,7 @@
   <%= text_field_tag :location %><br>
 
   <%= label_tag 'Cost: '%><br>
-  <%= number_field_tag :cost, nil, min: 1, max: 100000 %><br>
+  <%= number_field_tag :cost, nil, min: 1, max: 100000, placeholder: '$' %><br>
   <br>
   <%= label_tag 'Workshop is available (yes/no): '%>
   <%= label_tag 'Yes'%>
@@ -31,6 +31,18 @@
   <%= label_tag 'No'%>
   <%= radio_button_tag :active, false %><br>
   <br>
+
+  <%= label_tag 'Add required tools to the Workshop' %>
+  <%# select("post", "person_id", Person.all.collect { |p| [ p.name, p.id ] }, { prompt: 'Select Person' }) %>
+  <%# <%= select_tag :tools, raw("<option>Sewing Machine</option>,<option>Crochet Hooks</option>,<option>Sewing Needles</option>"), mulitple: true %>
+  <%= select_tag :tools, options_for_select(["Sewing Machine", "Crochet Hooks", "Sewing Needles", "Yarn", "Fabric", "Elastic"]), include_blank: true %><br>
+  <%# <%= select_tag :tools, options_from_collection_for_select(@tools, "name")%>
+  <%# .map {|tool| [tool.name, tool.id] } %>
+  <%# , { 'data-url' => admin_tool_path(tool: tool.id) } %>
+  <%= label_tag 'Add requirements for the Workshop' %><br>
+  <%= select_tag :requirement, options_from_collection_for_select(@classrooms, "id", "name"), include_blank: true %><br>
+
+
   <%= label_tag 'Image for Workshop: '%><br>
   <%= file_field_tag :image %>
   <%# # <%= file_field_tag :photo  %>

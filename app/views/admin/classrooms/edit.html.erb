@@ -26,7 +26,7 @@
   <%= f.label 'Cost: '%><br>
   <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>
 
-  <%= f.label 'Image for Workshop: '%>
+  <%= f.label 'Image for Workshop: '%><br>
   <%= f.file_field :image %>
   <br>
   <br>
