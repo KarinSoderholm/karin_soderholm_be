@@ -1,4 +1,6 @@
-<h2><%= @artwork.name %> Edit Page</h2>
+<section class="page-title">
+  <h2><%= @artwork.name %> Edit Page</h2>
+</section>
 <%= form_for ([:admin, @artwork]) do |f| %>
 
   <%= f.label 'Name of Artwork: '%><br>
@@ -9,7 +11,7 @@
 
   <%= f.label 'Artwork was created on: '%><br>
   <%= f.date_field :create_date %><br>
-  
+
   <%= f.label 'Artwork was sold on: '%><br>
   <%= f.date_field :sell_date %><br>
   <br>
