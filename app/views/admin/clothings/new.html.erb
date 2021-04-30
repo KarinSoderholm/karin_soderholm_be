@@ -13,7 +13,7 @@
   <%= text_field_tag :url %><br>
 
   <%= label_tag 'Category of Garment: '%><br>
-  <%= text_field_tag :category %><br>
+  <%= select_tag :category %><br>
   <%# <%= select_tag 'Categorgies', raw("<option>Outer Wear</option><option>Dress</option><option>Shirt</option><option>Under Garments</option><option>Pants</option>"), multiple: true, prompt: "Select something", :onchange => "this.form.submit()" %>
 
   <%= label_tag 'Garment is available (yes / no): '%>
@@ -26,7 +26,7 @@
   <%= date_field_tag :origin_date %><br>
   <br>
   <%= label_tag 'Cost: '%>
-  <%= number_field_tag :cost, nil, min: 1, max: 100000 %>
+  <%= number_field_tag :cost, nil, min: 1, max: 100000, placeholder: '$' %>
   <br>
   <%= label_tag 'Image of Garment: '%><br>
   <%= file_field_tag :image %><br>
