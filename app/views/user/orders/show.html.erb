@@ -2,20 +2,70 @@
 <section id='navigation-links-individual'>
   <%= link_to 'My Orders', '/profile/orders' %>
 </section>
-<p>Created On: <%= @order.created_at.localtime.strftime('%m/%d/%y') %></p>
-<p>Updated On: <%= @order.created_at.localtime.strftime('%m/%d/%y') %></p>
-<p>Status: <%= @order.status %></p>
-<p><%= @order.count_of_items %> items</p>
-<p>Total: <%= number_to_currency(@order.grand_total) %></p>
-<%= button_to 'Cancel Order', "/profile/orders/#{@order.id}", method: :delete if @order.pending? %>
 
-<h2>Order Items</h2>
-<% @order.order_items.each do |order_item| %>
-  <section id='order-item-<%= order_item.id %>'>
-    <h3><%= link_to order_item.item.name, item_path(order_item.item) %></h3>
-    <p><%= order_item.item.description %></p>
-    <p>Quantity: <%= order_item.quantity %></p>
-    <p>Price: <%= number_to_currency(order_item.price) %></p>
-    <p>Subtotal: <%= number_to_currency(order_item.subtotal) %></p>
+<section class="order-status">
+  <p>Total Number of Items in Order: <%= @order.order_artworks.count + @order.order_clothings.count + @order.order_classrooms.count %></p>
+  <p>Total: <%= number_to_currency(@order.grand_total) %></p><br>
+  <p>Status: <%= @order.status %></p>
+  Created On: <%= @order.created_at.localtime.strftime('%m/%d/%y') %>
+  Updated On: <%= @order.created_at.localtime.strftime('%m/%d/%y') %>
+  <%= button_to 'Cancel Order', "/profile/orders/#{@order.id}", method: :delete if @order.pending? %>
+</section>
+<br>
+
+<h2>Order Inventory</h2>
+  <section class="order-inventory">
+    <section class="order_artwork">
+      <% if !@order.order_artworks.nil? %>
+      <% @order.order_artworks.each do |order_artwork| %>
+      <section id='order-artwork-<%= order_artwork.id %>'>
+        <h3><%= link_to order_artwork.artwork.name, artwork_path(order_artwork.artwork) %></h3>
+        <%= image_tag(order_artwork.artwork.image, style: 'height:10%;width:10%') %>
+        <p><%= order_artwork.artwork.description %></p>
+        <p>Quantity: <%= order_artwork.quantity %></p>
+        <p>Price: <%= number_to_currency(order_artwork.price) %></p>
+        <p>Subtotal: <%= number_to_currency(order_artwork.subtotal(order_artwork)) %></p>
+      </section>
+      <% end %>
+      <% else %>
+      <h4>There are no workshops in your order</h4>
+      <% end %>
+    </section>
+    <br>
+    <section class="order_classroom">
+      <% if !@order.order_classrooms.nil? %>
+        <% @order.order_classrooms.each do |order_classroom| %>
+          <section id='order-classroom-<%= order_classroom.id %>'>
+            <h3><%= link_to order_classroom.classroom.name, classroom_path(order_classroom.classroom) %></h3>
+            <%= image_tag(order_classroom.classroom.image, style: 'height:10%;width:10%') %>
+            <p><%= order_classroom.classroom.description %></p>
+            <p>Quantity: <%= order_classroom.quantity %></p>
+            <p>Price: <%= number_to_currency(order_classroom.price) %></p>
+            <p>Subtotal: <%= number_to_currency(order_classroom.subtotal(order_classroom)) %></p>
+          </section>
+        <% end %>
+      <% else %>
+        <h4>There are no workshops in your order</h4>
+      <% end %>
+    </section>
+    <br>
+    <section class="order_clothing">
+      <% if !@order.order_clothings.nil? %>
+        <% @order.order_clothings.each do |order_clothing| %>
+          <section id='order-clothing-<%= order_clothing.id %>'>
+            <h3><%= link_to order_clothing.clothing.name, clothing_path(order_clothing.clothing) %></h3>
+            <%= image_tag(order_clothing.clothing.image, style: 'height:10%;width:10%') %>
+            <p><%= order_clothing.clothing.description %></p>
+            <p>Quantity: <%= order_clothing.quantity %></p>
+            <p>Price: <%= number_to_currency(order_clothing.price) %></p>
+            <p>Subtotal: <%= number_to_currency(order_clothing.subtotal(order_clothing)) %></p>
+          </section>
+        <% end %>
+      <% else %>
+        <h4>There are no workshops in your order</h4>
+      <% end %>
+    </section>
+    <br>
   </section>
-<% end %>
+
+<h2>Grand Total of Order <%= @order.id %>: <%= number_to_currency(@order.grand_total) %></h2>
