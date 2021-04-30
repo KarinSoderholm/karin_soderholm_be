@@ -38,7 +38,9 @@ class Admin::ClassroomsController < Admin::BaseController
   end
 
   def new
-
+    @tools = Tool.all
+    @requirements = Requirement.all
+    @classrooms = Classroom.all
   end
   # POST /classrooms
   def create

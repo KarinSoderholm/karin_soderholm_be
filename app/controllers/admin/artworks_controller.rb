@@ -18,7 +18,9 @@ class Admin::ArtworksController < Admin::BaseController
   end
 
   def new
-
+    @tools = Tool.all
+    @requirements = Requirement.all
+    @artworks = Artwork.all
   end
   # POST /artworks
   def create
@@ -35,6 +37,7 @@ class Admin::ArtworksController < Admin::BaseController
   end
 
   def edit
+    @artworks = Artwork.all
     @artwork = Artwork.find(params[:id])
   end
   # PATCH/PUT /artworks/1

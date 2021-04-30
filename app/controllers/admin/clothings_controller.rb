@@ -21,7 +21,7 @@ class Admin::ClothingsController < Admin::BaseController
     set_clothing
     if @clothing.nil?
       flash[:message] = "That garment is no longer available."
-      redirect_to admin_clothings_path  
+      redirect_to admin_clothings_path
     end
     # render json: @clothing
   end
@@ -42,6 +42,7 @@ class Admin::ClothingsController < Admin::BaseController
   end
 
   def edit
+    @clothings = Clothing.all
     @clothing = Clothing.find(params[:id])
   end
   # PATCH/PUT /clothings/1
