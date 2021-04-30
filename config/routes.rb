@@ -27,9 +27,6 @@ Rails.application.routes.draw do
     resources :users do
       get '/edit_password' => :edit_password
       get '/profile_edit/:user_id' => :profile_edit
-      # get '/edit_social/' => :edit_social
-      # get '/new_social/' => :new_social
-      # post '/add_social' => :add_social
     end
     resource :orders do
       patch '/:id/ship', action: :ship
@@ -81,4 +78,7 @@ Rails.application.routes.draw do
   resources :artworks
   resources :clothings
   resources :emails
+  namespace :artwork do
+    resources :collections
+  end
 end
