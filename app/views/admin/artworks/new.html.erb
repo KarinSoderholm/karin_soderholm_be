@@ -19,7 +19,7 @@
   <%= date_field_tag :sell_date %><br>
   <br>
   <%= label_tag 'Cost: '%><br>
-  <%= number_field_tag :cost, nil, min: 1, max: 100000 %><br>
+  <%= number_field_tag :cost, nil, min: 1, max: 100000, placeholder: '$' %><br>
   <br>
   <%= label_tag 'Artwork is available (yes / no): '%>
   <%= label_tag 'Yes'%>
@@ -27,6 +27,14 @@
   <%= label_tag 'No'%>
   <%= radio_button_tag :available, false %><br>
 
+  <%= label_tag 'Collection: '%><br>
+  <%# <%= select_tag :collection, options_for_select([ "", "" ], "MasterCard") %>
+  <%# <% binding.pry %>
+  <%= select_tag :collection, options_from_collection_for_select(@artworks, "id", "collection"), include_blank: true %><br>
+  <%# <%= f.label 'Collecetion: '%>
+  <%# <%= f.select :collection, @artworks.map { |artwork| [artwork.collection, artwork.id] }  %>
+
+  <br>
   <%= label_tag 'Image of Artwork: '%><br>
   <%= file_field_tag :image %><br>
   <%# # <%= file_field_tag :images %>
