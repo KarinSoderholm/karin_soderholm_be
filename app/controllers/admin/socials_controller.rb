@@ -1,24 +1,21 @@
 class Admin::SocialsController < Admin::BaseController
   before_action :set_social, only: [:show, :update, :destroy, :edit]
 
-  # GET /socials
   def index
     @socials = Social.all
   end
 
-  # GET /socials/1
   def show
-    binding.pry
   end
 
   def new
   end
-  # POST /socials
+
   def create
     @social = Social.new(social_params)
     if @social.save
       flash[:success] = "You have added to your Social links"
-      redirect_to "/admin/socials/#{current_user.id}"
+      redirect_to "/admin/socials/#{@social.id}"
       # render json: @social, status: :created, location: @social
     else
       flash[:error] = "Unable to save the details. Please try again!"
@@ -28,21 +25,18 @@ class Admin::SocialsController < Admin::BaseController
   end
 
   def edit
-
   end
-  # PATCH/PUT /socials/1
+
   def update
     if @social.update(social_params)
       flash[:success] = "You have updated your Socials! Wahoo! More connections"
-      render :show
+      redirect_to "/admin/socials/#{current_user.id}"
     else
       flash[:error] = "There was a problem with your request. Please try again"
-      # render json: @social.errors, status: :unprocessable_entity
       render :edit
     end
   end
 
-  # DELETE /socials/1
   def destroy
     @social.destroy
   end
