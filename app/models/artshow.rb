@@ -1,8 +1,8 @@
 class Artshow < ApplicationRecord
   require 'csv'
-  
+
   has_many :artshow_artworks, dependent: :destroy
-  has_many :artworks, through: :artshow_artworks
+  has_many :artworks, through: :artshow_artworks, dependent: :destroy
 
   validates :name, presence: true
   validates :location, presence: true

@@ -1,10 +1,12 @@
 class Artwork < ApplicationRecord
   require 'csv'
-  
+
   has_many :artshow_artworks, dependent: :destroy
   has_many :artshows, through: :artshow_artworks
   has_many :materials, dependent: :destroy
   has_one :artist_statement, dependent: :destroy
+  has_many :order_artworks, dependent: :destroy
+  has_many :orders, through: :order_artworks, dependent: :destroy 
   # has_many_attached :images
   has_one_attached :image
 
@@ -15,7 +17,8 @@ class Artwork < ApplicationRecord
   validates :sell_date, presence: false
   validates :cost, presence: true
   validates :available, inclusion: [true, false]
-  validates :images, presences: false
+  validates :images, presence: false
+  validates :collection, presence: false
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
