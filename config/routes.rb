@@ -78,7 +78,5 @@ Rails.application.routes.draw do
   resources :artworks
   resources :clothings
   resources :emails
-  namespace :artwork do
-    resources :collections
-  end
+  resources :collections
 end
