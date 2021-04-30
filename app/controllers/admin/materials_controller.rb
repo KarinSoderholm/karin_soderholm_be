@@ -18,18 +18,18 @@ class Admin::MaterialsController < Admin::BaseController
   def create
     @material = Material.new(material_params)
     if @material.save
-      render json: @material, status: :created, location: @material
+      # render json: @material, status: :created, location: @material
     else
-      render json: @material.errors, status: :unprocessable_entity
+      # render json: @material.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /materials/1
   def update
     if @material.update(material_params)
-      render json: @material
+      # render json: @material
     else
-      render json: @material.errors, status: :unprocessable_entity
+      # render json: @material.errors, status: :unprocessable_entity
     end
   end
 

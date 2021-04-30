@@ -1,4 +1,3 @@
-# class RequirementsController < ApplicationController
 class Admin::RequirementsController < Admin::BaseController
   before_action :set_requirement, only: [:show, :update, :destroy]
 
