@@ -1,23 +1,27 @@
-<h1 class="brand-name">Quiet Joy Studio</h1>
 
+<div class="welcome-layout">
+  <div class="welcome-container">
+    <h1 class="brand-name">Quiet Joy Studio</h1>
 
-<section class="art-layout">
-  <% @artworks.each do |artwork| %>
-    <p class="art-image"><%= image_tag(artwork.image) %></p>
-  <% end %>
-  <p><%= button_to 'Artworks', artworks_path, method: :get %></p>
-</section>
+      <section class="art-layout">
+        <% @artworks.each do |artwork| %>
+        <p class="art-image"><%= image_tag(artwork.image) %></p>
+        <% end %>
+        <p><%= button_to 'Artwork', artworks_path, method: :get %></p>
+      </section>
 
-<section class="garment-layout">
-  <% @clothings.each do |clothing| %>
-    <p class="garment-image"><%= image_tag(clothing.image) %></p>
-  <% end %>
-<p><%= button_to 'Garments', clothings_path, method: :get  %></p>
-</section>
+      <section class="garment-layout">
+        <% @clothings.each do |clothing| %>
+        <p class="garment-image"><%= image_tag(clothing.image) %></p>
+        <% end %>
+        <p><%= button_to 'Garments', clothings_path, method: :get  %></p>
+      </section>
 
-<section class="workshop-layout">
-  <% @classrooms.each do |classroom| %>
-    <p class="workshop-image"><%= image_tag(classroom.image) %></p>
-  <% end %>
-<p><%= button_to 'Workshops', classrooms_path, method: :get  %></p>
-</section>
+      <section class="workshop-layout">
+        <% @classrooms.each do |classroom| %>
+        <p class="workshop-image"><%= image_tag(classroom.image) %></p>
+        <% end %>
+        <p><%= button_to 'Workshops', classrooms_path, method: :get  %></p>
+      </section>
+  </div>
+</div>
