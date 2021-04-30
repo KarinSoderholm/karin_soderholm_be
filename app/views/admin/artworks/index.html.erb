@@ -17,6 +17,7 @@
       <th>Sell Date</th>
       <th>Cost</th>
       <th>Available</th>
+      <th>Collection</th>
     </tr>
   </thead>
   <tbody>
@@ -42,6 +43,7 @@
         <% end %>
         <td><%= number_to_currency(artwork.cost) %></td>
         <td><%= artwork.available %></td>
+        <td><%= artwork.collection %></td>
       </tr>
       <% end %>
     <% end %>

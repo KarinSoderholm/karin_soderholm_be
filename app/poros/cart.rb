@@ -13,8 +13,6 @@ class Cart
      item = Artwork.find(item_hash[:artwork])
     elsif item_hash.keys.include?(:clothing)
       item = Clothing.find(item_hash[:clothing])
-    else
-     flash[:error] = 'That item is not in our sytem. Please try again'
     end
   end
 

@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     resources :profiles do
       get '/edit_password' => :edit_password
     end
+    resources :socials
   end
 
   scope controller: :sessions do
@@ -77,4 +78,7 @@ Rails.application.routes.draw do
   resources :artworks
   resources :clothings
   resources :emails
+  namespace :artwork do
+    resources :collections
+  end
 end

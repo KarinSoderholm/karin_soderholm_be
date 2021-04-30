@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   before_action :require_admin
-  before_action :set_user, only: [:show, :update, :destroy, :edit, :edit_password, :index]
+  before_action :set_user, only: [:show, :update, :destroy, :edit, :edit_password, :index, :edit_social, :new_social]
   def show
   end
 
@@ -42,6 +42,15 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def destroy
+  end
+
+  def add_social
+  end
+
+  def new_social
+  end
+
+  def edit_social
   end
 
   private

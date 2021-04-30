@@ -1,0 +1,30 @@
+<h1>Your Social Details</h1>
+  <section class="social-details-links">
+    <%= button_to 'Add Social Links', new_admin_social_path, method: :get %>
+    <%= button_to 'Edit Social Links', edit_admin_social_path, method: :get %>
+  </section>
+<table>
+  <thead>
+    <tr>
+      <th>Pinterest</th>
+      <th>Instagram</th>
+      <th>Email</th>
+      <th>Etsy</th>
+      <th>Facebook</th>
+      <th>LinkedIn</th>
+      <th>Twitter</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= @social.pinterest %></td>
+        <%# <%= link_to 'Delete Garment', "/admin/socials/#{@social.id}/alert", method: :get %>
+        <td><%= @social.instagram %></td>
+        <td><%= @social.email %></td>
+        <td><%= @social.etsy %></td>
+        <td><%= @social.facebook %></td>
+        <td><%= @social.linked_in %></td>
+        <td><%= @social.twitter%></td>
+      </tr>
+  </tbody>
+</table>

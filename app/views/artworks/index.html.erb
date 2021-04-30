@@ -1,29 +1,33 @@
 <h1>Artwork</h1>
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'collections', artwork_collections_path %>  /  <%= link_to 'all collections', artworks_path %>
+</div>
+
 
 <div class="artworks-layout">
-<% if @artworks %>
-  <% @artworks.each do |artwork| %>
-  <div class="artwork-container">
-    <h2><%= artwork.name %></h2>
-    <div class="artwork-border">
-    <% if artwork.available %>
-      <p class="artwork-image"><%= link_to(image_tag(artwork.image), artwork_path(artwork), id: 'artwork') %></p>
-    <% else %>
-      <p class="artwork-image"><%= image_tag(artwork.image) %></p>
-    <% end %>
-    <!-- <h3>Description: <%= artwork.description %></h3> -->
-    <h3>This piece is <div class="availability"><%= artwork.availability? %></div></h3>
-    <% if artwork.available %>
-      <h5>Click the picture for more details!</h5>
-      <h3>Cost: <div class="cost"><%= number_to_currency(artwork.cost) %></div></h3>
-    <% else %>
-      <h5>Someone else was able to snatch this beauty up!</h5>
+  <% if @artworks %>
+    <% @artworks.each do |artwork| %>
+    <div class="artwork-container">
+      <div class="artwork-border">
+        <h2><%= artwork.name %></h2>
+      <% if artwork.available %>
+        <p class="artwork-image"><%= link_to(image_tag(artwork.image), artwork_path(artwork), id: 'artwork') %></p>
+      <% else %>
+        <p class="artwork-image"><%= image_tag(artwork.image) %></p>
+      <% end %>
+      <!-- <h3>Description: <%= artwork.description %></h3> -->
+      <h3>This piece is <div class="availability"><%= artwork.availability? %></div></h3>
+      <% if artwork.available %>
+        <h5>Click the picture for more details!</h5>
+        <h3>Cost: <div class="cost"><%= number_to_currency(artwork.cost) %></div></h3>
+      <% else %>
+        <h5>Someone else was able to snatch this beauty up!</h5>
+      <% end %>
+      </div>
+      <br>
     <% end %>
     </div>
-    <br>
+  <% else %>
+    <h3>There are no garments available at this time! Check back soon!</h3>
   <% end %>
-  </div>
-<% else %>
-  <h3>There are no garments available at this time! Check back soon!</h3>
-<% end %>
 </div>

@@ -1,32 +1,40 @@
 <h1>Welcome, <%= @user.name %> to the Administration Dashboard!</h1>
 <p>Here is the place to add and update aspects of the website.</p>
 
-<section class="garment-layout">
-  <% @clothings.each do |clothing| %>
-    <p class="garment-image"><%= image_tag(clothing.image) %></p>
-  <% end %>
-  <p><%= button_to 'My Garments', admin_clothings_path, method: :get %></p>
-</section>
-
-<section class="art-layout">
-  <% @artworks.each do |artwork| %>
-    <% if !artwork.image.nil? || !artwork.image.empty?%>
-      <p class="art-image"><%= image_tag(artwork.image) %></p>
-    <% else %>
-      <p>No Image to display</p>
-    <% end %>
-  <% end %>
-  <p><%= button_to 'My Art', admin_artworks_path, method: :get  %></p>
-</section> 
-
-<section class="workshop-layout">
-  <% @classrooms.each do |classroom| %>
-    <%# <% if classroom.image.nil? %>
-      <%# <!-- <p class="workshop-image"><%= image_tag(classroom.photo) %>
-    <%# <% else %>
-      <p class="workshop-image"><%= image_tag(classroom.image) %></p>
-    <%# <% end %>
-  <% end %>
-  <p><%= button_to 'My Workshops', admin_classrooms_path, method: :get  %></p>
-</section>
-<p><%= button_to 'Email List', admin_emails_path, method: :get  %></p>
+<div class="admin-dashboard-layout">
+  <ul>
+    <li>
+      <section class="garment-layout">
+        <% @clothings.each do |clothing| %>
+          <p class="garment-image"><%= image_tag(clothing.image) %></p>
+        <% end %>
+        <%= button_to 'My Garments', admin_clothings_path, method: :get %>
+      </section>
+    </li>
+    <li>
+      <section class="art-layout">
+        <% @artworks.each do |artwork| %>
+          <% if !artwork.image.nil? || !artwork.image.empty?%>
+            <p class="art-image"><%= image_tag(artwork.image) %></p>
+          <% else %>
+            <p>No Image to display</p>
+          <% end %>
+        <% end %>
+        <%= button_to 'My Art', admin_artworks_path, method: :get  %>
+      </section>
+    </li>
+    <li>
+      <section class="workshop-layout">
+        <% @classrooms.each do |classroom| %>
+            <p class="workshop-image"><%= image_tag(classroom.image) %></p>
+        <% end %>
+        <section class="admin-buttons">
+          <%= button_to 'My Workshops', admin_classrooms_path, method: :get  %>
+        </section>
+      </section>
+    </li>
+  </ul>
+  <section class="email-list">
+    <%= button_to 'Email List', admin_emails_path, method: :get  %>
+  </section>
+</div>

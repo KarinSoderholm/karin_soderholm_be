@@ -3,6 +3,8 @@ class Classroom < ApplicationRecord
 
   has_many :tools, dependent: :destroy
   has_many :requirements, dependent: :destroy
+  has_many :order_classrooms, dependent: :destroy
+  has_many :orders, through: :order_classrooms, dependent: :destroy 
   # has_one_attached :photo
   has_one_attached :image
 

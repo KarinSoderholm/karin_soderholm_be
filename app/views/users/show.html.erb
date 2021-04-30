@@ -5,6 +5,20 @@
   <%= link_to 'My Orders', '/profile/orders' %>
 </section>
 
-  <h3>My Artworks: none have been purchased, yet!</h3>
-  <h3>My Workshops: none have been purchased, yet!</h3>
-  <h3>My Garments: none have been purchased, yet!</h3>
+<h2>Your cart contains: </h2>
+<% if @cart %>
+  <% @cart.each do |cart_item, quantity| %>
+    <% if cart_item.keys.include?(:artwork) %>
+      <h3>Name: <%=Artwork.find(cart_item[:artwork]).name%></h3>
+      <h3>Cost: <%=number_to_currency(Artwork.find(cart_item[:artwork]).cost)%></h3>
+    <% elsif cart_item.keys.include?(:classroom) %>
+      <h3>Name: <%=Classroom.find(cart_item[:classroom]).name%></h3>
+      <h3>Cost: <%=number_to_currency(Classroom.find(cart_item[:classroom]).cost)%></h3>
+    <% elsif cart_item.keys.include?(:clothing) %>
+      <h3>Name: <%=Clothing.find(cart_item[:clothing]).name%></h3>
+      <h3>Cost: <%=number_to_currency(Clothing.find(cart_item[:clothing]).cost)%></h3>
+    <% end %>
+  <% end %>
+  <% else %>
+    <h3>Nothing!</h3>
+<% end %>

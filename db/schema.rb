@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_230602) do
+ActiveRecord::Schema.define(version: 2021_04_30_002318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_230602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "images", default: [], array: true
+    t.string "collection"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -167,7 +168,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_230602) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -189,6 +190,18 @@ ActiveRecord::Schema.define(version: 2021_04_25_230602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["classroom_id"], name: "index_requirements_on_classroom_id"
+  end
+
+  create_table "socials", force: :cascade do |t|
+    t.string "linked_in"
+    t.string "facebook"
+    t.string "instagram"
+    t.string "pinterest"
+    t.string "twitter"
+    t.string "email"
+    t.bigint "user_id"
+    t.string "etsy"
+    t.index ["user_id"], name: "index_socials_on_user_id"
   end
 
   create_table "tools", force: :cascade do |t|
@@ -227,5 +240,6 @@ ActiveRecord::Schema.define(version: 2021_04_25_230602) do
   add_foreign_key "orders", "users"
   add_foreign_key "patterns", "clothings"
   add_foreign_key "requirements", "classrooms"
+  add_foreign_key "socials", "users"
   add_foreign_key "tools", "classrooms"
 end

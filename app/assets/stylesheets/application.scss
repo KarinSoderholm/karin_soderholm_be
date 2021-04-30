@@ -10,13 +10,18 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
- */
 
+ */
+// Custom bootstrap variables must be set or imported *before* bootstrap
  @import "bootstrap";
  body {
-  background-color: white;
+    font-family: LTCKennerley;
+    font-style: normal;
+    font-weight: 400;
+    color: #815445;
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    // background-color: white;
   }
 
   /* .classname {
@@ -28,65 +33,66 @@
    text-align: center;
   	font-size: 40px;
   	color: #002244;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  }
+    font-family: LTCKennerley;
+   }
 
   h2 {
    text-align: center;
   	font-size: 30px;
   	color: #002244;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  }
+    font-family: LTCKennerley;
+   }
 
   h3 {
    text-align: center;
   	font-size: 20px;
   	color: #002244;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  }
+    font-family: LTCKennerley;
+   }
 
   h4 {
    text-align: center;
   	font-size: 17px;
   	/* color: #002244; */
   	color: white;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  }
+    font-family: LTCKennerley;
+   }
   h5 {
    text-align: center;
   	font-size: 15px;
   	color: #002244;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  }
+    font-family: LTCKennerley;
+   }
  ul{
    padding: 0px;
    text-align: center;
+   font-family: LTCKennerley;
  }
  img{
    width: 50%;
  }
 
- .fire-image {
-   background-image: url("fire.jpg"); /* The image used */
-   background-color: #cccccc; /* Used if the image is unavailable */
-   height: 500px; /* You must set a specified height */
-   background-position: center; /* Center the image */
-   background-repeat: no-repeat; /* Do not repeat the image */
-   background-size: cover; /* Resize the background image to cover the entire container */
- }
-
  #cart-image{
    width:50px;
  }
- #admin-profile-links{
-   text-align: center;
- }
+  #admin-profile-links{
+    display: flex;
+    text-align: center;
+    font-family: LTCKennerley;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
  section[id*='review'] {
    background-color: #DCDCDC;
  }
  div[class*='import-csv'] {
    background-color: #002244b0;
    height: 150px;
+   font-family: LTCKennerley;
  }
  .list-reviews {
    display: grid;
@@ -126,7 +132,9 @@
 
   .topnav {
     overflow: hidden;
-    background-color: #002244;
+    background-color: #51677e;
+    // background-color: #002244;
+    font-family: LTCKennerley;
   }
 
   .topnav a {
@@ -136,36 +144,259 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-    font-weight: bolder;
+    font-family: LTCKennerley;
+     // font-weight: bolder;
   }
 
   .topnav a:hover {
-    background-color: #17BEBB;
-    color: coral;
+    // background-color: #5b4c18;
+    background-color: #002244;
+    // background-color: #17BEBB;
+    color: gray;
+    font-weight: bolder;
+  }
+  .logged-in-user {
+    color: #5b4c18;
+    text-align: right;
+    border: none;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: LTCKennerley;
+  }
+  .logged-in-user-logout {
+    text-align: right;
+  }
+  .profile-link {
+    text-align: right;
+    align-self: flex-end;
   }
 
-  .bottomnav{
-    overflow: hidden;
+  // Shopping Cart
+  .bi bi-bag {
+    align-self: flex-end;
+    text-align: right;
+    color: white;
+    // background-color: white;
+    box-sizing: 32px;
+  }
+  .cart-mini {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9000;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-color: transparent;
+    transform: translateX(100%);
+    transition: transform 0ms linear 350ms, background-color 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: background-color;
+  }
+
+  .cart-mini-sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    padding: 0 20px 20px;
+    background-color: #ffffff;
+    transform: translateX(100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  .cart-mini-header {
+    font-family: "Roboto Condensed",sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    position: relative;
+    width: 100%;
+    padding: 18px 18px 16px;
+    font-size: 12px;
+    color: #bf684a;
+    text-align: center;
+    border-bottom: 1px solid #eeeeee;
+  }
+  .cart-mini-header-close {
+    position: absolute;
+    top: 50%;
+    right: -3px;
+    width: 26px;
+    height: 26px;
+    padding: 7px;
+    cursor: pointer;
+    transform: translateY(-50%);
+  }
+  .cart-mini-header-close svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .cart-mini-items {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+    width: calc(100% + 15px);
+    padding-right: 15px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cart-mini-empty {
+    font-family: LTCKennerley;
+    font-style: normal;
+    font-weight: 400;
+    margin-top: 40px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+
+  // Footer
+  .static-footer {
     background-color: #002244;
+  }
+  .main-footer a {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
+    // overflow: hidden;
+    background-color: #002244;
+  }
+  .main-footer a:hover{
+    color: #815445;
+
   }
 
   .subscribe-form{
-    height: 200px;
-    /* width: 200px; */
-    align: right;
+    display: flex;
+  	flex-direction: column;
+  	flex-wrap: nowrap;
+  	justify-content: flex-end;
+  	align-items: flex-end;
+  	align-content: center;
+
+
+    // height: 160px;
+    // width: 100px;
+    // text-align: right;
     background-position: right;
-    background-color: white;
-    padding: 20px;
-    margin: 20px;
-    border: 20px;
+    // background-color: white;
+    // padding: 20px;
+    // margin: 20px;
+    // border: 20px;
   }
   .subscribe-text{
-    color: coral;
+    display: flex;
+  	flex-direction: column;
+  	flex-wrap: nowrap;
+  	justify-content: flex-end;
+  	align-items: flex-end;
+  	align-content: center;
+    padding-top: 25px;
+    padding-right: 25px;
+    font-family: LTCKennerley;
+    // width: 500px;
+    // color: coral;
+    // font-size: large;
+    // font-weight: bolder;
+   }
+  .header-contact{
     font-size: large;
     font-weight: bolder;
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-family: LTCKennerley;
+    color: coral;
+    display: flex;
+  	flex-direction: column;
+  	flex-wrap: nowrap;
+  	justify-content: flex-end;
+  	align-items: flex-end;
+  	align-content: center;
+    padding-top: 25px;
+    padding-right: 25px;
   }
+
+  // in every index page
+  .quicknav-content {
+    color: #5b4c18;
+    background-color: gray;
+    background-color: #5b4c18;
+    // padding-left: 550px;
+    // align-self: center;
+    // align-items: center;
+    // position: relative;
+    display: flex;
+  	flex-direction: row;
+  	flex-wrap: nowrap;
+  	justify-content: center;
+  	align-items: space-between;
+  	align-content: space-around;
+    // width: 100%;
+    // max-width: 960px;
+    // max-height: 90%;
+    // padding: 30px 0 30px 30px;
+    overflow: hidden;
+    pointer-events: cursor;
+    background-color: #ffffff;
+    // opacity: 0;
+    // transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1) opacity;
+  }
+
+
+
+
+  .btn-subscribe-submit{
+    align-content: right;
+    background-color: white;
+    color: white;
+    opacity: 100%;
+  }
+  .form-group{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 25px;
+    padding-right: 25px;
+    width: 500px;
+  }
+  .form-group-text{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 25px;
+    padding-right: 25px;
+    width: 500px;
+    font-family: LTCKennerley;
+  }
+
+  .social-links svg-icon icon-pinterst svg-icon icon-instgram {
+    background: white;
+    display: flex;
+  	flex-direction: row;
+  	flex-wrap: wrap;
+  	justify-content: flex-end;
+  	align-items: flex-end;
+  	align-content: flex-end;
+    padding-top: 25px;
+    padding-right: 200px;
+    background: transparent;
+    color: white;
+  }
+  .svg-icon icon-pinterst{
+    align-content: flex-end;
+  }
+  .svg-icon icon-instgram{
+    align-content: flex-end;
+  }
+  .kit {
+    font-family: LTCKennerley;
+  }
+
   .address{
     text-align: center;
   }
@@ -177,16 +408,13 @@
 
   #navigation-links-individual{
     text-align: center;
-    /* font-family: "Marker Felt", fantasy */
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  }
+   }
 
   .statistics{
     text-align: center;
     color: coral;
     /* font-family: "Marker Felt", fantasy */
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-  }
+   }
   .orders{
     display: grid;
     width: 50%;
@@ -313,7 +541,6 @@
    font-size: 15px;
    letter-spacing: 2px;
    display:block;
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 
  }
 
@@ -325,7 +552,7 @@
    border-width: thick;
    background-color: red;
    color: white;
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+   font-family: LTCKennerley;
  }
  .success-flash {
    padding: 10px;
@@ -333,9 +560,9 @@
    border-style: inset;
    border-color: black;
    border-width: thick;
-   background-color: green;
+   background-color: #5b4c18;
    color: white;
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+   font-family: LTCKennerley;
  }
  .alert-flash {
    padding: 10px;
@@ -344,8 +571,8 @@
    border-color: black;
    border-width: thick;
    background-color: blue;
+   font-family: LTCKennerley;
    color: white;
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
  }
  .notice-flash {
    padding: 10px;
@@ -354,8 +581,8 @@
    border-color: black;
    border-width: thick;
    background-color: coral;
+   font-family: LTCKennerley;
    color: white;
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
  }
  .message-flash{
    padding: 10px;
@@ -364,8 +591,8 @@
    border-color: black;
    border-width: thick;
    background-color: pink;
+   font-family: LTCKennerley;
    color: white;
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
  }
  .alert-info{
    padding: 10px;
@@ -374,12 +601,15 @@
    border-color: black;
    border-width: thick;
    background-color: coral;
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+ }
+
+ // This is in the #alert for Classroom, Clothing, Artwork
+ .flash-message{
+   align-content: right;
  }
 
  table {
    /* font-family: arial, sans-serif; */
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
    border-collapse: collapse;
    width: 100%;
  }
@@ -394,24 +624,16 @@
    background-color: #F0F8FF;
  }
 
- .logged-in-user {
-   color: salmon;
-   text-align: right;
-   border: none;
-   padding: 14px 16px;
-   text-decoration: none;
-   font-size: 17px;
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
-   font-weight: bolder;
- }
- .logged-in-user-logout {
-   text-align: right;
- }
+
 
  .brand-name {
    text-decoration: none;
-   font-weight: bolder;
-   border: black
+   font-size: 100px;
+   // font-weight: bolder;
+   border: black;
+   font-family: LTCKennerley;
+   // color: #815445;
+   color: #5b4c18
  }
 
  #garment-details {
@@ -419,13 +641,11 @@
    width: 60%;
   	display: grid;
    /* font-family: "Marker Felt", fantasy */
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
    text-decoration: none;
    font-weight: bold;
  }
 
  .availability{
-   font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
    font-size: 150%;
    font-weight: bolder;
    color: red;
@@ -437,7 +657,14 @@
    color: silver;
   }
 
+  // Welcome Page styling
   .garment-layout{
+    // display: flex;
+    // flex-direction: column;
+    // flex-wrap: nowrap;
+    // justify-content: space-around;
+    // align-items: stretch;
+    // align-content: stretch;
     background-color: #00dcff38;
     background-image: url('multiple_flowers.png');
     background-size: cover;
@@ -454,6 +681,7 @@
     margin-top: 30px;
   }
   .art-layout{
+    // display: flex;
     background-color: #ffbc009e;
     background-image: url('singular_flower.png');
     background-size: cover;
@@ -494,6 +722,37 @@
   }
   .workshop-image{
     width: 40%;
+  }
+
+// admin#dashboard
+  .admin-dashboard-layout ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    background-size: cover;
+  }
+  .admin-dashboard-layout ul li  admin-buttons{
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    border: 1px solid #ccc;
+    width: 30%;
+  }
+  .admin-dashboard-layout ul li span {
+    padding: 0px;
+  }
+  .email-list {
+    display: block;
+    align-self:center;
+  }
+  .admin-buttons{
+    list-style:inherit;
+    // display: inline-block;
+    // padding: 0;
+    // border: 1px solid #ccc;
+    // width: 30%;
   }
 
 /* classrooms#index */
@@ -540,6 +799,12 @@
 
 /* clothings#index */
   .clothings-layout{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: stretch;
+    align-content: stretch;
     /* background-color: #00dcff38; */
     background-image: url('multiple_flowers.png');
     background-size: cover;
@@ -554,6 +819,15 @@
     margin-bottom: 30px;
     margin-top: 30px;
   }
+  .clothing-container{
+
+  }
+  .clothing-header{
+    display: flex;
+    padding: 0 0 25 25;
+    margin: 0 0 25 25;
+    border: 0 0 25 25;
+  }
   .clothing-border{
     margin: auto;
     background-color: white;
@@ -565,8 +839,10 @@
     z-index: 3;
   }
   .clothing-image{
-    width: 95%;
-    height: 80%;
+    display: flex;
+    align-self: center;
+    width: 100%;
+    // height: 100%;
     padding-left: 25%;
     align-content: center;
     margin: inherit;
@@ -575,9 +851,19 @@
     z-index: 4;
   }
   .clothing-container {
+    display: flex;
+    align-content: stretch;
     margin: auto;
     padding: 0px;
     /* border-top: 3px solid black; */
+  }
+  .clothing-text {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: contain;
+    align-content: contain;
   }
 
 /* artworks#index */
@@ -636,9 +922,7 @@
     /* background-color: white; */
     /* opacity: 50%; */
   }
-  .flash-message{
-    align-content: right;
-  }
+
 
   .btn-outline-info{
     /* font-style: normal;
@@ -646,7 +930,9 @@
     font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif; */
     /* background-color: silver; */
     /* border-style: inset; */
+    // position: relative;
     position: relative;
+    // static absolute fixed relative sticky initial inherit
     display:block;
     height: 45px;
     width: 150px;
@@ -721,4 +1007,40 @@
   .logo-image {
     height: 120px;
     width: 120px;
+  }
+
+  // order#show
+  .order-inventory{
+    text-align: center;
+  }
+  .order-artwork{
+    text-align: center;
+    border: 1px solid #f2f2f2;
+    padding: 8px;
+  }
+  .order-classroom{
+    text-align: center;
+    border: 1px solid #f2f2f2;
+    padding: 8px;
+  }
+  .order-clothing{
+    text-align: center;
+    border: 1px solid #f2f2f2;
+    padding: 8px;
+  }
+  .order-status{
+    text-align: center;
+    border: 1px solid #f2f2f2;
+    padding: 8px;
+  }
+
+
+  // social#art_show
+  .social-details-links{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    align-content: flex-end;
   }

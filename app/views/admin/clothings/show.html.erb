@@ -1,8 +1,8 @@
 <h1>Garment: <%= @clothing.name %></h1>
 <section id='navigation-links-individual'>
   <%= link_to 'My Garments', '/admin/clothings' %>
-  <%= link_to 'Edit Discount', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
-  <%= link_to 'Delete Discount', "/admin/clothings/#{@clothing.id}", method: :delete %>
+  <%= link_to 'Edit Garment', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
+  <%= link_to 'Delete Garment', "/admin/clothings/#{@clothing.id}", method: :delete %>
 </section>
 
 <section id="garment-details">

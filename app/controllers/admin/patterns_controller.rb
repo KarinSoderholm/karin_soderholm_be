@@ -1,4 +1,3 @@
-# class PatternsController < ApplicationController
 class Admin::PatternsController < Admin::BaseController
   before_action :set_pattern, only: [:show, :update, :destroy]
 
