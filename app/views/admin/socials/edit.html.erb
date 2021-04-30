@@ -1,0 +1,26 @@
+<h1>Update Social Links</h1>
+<%= form_for ([:admin, @social]) do |f| %>
+
+  <%= f.label 'Pinterest: '%><br>
+  <%= f.text_field :pinterest %><br>
+
+  <%= f.label 'Instagram: '%><br>
+  <%= f.text_field :instagram %><br>
+
+  <%= f.label 'Email: '%><br>
+  <%= f.text_field :email %><br>
+
+  <%= f.label 'Etsy: '%><br>
+  <%= f.text_field :etsy %><br>
+
+  <%= f.label 'Facebook: '%><br>
+  <%= f.text_field :facebook %><br>
+
+  <%= f.label 'LinkedIn: '%><br>
+  <%= f.text_field :linked_in %><br>
+
+  <%= f.label 'Twitter: ' %><br>
+  <%= f.text_field :twitter %><br>
+
+  <%= f.submit 'Update Social' %>
+<% end %>
