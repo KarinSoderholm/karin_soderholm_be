@@ -15,7 +15,7 @@
         <% elsif item.class == Clothing %>
           <h2><%= link_to item.name, "/clothings/#{item.id}" %></h2>
         <% end %>
-        <%= image_tag(item.image) %>
+        <%= image_tag(item.image, style: 'height:10%;width:10%') %>
         <p><strong>Price:</strong> <%= number_to_currency(item.cost) %></p>
         <p><strong>Quantity:</strong> <%= quantity %></p>
         <%# <% if cart.applied_discount(item) %>
