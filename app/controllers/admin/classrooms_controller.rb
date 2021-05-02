@@ -1,4 +1,3 @@
-# class ClassroomsController < ApplicationController
 class Admin::ClassroomsController < Admin::BaseController
   before_action :set_classroom, only: [:show, :update, :destroy]
   require 'csv'
@@ -14,7 +13,6 @@ class Admin::ClassroomsController < Admin::BaseController
           classroom_data.delete(k)
         end
       end
-      # binding.pry
       @classroom = Classroom.new
       binding.pry
       if @classroom.save

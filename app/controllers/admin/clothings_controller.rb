@@ -1,4 +1,3 @@
-# class ClothingsController < ApplicationController
 class Admin::ClothingsController < Admin::BaseController
   before_action :set_clothing, only: [:show, :update, :destroy]
 

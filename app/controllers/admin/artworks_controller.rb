@@ -21,6 +21,7 @@ class Admin::ArtworksController < Admin::BaseController
     @tools = Tool.all
     @requirements = Requirement.all
     @artworks = Artwork.all
+    @collections = Collection.all
   end
   # POST /artworks
   def create
@@ -37,19 +38,29 @@ class Admin::ArtworksController < Admin::BaseController
   end
 
   def edit
-    @artworks = Artwork.all
+    # binding.pry
+    @collections = Collection.all
     @artwork = Artwork.find(params[:id])
   end
-  # PATCH/PUT /artworks/1
+
   def update
-    if @artwork.update(artwork_params)
+    collection = Collection.where(name: params[:artwork][:collection][:name]).first
+    if !collection.nil?
+      artwork_collection = ArtworkCollection.new(artwork_id: @artwork.id, collection_id: collection.id)
+    end
+    
+    if !@artwork.collections.include?(collection) && !collection.nil?
+      artwork_collection.save({artwork_id: @artwork.id, collection_id: collection.id})
+      @artwork.update(artwork_params)
       flash[:success] = 'You did it! You edited your artwork data!'
       redirect_to admin_artworks_path
-      # render json: @artwork
+    # end
+    elsif @artwork.update(artwork_params)
+      flash[:success] = 'You did it! You edited your artwork data!'
+      redirect_to admin_artworks_path
     else
       flash.now[:error] = "Cannot leave manditory fields empty. Please try again"
       render :edit
-      # render json: @artwork.errors, status: :unprocessable_entity
     end
   end
 
@@ -74,7 +85,7 @@ class Admin::ArtworksController < Admin::BaseController
     # Only allow a trusted parameter "white list" through.
     def artwork_params
       if !params[:artwork].nil?
-        params.require(:artwork).permit(:name, :description, :image, :materials, :create_date, :sell_date, :cost, :available, :art_shows, images: [])
+        params.require(:artwork).permit(:name, :description, :image, :materials, :create_date, :sell_date, :cost, :available, :art_shows, :collection, images: [])
       else
         hash = {}
         hash[:name] = params[:name]
