@@ -1,4 +1,4 @@
 class ArtworkCollection < ApplicationRecord
-  belongs_to :artwork
-  belongs_to :collection
+  belongs_to :artwork, dependent: :destroy
+  belongs_to :collection, dependent: :destroy
 end

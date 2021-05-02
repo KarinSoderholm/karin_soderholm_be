@@ -46,4 +46,9 @@ class Artwork < ApplicationRecord
   def self.total_available
     where(available: true).count
   end
+
+  def self.find_collections
+    
+  end
+
 end
