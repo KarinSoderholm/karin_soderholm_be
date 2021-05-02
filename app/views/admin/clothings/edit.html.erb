@@ -1,5 +1,6 @@
-<h2><%= @clothing.name %> Edit Page</h2>
-<%# <%= form_tag "/admin/clothings/#{@clothing.id}", method: :patch do %>
+<section class="page-title">
+  <h2><%= @clothing.name %> Edit Page</h2>
+</section>
 <%= form_for ([:admin, @clothing]) do |f| %>
 
   <%= f.label 'Name of Garment: '%><br>

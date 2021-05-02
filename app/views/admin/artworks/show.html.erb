@@ -1,4 +1,6 @@
-<h1><%= @artwork.name %></h1>
+<section class="page-title">
+  <h1><%= @artwork.name %></h1>
+</section>
 <section id='navigation-links-individual'>
   <%= link_to 'My Art', '/admin/artworks' %>
   <%= link_to "Edit #{@artwork.name}", "/admin/artworks/#{@artwork.id}/edit", method: :get %>

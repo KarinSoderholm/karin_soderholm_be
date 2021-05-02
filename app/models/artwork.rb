@@ -6,7 +6,9 @@ class Artwork < ApplicationRecord
   has_many :materials, dependent: :destroy
   has_one :artist_statement, dependent: :destroy
   has_many :order_artworks, dependent: :destroy
-  has_many :orders, through: :order_artworks, dependent: :destroy 
+  has_many :orders, through: :order_artworks, dependent: :destroy
+  has_many :artwork_collections, dependent: :destroy
+  has_many :collections, through: :artwork_collections, dependent: :destroy
   # has_many_attached :images
   has_one_attached :image
 
@@ -18,7 +20,7 @@ class Artwork < ApplicationRecord
   validates :cost, presence: true
   validates :available, inclusion: [true, false]
   validates :images, presence: false
-  validates :collection, presence: false
+  # validates :collection, presence: false
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
@@ -44,4 +46,9 @@ class Artwork < ApplicationRecord
   def self.total_available
     where(available: true).count
   end
+
+  def self.find_collections
+    
+  end
+
 end

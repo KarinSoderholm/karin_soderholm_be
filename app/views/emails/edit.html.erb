@@ -1,4 +1,6 @@
-<h1>Edit <%= @email.email_address%>:</h1>
+<section class="page-title">
+  <h1>Edit <%= @email.email_address%>:</h1>
+</section>
 <%= form_for @email do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>

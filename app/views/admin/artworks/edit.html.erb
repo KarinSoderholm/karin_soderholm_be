@@ -1,4 +1,6 @@
-<h2><%= @artwork.name %> Edit Page</h2>
+<section class="page-title">
+  <h2><%= @artwork.name %> Edit Page</h2>
+</section>
 <%= form_for ([:admin, @artwork]) do |f| %>
 
   <%= f.label 'Name of Artwork: '%><br>
@@ -9,13 +11,19 @@
 
   <%= f.label 'Artwork was created on: '%><br>
   <%= f.date_field :create_date %><br>
-  
+
   <%= f.label 'Artwork was sold on: '%><br>
   <%= f.date_field :sell_date %><br>
   <br>
 
-  <%= f.label 'Collecetion: '%>
-  <%= f.select :collection, @artworks.map { |artwork| [artwork.collection] }  %><br>
+  <%= f.label 'Collection: '%><br>
+  <%# <% binding.pry %>
+  <%# <%= f.select :collection_name, @collections.map { |collection| [collection.name] }, include_blank: true %> 
+  <% @collections.each do |collection| %>
+    <%= f.fields_for collection do |collection_form| %>
+      <%= collection_form.select :name, @collections.map { |collection| [collection.name] }, include_blank: true %>
+    <% end %>
+  <% end %><br>
 
   <%= f.label 'Cost: '%><br>
   <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>

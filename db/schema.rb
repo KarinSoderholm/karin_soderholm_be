@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_30_002318) do
+ActiveRecord::Schema.define(version: 2021_04_30_164619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 2021_04_30_002318) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "artwork_collections", force: :cascade do |t|
+    t.bigint "artwork_id"
+    t.bigint "collection_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artwork_id"], name: "index_artwork_collections_on_artwork_id"
+    t.index ["collection_id"], name: "index_artwork_collections_on_collection_id"
+  end
+
   create_table "artworks", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -75,7 +84,6 @@ ActiveRecord::Schema.define(version: 2021_04_30_002318) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "images", default: [], array: true
-    t.string "collection"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -102,6 +110,12 @@ ActiveRecord::Schema.define(version: 2021_04_30_002318) do
     t.boolean "available"
     t.date "origin_date"
     t.float "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "collections", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -229,6 +243,8 @@ ActiveRecord::Schema.define(version: 2021_04_30_002318) do
   add_foreign_key "artist_statements", "artworks"
   add_foreign_key "artshow_artworks", "artshows"
   add_foreign_key "artshow_artworks", "artworks"
+  add_foreign_key "artwork_collections", "artworks"
+  add_foreign_key "artwork_collections", "collections"
   add_foreign_key "fabrics", "clothings"
   add_foreign_key "materials", "artworks"
   add_foreign_key "order_artworks", "artworks"

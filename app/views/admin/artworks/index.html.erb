@@ -1,4 +1,6 @@
-<h1>All the Artwork!</h1>
+<section class="page-title">
+  <h1>All the Artwork!</h1>
+</section>
 
 
 <h3>Total Number of Artpieces: <%= @artworks.count %></h3>
@@ -17,7 +19,7 @@
       <th>Sell Date</th>
       <th>Cost</th>
       <th>Available</th>
-      <th>Collection</th>
+      <th>Collection(s)</th>
     </tr>
   </thead>
   <tbody>
@@ -43,7 +45,9 @@
         <% end %>
         <td><%= number_to_currency(artwork.cost) %></td>
         <td><%= artwork.available %></td>
-        <td><%= artwork.collection %></td>
+        <% artwork.collections.each do |collection| %>
+          <td><%= collection.name %></td>
+        <% end %>
       </tr>
       <% end %>
     <% end %>
@@ -51,6 +55,7 @@
 </table>
 
 <p><%= button_to 'Add a New Artwork', new_admin_artwork_path, method: :get  %></p>
+<p><%= button_to 'Add a New Collection',  new_admin_collection_path, method: :get  %></p>
 
 <div class="import-csv">
   <%= form_tag import_admin_artworks_path, multipart: true do %>

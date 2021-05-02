@@ -1,4 +1,6 @@
-<h1>Garment: <%= @clothing.name %></h1>
+<section class="page-title">
+  <h1>Garment: <%= @clothing.name %></h1>
+</section>
 <section id='navigation-links-individual'>
   <%= link_to 'My Garments', '/admin/clothings' %>
   <%= link_to 'Edit Garment', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
