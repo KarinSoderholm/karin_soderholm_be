@@ -2,15 +2,33 @@ class CollectionsController < ApplicationController
   def index
     @artworks = Artwork.all
     @collections = Collection.all
-    # @collections = @artworks.map do |artwork|
-    #   artwork.collection
-    # end.uniq
   end
-
+  
   def show
-    binding.pry
     @collection = Collection.find(params[:id])
-    @collection = Artwork.find_by(collection: params[:collection_type])
   end
 
+  def new
+
+  end
+
+  def create
+
+  end
+
+  private
+
+  def set_collection
+    @collection = Collection.find(params[:id])
+  end
+
+  def collection_params
+    if !params[:collection].nil?
+      params.require(:collection).permit(:name)
+    else
+      hash = {}
+      hash[:name] = params[:name]
+      return hash
+    end
+  end
 end
