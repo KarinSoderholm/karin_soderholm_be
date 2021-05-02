@@ -82,4 +82,14 @@ Rails.application.routes.draw do
   resources :clothings
   resources :emails
   resources :collections
+  resources :about do
+    get '/bio', :action => :bio
+    get '/contact', :action => :contact
+  end
+
+  # , :path => '/about/bio', only: :index
+  # resources :about, controller: 'about' do
+  #   get '/bio', :action => 'bio'
+  #   get '/contact' => :contact
+  # end
 end
