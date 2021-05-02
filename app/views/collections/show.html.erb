@@ -1,4 +1,19 @@
 <section class="page-title">
-  <%= @collection.collection %>
+  <h1><%= @collection.name %></h1>
 </section>
-<%= link_to 'All the Collections' collections_path, method: :get %>
+<section class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %>/<%= link_to 'collections', collections_path, method: :get %>
+</section>
+
+<div class="collection-layout">
+    <div class="collection-container">
+      <% @collection.artworks.each do |artwork| %>
+        <div class="artwork-container">
+          <%# <% binding.pry %>
+          <%= link_to "#{ artwork.name }", "/artworks/#{ artwork.id }", method: :get %><br>
+          <%= image_tag(artwork.image, style: 'height:10%;width:10%') %><br>
+          <%= number_to_currency(artwork.cost) %><br>
+        </div>
+      <% end %>
+    </div>
+</div>
