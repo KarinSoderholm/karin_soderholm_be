@@ -40,6 +40,9 @@ Rails.application.routes.draw do
       get '/edit_password' => :edit_password
     end
     resources :socials
+    resources :collections do
+      get '/alert' => :alert
+    end
   end
 
   scope controller: :sessions do

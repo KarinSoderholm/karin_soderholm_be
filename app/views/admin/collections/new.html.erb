@@ -1,0 +1,12 @@
+<section class="page-title">
+  <h2>Create a new Collection</h2>
+</section>
+
+<h3><%= link_to 'My Collections', admin_collections_path, method: :get %></h3>
+
+<%= form_tag '/admin/collections' do %>
+  <%= label_tag 'Name of new Collection: '%><br>
+  <%= text_field_tag :name %><br>
+
+  <%= submit_tag 'Submit Collection' %>
+<% end %>
