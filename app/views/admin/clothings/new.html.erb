@@ -15,8 +15,9 @@
   <%= text_field_tag :url %><br>
 
   <%= label_tag 'Category of Garment: '%><br>
-  <%= select_tag :category %><br>
-  <%# <%= select_tag 'Categorgies', raw("<option>Outer Wear</option><option>Dress</option><option>Shirt</option><option>Under Garments</option><option>Pants</option>"), multiple: true, prompt: "Select something", :onchange => "this.form.submit()" %>
+  <%# <%= select_tag :category %>
+  <%# <%= select_tag 'Categorgies', raw("<option>Outer Wear</option><option>Dress</option><option>Shirt</option><option>Under Garments</option><option>Pants</option>"), multiple: true, prompt: "Select something" %>
+  <%= select_tag(:category, options_for_select([["Outer Wear",1],["Dress",2],["Shirt",3]], params[:category] ), class:"select") %><br>
 
   <%= label_tag 'Garment is available (yes / no): '%>
   <%= label_tag 'Yes'%>

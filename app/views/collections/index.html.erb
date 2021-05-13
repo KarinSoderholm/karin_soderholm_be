@@ -1,24 +1,28 @@
 <section class="page-title">
   <h1>All the Collections</h1>
 </section>
-<section class="quicknav-content">
-  <p><%= link_to 'home', welcome_index_path %>/<%= link_to 'artwork', artworks_path, method: :get %></p>
-</section>
-<br>
-<section class="collections-layout">
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'artwork', artworks_path, method: :get %>
+</div>
+
+<div class="collections-layout">
+  <section class='collection-row'>
     <section class="collection-types">
       <% @collections.each do |collection| %>
-        <section class="collection">
-          <section class="collection-title">
-            <p>__________<%= link_to "#{collection.name}", "/collections/#{collection.id}", method: :get %>__________</p>
-          </section>
-          <% collection.artworks.each do |artwork| %>
+        <section class="collection-column">
+          <section class="collection">
+            <section class="collection-title">
+              <p>__________<%= link_to "#{collection.name}", "/collections/#{collection.id}", method: :get %>__________</p>
+            </section>
             <section class="artwork-collections">
-              <%= image_tag(artwork.image, style: 'height:10%;width:10%') %>
+            <% collection.artworks.each do |artwork| %>
+                <%= image_tag(artwork.image, style: 'height:10%;width:10%') %>
             <% end  %>
             </section>
+          </section>
         </section>
+    </section>
       <% end %>
       <br>
-    </section>
-</section>
+  </section>
+</div>
