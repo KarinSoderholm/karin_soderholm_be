@@ -4,25 +4,58 @@
     <section class="page-title">
       <h1 class="brand-name">Quiet Joy Studio</h1>
     </section>
-      <section class="art-layout">
-        <% @artworks.each do |artwork| %>
-        <p class="art-image"><%= image_tag(artwork.image) %></p>
-        <% end %>
-        <p><%= button_to 'Artwork', artworks_path, method: :get %></p>
-      </section>
 
-      <section class="garment-layout">
-        <% @clothings.each do |clothing| %>
-        <p class="garment-image"><%= image_tag(clothing.image) %></p>
-        <% end %>
-        <p><%= button_to 'Garments', clothings_path, method: :get  %></p>
+    <section class="introduction-layout">
+      <%= image_tag('KarinFire.JPG', class: 'welcome-karin-image')%>
+      <section class="welcome-note-from-karin">
+        <p>Some words of introduction...</p>
+        <p> All customizable to what you'd like to say</p>
       </section>
+    </section><br><br>
 
-      <section class="workshop-layout">
-        <% @classrooms.each do |classroom| %>
-        <p class="workshop-image"><%= image_tag(classroom.image) %></p>
-        <% end %>
-        <p><%= button_to 'Workshops', classrooms_path, method: :get  %></p>
-      </section>
-  </div>
+  <div class="container">
+  <div class="carousel">
+    <input type="radio" id="carousel-1" name="carousel[]" checked>
+    <input type="radio" id="carousel-2" name="carousel[]">
+    <input type="radio" id="carousel-3" name="carousel[]">
+    <input type="radio" id="carousel-4" name="carousel[]">
+    <input type="radio" id="carousel-5" name="carousel[]">
+    <ul class="carousel__items">
+      <!-- <li class="carousel__item"><img src="//lh5.googleusercontent.com/-cTEgPOnd3l8/U8-EmaZ4KNI/AAAAAAAABc8/6eacbALkQ6A/w1358-h905-no/carousel-1.JPG" alt=""></li> -->
+      <li class="carousel__item"><%= image_tag("welcome-img1.png")%></li>
+      <%# <li class="carousel__item"><img src="//lh4.googleusercontent.com/-ntVHbbWX5eo/U8-EmV8P4cI/AAAAAAAABc4/ICYBGkcztTc/w1358-h905-no/carousel-2.jpg" alt=""></li> %>
+      <li class="carousel__item"><%= image_tag("welcome-img2.png")%></li>
+      <%# <li class="carousel__item"><img src="//lh5.googleusercontent.com/-batEXUZE_e4/U8-EmLF9-hI/AAAAAAAABc0/J3tJVUa6Buk/w1358-h905-no/carousel-3.jpg" alt=""></li> %>
+      <li class="carousel__item"><%= image_tag("welcome-img3.png")%></li>
+      <%# <li class="carousel__item"><img src="//lh5.googleusercontent.com/-gywqIeMvel0/U8-EolKdtkI/AAAAAAAABdM/G0-NHuvvJUU/w1358-h905-no/carousel-4.jpg" alt=""></li> %>
+      <li class="carousel__item"><%= image_tag("welcome-img4.png")%></li>
+      <%# <li class="carousel__item"><img src="//lh5.googleusercontent.com/--2iANjL3ikc/U8-EoGJ18mI/AAAAAAAABdI/fBe-q3Gos6Y/w1358-h905-no/carousel-5.jpg" alt=""></li> %>
+      <li class="carousel__item"><%= image_tag("welcome-img5.png")%></li>
+    </ul>
+     <div class="carousel__prev">
+      <label for="carousel-1"></label>
+      <label for="carousel-2"></label>
+      <label for="carousel-3"></label>
+      <label for="carousel-4"></label>
+      <label for="carousel-5"></label>
+     </div>
+     <div class="carousel__next">
+       <label for="carousel-1"></label>
+       <label for="carousel-2"></label>
+       <label for="carousel-3"></label>
+       <label for="carousel-4"></label>
+       <label for="carousel-5"></label>
+     </div>
+     <div class="carousel__nav">
+       <label for="carousel-1"></label>
+       <label for="carousel-2"></label>
+       <label for="carousel-3"></label>
+       <label for="carousel-4"></label>
+       <label for="carousel-5"></label>
+     </div>
+   </div>
+ </div>
+
+
+
 </div>
