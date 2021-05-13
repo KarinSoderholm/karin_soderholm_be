@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :cart,
                 :current_user,
-                :current_admin?
+                :current_admin?,
+                :find_twitter,
+                :find_instagram,
+                :find_linked_in,
+                :find_pinterest
 
   def cart
     @cart ||= Cart.new(session[:cart])
@@ -34,6 +38,45 @@ class ApplicationController < ActionController::Base
   def generate_flash(resource)
     resource.errors.messages.each do |validation, message|
       flash[validation] = "#{validation}: #{message}"
+    end
+  end
+
+  def find_linked_in
+    social = Social.first
+    if !social.linked_in.empty?
+      return true
+    else
+      return false
+    end
+  end
+
+  def find_twitter
+    social = Social.first
+    if !social.twitter.empty?
+      return true
+    else
+      return false
+    end
+  end
+
+  def find_instagram
+    social = Social.first
+    if !social.instagram.empty?
+      @instagram = social.instagram
+      return @instagram
+      return true
+    else
+      return false
+    end
+  end
+
+  def find_pinterest
+    social = Social.first
+    if !social.pinterest.empty?
+      @pinterest = social.pinterest
+      return @pinterest
+    else
+      return false
     end
   end
 end

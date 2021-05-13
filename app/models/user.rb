@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :orders
   has_one :social
+  has_one_attached :avatar
 
   validates_presence_of :name,
                         :address,

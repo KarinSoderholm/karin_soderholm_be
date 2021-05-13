@@ -40,7 +40,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'figaro'
 gem 'faraday'
 gem 'fast_jsonapi'
-gem 'bootstrap', '~> 4.1.2'
+gem "bootstrap", ">= 4.3.1"
+# gem 'bootstrap', '~> 4.1.2'
 gem 'jquery-rails'
 gem 'webpacker'
 

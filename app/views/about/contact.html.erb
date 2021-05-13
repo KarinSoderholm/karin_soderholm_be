@@ -1,0 +1,27 @@
+<section class="page-title">
+  <h1>Contact Quiet Joy Studio</h1>
+</section>
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'about the maker', '/about/1/bio' %>
+</div>
+
+<div class="contact-form">
+  <%= form_tag about_index_path do %>
+    <%= label_tag :subject %><br>
+    <%= text_field_tag :subject %><br>
+
+    <%= label_tag :your_name %><br>
+    <%= text_field_tag :name %><br>
+
+    <%= label_tag :your_email_address %><br>
+    <%= email_field_tag :customer_email_address %><br>
+
+    <%# <%= label_tag :maker_email_address %>
+    <%# <%= email_field_tag :email_address, 'karin@example.com' %>
+
+    <%= label_tag :compose %><br>
+    <%= text_area_tag :message, nil, rows: 20, cols: 50 %><br>
+
+    <%= submit_tag 'Send Email' %>
+  <% end %>
+</div>

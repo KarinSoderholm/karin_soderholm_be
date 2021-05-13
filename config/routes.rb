@@ -43,6 +43,9 @@ Rails.application.routes.draw do
     resources :collections do
       get '/alert' => :alert
     end
+    resources :contacts do
+      get '/messages' => :messages
+    end
   end
 
   scope controller: :sessions do
@@ -82,4 +85,15 @@ Rails.application.routes.draw do
   resources :clothings
   resources :emails
   resources :collections
+  resources :about do
+    get '/bio', :action => :bio
+    get '/contact', :action => :contact
+  end
+  resources :socials 
+
+  # , :path => '/about/bio', only: :index
+  # resources :about, controller: 'about' do
+  #   get '/bio', :action => 'bio'
+  #   get '/contact' => :contact
+  # end
 end

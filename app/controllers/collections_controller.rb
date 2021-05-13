@@ -3,7 +3,7 @@ class CollectionsController < ApplicationController
     @artworks = Artwork.all
     @collections = Collection.all
   end
-  
+
   def show
     @collection = Collection.find(params[:id])
   end
