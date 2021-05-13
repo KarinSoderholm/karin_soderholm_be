@@ -947,92 +947,6 @@
     /* border-top: 3px solid black; */
   }
 
-/* clothings#index */
-  .clothings-layout{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: stretch;
-    align-content: stretch;
-    /* background-color: #00dcff38; */
-    background-image: url('copper_sparkle.jpeg');
-    background-size: cover;
-    align-content: stretch;
-    padding: 50px;
-    padding-right: 40px;
-    padding-left: 40px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    margin-left: 30px;
-    margin-right: 30px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-  }
-  .clothing-container{
-
-  }
-  .clothing-header{
-    display: flex;
-    padding: 0 0 25 25;
-    margin: 0 0 25 25;
-    border: 0 0 25 25;
-  }
-  .clothing-border{
-    margin: auto;
-    background-color: white;
-    /* opacity: 50%; */
-    /* width: 300px; */
-    border: 15px solid #f3eaea;
-    padding: 50px;
-    margin: 20px;
-    z-index: 3;
-  }
-  .clothing-image{
-    display: flex;
-    align-self: center;
-    width: 100%;
-    // height: 100%;
-    padding-left: 25%;
-    align-content: center;
-    margin: inherit;
-    margin-right: 10%;
-    background-position: center;
-    z-index: 4;
-  }
-  .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-
-  .column {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
-  }
-  .clothing-container {
-    display: flex;
-    align-content: stretch;
-    margin: auto;
-    padding: 0px;
-    /* border-top: 3px solid black; */
-  }
-  .clothing-text {
-    // height: 50%; */
-    /* width: 50%; */
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    align-content: space-between;
-  }
-  #clothing {
-    display: flex;
-  }
 
 /* artworks#index */
   .artworks-layout{
@@ -1153,6 +1067,99 @@
     flex-wrap: wrap;
     justify-content: space-around;
   }
+
+
+
+  /* clothings#index  check out clothings.scss file */
+    .clothings-layout{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: stretch;
+      align-content: stretch;
+      /* background-color: #00dcff38; */
+      background-image: url('copper_sparkle.jpeg');
+      background-size: cover;
+      align-content: stretch;
+      padding: 50px;
+      padding-right: 40px;
+      padding-left: 40px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      margin-left: 30px;
+      margin-right: 30px;
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+    .clothing-container{
+
+    }
+    .clothing-header{
+      display: flex;
+      padding: 0 0 25 25;
+      margin: 0 0 25 25;
+      border: 0 0 25 25;
+    }
+    .clothing-border{
+      margin: auto;
+      background-color: white;
+      /* opacity: 50%; */
+      /* width: 300px; */
+      border: 15px solid #f3eaea;
+      padding: 50px;
+      margin: 20px;
+      z-index: 3;
+    }
+    .clothing-image{
+      display: flex;
+      align-self: center;
+      width: 100%;
+      // height: 100%;
+      padding-left: 25%;
+      align-content: center;
+      margin: inherit;
+      margin-right: 10%;
+      background-position: center;
+      z-index: 4;
+    }
+    .clothing-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .clothing-column {
+      display: flex;
+      // flex-direction: column;
+      // flex-basis: 100%;
+      // flex: 3;
+      flex: 1 1 160px;
+      margin: 10px;
+      // flex: 0 0 33.3333%;
+    }
+    .clothing-container {
+      display: flex;
+      align-content: stretch;
+      margin: auto;
+      padding: 0px;
+      /* border-top: 3px solid black; */
+    }
+    .clothing-text {
+      // height: 50%; */
+      /* width: 50%; */
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      align-content: space-between;
+    }
+    #clothing {
+      display: flex;
+    }
+
 
   .btn-outline-info{
     /* font-style: normal;
