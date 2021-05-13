@@ -17,3 +17,4 @@
 //= reequire jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= requrie custom
