@@ -89,8 +89,8 @@ Rails.application.routes.draw do
     get '/bio', :action => :bio
     get '/contact', :action => :contact
   end
-  resources :socials 
-
+  resources :socials
+  resources :commission_blooming_maps
   # , :path => '/about/bio', only: :index
   # resources :about, controller: 'about' do
   #   get '/bio', :action => 'bio'

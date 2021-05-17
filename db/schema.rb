@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_02_201035) do
+ActiveRecord::Schema.define(version: 2021_05_14_003952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,20 @@ ActiveRecord::Schema.define(version: 2021_05_02_201035) do
 
   create_table "collections", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "commission_blooming_maps", force: :cascade do |t|
+    t.string "customer_name"
+    t.string "customer_email"
+    t.string "customer_phone"
+    t.string "message"
+    t.string "map_city"
+    t.string "map_state"
+    t.string "map_country"
+    t.string "map_flower"
+    t.string "map_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
