@@ -6,17 +6,29 @@
   <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my collections', admin_collections_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %> / <%= link_to  'my artwork', admin_artworks_path %>
 </div><br>
 
-<section class="collection-details">
-  <p>Collection Name: <%= @collection.name %></p>
-  <% if !@collection.artworks.empty? %>
-    <% @collection.artworks.each do |artwork| %>
-    <%= artwork.name %><br>
-    <%= artwork.description %><br>
-    <%= link_to image_tag(artwork.image), admin_artwork_path(artwork) %><br>
-    <%= artwork.cost %><br>
-    <p>Artwork is <%= artwork.availability? %></p><br>
+  <section class="collection-container">
+    <% if !@collection.artworks.empty? %>
+      <section class="collection-artwork-seperation">
+        <p>_____________________________________________________________________________________</p>
+      </section><br>
+      <% @collection.artworks.each do |artwork| %>
+        <section class="collection-header">
+          <br>
+          <p><%= artwork.name %></p>
+        </section><br>
+        <section class="collection-details">
+          <p><%= artwork.description %></p><br>
+          <section class="collection-artwork-image">
+            <p><%= link_to image_tag(artwork.image), admin_artwork_path(artwork) %></p><br>
+          </section>
+          <p>Cost: <%= artwork.cost %></p><br>
+          <p>Artwork is <%= artwork.availability? %></p><br>
+          <% end %>
+        </section>
+        <section class="collection-artwork-seperation">
+          _____________________________________________________________________________________
+        </section>
+    <% else %>
+      <p>There are no artworks associated with this Collection at this time </p>
     <% end %>
-  <% else %>
-    <p>There are no artworks associated with this Collection at this time </p>
-  <% end %>
-</section>
+  </section>
