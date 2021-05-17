@@ -2,6 +2,9 @@
   <h1>All the Garments!</h1>
 </section>
 
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my artwork', admin_artworks_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
 <h3>Total Number of Garments: <%= @clothings.count %></h3>
 <h3>Number of Garments Sold: <%= @clothings.total_sold %></h3>
 <h3>Number of Garments Available for purchase: <%= @clothings.total_available %></h3>
@@ -44,7 +47,9 @@
   </tbody>
 </table>
 
-<p><%= button_to 'Add a New Garment', new_admin_clothing_path, method: :get  %></p>
+<section class="new-clothing-button">
+  <p><%= button_to 'Add a New Garment', new_admin_clothing_path, method: :get  %></p>
+</section>
 
 
 <div class="import-csv">

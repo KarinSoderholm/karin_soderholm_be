@@ -2,6 +2,10 @@
   <h1>All the Workshops!</h1>
 </section>
 
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %>
+</div>
+<br>
 <h3>Total Number of Workshops: <%= @classrooms.count %></h3>
 <h3>Number of Current/Future Workshops: <%= @classrooms.active_classrooms %></h3>
 <h3>Number of Past Workshops: <%= @classrooms.inactive_classrooms %></h3>

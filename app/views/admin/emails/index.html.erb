@@ -2,6 +2,10 @@
   <h1>My Email List</h1>
 </section>
 
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> 
+</div>
+
 <h3>Total Number of Collected Emails: <%= @emails.count %></h3>
 <table>
   <thead>
@@ -25,7 +29,9 @@
   </tbody>
 </table>
 
-<p><%= button_to 'Add a New Email', new_admin_email_path, method: :get  %></p>
+<section class="new-email-button">
+  <p><%= button_to 'Add a New Email', new_admin_email_path, method: :get  %></p>
+</section>
 
 <div class="import-csv">
   <%= form_tag import_admin_emails_path, multipart: true do %>
