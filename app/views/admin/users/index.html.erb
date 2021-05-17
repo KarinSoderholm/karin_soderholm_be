@@ -1,6 +1,11 @@
 <section class="page-title">
-  <h1><%= @user.name %></h1>
+  <h1>Community Members</h1>
 </section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'all emails', admin_emails_path %>
+</div><br>
+
 <h3>Total number of people in the Community: <%= @users.count %></h3>
 
 <table>

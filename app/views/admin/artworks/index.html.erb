@@ -2,6 +2,9 @@
   <h1>All the Artwork!</h1>
 </section>
 
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
 
 <h3>Total Number of Artpieces: <%= @artworks.count %></h3>
 <h3>Number of Artpieces Sold: <%= @artworks.total_sold %></h3>
@@ -54,8 +57,13 @@
   </tbody>
 </table>
 
-<p><%= button_to 'Add a New Artwork', new_admin_artwork_path, method: :get  %></p>
-<p><%= button_to 'Add a New Collection',  new_admin_collection_path, method: :get  %></p>
+<section class="new-artwork-button">
+  <p><%= button_to 'Add a New Artwork', new_admin_artwork_path, method: :get  %></p>
+</section>
+
+<section class="new-collection-button">
+  <p><%= button_to 'Add a New Collection',  new_admin_collection_path, method: :get  %></p>
+</section>
 
 <div class="import-csv">
   <%= form_tag import_admin_artworks_path, multipart: true do %>
