@@ -9,18 +9,20 @@
   <section class='collection-row'>
     <section class="collection-types">
       <% @collections.each do |collection| %>
-        <section class="collection-column">
-          <section class="collection">
-            <section class="collection-title">
-              <p>__________<%= link_to "#{collection.name}", "/collections/#{collection.id}", method: :get %>__________</p>
-            </section>
-            <section class="artwork-collections">
-            <% collection.artworks.each do |artwork| %>
-                <%= image_tag(artwork.image, style: 'height:10%;width:10%') %>
-            <% end  %>
+        <% if !collection.artworks.empty?%>
+          <section class="collection-column">
+            <section class="collection">
+              <section class="collection-title">
+                <p>__________<%= link_to "#{collection.name}", "/collections/#{collection.id}", method: :get %>__________</p>
+              </section>
+              <section class="artwork-collections">
+              <% collection.artworks.each do |artwork| %>
+                  <%= image_tag(artwork.image, style: 'height:10%;width:10%') %>
+              <% end  %>
+              </section>
             </section>
           </section>
-        </section>
+        <% end %>
     </section>
       <% end %>
       <br>

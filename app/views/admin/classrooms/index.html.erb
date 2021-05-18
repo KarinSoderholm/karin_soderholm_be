@@ -41,8 +41,16 @@
         <td><%= (classroom.date).strftime("%A, %d %b %Y") %></td>
         <td><%= (classroom.time).strftime("%I : %M %p") %></td>
         <td><%= classroom.location %></td>
-        <td><%= classroom.requirements %></td>
-        <td><%= classroom.tools_needed %></td>
+        <% if !classroom.requirements.empty?%>
+          <td><%= classroom.requirements %></td>
+        <% else %>
+          <td>There are no requirements set up yet</td>
+        <% end %>
+        <% if !classroom.tools.empty?%>
+          <td><%= classroom.find_all_tools %></td>
+        <% else %>
+          <td>There are no tools set up yet</td>
+        <% end %>
         <td><%= number_to_currency(classroom.cost) %></td>
         <td><%= classroom.active %></td>
       </tr>
