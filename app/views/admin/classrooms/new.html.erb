@@ -2,7 +2,9 @@
   <h1>Create a new Workshop!</h1>
 </section>
 
-<h3><%= link_to 'My Workshops', '/admin/classrooms' %></h3>
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshop', admin_classrooms_path %>
+</div><br>
 
 <%= form_tag '/admin/classrooms', multipart: true  do %>
   <%= label_tag 'Name of Workshop: '%><br>
@@ -34,15 +36,15 @@
   <%= radio_button_tag :active, false %><br>
   <br>
 
-  <%= label_tag 'Add required tools to the Workshop' %>
+  <%= label_tag 'Add required tools to the Workshop' %><br>
   <%# select("post", "person_id", Person.all.collect { |p| [ p.name, p.id ] }, { prompt: 'Select Person' }) %>
   <%# <%= select_tag :tools, raw("<option>Sewing Machine</option>,<option>Crochet Hooks</option>,<option>Sewing Needles</option>"), mulitple: true %>
-  <%= select_tag :tools, options_for_select(["Sewing Machine", "Crochet Hooks", "Sewing Needles", "Yarn", "Fabric", "Elastic"]), include_blank: true %><br>
+  <%= select_tag :tools_needed, options_for_select(["Sewing Machine", "Crochet Hooks", "Sewing Needles", "Yarn", "Fabric", "Elastic"]), include_blank: true %><br>
   <%# <%= select_tag :tools, options_from_collection_for_select(@tools, "name")%>
   <%# .map {|tool| [tool.name, tool.id] } %>
   <%# , { 'data-url' => admin_tool_path(tool: tool.id) } %>
   <%= label_tag 'Add requirements for the Workshop' %><br>
-  <%= select_tag :requirement, options_from_collection_for_select(@classrooms, "id", "name"), include_blank: true %><br>
+  <%= select_tag :requirements, options_from_collection_for_select(@classrooms, "id", "name"), include_blank: true %><br>
 
 
   <%= label_tag 'Image for Workshop: '%><br>
