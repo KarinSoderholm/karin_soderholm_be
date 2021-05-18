@@ -1,5 +1,5 @@
 <section class="page-title">
-  <h1>Commission some Artwork!</h1>
+  <h1>Commission a BloomingMap!</h1>
 </section>
 <div class="quicknav-content">
   <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'artwork', artworks_path %>  /  <%= link_to 'all collections', artworks_path %>
@@ -28,6 +28,9 @@
 
   <%= label_tag 'The country of your map: ' %><br>
   <%= text_field_tag :map_country %><br>
+
+  <%= label_tag 'The flower included in your map: ' %><br>
+  <%= text_field_tag :map_flower %><br>
 
   <%= label_tag "Are there colors you'd like included in your map? " %><br>
   <%= text_field_tag :map_color %><br>
