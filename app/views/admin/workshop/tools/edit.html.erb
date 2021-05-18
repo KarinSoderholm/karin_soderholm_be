@@ -1,0 +1,11 @@
+<section class="page-title">
+  <h1>Edit <%= @tool.name%>:</h1>
+</section>
+<%= form_for admin_workshop_tools_path @tool do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <% f.hidden_field "#{@tool.classroom_id}"%>
+  <%# <%= f.hidden_field @tool.classroom_id %>
+  <%= f.submit 'Update Tool' %>
+<% end %>
