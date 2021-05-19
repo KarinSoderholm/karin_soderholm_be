@@ -56,4 +56,8 @@ class Classroom < ApplicationRecord
   def find_all_tools
     self.tools.map { |tool| tool.name }
   end
+
+  def find_all_requirements
+    self.requirements.map { |requirement| requirement.name}
+  end
 end
