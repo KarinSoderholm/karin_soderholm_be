@@ -45,12 +45,41 @@
     <strong>Workshop's Cost:</strong>
   </section>
     <%= number_to_currency(@classroom.cost) %><br><br>
-</section>
 
-<section id="add-requirements">
-  <%= button_to 'Add Requirements to a Workshop' %>
-</section>
 
-<section id="add-tools">
-  <p><%= button_to 'Add Tools needed for a Workshop' %></p>
+  <section class="admin-classroom-detail-category">
+    <strong>Workshop's Tools:</strong>
+  </section>
+  <section class="admin-classrooms-tools">
+    <% if !@classroom.tools.empty? %>
+      <% @classroom.tools.each do |tool| %>
+        <%= link_to tool.name, "/admin/workshop/tools/#{tool.id}" %><br>
+      <% end %>
+    <% else %>
+      <p>There are no required tools needed for <%= @classroom.name %></p>
+      <p>(Add tools so they can be added to the Workshop! 😎)</p>
+    <% end %>
+  </section>
+  <section class="admin-add-tools-button">
+    <p><%= button_to 'Add a Tool', "/admin/workshop/tools/new/#{@classroom.id}", method: :get %></p>
+  </section>
+
+  <section class="admin-classroom-detail-category">
+    <strong>Workshop's Requirements:</strong>
+  </section>
+
+  <section class="admin-classrooms-requirements">
+    <% if !@classroom.requirements.empty? %>
+      <% @classroom.requirements.each do |requirement| %>
+        <%= link_to requirement.name, "/admin/workshop/requirements/#{requirement.id}" %><br>
+      <% end %>
+    <% else %>
+      <p>There are no required requirements needed for <%= @classroom.name %></p>
+      <p>(Add requirements so they can be added to the Workshop! 😎)</p>
+    <% end %>
+  </section>
+
+  <section class="admin-add-requirements-button">
+    <%= button_to 'Add a Requirement', "/admin/workshop/requirements/new/#{@classroom.id}", method: :get  %>
+  </section>
 </section>
