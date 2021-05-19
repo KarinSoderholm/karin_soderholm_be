@@ -42,7 +42,7 @@
         <td><%= (classroom.time).strftime("%I : %M %p") %></td>
         <td><%= classroom.location %></td>
         <% if !classroom.requirements.empty?%>
-          <td><%= classroom.requirements %></td>
+          <td><%= classroom.find_all_requirements %></td>
         <% else %>
           <td>There are no requirements set up yet</td>
         <% end %>
