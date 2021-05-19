@@ -1,6 +1,10 @@
 <section class="page-title">
   <h2><%= @artwork.name %> Edit Page</h2>
 </section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>  /  <%= link_to 'my art', admin_artworks_path %>
+</div>
 <%= form_for ([:admin, @artwork]) do |f| %>
 
   <%= f.label 'Name of Artwork: '%><br>
@@ -18,7 +22,7 @@
 
   <%= f.label 'Collection: '%><br>
   <%# <% binding.pry %>
-  <%# <%= f.select :collection_name, @collections.map { |collection| [collection.name] }, include_blank: true %> 
+  <%# <%= f.select :collection_name, @collections.map { |collection| [collection.name] }, include_blank: true %>
   <% @collections.each do |collection| %>
     <%= f.fields_for collection do |collection_form| %>
       <%= collection_form.select :name, @collections.map { |collection| [collection.name] }, include_blank: true %>
