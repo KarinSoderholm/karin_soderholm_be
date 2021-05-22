@@ -1,8 +1,14 @@
 <section class="page-title">
   <h1><%= @user.name %></h1>
-</section>  
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'all users', admin_users_path %> / <%= link_to 'all emails', admin_emails_path %>
+</div><br>
+
 <section id='admin-profile-links'>
-  <%= button_to 'All Profiles', "/admin/users", method: :get %>
+  <%# I added the link above to 'all users' which takes the place of this button. I think the link makes more sense. %>
+  <%# <%= button_to 'All Profiles', "/admin/users", method: :get %>
   <%= button_to 'Edit Profile', "/admin/users/#{@user.id}/edit", method: :get %>
   <%= button_to 'Edit Password', "/admin/users/#{@user.id}/edit_password", method: :get %>
   <%= button_to 'Delete Profile', "/admin/users/#{@user.id}", method: :delete %>
