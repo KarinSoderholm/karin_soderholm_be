@@ -1,15 +1,16 @@
 <section class="page-title">
  <h1>Log In</h1>
 </section>
-<%= form_tag login_path do %>
-  <%= label_tag :email %><br>
-  <%= email_field_tag :email %><br>
-  <br>
-  <%= label_tag :password %><br>
-  <%= password_field_tag :password %><br>
+<section class='login login-form'>
+  <%= form_tag login_path do %>
+    <%= label_tag :email %><br>
+    <%= email_field_tag :email %><br>
+    <br>
+    <%= label_tag :password %><br>
+    <%= password_field_tag :password %><br>
 
-  <%= submit_tag 'Log In', class: "btn btn-outline-info" %>
-<% end %>
-
-<button type "submit" class="btn btn-outline-info" aria-pressed="true">Sign Up</button>
-<%= button_to 'Sign Me Up!', registration_path, method: :get, class: "btn btn-outline-info" %>
+    <%= submit_tag 'Log In', class: "btn btn-outline-info" %>
+  <% end %>
+  <button type "submit" class="btn btn-outline-info" aria-pressed="true">Sign Up</button>
+  <%= button_to 'Sign Me Up!', registration_path, method: :get, class: "btn btn-outline-info" %>
+</section>
