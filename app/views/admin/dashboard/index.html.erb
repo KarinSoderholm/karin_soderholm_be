@@ -9,6 +9,11 @@
 <div class="quicknav-content">
   <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %> / <%= link_to  'my collections', admin_collections_path %>
 </div><br>
+<div class="quicknav-content">
+  <%= link_to  'all users', admin_users_path %> / <%= link_to  'my email list', admin_emails_path %> 
+</div><br>
+
+
 <div class="admin-dashboard-layout">
   <ul>
     <li>
@@ -46,12 +51,12 @@
       </section>
     </li>
     <li>
-      <div class="email-layout">
-        <section class="email-list-button">
-          <p><%= button_to 'Email List', admin_emails_path, method: :get  %></p>
-        </section>
-      </div>
+      <!-- <section class="email-layout">
+      </section> -->
     </li>
+    <!-- <section class="email-list-button">
+      <p><%= button_to 'Email List', admin_emails_path, method: :get  %></p>
+    </section> -->
   </ul>
 
 </div>
