@@ -1,0 +1,20 @@
+<section class="page-title">
+  <h1>Add a new requirement to <%= @classroom.name %>: </h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  "#{@classroom.name}", admin_classroom_path(@classroom) %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
+
+<div class="admin-requirements-form">
+  <%= form_tag "/admin/workshop/requirements/new/#{@classroom.id}" do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %><br>
+
+  <%= hidden_field_tag "#{@classroom.id}"%>
+
+  <section class="new-email-button">
+    <%= submit_tag 'Add this requirement to the list' %>
+  </section>
+  <% end %>
+</div>

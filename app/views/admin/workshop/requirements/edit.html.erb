@@ -1,0 +1,11 @@
+<section class="page-title">
+  <h1>Edit <%= @requirement.name%>:</h1>
+</section>
+<%= form_for admin_workshop_requirement_path @requirement do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <% f.hidden_field "#{@requirement.classroom_id}" %>
+  <%# <%= f.hidden_field @requirement.classroom_id %>
+  <%= f.submit 'Update Requirements' %>
+<% end %>
