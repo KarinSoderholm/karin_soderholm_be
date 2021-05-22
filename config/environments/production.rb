@@ -55,6 +55,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "karin_soderholm_be_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
+  # config.action_mailer.perform_caching = true
   config.action_mailer.delivery_method = :smtp
   host = 'localhost:3000'
   config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }
