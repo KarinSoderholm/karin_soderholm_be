@@ -1,4 +1,4 @@
-<section class="page-title">
+<section class="classroom-page-title-show">
   <h1><%= @classroom.name %></h1>
 </section>
 
@@ -6,74 +6,79 @@
   <%= link_to 'home', welcome_index_path %> / <%= link_to 'artwork', artworks_path, method: :get %> / <%= link_to 'garments', clothings_path, method: :get %> / <%= link_to 'workshops', classrooms_path, method: :get %>
 </div>
 
-<div class="classroom-container">
-  <div class="classroom-image-container">
-    <section class="classroom-image-show">
-      <%= image_tag(@classroom.image) %>
-    </section>
-  </div>
+<div class="classroom-container-show">
+  <div class="classroom-card-show"
+    <!-- <div class="classroom-image-container">
+      <section class="classroom-image-show">
+        <%= image_tag(@classroom.image) %>
+      </section>
+    <!-- </div> -->
 
-  <div class="classroom-description-container">
-    <section class="classroom-description">
-      <h5>What to expect:</h5>
-      <%= @classroom.description %>
-    </section>
-  </div><br><br>
+    <div class="classroom-description-container">
+      <section class="classroom-description">
+        <h5>What to expect:</h5>
+        <%= @classroom.description %>
+      </section><br><br>
+    </div>
+    <div class="classroom-date-container">
+      <section class="classroom-date">
+        <h5>Date for <%= @classroom.name %>:</h5>
+        <%= (@classroom.date).strftime("%A, %b %d %Y") %>
+      </section><br><br>
+    </div>
 
-  <div class="classroom-date-container">
-    <section class="classroom-date">
-      <h5>Date for <%= @classroom.name %>:</h5>
-      <%= (@classroom.date).strftime("%A, %b %d %Y") %>
-    </section>
-  </div><br><br>
+    <div class="classroom-time-container">
+      <section class="classroom-time">
+        <h5>Time for <%= @classroom.name %>:</h5>
+        <%= (@classroom.time).strftime("%I : %M %p" ) %>
+      </section>
+    </div><br><br>
 
-  <div class="classroom-time-container">
-    <section class="classroom-time">
-      <h5>Time for <%= @classroom.name %>:</h5>
-      <%= (@classroom.time).strftime("%I : %M %p" ) %>
-    </section>
-  </div><br><br>
+    <div class="classroom-location-container">
+      <section class="classroom-location">
+        <h5>Workshop Location:</h5>
+        <%= @classroom.location %>
+      </section>
+    </div><br>
 
-  <div class="classroom-location-container">
-    <section class="classroom-location">
-      <h5>Workshop Location:</h5>
-      <%= @classroom.location %>
-    </section>
-  </div><br>
+    <div class="classroom-tools-container">
+        <% if !@classroom.tools.empty? %>
+          <h5>Supplies needed for <%= @classroom.name %>: </h5>
+          <section class="classroom-tools">
+            <% @classroom.find_all_tools.each_with_index do |tool, index| %>
+                <p><%= index + 1 %>: <%= tool.capitalize %></p>
+            <% end %>
+          </section>
+        <% end %><br>
+    </div>
 
-  <div class="classroom-tools-container">
-      <% if !@classroom.tools.empty? %>
-        <h5>Supplies needed for <%= @classroom.name %>: </h5>
-        <section class="classroom-tools">
-          <% @classroom.find_all_tools.each_with_index do |tool, index| %>
-              <p><%= index + 1 %>: <%= tool.capitalize %></p>
+    <div class="classroom-requirements-container">
+      <section class="classroom-requirements">
+        <% if !@classroom.requirements.empty? %>
+          <h5>Pre-Req's needed for <%= @classroom.name %>: </h5>
+
+          <% @classroom.find_all_requirements.each_with_index do |requirement, index| %>
+            <% reference_classroom_id = @classroom.find_reference_classroom_id(requirement).id %>
+            <%# <% binding.pry %>
+            <p><%= index + 1 %>: <%= link_to requirement.capitalize, classroom_path(reference_classroom_id) %></p>
+            <!-- <p><%= index + 1 %>: <%= link_to requirement.capitalize, "/classrooms/#{reference_classroom_id}" %></p> -->
           <% end %>
-        </section>
-      <% end %><br>
-  </div>
+        <% end %><br>
+      </section>
+    </div>
 
-  <div class="classroom-requirements-container">
-    <section class="classroom-requirements">
-      <% if !@classroom.requirements.empty? %>
-        <h5>Pre-Req's needed for <%= @classroom.name %>: </h5>
-
-        <% @classroom.find_all_requirements.each_with_index do |requirement, index| %>
-          <% reference_classroom_id = @classroom.find_reference_classroom_id(requirement).id %>
-          <%# <% binding.pry %>
-          <p><%= index + 1 %>: <%= link_to requirement.capitalize, classroom_path(reference_classroom_id) %></p>
-          <!-- <p><%= index + 1 %>: <%= link_to requirement.capitalize, "/classrooms/#{reference_classroom_id}" %></p> -->
-        <% end %>
-      <% end %><br>
-    </section>
-  </div>
-
-  <div class="classroom-cost-container">
-    <section class="classroom-cost">
-      <h5>Cost:</h5>
-      <%= number_to_currency(@classroom.cost) %>
-    </section>
-  </div>
-</div>
+    <div class="classroom-cost-container">
+      <section class="classroom-cost">
+        <h5>Cost:</h5>
+        <%= number_to_currency(@classroom.cost) %>
+      </section>
+    </div>
+  <!-- </div> -->
+<!-- </div>
 
 <!-- <button type "submit" class="btn btn-outline-info" aria-pressed="true">Enroll</button> -->
-<%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %>
+    <div class="btn-classroom-sign-up-show">
+      <%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %>
+    </div>
+  </div>
+</div>

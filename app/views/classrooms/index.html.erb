@@ -18,9 +18,9 @@
             </div>
             <div class="classroom-card-index">
               <% if classroom.active %>
-              <p class="classroom-image"><%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %></p>
+                <p class="classroom-image"><%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %></p>
               <% else %>
-              <p class="classroom-image"><%= image_tag(classroom.image) %></p>
+                <p class="classroom-image"><%= image_tag(classroom.image) %></p>
               <% end%>
               <div class="classroom-text-index">
                 <div class="classroom-details-index"><h3>Date: </h3></div>
