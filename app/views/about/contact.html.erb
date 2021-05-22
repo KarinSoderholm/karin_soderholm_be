@@ -7,20 +7,20 @@
 
 <div class="contact-form">
   <%= form_tag about_index_path do %>
-    <%= label_tag :subject %><br>
-    <%= text_field_tag :subject %><br>
-
     <%= label_tag :your_name %><br>
     <%= text_field_tag :name %><br>
 
     <%= label_tag :your_email_address %><br>
-    <%= email_field_tag :customer_email_address %><br>
+    <%= email_field_tag :customer_email_address, nil, placeholder: 'email@example.com'  %><br>
+
+    <%= label_tag :subject %><br>
+    <%= text_field_tag :subject %><br>
 
     <%# <%= label_tag :maker_email_address %>
-    <%# <%= email_field_tag :email_address, 'karin@example.com' %>
+    <%# <%= email_field_tag :email_address, nil, placeholder: 'email@example.com' %>
 
     <%= label_tag :compose %><br>
-    <%= text_area_tag :message, nil, rows: 20, cols: 50 %><br>
+    <%= text_area_tag :message, nil, rows: 20, cols: 50, placeholder: 'A note to QuietJoyStudio' %><br>
 
     <%= submit_tag 'Send Email' %>
   <% end %>
