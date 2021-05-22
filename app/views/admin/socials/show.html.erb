@@ -1,10 +1,13 @@
 <section class="page-title">
   <h1>Your Social Details</h1>
 </section>
-  <section class="social-details-links">
-    <%# <%= button_to 'Add Social Links', new_admin_social_path, method: :get %>
-    <%= button_to 'Edit Social Links', edit_admin_social_path, method: :get %>
-  </section>
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'your profile', admin_user_path %>
+</div><br>
+
+<section class="social-details-links">
+  <%= button_to 'Edit Social Links', edit_admin_social_path, method: :get %>
+</section>
 <table>
   <thead>
     <tr>
