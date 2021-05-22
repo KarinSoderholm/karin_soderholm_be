@@ -60,4 +60,8 @@ class Classroom < ApplicationRecord
   def find_all_requirements
     self.requirements.map { |requirement| requirement.name}
   end
+
+  def find_reference_classroom_id(requirement_classroom_name)
+    Classroom.find_by(name: requirement_classroom_name)
+  end
 end
