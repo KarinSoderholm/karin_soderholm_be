@@ -49,6 +49,7 @@ class Admin::ClassroomsController < Admin::BaseController
   end
 
   def edit
+    @classrooms = Classroom.all
     @classroom = Classroom.find(params[:id])
   end
 
@@ -81,7 +82,10 @@ class Admin::ClassroomsController < Admin::BaseController
 
     def classroom_params
       if !params[:classroom].nil?
-        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :requirements, :tools_needed, :cost, :active, :photo)
+        # binding.pry
+        # params[:classroom][:requirements] = (params.dig(:classroom, :requirements) || {}).values
+        # params[:classroom][:tools_needed] = (params.dig(:classroom, :tools_needed) || {}).values
+        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :cost, :active, :photo, requirements: [], tools_needed: [])
       else
         hash = {}
         hash[:name] = params[:name]

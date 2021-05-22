@@ -4,8 +4,6 @@ class SocialsController < ApplicationController
   end
 
   def show
-
+    @social = Social.find_by(user_id: current_user.id)
   end
-
-
 end

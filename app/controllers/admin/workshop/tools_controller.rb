@@ -5,18 +5,15 @@ class Admin::Workshop::ToolsController < Admin::BaseController
     @tools = @classroom.tools
   end
 
-
   def show
-    @classroom = Classroom.find(@tool.classroom.id)
+    @classroom = Classroom.find(@tool.classroom_id)
   end
 
   def new
-    # @classroom = Classroom.find(params[:classroom_id])
   end
 
   def create
     @tool = Tool.new(tool_params)
-    # @classroom = Classroom.find(tool_params[:classroom_id])
     if @tool.save
       flash[:success] = "A new tool was added to #{@classroom.name}"
       redirect_to admin_classroom_path(@classroom)
@@ -27,7 +24,7 @@ class Admin::Workshop::ToolsController < Admin::BaseController
   end
 
   def edit
-    @tool = Tool.find(params[:id])
+    # @tool = Tool.find(params[:id])
   end
   def update
     # if @tool.update(tool_params)

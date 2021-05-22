@@ -13,6 +13,9 @@ class ToolsController < ApplicationController
     render json: @tool
   end
 
+  def new
+    
+  end
   # POST /tools
   def create
     @tool = Tool.new(tool_params)

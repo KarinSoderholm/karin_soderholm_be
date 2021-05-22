@@ -17,7 +17,7 @@ class AboutController < ApplicationController
       flash[:success] = 'Your message has been sent. Karin will get back with you shortly!'
       redirect_to '/about/1/bio'
     else
-      flash[:error] = "All fields must be filled in to send a message. Please try again!"
+      flash.now[:error] = "All fields must be filled in to send an email. Please try again!"
       render :contact
     end
   end

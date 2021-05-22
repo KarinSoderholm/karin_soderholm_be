@@ -36,14 +36,15 @@ class ApplicationController < ActionController::Base
   end
 
   def generate_flash(resource)
-    resource.errors.messages.each do |validation, message|
-      flash[validation] = "#{validation}: #{message}"
+    resource.errors.messages.map do |validation, message|
+      flash[:error] = "The #{validation} #{message.first}"
+      # flash[validation] = "#{validation}: #{message}"
     end
   end
 
   def find_linked_in
     social = Social.first
-    if !social.linked_in.empty?
+    if !social.linked_in.nil?
       return true
     else
       return false
@@ -52,7 +53,7 @@ class ApplicationController < ActionController::Base
 
   def find_twitter
     social = Social.first
-    if !social.twitter.empty?
+    if !social.twitter.nil?
       return true
     else
       return false
@@ -61,7 +62,7 @@ class ApplicationController < ActionController::Base
 
   def find_instagram
     social = Social.first
-    if !social.instagram.empty?
+    if !social.instagram.nil?
       @instagram = social.instagram
       return @instagram
       return true
@@ -72,7 +73,7 @@ class ApplicationController < ActionController::Base
 
   def find_pinterest
     social = Social.first
-    if !social.pinterest.empty?
+    if !social.pinterest.nil?
       @pinterest = social.pinterest
       return @pinterest
     else
