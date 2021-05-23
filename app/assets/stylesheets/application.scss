@@ -165,6 +165,24 @@
     color: gray;
     font-weight: bolder;
   }
+  .link-profile{
+    display: flex;
+    color: #f2f2f2;
+    padding-left: 32em;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  .link-profile a{
+    display: flex;
+    color: gray;
+    text-decoration: none;
+  }
+  .link-profile a:hover{
+    background-color: #51677e;
+    text-decoration: none;
+    color: gray;
+    font-weight: bolder;
+  }
   .logged-in-user {
     color: #5b4c18;
     text-align: right;

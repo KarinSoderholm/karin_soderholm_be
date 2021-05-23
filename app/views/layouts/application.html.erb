@@ -34,7 +34,7 @@
           <% else %>
             <%= link_to 'Profile', profile_path %>
           <% end %>
-          <%# <!-- <p class='logged-in-user-logout'><%= link_to 'Log Out', logout_path %>
+
             <% if current_admin? %>
               <%= link_to 'Admin Dashboard', admin_dashboard_index_path %>
               <%= link_to 'My Art', admin_artworks_path %>
@@ -49,6 +49,15 @@
           <% end %>
         </div>
       </div>
+      <% if current_admin? %>
+      <section class="link-profile">
+        <p class="link-profile"><%= link_to "#{current_user.name}", "/admin/users/#{current_user.id}" %></p><br>
+      </section>
+      <% elsif current_user %>
+        <section class="link-profile">
+          <p class="link-profile"><%= link_to "#{current_user.name}", profile_path %></p><br>
+        </section>
+      <% end %>
     </div>
     <nav class = 'topnav'>
       <p><%= link_to image_tag("KarinBestLogo.png", class: 'logo-image'), welcome_index_path %></p>
@@ -154,7 +163,7 @@
                     Be the first to know whats <br>
                     going on in Karin's Community!
                   </div>
-                  
+
                   <div class="subscribe-form"
                     <%= form_tag '/emails', method: 'post', :class => 'form-inline' do %>
                       <%= text_field_tag :name, nil, class: 'form-inline', placeholder: 'Your name' %>
