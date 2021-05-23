@@ -1,6 +1,11 @@
 <section class="page-title">
   <h1><%= @user.name %></h1>
-</section>  
+</section>
+
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'artwork', artworks_path, method: :get %> / <%= link_to 'garments', clothings_path, method: :get %> / <%= link_to 'workshops', classrooms_path, method: :get %>
+</div>
+
 <section id='navigation-links-individual'>
   <%= link_to 'Edit', '/profile/edit' %>
   <%= link_to 'Change Password', '/profile/edit_password' %>
@@ -11,14 +16,14 @@
 <% if @cart %>
   <% @cart.each do |cart_item, quantity| %>
     <% if cart_item.keys.include?(:artwork) %>
-      <h3>Name: <%=Artwork.find(cart_item[:artwork]).name%></h3>
-      <h3>Cost: <%=number_to_currency(Artwork.find(cart_item[:artwork]).cost)%></h3>
+      <h3>Name: <%= link_to Artwork.find(cart_item[:artwork]).name, artwork_path(Artwork.find(cart_item[:artwork])) %></h3>
+      <h3>Cost: <%= number_to_currency(Artwork.find(cart_item[:artwork]).cost) %></h3>
     <% elsif cart_item.keys.include?(:classroom) %>
-      <h3>Name: <%=Classroom.find(cart_item[:classroom]).name%></h3>
-      <h3>Cost: <%=number_to_currency(Classroom.find(cart_item[:classroom]).cost)%></h3>
+      <h3>Name: <%= link_to Classroom.find(cart_item[:classroom]).name, classroom_path(Classroom.find(cart_item[:classroom])) %></h3>
+      <h3>Cost: <%= number_to_currency(Classroom.find(cart_item[:classroom]).cost) %></h3>
     <% elsif cart_item.keys.include?(:clothing) %>
-      <h3>Name: <%=Clothing.find(cart_item[:clothing]).name%></h3>
-      <h3>Cost: <%=number_to_currency(Clothing.find(cart_item[:clothing]).cost)%></h3>
+      <h3>Name: <%= link_to Clothing.find(cart_item[:clothing]).name, clothing_path(Clothing.find(cart_item[:clothing])) %></h3>
+      <h3>Cost: <%= number_to_currency(Clothing.find(cart_item[:clothing]).cost) %></h3>
     <% end %>
   <% end %>
   <% else %>
