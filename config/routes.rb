@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       post '/workshop/requirements/:id/edit/:classroom_id' => :update
       delete '/workshop/requirements/:id' => :destroy
     end
-    
+
     resources :patterns
     resources :fabrics
     resources :artshow_artworks
@@ -63,6 +63,7 @@ Rails.application.routes.draw do
     resources :contacts do
       get '/messages' => :messages
     end
+    resources :commission_blooming_maps
   end
 
   scope controller: :sessions do
@@ -108,9 +109,4 @@ Rails.application.routes.draw do
   end
   resources :socials
   resources :commission_blooming_maps
-  # , :path => '/about/bio', only: :index
-  # resources :about, controller: 'about' do
-  #   get '/bio', :action => 'bio'
-  #   get '/contact' => :contact
-  # end
 end
