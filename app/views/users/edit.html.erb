@@ -2,6 +2,10 @@
   <h1>Edit your info:</h1>
 </section>
 
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'profile', profile_path(@user), method: :get %>
+</div>
+
 <%= form_for @user do |f| %>
   <%= f.label :name %><br>
   <%= f.text_field :name %><br>
