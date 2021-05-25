@@ -1,0 +1,61 @@
+<section class="page-title">
+  <h1>Commissioned Maps</h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>
+</div><br>
+
+<h3>Total Number of Commissions: <%= @commissions.count %></h3>
+<h3>Number of Commissions Completed: <%= @commissions.total_finished %></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Link to Edit</th>
+      <th>Link to Delete</th>
+      <th>Commission Status</th>
+      <th>Completion Date</th>
+      <th>Customer Email</th>
+      <th>Customer Phone</th>
+      <!-- <th>Message</th> -->
+      <th>Map City</th>
+      <th>Map State</th>
+      <th>Map Country</th>
+      <th>Map Flower</th>
+      <th>Map Color</th>
+      <!-- <th>Notes</th> -->
+      <th>Date of Commission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @commissions%>
+      <% @commissions.each do |commission| %>
+        <tr>
+          <td><%= link_to "#{commission.customer_name}", admin_commission_blooming_map_path(commission) %></td>
+          <td><%= link_to 'Edit Commission', edit_admin_commission_blooming_map_path(commission), method: :get %></td>
+          <td><%= link_to 'Delete Commission', admin_commission_blooming_map_path(commission), method: :delete %></td>
+          <td><%= commission.commission_status %></td>
+          <% if commission.commission_status == 'delivered' %>
+            <td><%= (commission.updated_at).strftime("%A, %d %b %Y") %></td>
+          <% else %>
+            <td>Commission is not completed yet</td>
+          <% end %>
+          <td><%= commission.customer_email %></td>
+          <td><%= commission.customer_phone %></td>
+          <%# <!-- <td><%= commission.message %>
+          <td><%= commission.map_city %></td>
+          <td><%= commission.map_state %></td>
+          <td><%= commission.map_country %></td>
+          <td><%= commission.map_flower %></td>
+          <td><%= commission.map_color %></td>
+          <%# <!-- <td><%= commission.notes %>
+          <td><%= (commission.created_at).strftime("%A, %d %b %Y") %></td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>There are no commissions for any BloomingMaps currently in the system! Check back soon!</tr>
+    <% end %>
+  </tbody>
+</table>
