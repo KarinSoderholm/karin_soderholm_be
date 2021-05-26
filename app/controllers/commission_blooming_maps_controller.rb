@@ -11,8 +11,8 @@ class CommissionBloomingMapsController < ApplicationController
   end
 
   def create
-    map_collection = Collection.find_by(name: '100 Day Project: maps')
-    commission = CommissionBloomingMap.new(commision_params)
+    map_collection = Collection.find_by(name: '100 Day Project: Maps')
+    commission = CommissionBloomingMap.new(commission_params)
     if commission.save
       flash[:success] = 'Thank you for interest in a custom piece of art. Karin will reach out to you shortly!!'
       redirect_to "/collections/#{ map_collection.id }"
@@ -23,7 +23,7 @@ class CommissionBloomingMapsController < ApplicationController
   end
 
   private
-  def commision_params
+  def commission_params
       params.permit(:customer_name,
                     :customer_email,
                     :customer_phone,
@@ -31,6 +31,8 @@ class CommissionBloomingMapsController < ApplicationController
                     :map_city,
                     :map_state,
                     :map_country,
-                    :map_color)
+                    :map_color,
+                    :map_flower,
+                    :commission_status)
   end
 end
