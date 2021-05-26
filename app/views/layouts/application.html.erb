@@ -39,6 +39,7 @@
               <%= link_to 'Admin Dashboard', admin_dashboard_index_path %>
               <%= link_to 'My Art', admin_artworks_path %>
               <%= link_to 'My Collections', admin_collections_path %>
+              <%= link_to 'My Commissions', admin_commission_blooming_maps_path %>
               <%= link_to 'My Email List', admin_emails_path %>
               <%= link_to 'My Garments', admin_clothings_path %>
               <%= link_to 'My Workshops', admin_classrooms_path %>
@@ -52,6 +53,9 @@
       <% if current_admin? %>
       <section class="link-profile">
         <p class="link-profile"><%= link_to "#{current_user.name}", "/admin/users/#{current_user.id}" %></p><br>
+      </section>
+      <section class="unfinished-commissioned-work">
+        <p style="border-radius: 50%; background-color: red; padding: .25em"><%= CommissionBloomingMap.find_all_unfinished_commissed_maps %></p>
       </section>
       <% elsif current_user %>
         <section class="link-profile">
