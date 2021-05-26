@@ -183,6 +183,15 @@
     color: gray;
     font-weight: bolder;
   }
+  .unfinished-commissioned-work{
+    display: flex;
+    // background-color: red;
+    // border-radius: 50%;
+  }
+  .unfinished-commissioned-work a {
+    background-color: red;
+    border-radius: 50%;
+  }
   .logged-in-user {
     color: #5b4c18;
     text-align: right;
@@ -1713,10 +1722,12 @@
 
   .collection-title a{
     color: #8d8361;
+    text-decoration: none;
   }
 
   .collection-title a:hover {
     color: #51677e;
+    text-decoration: none;
   }
 
   .collection-row {
@@ -1730,6 +1741,14 @@
     flex-direction: column;
     flex-basis: 100%;
     flex: 1;
+  }
+  .collection-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
   }
   .collection-text {
     display: flex;
@@ -1755,6 +1774,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+  }
+  .artwork-collections-column{
+    display: flex;
+  }
+  .collection-artwork-card{
+    display: flex;
   }
 
   // collection#show
@@ -2625,7 +2650,76 @@ body {
   -moz-transition:    0.08s ease-in;
   -webkit-transition: 0.08s ease-in;
 }
+// admin commission blooming maps index
+.commission-not-paid{
 
+}
+.commission-not-paid td a{
+
+}
+.commission-deposit_paid{
+
+}
+.commission-paid-in-full{
+
+}
+.commission-sales{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+// admin commission blooming maps show
+.commission-edit-show{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+.commission-layout-show{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2em;
+}
+.commission-layout-show h3{
+
+}
+.commission-customer-details{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2em;
+  border-radius: 1em;
+  border-style: solid;
+  max-width: 50em;
+}
+.commission-map-details{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: flex-start;
+}
+.commission-notes{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.25em;
+  max-width: 25em;
+}
 
 // admin dashboard
 .all-my-garments-button{
