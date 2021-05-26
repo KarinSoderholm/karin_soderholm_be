@@ -33,6 +33,11 @@
       </section>
 
       <section class="commission-notes">
+        <% if !@commission_blooming_map.price.nil?%>
+          <h3>Price: <%= number_to_currency(@commission_blooming_map.price) %></h3>
+          <h3>Deposit: <%= number_to_currency(@commission_blooming_map.price / 2 ) %></h3>
+        <% end %>
+        <h3>Payment Status:</h3><%= @commission_blooming_map.commission_payment %><br><br>
         <h3>Commissioned Work Status:</h3><%= @commission_blooming_map.commission_status %><br><br>
         <h3>Notes:</h3><%= @commission_blooming_map.notes %><br>
       </section>
