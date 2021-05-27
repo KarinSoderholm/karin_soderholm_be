@@ -13,7 +13,7 @@
   <%= text_field_tag :customer_email %><br>
 
   <%= label_tag 'Your phone number: *' %><br>
-  <%= text_field_tag :customer_phone %><br>
+  <%= telephone_field_tag :customer_phone, nil, placeholder: '(000)000-000' %><br>
 
   <%= label_tag 'A message to the Maker: *' %><br>
   <%= text_area_tag :message, nil, rows: 20, cols: 50 %><br>
