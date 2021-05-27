@@ -7,11 +7,23 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my collections', admin_collections_path %> / <%= link_to  'my commissions', admin_commission_blooming_maps_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %> 
+  <% if (CommissionBloomingMap.find_all_unfinished_commissed_maps == 0) && (Contact.message_status_unread.count == 0) %>
+  <%= link_to "messages", "/admin/contacts/#{current_user.id}/messages" %> / <%= link_to  "my commissions", admin_commission_blooming_maps_path %>
+  <% elsif (CommissionBloomingMap.find_all_unfinished_commissed_maps > 0) && (Contact.message_status_unread.count == 0) %>
+  <%= link_to "messages", "/admin/contacts/#{current_user.id}/messages" %> / <%= link_to  "my commissions(#{CommissionBloomingMap.find_all_unfinished_commissed_maps})", admin_commission_blooming_maps_path, style: 'color: red' %>
+  <% elsif (CommissionBloomingMap.find_all_unfinished_commissed_maps == 0) && (Contact.message_status_unread.count > 0)%>
+  <%= link_to "messages(#{Contact.message_status_unread.count})", "/admin/contacts/#{current_user.id}/messages", style: 'color: red' %> / <%= link_to  "my commissions", admin_commission_blooming_maps_path %>
+  <% else %>
+  <%= link_to "messages(#{Contact.message_status_unread.count})", "/admin/contacts/#{current_user.id}/messages", style: 'color: red' %> / <%= link_to  "my commissions(#{CommissionBloomingMap.find_all_unfinished_commissed_maps})", admin_commission_blooming_maps_path, style: 'color: red' %>
+  <% end %>
+</div><br>
+<div class="quicknav-content">
+  <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my collections', admin_collections_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 <div class="quicknav-content">
   <%= link_to  'all users', admin_users_path %> / <%= link_to  'my email list', admin_emails_path %>
 </div><br>
+
 
 
 <div class="admin-dashboard-layout">
@@ -19,11 +31,11 @@
     <li>
       <section class="art-layout">
         <% @artworks.each do |artwork| %>
-        <% if !artwork.image.nil? || !artwork.image.empty?%>
-        <p class="art-image"><%= link_to image_tag(artwork.image), admin_artwork_path(artwork) %></p>
-        <% else %>
-        <p>No Image to display</p>
-        <% end %>
+          <% if artwork.image.attached? %>
+            <p class="art-image"><%= link_to image_tag(artwork.image), admin_artwork_path(artwork) %></p>
+          <% else %>
+            <p class="art-image-no-image"><%= link_to 'Image coming soon!', admin_artwork_path(artwork), style: 'color: white'%></p>
+          <% end %>
         <% end %>
       </section>
       <section class="all-my-art-button">
@@ -33,7 +45,15 @@
     <li>
       <section class="garment-layout">
         <% @clothings.each do |clothing| %>
-          <p class="garment-image"><%= link_to image_tag(clothing.image), admin_clothing_path(clothing) %></p>
+          <% if clothing.image.attached? %>
+            <p class="garment-image"><%= link_to image_tag(clothing.image), admin_clothing_path(clothing) %></p>
+          <% else %>
+            <!-- <section class="garment-image-no-image-card"> -->
+              <!-- <p class="garment-image-no-image"><%= link_to image_tag('beautiful-thread.png'), admin_clothing_path(clothing) %></p>
+              <label for="garment-image-no-image">Image coming soon!</label> -->
+              <p class="garment-image-no-image"><%= link_to 'Image coming soon!', admin_clothing_path(clothing), style: 'color: white'%></p>
+            <!-- </section> -->
+          <% end %>
         <% end %>
       </section>
       <section class="all-my-garments-button">
