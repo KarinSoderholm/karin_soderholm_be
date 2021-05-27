@@ -1,23 +1,55 @@
 <section class="page-title">
   <h1><%= @artwork.name %></h1>
 </section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
+
 <section id='navigation-links-individual'>
-  <%= link_to 'My Art', '/admin/artworks' %>
   <%= link_to "Edit #{@artwork.name}", "/admin/artworks/#{@artwork.id}/edit", method: :get %>
   <%= link_to "Delete #{@artwork.name}", "/admin/artworks/#{@artwork.id}", method: :delete %>
 </section>
 
-<section id="garment-details">
-  <p>Artwork Description: <%= @artwork.description %></p>
-  <p>Artwork Image: <%= image_tag(@artwork.image) %></p>
-  <p><%= @artwork.name %> Creation Date: <%= (@artwork.create_date).strftime("%A, %d %b %Y") %></p>
-  <% if !@artwork.sell_date.nil? %>
-    <p><%= @artwork.name %> Sell Date: <%= (@artwork.sell_date).strftime("%A, %d %b %Y") %></p>
-  <% else %>
-    <p><%= @artwork.name %> Sell Date: <%= @artwork.sell_date %></p>
-  <% end %>
-  <p>Artwork's availability: <%= @artwork.availability? %></p>
-  <p>Artwork's MSRP: <%= number_to_currency(@artwork.cost) %></p>
+<section class="admin-artwork-details">
+  <section class="admin-artwork-details-category" >
+    Artwork Description:
+  </section>
+    <%= @artwork.description %>
+
+  <section class="admin-artwork-details-category" >
+    Artwork Image:
+  </section>
+    <% if @artwork.image.attached? %>
+      <p><%= image_tag(@artwork.image) %></p>
+    <% else %>
+      <h5>There is no image for this Artwork, yet!</h5>
+    <% end %>
+
+    <section class="admin-artwork-details-category" >
+      <%= @artwork.name %> Creation Date:
+    </section>
+      <%= (@artwork.create_date).strftime("%A, %d %b %Y") %>
+
+    <section class="admin-artwork-details-category" >
+      <%= @artwork.name %> Sell Date:
+    </section>
+      <% if !@artwork.sell_date.nil? %>
+        <%= (@artwork.sell_date).strftime("%A, %d %b %Y") %>
+      <% else %>
+        <%= @artwork.name %> Sell Date: <%= @artwork.sell_date %>
+      <% end %>
+
+    <section class="admin-artwork-details-category" >
+      Artwork's availability:
+    </section>
+      <%= @artwork.availability? %>
+
+    <section class="admin-artwork-details-category" >
+      Artwork's MSRP:
+    </section>
+      <%= number_to_currency(@artwork.cost) %>
+      
 </section>
 
 <section id="add-artshows">
