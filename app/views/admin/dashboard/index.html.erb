@@ -63,7 +63,11 @@
     <li>
       <section class="workshop-layout">
         <% @classrooms.each do |classroom| %>
+          <% if classroom.image.attached? %>
             <p class="workshop-image"><%= link_to image_tag(classroom.image), admin_classroom_path(classroom) %></p>
+          <% else %>
+            <p class="workshop-image-no-image"><%= link_to 'Image coming soon!', admin_classroom_path(classroom), style: 'color: white'%></p>
+          <% end %>
         <% end %><br>
       </section>
       <section class="all-my-workshops-button">
