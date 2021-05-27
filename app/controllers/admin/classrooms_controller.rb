@@ -1,5 +1,5 @@
 class Admin::ClassroomsController < Admin::BaseController
-  before_action :set_classroom, only: [:show, :update, :destroy]
+  before_action :set_classroom, only: [:show, :edit, :update, :destroy]
   require 'csv'
   def import
     classroom_data = Classroom.import(params[:file])
@@ -55,11 +55,15 @@ class Admin::ClassroomsController < Admin::BaseController
 
   def edit
     @classrooms = Classroom.all
-    @classroom = Classroom.find(params[:id])
   end
 
   def update
+    binding.pry
+    if Requirement.find_by(classroom_id: Classroom.find(params[:classroom][:requirements])).nil?
+      requirement = Requirement.new(name: Classroom.find(params[:classroom][:requirements]).name, classroom_id: @classroom.id )
+    end
     if @classroom.update(classroom_params)
+      requirement.save
       flash[:success] = 'Congrats! The Workshop was updated!'
       redirect_to admin_classrooms_path
     else
@@ -73,7 +77,6 @@ class Admin::ClassroomsController < Admin::BaseController
   end
 
   def destroy
-    @classroom = Classroom.find(params[:id])
     if @classroom.destroy
       flash[:success] = 'The Workshop was removed!'
       redirect_to admin_classrooms_path
