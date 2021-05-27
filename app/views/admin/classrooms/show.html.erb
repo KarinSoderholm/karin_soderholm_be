@@ -19,7 +19,11 @@
   <section class="admin-classroom-detail-category">
     <strong>Workshop Image:</strong>
   </section>
-    <%= image_tag(@classroom.image) %><br><br>
+    <% if @classroom.image.attached? %>
+      <%= image_tag(@classroom.image) %><br><br>
+    <% else %>
+      <p>There is no image uploaded, yet!</p><br>
+    <% end %>
 
   <section class="admin-classroom-detail-category">
     <strong>Workshop Date:</strong>
