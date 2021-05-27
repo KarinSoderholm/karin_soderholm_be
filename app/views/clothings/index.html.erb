@@ -16,10 +16,14 @@
             <div class="clothing-header">
               <h2><%= clothing.name %></h2>
             </div>
-          <% if clothing.available %>
-            <p class="clothing-image"><%= link_to(image_tag(clothing.image), clothing_path(clothing), id: 'clothing') %></p>
-          <% else %>
+          <% if clothing.available && clothing.image.attached? %>
+            <p class="clothing-image"><%= link_to image_tag(clothing.image), clothing_path(clothing), id: 'clothing' %></p>
+          <% elsif clothing.available && !clothing.image.attached? %>
+            <p class="clothing-image"><%= link_to 'Image coming soon!', clothing_path(clothing), id: 'clothing' %></p> 
+          <% elsif !clothing.available && clothing.image.attached? %>
             <p class="clothing-image"><%= image_tag(clothing.image) %></p>
+          <% else %>
+            <p class="clothing-image">Garment Unavailable</p>
           <% end %>
           <!-- <h3>Description: <%= clothing.description %></h3> -->
             <div class="clothing-text">
