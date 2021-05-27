@@ -1,9 +1,14 @@
 <section class="page-title">
   <h1>Edit <%= @requirement.name%>:</h1>
 </section>
-<%= form_for admin_workshop_requirement_path @requirement do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{@classroom.name}", admin_classroom_path %>
+</div><br>
+<%# <%= form_for admin_workshop_requirement_path(@requirement) @requirement do |f| %>
+<%= form_for "/admin/workshop/#{@requirement.id}/edit/#{@requirement.classroom_id}" do |f| %>
+  <%= f.label :name %><br>
+  <%= f.select :name, options_from_collection_for_select(@classrooms, "name", "name"), include_blank: true, multiple: true  %>
 
   <% f.hidden_field "#{@requirement.classroom_id}" %>
   <%# <%= f.hidden_field @requirement.classroom_id %>
