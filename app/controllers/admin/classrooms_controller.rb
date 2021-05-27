@@ -38,8 +38,13 @@ class Admin::ClassroomsController < Admin::BaseController
   end
 
   def create
+    binding.pry
     classroom = Classroom.new(classroom_params)
     if classroom.save
+      if !params[:requirements].nil?
+        find_requirement = Classroom.find(params[:requirements])
+        requirement = Requirement.create({name: find_requirement.name, classroom_id: classroom.id })
+      end
       flash[:success] = 'Congrats! A new Workshop was created!'
       redirect_to admin_classrooms_path
     else
@@ -85,7 +90,7 @@ class Admin::ClassroomsController < Admin::BaseController
         # binding.pry
         # params[:classroom][:requirements] = (params.dig(:classroom, :requirements) || {}).values
         # params[:classroom][:tools_needed] = (params.dig(:classroom, :tools_needed) || {}).values
-        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :cost, :active, :photo, requirements: [], tools_needed: [])
+        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :cost, :active, :photo, requirements: [], tools: [])
       else
         hash = {}
         hash[:name] = params[:name]
