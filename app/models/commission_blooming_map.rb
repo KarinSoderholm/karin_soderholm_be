@@ -23,7 +23,7 @@ class CommissionBloomingMap < ApplicationRecord
 
   def get_readable_commission_status
     if self.commission_status == 'not_started'
-      return "Not paid"
+      return "Not started"
     elsif self.commission_status == 'started'
       return "Started"
     elsif self.commission_status == 'finished'
