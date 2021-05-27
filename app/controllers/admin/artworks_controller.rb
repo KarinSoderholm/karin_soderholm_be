@@ -23,9 +23,16 @@ class Admin::ArtworksController < Admin::BaseController
 
   def create
     artwork = Artwork.new(artwork_params)
+    collection = Collection.find(params[:collection])
     if artwork.save
-      flash[:success] = 'You did it! You created a new art piece in the database!'
-      redirect_to admin_artworks_path
+      if !collection.nil?
+        artwork_collection = ArtworkCollection.new(artwork_id: artwork.id, collection_id: collection.id)
+      end
+      if !artwork.collections.include?(collection) && !collection.nil?
+        artwork_collection.save({artwork_id: artwork.id, collection_id: collection.id})
+        flash[:success] = 'You did it! You created a new art piece in the database!'
+        redirect_to admin_artworks_path
+      end
     else
       flash.now[:error] = "Cannot leave manditory fields empty. Please try again"
       render :new
