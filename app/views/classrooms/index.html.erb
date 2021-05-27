@@ -17,8 +17,12 @@
               <h2><%= classroom.name %></h2>
             </div>
             <div class="classroom-card-index">
-              <% if classroom.active %>
+              <% if classroom.active && classroom.image.attached? %>
                 <p class="classroom-image"><%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %></p>
+              <% elsif classroom.active && !classroom.image.attached? %>
+                <p class="classroom-image"><%= link_to 'Image coming soon!', classroom_path(classroom), id: 'classroom' %></p>
+              <% elsif !clasroom.active && !classroom.image.attached? %>
+                <p class="classroom-image">'Workshop is unavailable'</p>
               <% else %>
                 <p class="classroom-image"><%= image_tag(classroom.image) %></p>
               <% end%>
