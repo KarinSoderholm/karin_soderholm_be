@@ -1,11 +1,11 @@
 <section class="page-title">
-  <h1>Tool: <%= @requirement.name%></h1>
+  <h1>Requirement: <%= @requirement.name%></h1>
 </section>
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  "#{@classroom.id}", admin_classroom_path(@classroom) %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  "#{@classroom.name}", admin_classroom_path(@classroom) %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 
 <section id='navigation-links-individual'>
-  <%= link_to 'Edit Tool', "/admin/workshop/requirements/#{@requirement.id}/edit/#{@requirement.classroom_id}", method: :get %>
-  <%= link_to 'Delete Tool', "/admin/workshop/requirements/#{@requirement.id}", method: :delete %>
+  <%= link_to 'Edit Requirement', "/admin/workshop/requirements/#{@requirement.id}/edit/#{@requirement.classroom_id}", method: :get %>
+  <%= link_to 'Delete Requirement', "/admin/workshop/requirements/#{@requirement.id}", method: :delete %>
 </section><br>
