@@ -8,7 +8,7 @@
 <section id='navigation-links-individual'>
   <%= link_to 'Edit Garment', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
   <%= link_to 'Delete Garment', "/admin/clothings/#{@clothing.id}", method: :delete %>
-</section>
+</section><br><br>
 
 <section class="admin-garment-details">
   <section class="admin-garment-detail-category">
@@ -19,8 +19,11 @@
   <section class="admin-garment-detail-category">
     Garment Image:
   </section>
-    <%= image_tag(@clothing.image) %><br><br>
-
+    <% if @clothing.image.attached? %>
+      <%= image_tag(@clothing.image) %><br><br>
+    <% else %>
+      There is no image uploaded, yet for this Garment! <br><br>
+    <% end %>
   <section class="admin-garment-detail-category">
     Link to Etsy url:
   </section>
@@ -52,9 +55,9 @@
 </section>
 
 <section id="add-pattern">
-  <p><%= button_to "Add pattern used to make #{@clothing.name}" %></p>
+  <p><%= button_to "Add Pattern" %></p>
 </section>
 
 <section id="add-materials">
-  <p><%= button_to "Add Fabrics used in making #{@clothing.name}" %></p>
+  <p><%= button_to "Add Fabrics" %></p>
 </section>
