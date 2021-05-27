@@ -34,6 +34,7 @@
   <%= label_tag 'Collection: '%><br>
   <%# <%= select_tag :collection, options_for_select([ "", "" ], "MasterCard") %>
   <%# <% binding.pry %>
+  <%# <%= select_tag :collection, options_from_collection_for_select(@collections, "id", "name"), include_blank: true %>
   <%= select_tag :collection, options_from_collection_for_select(@collections, "id", "name"), include_blank: true %><br>
   <%# <%= f.label 'Collecetion: '%>
   <%# <%= f.select :collection, @artworks.map { |artwork| [artwork.collection, artwork.id] }  %>
