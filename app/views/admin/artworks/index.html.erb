@@ -33,10 +33,10 @@
         <td><%= link_to "Edit #{artwork.name}", "/admin/artworks/#{artwork.id}/edit", method: :get %></td>
         <td><%= link_to "Delete #{artwork.name}", "/admin/artworks/#{artwork.id}/alert", method: :get %></td>
         <td><%= artwork.description %></td>
-        <% if !artwork.image.nil? %>
+        <% if artwork.image.attached? %>
           <td><%= image_tag(artwork.image) %></td>
-        <% elsif !artwork.images.nil? %>
-          <td><%= image_tag(artwork.images[0]) %></td>
+        <%# <% elsif artwork.images.attached? %>
+          <%# <!-- <td><%= image_tag(artwork.images[0]) %>
         <% else %>
           <td>There is no image to display </td>
         <% end %>
