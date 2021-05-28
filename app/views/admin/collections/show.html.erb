@@ -6,12 +6,12 @@
   <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my collections', admin_collections_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %> / <%= link_to  'my artwork', admin_artworks_path %>
 </div><br>
 
-  <section class="collection-container">
+  <section class="admin-collection-container-show">
     <% if !@collection.artworks.empty? %>
-      <section class="admin-collection-row">
+      <section class="admin-collection-row-show">
         <% @collection.artworks.each do |artwork| %>
-          <section class="admin-collection-column">
-            <section class="collection-header">
+          <section class="admin-collection-column-show">
+            <section class="admin-collection-header-show">
               <br>
               <p><%= artwork.name %></p>
             </section><br>
@@ -22,11 +22,11 @@
                 <p><%= link_to image_tag(artwork.image), admin_artwork_path(artwork) %></p><br>
               </section>
 
-              <p>Cost: <%= artwork.cost %></p><br>
+              <p>Cost: <%= number_to_currency(artwork.cost) %></p><br>
               <p>Artwork is <%= artwork.availability? %></p><br>
 
               <section class="collection-artwork-seperation">
-                _____________________________________________________________________________________
+                <!-- _____________________________________________________________________________________ -->
               </section>
             <!-- </section> -->
 
