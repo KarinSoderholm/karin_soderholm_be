@@ -22,6 +22,7 @@ class Artwork < ApplicationRecord
   validates :cost, presence: true
   validates :available, inclusion: [true, false]
   validates :images, presence: false
+  validate :acceptable_image
   # validates :collection, presence: false
 
   def self.import(file)

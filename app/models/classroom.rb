@@ -16,6 +16,7 @@ class Classroom < ApplicationRecord
   validates :location, presence: true
   validates :active, inclusion: [true, false]
   validates :cost, presence: true
+  validate :acceptable_image
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
@@ -63,5 +64,13 @@ class Classroom < ApplicationRecord
 
   def find_reference_classroom_id(requirement_classroom_name)
     Classroom.find_by(name: requirement_classroom_name)
+  end
+
+  def get_active_status
+    if self.active == true
+      return 'active'
+    elsif self.active == false
+      return 'inactive'
+    end
   end
 end

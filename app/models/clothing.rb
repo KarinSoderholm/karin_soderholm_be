@@ -15,6 +15,7 @@ class Clothing < ApplicationRecord
   validates :available, inclusion: [true, false]
   validates :origin_date, presence: true
   validates :cost, presence: true
+  validate :acceptable_image
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
