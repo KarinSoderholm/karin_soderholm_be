@@ -11,18 +11,34 @@
       <% @collections.each do |collection| %>
         <% if !collection.artworks.empty?%>
           <section class="collection-column">
+            <section class="collection-title">
+              <p><%= link_to "#{collection.name}", "/collections/#{collection.id}", method: :get %></p>
+            </section>
             <section class="collection-card">
-              <section class="collection-title">
-                <p><%= link_to "#{collection.name}", "/collections/#{collection.id}", method: :get %></p>
-              </section>
               <section class="artwork-collections">
                 <section class="artwork-collections-column">
                   <% collection.artworks.each do |artwork| %>
-                  <section class="collection-artwork-card">
-                    <%= image_tag(artwork.image, style: 'height:10%;width:10%') %>
-                  </section>
-                </section>
+                    <% if artwork.image.attached? %>
+                      <section class="collection-artwork-card">
+                        <section class="collection-artwork-card-image">
+                          <%= image_tag(artwork.image, style: 'height:10em;width:10em') %>
+                        </section>
+                        <section class="collection-artwork-card-title">
+                          <h3><%= link_to artwork.name, artwork_path(artwork) %></h3>
+                        </section>
+                      </section>
+                    <% else %>
+                      <section class="collection-artwork-card">
+                        <section class="collection-artwork-card-image-no-image">
+                          <p style="text-align: center;">Image coming soon!</p>
+                        </section>
+                        <section class="collection-artwork-card-title">
+                          <h3><%= link_to artwork.name, artwork_path(artwork) %></h3>
+                        </section>
+                      </section>
+                    <% end %>
                   <% end  %>
+                </section>
               </section>
             </section>
           </section>

@@ -9,7 +9,7 @@ class Clothing < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :image, presence: true
+  validates :image, presence: false
   validates :url, presence: false
   validates :category, presence: true
   validates :available, inclusion: [true, false]
