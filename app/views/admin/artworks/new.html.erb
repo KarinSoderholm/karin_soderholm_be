@@ -2,7 +2,9 @@
   <h1>Create a new Artwork!</h1>
 </section>
 
-<h3><%= link_to 'My Artworks', admin_artworks_path, method: :get %></h3>
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
 
 <%= form_tag '/admin/artworks', multipart: true do %>
   <%= label_tag 'Name of Artwork: '%><br>
@@ -32,6 +34,7 @@
   <%= label_tag 'Collection: '%><br>
   <%# <%= select_tag :collection, options_for_select([ "", "" ], "MasterCard") %>
   <%# <% binding.pry %>
+  <%# <%= select_tag :collection, options_from_collection_for_select(@collections, "id", "name"), include_blank: true %>
   <%= select_tag :collection, options_from_collection_for_select(@collections, "id", "name"), include_blank: true %><br>
   <%# <%= f.label 'Collecetion: '%>
   <%# <%= f.select :collection, @artworks.map { |artwork| [artwork.collection, artwork.id] }  %>

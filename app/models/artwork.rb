@@ -1,4 +1,6 @@
 class Artwork < ApplicationRecord
+  include ActiveModel::Dirty
+  define_attribute_methods
   require 'csv'
 
   has_many :artshow_artworks, dependent: :destroy
@@ -20,6 +22,7 @@ class Artwork < ApplicationRecord
   validates :cost, presence: true
   validates :available, inclusion: [true, false]
   validates :images, presence: false
+  validate :acceptable_image
   # validates :collection, presence: false
 
   def self.import(file)
@@ -48,7 +51,18 @@ class Artwork < ApplicationRecord
   end
 
   def self.find_collections
-    
+
   end
 
+  def set_availability(params)
+    if !params[:artwork][:sell_date].empty?
+      params[:artwork][:available] = false
+      self.available = false
+      return params
+    else
+      params[:artwork][:available] = true
+      self.available = true
+      return params
+    end
+  end
 end

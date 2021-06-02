@@ -1,6 +1,11 @@
 <section class="page-title">
   <h1>Welcome to Karin's Community!</h1>
 </section>
+
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'artwork', artworks_path, method: :get %> / <%= link_to 'garments', clothings_path, method: :get %> / <%= link_to 'workshops', classrooms_path, method: :get %>
+</div>
+
 <h3>Please fill out this form!</h3>
 <%= form_for @user do |f| %>
   <%= f.label :name %><br>

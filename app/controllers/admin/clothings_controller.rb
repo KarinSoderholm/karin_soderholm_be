@@ -57,7 +57,7 @@ class Admin::ClothingsController < Admin::BaseController
   # DELETE /clothings/1
   def destroy
     if @clothing.destroy
-      flash[:alert] = "You have successfully destroyed your Garment from the Collection"
+      flash[:notice] = "You have successfully destroyed your Garment from the Collection"
       redirect_to admin_clothings_path
     end
   end

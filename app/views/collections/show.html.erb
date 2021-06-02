@@ -7,13 +7,23 @@
 
 <div class="collection-layout">
     <div class="collection-container">
-      <% @collection.artworks.each do |artwork| %>
-        <div class="artwork-container">
-          <%# <% binding.pry %>
-          <%= link_to "#{ artwork.name }", "/artworks/#{ artwork.id }", method: :get %><br>
-          <%= image_tag(artwork.image, style: 'height:10%;width:10%') %><br>
-          <%= number_to_currency(artwork.cost) %><br>
-        </div>
-      <% end %>
+      <div class="collection-container-row">
+        <% @collection.artworks.each do |artwork| %>
+          <!-- <div class="collection-artwork-column"> -->
+            <%# <% binding.pry %>
+            <div class="collection-card-show">
+              <div class="collection-artwork-header">
+                <%= link_to "#{ artwork.name }", "/artworks/#{ artwork.id }", method: :get %><br>
+              </div>
+              <div class="collection-artwork-image">
+                <%= image_tag(artwork.image) %><br>
+              </div>
+              <div class="collection-artwork-cost">
+                <%= number_to_currency(artwork.cost) %><br>
+              </div>
+            </div>
+          <!-- </div> -->
+        <% end %>
+      </div>
     </div>
 </div>

@@ -2,26 +2,46 @@
  <h1>Workshops</h1>
 </section>
 
-<div class="container">
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'artwork', artworks_path, method: :get %> / <%= link_to 'garments', clothings_path, method: :get %>
+</div>
+
+<div class="classroom-container-index">
   <div class="classrooms-layout">
-  <% if @classrooms %>
-    <% @classrooms.each do |classroom| %>
-      <div class="classroom-container">
-      <h2><%= classroom.name %></h2>
-      <div class="clothing-border">
-      <% if classroom.active %>
-        <p class="classroom-image"><%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %></p>
-      <% else %>
-        <p class="classroom-image"><%= image_tag(classroom.image) %></p>
-      <% end%>
-      <!-- <h3>Description: <%= classroom.description %></h3> -->
-      <h3>Date: <%= (classroom.date).strftime("%A, %d %b %Y") %></h3>
-      <h3>Time: <%= (classroom.time).strftime("%I : %M %p" ) %></h3>
-      <h3>Location: <%= classroom.location %></h3>
-      <h3>Cost: <div class="cost"><%= number_to_currency(classroom.cost) %></div></h3>
-      </div>
-      <br>
-    <% end %>
+  <% if !@classrooms.empty? %>
+    <div class="classroom-row-index">
+      <% @classrooms.each do |classroom| %>
+        <div class="classroom-column-index">
+          <div class="classroom-border-index">
+            <div class="classroom-header-index">
+              <h2><%= classroom.name %></h2>
+            </div>
+            <div class="classroom-card-index">
+              <% if classroom.active && classroom.image.attached? %>
+                <p class="classroom-image"><%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %></p>
+              <% elsif classroom.active && !classroom.image.attached? %>
+                <p class="classroom-image"><%= link_to 'Image coming soon!', classroom_path(classroom), id: 'classroom' %></p>
+              <% elsif !classroom.active && !classroom.image.attached? %>
+                <p class="classroom-image">Workshop is unavailable</p>
+              <% else %>
+                <p class="classroom-image"><%= image_tag(classroom.image) %></p>
+              <% end%>
+              <div class="classroom-text-index">
+                <div class="classroom-details-index"><h3>Date: </h3></div>
+                <div class="classroom-details-index"><%= (classroom.date).strftime("%A, %d %b %Y") %></div><br>
+                <div class="classroom-details-index"><h3>Time: </h3></div>
+                <div class="classroom-details-index"><%= (classroom.time).strftime("%I : %M %p" ) %></div><br>
+                <div class="classroom-details-index"><h3>Location: </h3></div>
+                <div class="classroom-details-index"><%= classroom.location %></div><br>
+                <div class="classroom-details-index"><h3>Cost: </h3></div>
+                <div class="cost"><%= number_to_currency(classroom.cost) %></div><br>
+              </div>
+
+            </div>
+          </div>
+            <br>
+        </div>
+      <% end %>
     </div>
   <% else %>
     <h3>There are no workshops available at this time! Check back soon!</h3>

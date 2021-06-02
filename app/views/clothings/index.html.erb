@@ -1,20 +1,29 @@
 <section class="page-title">
   <h1>Garments</h1>
 </section>
+
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'artwork', artworks_path, method: :get %> / <%= link_to 'workshops', classrooms_path, method: :get %>
+</div>
+
 <div class="clothings-layout">
-  <div class="row">
-    <% if @clothings %>
+  <div class="clothing-row">
+    <% if !@clothings.empty? %>
       <% @clothings.each do |clothing| %>
-        <div class="column">
+        <div class="clothing-column">
       <!-- <div class="clothing-container"> -->
-          <div class="clothing-header">
-            <h2><%= clothing.name %></h2>
-          </div>
           <div class="clothing-border">
-          <% if clothing.available %>
-            <p class="clothing-image"><%= link_to(image_tag(clothing.image), clothing_path(clothing), id: 'clothing') %></p>
-          <% else %>
+            <div class="clothing-header">
+              <h2><%= clothing.name %></h2>
+            </div>
+          <% if clothing.available && clothing.image.attached? %>
+            <p class="clothing-image"><%= link_to image_tag(clothing.image), clothing_path(clothing), id: 'clothing' %></p>
+          <% elsif clothing.available && !clothing.image.attached? %>
+            <p class="clothing-image"><%= link_to 'Image coming soon!', clothing_path(clothing), id: 'clothing' %></p> 
+          <% elsif !clothing.available && clothing.image.attached? %>
             <p class="clothing-image"><%= image_tag(clothing.image) %></p>
+          <% else %>
+            <p class="clothing-image">Garment Unavailable</p>
           <% end %>
           <!-- <h3>Description: <%= clothing.description %></h3> -->
             <div class="clothing-text">

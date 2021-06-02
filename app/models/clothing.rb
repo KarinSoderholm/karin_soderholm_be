@@ -9,12 +9,13 @@ class Clothing < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :image, presence: true
+  validates :image, presence: false
   validates :url, presence: false
   validates :category, presence: true
   validates :available, inclusion: [true, false]
   validates :origin_date, presence: true
   validates :cost, presence: true
+  validate :acceptable_image
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

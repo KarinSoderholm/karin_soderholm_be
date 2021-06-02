@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_02_201035) do
+ActiveRecord::Schema.define(version: 2021_05_26_191722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,9 @@ ActiveRecord::Schema.define(version: 2021_05_02_201035) do
     t.datetime "updated_at", null: false
   end
 
+# Could not dump table "commission_blooming_maps" because of following StandardError
+#   Unknown type 'commission_status' for column 'commission_status'
+
   create_table "contacts", force: :cascade do |t|
     t.string "name"
     t.string "subject"
@@ -127,6 +130,8 @@ ActiveRecord::Schema.define(version: 2021_05_02_201035) do
     t.text "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "message_status", default: "unread"
+    t.index ["message_status"], name: "index_contacts_on_message_status"
   end
 
   create_table "emails", force: :cascade do |t|

@@ -1,7 +1,10 @@
 <section class="page-title">
   <h1>Create a new Garment!</h1>
 </section>
-<h3><%= link_to 'My Garments', '/admin/clothings' %></h3>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
 
 <%= form_tag '/admin/clothings', multipart: true    do %>
   <%= label_tag 'Name of Garment: '%><br>
@@ -17,7 +20,7 @@
   <%= label_tag 'Category of Garment: '%><br>
   <%# <%= select_tag :category %>
   <%# <%= select_tag 'Categorgies', raw("<option>Outer Wear</option><option>Dress</option><option>Shirt</option><option>Under Garments</option><option>Pants</option>"), multiple: true, prompt: "Select something" %>
-  <%= select_tag(:category, options_for_select([["Outer Wear",1],["Dress",2],["Shirt",3]], params[:category] ), class:"select") %><br>
+  <%= select_tag(:category, options_for_select([["Outer Wear","Outer Wear"],["Dress", "Dress"],["Shirt","Shirt"],["Pant","Pant"],["Intimate","Intimate"]], params[:category] ), class:"select") %><br>
 
   <%= label_tag 'Garment is available (yes / no): '%>
   <%= label_tag 'Yes'%>

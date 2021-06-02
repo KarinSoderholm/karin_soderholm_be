@@ -6,8 +6,4 @@ class ClassroomsController < ApplicationController
   def show
     @classroom = Classroom.find(params[:id])
   end
-
-  def flash
-    {}
-  end
 end

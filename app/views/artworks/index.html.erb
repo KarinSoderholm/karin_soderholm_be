@@ -1,33 +1,52 @@
 <section class="page-title">
   <h1>Artwork</h1>
 </section>
+
 <div class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'collections', collections_path %>  /  <%= link_to 'all collections', artworks_path %>
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'collections', collections_path, method: :get %> / <%= link_to 'garments', clothings_path, method: :get %> / <%= link_to 'workshops', classrooms_path, method: :get %>
 </div>
 
-<div class="artworks-layout">
-  <% if @artworks %>
-    <% @artworks.each do |artwork| %>
-    <div class="artwork-container">
-      <div class="artwork-border">
-        <h2><%= artwork.name %></h2>
-      <% if artwork.available %>
-        <p class="artwork-image"><%= link_to(image_tag(artwork.image), artwork_path(artwork), id: 'artwork') %></p>
-      <% else %>
-        <p class="artwork-image"><%= image_tag(artwork.image) %></p>
-      <% end %>
-      <!-- <h3>Description: <%= artwork.description %></h3> -->
-      <h3>This piece is <div class="availability"><%= artwork.availability? %></div></h3>
-      <% if artwork.available %>
-        <h5>Click the picture for more details!</h5>
-        <h3>Cost: <div class="cost"><%= number_to_currency(artwork.cost) %></div></h3>
-      <% else %>
-        <h5>Someone else was able to snatch this beauty up!</h5>
-      <% end %>
-      </div>
-      <br>
-    <% end %>
-    </div>
+<div class="artworks-layout-index">
+  <% if !@artworks.empty? %>
+    <section class="artwork-container-index">
+      <section class="artwork-row-index">
+        <% @artworks.each do |artwork| %>
+          <section class="artwork-column-index">
+            <section class="artwork-card-index">
+              <section class="artwork-card-index-title">
+                <h3><%= artwork.name %></h3>
+              </section>
+              <% if artwork.available && artwork.image.attached? %>
+                <section class="artwork-image">
+                  <p><%= link_to(image_tag(artwork.image), artwork_path(artwork), id: 'artwork') %></p>
+                </section>
+              <% elsif artwork.available && !artwork.image.attached? %>
+                <section class="artwork-image-no-image">
+                  <p style="display: flex;"><%= link_to 'Image coming soon!', artwork_path(artwork), id: 'artwork' %></p>
+                </section>
+              <% elsif !artwork.available && artwork.image.attached? %>
+                <section class="artwork-image-special">
+                  <p id='artwork'><%= image_tag(artwork.image) %></p>
+                </section>
+              <% else %>
+                <section class="artwork-image-no-image">
+                  <p>Art is unavailable!</p>
+                </section>
+              <% end %>
+              <!-- <h3>Description: <%= artwork.description %></h3> -->
+              <div class="availability"><h4>This piece is <%= artwork.availability? %></div></h4>
+              <% if artwork.available %>
+                <h5>Click the picture for more details!</h5>
+                <h3>Cost: <div class="cost"><%= number_to_currency(artwork.cost) %></div></h3>
+              <% else %>
+                <h5>Someone else was able to snatch this beauty up!</h5>
+              <% end %>
+            </section>
+          </section>
+        <br>
+        <% end %>
+      </section>
+    </section>
   <% else %>
     <h3>There are no garments available at this time! Check back soon!</h3>
   <% end %>

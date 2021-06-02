@@ -1,6 +1,11 @@
 <section class="page-title">
   <h1>Update Social Links</h1>
 </section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'social details', admin_social_path %>
+</div><br>
+
 <%= form_for ([:admin, @social]) do |f| %>
 
   <%= f.label 'Pinterest: '%><br>

@@ -3,31 +3,51 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'all collections', artworks_path %>
-</div>
+  <%= link_to 'admin dashboard', admin_dashboard_index_path %>
+</div><br>
 
 <section class="messages-table">
   <table>
     <thead>
       <tr>
+        <th>Read</th>
+        <th>Responded</th>
+        <th>Follow Up</th>
         <th>Subject</th>
         <th>Customer Name</th>
         <th>Customer Email</th>
         <th>Message</th>
-        <th>Read</th>
-        <th>Responded</th>
-        <th>Followed Up</th>
+        <th>Save</th>
       </tr>
     </thead>
     <tbody>
       <% if @contacts %>
         <% @contacts.each do |contact| %>
         <tr>
-          <td><%= contact.subject %></td>
-          <td><%= contact.name %></td>
-          <td><%= contact.customer_email_address %></td>
-          <td><%= contact.message %></td>
-          <td> check_box []</td>
+          <%= form_for ([:admin, contact]) do |f| %>
+            <% if contact.message_status == 'unread'%>
+              <td> <%= radio_button('contact', 'message_status', 'read') %></td>
+              <td> <%= radio_button('contact', 'message_status', 'responded') %></td>
+              <td> <%= radio_button('contact', 'message_status', 'follow_up') %></td>
+            <% elsif contact.message_status == 'read'%>
+              <td> <%= '✅' %></td>
+              <td> <%= radio_button('contact', 'message_status', 'responded') %></td>
+              <td> <%= radio_button('contact', 'message_status', 'follow_up') %></td>
+            <% elsif contact.message_status == 'responded'%>
+              <td> <%= '✅' %></td>
+              <td> <%= '✅' %></td>
+              <td> <%= radio_button('contact', 'message_status', 'follow_up') %></td>
+            <% elsif contact.message_status == 'follow_up'%>
+              <td> <%= '✅' %></td>
+              <td> <%= '✅' %></td>
+              <td> <%= '✅' %></td>
+            <% end %>
+            <td><%= contact.subject %></td>
+            <td><%= contact.name %></td>
+            <td><%= contact.customer_email_address %></td>
+            <td><%= contact.message %></td>
+            <td><%= f.submit 'Update' %></td>
+          <% end %>
         </tr>
         <% end %>
       <% end %>

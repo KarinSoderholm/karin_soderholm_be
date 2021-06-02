@@ -4,8 +4,25 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :dashboard, :path => '/', only: :index
-    resources :requirements
-    resources :tools
+    scope controller: :tools, module: 'workshop' do
+      get '/workshop/tools/:id' => :show
+      get '/workshop/tools' => :index
+      get '/workshop/tools/new/:classroom_id' => :new
+      post '/workshop/tools/:classroom_id' => :create
+      get '/workshop/tools/:id/edit/:classroom_id' => :edit
+      post '/workshop/tools/:id/edit/:classroom_id' => :update
+      delete '/workshop/tools/:id' => :destroy
+    end
+    scope controller: :requirements, module: 'workshop' do
+      get '/workshop/requirements/:id' => :show
+      get '/workshop/requirements' => :index
+      get '/workshop/requirements/new/:classroom_id' => :new
+      post '/workshop/requirements/new/:classroom_id' => :create
+      get '/workshop/requirements/:id/edit/:classroom_id' => :edit
+      post '/workshop/requirements/:id/edit/:classroom_id' => :update
+      delete '/workshop/requirements/:id' => :destroy
+    end
+
     resources :patterns
     resources :fabrics
     resources :artshow_artworks
@@ -46,6 +63,7 @@ Rails.application.routes.draw do
     resources :contacts do
       get '/messages' => :messages
     end
+    resources :commission_blooming_maps
   end
 
   scope controller: :sessions do
@@ -89,11 +107,6 @@ Rails.application.routes.draw do
     get '/bio', :action => :bio
     get '/contact', :action => :contact
   end
-  resources :socials 
-
-  # , :path => '/about/bio', only: :index
-  # resources :about, controller: 'about' do
-  #   get '/bio', :action => 'bio'
-  #   get '/contact' => :contact
-  # end
+  resources :socials
+  resources :commission_blooming_maps
 end

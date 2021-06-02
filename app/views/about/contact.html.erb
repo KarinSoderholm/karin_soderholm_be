@@ -5,23 +5,25 @@
   <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'about the maker', '/about/1/bio' %>
 </div>
 
-<div class="contact-form">
-  <%= form_tag about_index_path do %>
-    <%= label_tag :subject %><br>
-    <%= text_field_tag :subject %><br>
+<div class="contact-layout"
+  <div class="contact-form">
+    <%= form_tag about_index_path do %>
+      <%= label_tag :your_name %><br>
+      <%= text_field_tag :name, nil, placeholder: 'your name' %><br>
 
-    <%= label_tag :your_name %><br>
-    <%= text_field_tag :name %><br>
+      <%= label_tag :your_email_address %><br>
+      <%= email_field_tag :customer_email_address, nil, placeholder: 'your_email@example.com'  %><br>
 
-    <%= label_tag :your_email_address %><br>
-    <%= email_field_tag :customer_email_address %><br>
+      <%= label_tag :subject %><br>
+      <%= text_field_tag :subject, nil, placeholder: 'subject of email' %><br>
 
-    <%# <%= label_tag :maker_email_address %>
-    <%# <%= email_field_tag :email_address, 'karin@example.com' %>
+      <%# <%= label_tag :maker_email_address %>
+      <%# <%= email_field_tag :email_address, nil, placeholder: 'email@example.com' %>
 
-    <%= label_tag :compose %><br>
-    <%= text_area_tag :message, nil, rows: 20, cols: 50 %><br>
+      <%= label_tag :compose %><br>
+      <%= text_area_tag :message, nil, rows: 20, cols: 50, placeholder: 'A note to QuietJoyStudio' %><br>
 
-    <%= submit_tag 'Send Email' %>
-  <% end %>
+      <%= submit_tag 'Send Email' %>
+    <% end %>
+  </div>
 </div>
