@@ -49,19 +49,6 @@ RSpec.describe Classroom, type: :model do
       expect(@sewing101.active_status).to_not eq('Inactive')
     end
 
-    it '.active_classrooms' do
-      expect(Classroom.active_classrooms).to eq 2
-      expect(Classroom.active_classrooms).to_not eq 1
-      expect(Classroom.active_classrooms).to_not eq 3
-      expect(Classroom.active_classrooms).to_not eq 0
-    end
-
-    it '.inactive_classrooms' do
-      expect(Classroom.inactive_classrooms).to eq 0
-      expect(Classroom.inactive_classrooms).to_not eq 2
-      expect(Classroom.inactive_classrooms).to_not eq 1
-    end
-
     it '.find_all_tools' do
       expect(@sewing101.find_all_tools).to eq(['Sewing Machine', 'Stripped Fabric', 'Yellow Thread'])
       expect(@sewing101.find_all_tools.count).to eq 3
@@ -80,5 +67,20 @@ RSpec.describe Classroom, type: :model do
       expect(@sewing101.find_reference_classroom_id(@fabric_basics_requirement.name)).to eq(@fabric_basics)
     end
 
+  end
+
+  describe 'class methods' do
+    it '.active_classrooms' do
+      expect(Classroom.active_classrooms).to eq 2
+      expect(Classroom.active_classrooms).to_not eq 1
+      expect(Classroom.active_classrooms).to_not eq 3
+      expect(Classroom.active_classrooms).to_not eq 0
+    end
+
+    it '.inactive_classrooms' do
+      expect(Classroom.inactive_classrooms).to eq 0
+      expect(Classroom.inactive_classrooms).to_not eq 2
+      expect(Classroom.inactive_classrooms).to_not eq 1
+    end
   end
 end
