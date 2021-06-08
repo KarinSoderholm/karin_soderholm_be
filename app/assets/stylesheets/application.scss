@@ -1429,6 +1429,7 @@
     // padding: 0 0 0 1em;
     // margin: 0 0 0 1em;
   }
+
   .collection-artwork-seperation{
     display: flex;
     flex-direction: row;
@@ -2116,6 +2117,7 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    background-color: #51677e;
   }
   .collection-container{
     display: flex;
@@ -2148,7 +2150,12 @@
     align-content: center;
     justify-content: center;
     align-items: center;
-    flex: 2;
+    width: 46%;
+    height: 30em;
+    background-color: white;
+    padding: 1em;
+    margin: 1em;
+    border: 1em;
   }
   .collection-artwork-header{
     display: flex;
@@ -2157,6 +2164,14 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    padding: 1.5em;
+    margin: 1em;
+  }
+  .collection-artwork-header a {
+    color: #8d8361;
+    text-decoration: none;
+    font-size: larger;
+    margin-bottom: 1em;
   }
   .collection-artwork-image{
     display: flex;
@@ -2168,6 +2183,39 @@
     max-height: 50%;
     max-width: 50%;
   }
+  .collection-artwork-image img {
+    box-shadow: 0 4px 8px 0 #5d5959;
+    width: 100%;
+    // border-radius: 1em;
+    margin-bottom: 1em;
+  }
+  .collection-artwork-no-image{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    max-height: 50%;
+    max-width: 50%;
+  }
+  .collection-artwork-no-image a {
+    box-shadow: 0 4px 8px 0 #5d5959;
+    display: flex;
+    margin-bottom: 1em;
+    margin: 1em;
+    padding: 1em;
+    width: 12.5em;
+    height: 12.5em;
+    /* text-align: center; */
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #51677e;
+  }
   .collection-artwork-cost{
     display: flex;
     flex-direction: row;
@@ -2175,6 +2223,8 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    margin: 1em;
+    padding: 1em;
   }
   /* clothings#index  check out clothings.scss file */
     .clothings-layout{
