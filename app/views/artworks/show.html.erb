@@ -7,9 +7,15 @@
 
 <div class="artwork-container">
   <div class="artwork-image-container">
-    <section class="artwork-image">
-      <%= image_tag(@artwork.image) %>
-    </section>
+    <% if @artwork.image.attached? %>
+      <section class="artwork-image">
+        <%= image_tag(@artwork.image) %>
+      </section>
+    <% else %>
+      <section class="artwork-no-image">
+        <%= 'Image coming soon!' %>
+      </section>
+    <% end %>
   </div>
 
   <div class="artwork-description-container">
