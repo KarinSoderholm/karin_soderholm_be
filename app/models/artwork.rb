@@ -11,7 +11,7 @@ class Artwork < ApplicationRecord
   has_many :orders, through: :order_artworks, dependent: :destroy
   has_many :artwork_collections, dependent: :destroy
   has_many :collections, through: :artwork_collections, dependent: :destroy
-  # has_many_attached :images
+  has_many_attached :images
   has_one_attached :image
 
   validates :name, presence: true
