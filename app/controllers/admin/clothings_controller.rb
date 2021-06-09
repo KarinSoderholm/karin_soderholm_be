@@ -69,7 +69,7 @@ class Admin::ClothingsController < Admin::BaseController
 
     def clothing_params
       if !params[:clothing].nil?
-        params.require(:clothing).permit(:name, :description, :image, :fabric, :url, :category, :available, :pattern_name, :origin_date, :pattern_cost, :cost)
+        params.require(:clothing).permit(:name, :description, :image, :fabric, :url, :category, :available, :pattern_name, :origin_date, :pattern_cost, :cost, images: [])
       else
         hash = {}
         hash[:name] = params[:name]
