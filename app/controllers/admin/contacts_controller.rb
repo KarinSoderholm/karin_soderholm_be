@@ -4,12 +4,13 @@ class Admin::ContactsController < Admin::BaseController
   end
   def update
     @contact = Contact.find(params[:id])
-    if @contact.update(contact_params)
+    if !params[:contact].nil?
+      @contact.update(contact_params)
       flash.now[:success] = "Message status was changed to #{@contact.message_status}!"
       redirect_to admin_contact_messages_path(@contact)
     else
-      flash.now[:error] = 'Unable to update. Please try again'
-      render :messages
+      flash[:error] = 'Unable to update. Please try again'
+      redirect_to admin_contact_messages_path(@contact)
     end
   end
 
