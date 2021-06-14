@@ -20,9 +20,9 @@
               <% if classroom.active && classroom.image.attached? %>
                 <p class="classroom-image"><%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %></p>
               <% elsif classroom.active && !classroom.image.attached? %>
-                <p class="classroom-image"><%= link_to 'Image coming soon!', classroom_path(classroom), id: 'classroom' %></p>
+                <p class="classroom-no-image"><%= link_to 'Image coming soon!', classroom_path(classroom), id: 'classroom' %></p>
               <% elsif !classroom.active && !classroom.image.attached? %>
-                <p class="classroom-image">Workshop is unavailable</p>
+                <p class="classroom-no-image">Workshop is unavailable</p>
               <% else %>
                 <p class="classroom-image"><%= image_tag(classroom.image) %></p>
               <% end%>
