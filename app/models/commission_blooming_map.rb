@@ -10,6 +10,7 @@ class CommissionBloomingMap < ApplicationRecord
   validates :notes, presence: false
   validates :price, presence: false
 
+
   enum commission_status: { not_started: 'not_started', started: 'started', finished: 'finished', delivered: 'delivered' }, _prefix: :commission_status
   enum commission_payment: { not_paid: 'not_paid', deposit_paid: 'deposit_paid', paid_in_full: 'paid_in_full'}, _prefix: :commission_payment
 
