@@ -2,30 +2,32 @@
   <h1><%= @artwork.name %></h1>
 </section>
 <div class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'collections', collections_path %>  /  <%= link_to 'all collections', artworks_path %>
+  <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'collections', collections_path %>  /  <%= link_to 'artwork', artworks_path %>
 </div>
 
-<div class="artwork-container">
-  <div class="artwork-image-container">
-    <% if @artwork.image.attached? %>
-      <section class="artwork-image">
-        <%= image_tag(@artwork.image) %>
-      </section>
+<div class="artwork-container-show">
+  <div class="artwork-image-container-show">
+    <% if @artwork.photos.attached? %>
+      <% @artwork.photos.map do |photo|%>
+          <section class="artwork-image-show">
+            <%= image_tag(photo) %>
+          </section>
+      <% end %>
     <% else %>
-      <section class="artwork-no-image">
+      <section class="artwork-no-image-show">
         <%= 'Image coming soon!' %>
       </section>
     <% end %>
   </div>
 
-  <div class="artwork-description-container">
-    <section class="artwork-description">
+  <div class="artwork-description-container-show">
+    <section class="artwork-description-show">
       <%= @artwork.description %>
     </section>
   </div>
 
-  <div class="artwork-cost-container">
-    <section class="artwork-cost">
+  <div class="artwork-cost-container-show">
+    <section class="artwork-cost-show">
       <%= number_to_currency(@artwork.cost) %>
     </section>
   </div>

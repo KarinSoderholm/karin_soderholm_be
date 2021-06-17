@@ -34,7 +34,7 @@
                 </section>
               <% end %>
               <!-- <h3>Description: <%= artwork.description %></h3> -->
-              <div class="availability"><h4>This piece is <%= artwork.availability? %></div></h4>
+              <div class="artwork-availability"><h4>This piece is <%= artwork.availability? %></div></h4>
               <% if artwork.available %>
                 <h5>Click the picture for more details!</h5>
                 <h3>Cost: <div class="cost"><%= number_to_currency(artwork.cost) %></div></h3>
