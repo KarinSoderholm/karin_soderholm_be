@@ -160,12 +160,12 @@
                         </svg>
                         </a>
                       <% end %>
-                      <% if find_linked_in %>
-                        <%= link_to image_tag('twitter-brands.svg', class: "social-link social-link-linked_in"), find_linked_in %>
-                      <% end %>
-                      <% if find_twitter %>
-                        <%= link_to image_tag('twitter-brands.svg', class: "social-link social-link-twitter"), find_twitter %>
-                      <% end %>
+                      <%# <% if find_linked_in %>
+                        <%# <%= link_to image_tag('twitter-brands.svg', class: "social-link social-link-linked_in"), find_linked_in %>
+                      <%# <% end %>
+                      <%# <% if find_twitter %>
+                        <%# <%= link_to image_tag('twitter-brands.svg', class: "social-link social-link-twitter"), find_twitter %>
+                      <%# <% end %>
                     </div>
                   </nav>
                 </div>
@@ -177,14 +177,42 @@
                   </div>
                   <div class="about-text">
                     Be the first to know whats <br>
-                    going on in Karin's Community!
+                    going on in Karin's Community!<br>
                   </div>
 
-                  <div class="subscribe-form"
-                    <%= form_tag '/emails', method: 'post', :class => 'form-inline' do %>
-                      <%= text_field_tag :name, nil, class: 'form-inline', placeholder: 'Your name' %>
-                      <%= email_field_tag :email_address, nil, class: 'form-inline', placeholder: 'email@example.com' %><br>
-                      <%= submit_tag "Subscribe" %>
+                  <div class="subscribe-form", id="subscribe-form"
+                    <%# <%= form_tag '/emails' do %>
+                      <%# <%= text_field_tag :name, nil, class: 'form-inline', placeholder: 'Your name' %>
+                      <%# <%= email_field_tag :email_address, nil, class: 'form-inline', placeholder: 'email@example.com' %>
+                      <%# <%= submit_tag "Subscribe" %>
+                    <%# <% end %>
+
+                    <%# <%= form_tag '/emails' do %>
+                      <%# <%= label_tag :name %>
+                      <%# <%= text_field_tag :name, nil, class: 'form-inline', placeholder: 'your name' %>
+
+                      <%# <%= label_tag :email_address %>
+                      <%# <%= text_field_tag :email_address, nil, class: 'form-inline', placeholder: 'email@example.com' %>
+                      <%# <%= submit_tag "Join" %>
+                    <%# <% end %>
+
+                    <%# <%= form_tag '/emails' do %>
+                      <%# <%= label_tag :name %>
+                      <%# <%= text_field_tag :name %>
+
+                      <%# <%= label_tag :email_address %>
+                      <%# <%= text_field_tag :email_address %>
+                      <%= submit_tag "Join Karin's Community" %>
+                    <%# <% end %>
+
+                    <%= form_tag emails_path, remote: true do %>
+                      <%# <%= label_tag :name %>
+                      <%= text_field_tag :name, nil, placeholder: 'your name' %><br>
+
+                      <%# <%= label_tag :email_address %>
+                      <%= text_field_tag :email_address, nil, placeholder: 'email@example.com' %><br>
+
+                      <%= submit_tag "Join" %>
                     <% end %>
                   </div>
                 </div>
