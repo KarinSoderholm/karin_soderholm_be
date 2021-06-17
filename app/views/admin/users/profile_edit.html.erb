@@ -5,6 +5,7 @@
 <div class="quicknav-content">
   <%= link_to 'admin dashboard', admin_dashboard_index_path %>  /  <%= link_to 'all_users', admin_users_path %>
 </div>
+
 <%= form_for(@user, url: "/user/#{@user.id}") do |f| %>
   <%= f.label :name %><br>
   <%= f.text_field :name %><br>

@@ -1,6 +1,11 @@
 <section class="page-title">
   <h3>Please fill out this form!</h3>
 </section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'profile', admin_profile_path(@user) %>
+</div><br>
+
 <%= form_for @user do |f| %>
   <%= f.label :name %><br>
   <%= f.text_field :name %><br>
