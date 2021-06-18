@@ -22,7 +22,9 @@ Rails.application.routes.draw do
       post '/workshop/requirements/:id/edit/:classroom_id' => :update
       delete '/workshop/requirements/:id' => :destroy
     end
-
+    resources :cv do
+      collection { post :import }
+    end
     resources :patterns
     resources :fabrics
     resources :artshow_artworks
@@ -115,6 +117,7 @@ Rails.application.routes.draw do
   resources :about do
     get '/bio', :action => :bio
     get '/contact', :action => :contact
+    get '/cv', :action => :cv
   end
   resources :socials
   resources :commission_blooming_maps

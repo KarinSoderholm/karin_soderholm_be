@@ -7,6 +7,10 @@ class AboutController < ApplicationController
     @socials = Social.all
   end
 
+  def cv
+    # @cv = CV.find(params[:cv_id])
+  end
+
   def new
   end
 
