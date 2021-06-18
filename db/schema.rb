@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_18_071442) do
+ActiveRecord::Schema.define(version: 2021_06_18_201909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,14 @@ ActiveRecord::Schema.define(version: 2021_06_18_071442) do
     t.index ["message_status"], name: "index_contacts_on_message_status"
   end
 
+  create_table "cvs", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cvs_on_user_id"
+  end
+
   create_table "emails", force: :cascade do |t|
     t.string "email_address"
     t.datetime "created_at", null: false
@@ -270,6 +278,7 @@ ActiveRecord::Schema.define(version: 2021_06_18_071442) do
   add_foreign_key "artshow_artworks", "artworks"
   add_foreign_key "artwork_collections", "artworks"
   add_foreign_key "artwork_collections", "collections"
+  add_foreign_key "cvs", "users"
   add_foreign_key "fabrics", "clothings"
   add_foreign_key "materials", "artworks"
   add_foreign_key "order_artworks", "artworks"
