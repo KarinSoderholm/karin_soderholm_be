@@ -5,7 +5,7 @@ class Classroom < ApplicationRecord
   has_many :requirements, dependent: :destroy
   has_many :order_classrooms, dependent: :destroy
   has_many :orders, through: :order_classrooms, dependent: :destroy
-  # has_one_attached :photo
+  has_many_attached :photos
   has_one_attached :image
 
   validates :name, presence: true
@@ -71,6 +71,39 @@ class Classroom < ApplicationRecord
       return 'active'
     elsif self.active == false
       return 'inactive'
+    end
+  end
+
+  def set_images(params)
+    if params[:classroom][:photos]
+      self.photos.attach(params[:classroom][:photos])
+    end
+  end
+
+  def acceptable_photos
+    return unless photos.attached?
+
+    photos.map do |photo|
+      unless photo.byte_size <= 1.megabyte
+        errors.add(:photos, "is too big")
+      end
+    end
+
+    acceptable_types = ["image/jpeg", "image/png"]
+    unless acceptable_types.include?(image.content_type)
+      errors.add(:photos, "must be a JPEG or PNG")
+    end
+  end
+
+  def set_availability(params)
+    if params[:classroom][:date] < Time.now.to_datetime
+      params[:classroom][:active] = false
+      self.active = false
+      return params
+    else
+      params[:classroom][:active] = true
+      self.active = true
+      return params
     end
   end
 end
