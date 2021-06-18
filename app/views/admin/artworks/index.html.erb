@@ -35,8 +35,8 @@
         <td><%= artwork.description %></td>
         <% if artwork.image.attached? %>
           <td><%= image_tag(artwork.image) %></td>
-        <%# <% elsif artwork.images.attached? %>
-          <%# <!-- <td><%= image_tag(artwork.images[0]) %>
+        <% elsif artwork.photos.attached? %>
+          <td><%= image_tag(artwork.photos.first) %>(<%= artwork.photos.count %>)</td>
         <% else %>
           <td>There is no image to display </td>
         <% end %>
@@ -66,8 +66,8 @@
 </section>
 
 <div class="import-csv">
-  <%= form_tag import_admin_artworks_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag 'Import Spreadsheet' %>
-  <% end %>
+  <%# <%= form_tag import_admin_artworks_path, multipart: true do %>
+    <%# <%= file_field_tag :file %>
+    <%# <%= submit_tag 'Import Spreadsheet' %>
+  <%# <% end %>
 </div>
