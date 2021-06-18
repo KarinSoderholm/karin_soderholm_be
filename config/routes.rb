@@ -35,11 +35,17 @@ Rails.application.routes.draw do
     end
     resources :artworks do
       collection { post :import }
+      get '/add_photos' => :add_photos
+      patch '/photo_update' => :photo_update
+      delete '/remove_photo/:photo_id' => :remove_photo
       get '/alert' => :alert
     end
     resources :clothings do
       collection { post :import }
       get '/alert' => :alert
+      get '/add_photos' => :add_photos
+      patch '/photo_update' => :photo_update
+      delete '/remove_photo/:photo_id' => :remove_photo
     end
     resources :users do
       get '/edit_password' => :edit_password
