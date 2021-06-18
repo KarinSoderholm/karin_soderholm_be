@@ -47,3 +47,20 @@ function showSlides(n) {
 function myFunction(x) {
   x.classList.toggle("change");
 }
+
+// on hover to change pictures in collection#index
+(document).on "page:change", ->{
+// (document).ready(function() {
+  (".collection-artwork-card-image-closed-box").mouseenter(function() {
+      (".collection-artwork-card-image-open-box").show();
+      (".collection-artwork-card-image-closed-box").hide();
+      (this).hide();
+  });
+
+  (".collection-artwork-card-image-open-box").mouseout(function() {
+    (".collection-artwork-card-image-closed-box").show();
+    (".collection-artwork-card-image-open-box").hide();
+    (this).hide();
+  });
+// });
+};
