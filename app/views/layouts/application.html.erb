@@ -115,12 +115,6 @@
                   <div class="collections-section-collection">
                     <%= link_to 'Collections', "/collections", class: "collections-footer" %>
                   </div>
-                  <div class="collection-section-text">
-                    <% collections = Collection.all %>
-                    <% collections.each do |collection| %>
-                      <%= link_to collection.name, "/collections/#{collection.id}", method: :get %>
-                    <% end %>
-                  </div>
                   <div class="collections-section-clothing">
                     <%= link_to 'Garments', "/clothings", class: "clothings-footer" %>
                   </div>
