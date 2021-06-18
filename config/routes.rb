@@ -32,6 +32,9 @@ Rails.application.routes.draw do
     resources :classrooms do
       collection { post :import }
       get '/alert' => :alert
+      get '/add_photos' => :add_photos
+      patch '/photo_update' => :photo_update
+      delete '/remove_photo/:photo_id' => :remove_photo
     end
     resources :artworks do
       collection { post :import }
