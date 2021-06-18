@@ -39,6 +39,8 @@
         <td><%= classroom.description %></td>
         <% if classroom.image.attached? %>
           <td><%= image_tag(classroom.image)%></td>
+        <% elsif classroom.photos.attached? %>
+          <td><%= image_tag(classroom.photos.first)%>(<%= classroom.photos.count%>)</td>
         <% else %>
           <td>There is no image uploaded, yet!</td>
         <% end %>
@@ -81,8 +83,8 @@
 <%# <!-- <p><%= button_to 'Delete Workshop', new_admin_classroom_path, method: :delete, data: { confirm: 'Are you sure?' }  %>
 
 <div class="import-csv">
-  <%= form_tag import_admin_classrooms_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag 'Import Spreadsheet' %>
-  <% end %>
+  <%# <%= form_tag import_admin_classrooms_path, multipart: true do %>
+    <%# <%= file_field_tag :file %>
+    <%# <%= submit_tag 'Import Spreadsheet' %>
+  <%# <% end %>
 </div>
