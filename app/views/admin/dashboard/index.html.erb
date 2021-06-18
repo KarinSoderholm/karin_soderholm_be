@@ -50,26 +50,39 @@
     <li>
       <section class="admin-dashboard-garment-layout">
         <% @clothings.each do |clothing| %>
-          <% if clothing.image.attached? %>
-            <p class="admin-dashboard-garment-image"><%= link_to image_tag(clothing.image), admin_clothing_path(clothing) %></p>
+          <% if clothing.photos.attached? %>
+            <section class="admin-dashboard-garment-card"
+              <p class="admin-dashboard-garment-image"><%= link_to image_tag(clothing.photos.first), admin_clothing_path(clothing) %></p>
+              <section class="admin-dashboard-garment-name">
+                <%= clothing.name %>
+              </section>
+            </section>
           <% else %>
-            <!-- <section class="garment-image-no-image-card"> -->
-              <!-- <p class="garment-image-no-image"><%= link_to image_tag('beautiful-thread.png'), admin_clothing_path(clothing) %></p>
-              <label for="garment-image-no-image">Image coming soon!</label> -->
-              <p class="admin-dashboard-garment-image-no-image"><%= link_to 'Image coming soon!', admin_clothing_path(clothing), style: 'color: white'%></p>
-            <!-- </section> -->
+              <p class="admin-dashboard-garment-image-no-image"><%= link_to 'Image coming soon!', admin_clothing_path(clothing), style: 'color: white' %></p>
           <% end %>
         <% end %>
       </section>
       <section class="all-my-garments-button">
-        <%= button_to 'My Garments', admin_clothings_path, method: :get %>
+        <p class="admin-dashboard-garment-button"><%= button_to 'My Garments', admin_clothings_path, method: :get %></p>
       </section>
     </li>
     <li>
       <section class="admin-dashboard-workshop-layout">
         <% @classrooms.each do |classroom| %>
-          <% if classroom.image.attached? %>
-            <p class="admin-dashboard-workshop-image"><%= link_to image_tag(classroom.image), admin_classroom_path(classroom) %></p>
+          <% if classroom.photos.attached? %>
+            <section class="admin-dashboard-workshop-card"
+              <p class="admin-dashboard-workshop-image"><%= link_to image_tag(classroom.photos.first), admin_classroom_path(classroom) %></p>
+              <section class="admin-dashboard-workshop-name">
+                <%= classroom.name %>
+              </section>
+            </section>
+          <% elsif classroom.image.attached? %>
+            <section class="admin-dashboard-workshop-card"
+              <p class="admin-dashboard-workshop-image"><%= link_to image_tag(classroom.image), admin_classroom_path(classroom) %></p>
+              <section class="admin-dashboard-workshop-name">
+                <%= classroom.name %>
+              </section>
+            </section>
           <% else %>
             <p class="admin-dashboard-workshop-image-no-image"><%= link_to 'Image coming soon!', admin_classroom_path(classroom), style: 'color: white'%></p>
           <% end %>
@@ -79,13 +92,6 @@
         <%= button_to 'My Workshops', admin_classrooms_path, method: :get  %>
       </section>
     </li>
-    <li>
-      <!-- <section class="email-layout">
-      </section> -->
-    </li>
-    <!-- <section class="email-list-button">
-      <p><%= button_to 'Email List', admin_emails_path, method: :get  %></p>
-    </section> -->
   </ul>
 
 </div>

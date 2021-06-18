@@ -16,11 +16,15 @@
               <p><%= artwork.name %></p>
             </section><br>
             <!-- <section class="collection-details"> -->
-              <p><%= artwork.description %></p><br>
-
-              <section class="collection-artwork-image">
-                <p><%= link_to image_tag(artwork.image), admin_artwork_path(artwork) %></p><br>
-              </section>
+              <p class="admin-collection-description"><%= artwork.description %></p><br>
+              <% if artwork.photos.attached? %>
+                <% artwork.photos.map do |photo| %>
+                  <section class="collection-artwork-image">
+                    <p><%= link_to image_tag(photo), admin_artwork_path(artwork) %></p><br>
+                  </section>
+                <% end %>
+              <% else %>
+              <% end %>
 
               <p>Cost: <%= number_to_currency(artwork.cost) %></p><br>
               <p>Artwork is <%= artwork.availability? %></p><br>
@@ -34,6 +38,6 @@
         <% end %>
       </section>
     <% else %>
-      <p>There are no artworks associated with this Collection at this time </p>
+      <p class="admin-collection-no-artworks">There are no artworks associated with this Collection at this time </p>
     <% end %>
   </section>

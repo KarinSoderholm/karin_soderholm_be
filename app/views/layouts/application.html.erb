@@ -104,28 +104,28 @@
           <% if !current_admin? %>
             <section class="footer-row">
               <div class="footer-column">
-                <div class="collection-section">
-                  <div class="header-contact">
+                <div class="collections-section">
+                  <div class="collections-section-artwork">
                     <%= link_to 'Artwork', "/artworks", class: "artworks-footer" %>
                   </div>
-                  <div class="collection-text">
+                  <div class="collections-section-commission">
                     <%= link_to 'Commission a Blooming Map', new_commission_blooming_map_path, method: :get %>
                   </div>
 
-                  <div class="header-contact">
+                  <div class="collections-section-collection">
                     <%= link_to 'Collections', "/collections", class: "collections-footer" %>
-                  </div><br>
-                  <div class="collection-text">
+                  </div>
+                  <div class="collection-section-text">
                     <% collections = Collection.all %>
                     <% collections.each do |collection| %>
                       <%= link_to collection.name, "/collections/#{collection.id}", method: :get %>
                     <% end %>
                   </div>
-                  <div class="header-contact">
+                  <div class="collections-section-clothing">
                     <%= link_to 'Garments', "/clothings", class: "clothings-footer" %>
                   </div>
 
-                  <div class="header-contact">
+                  <div class="collections-section-classroom">
                     <%= link_to 'Workshops', "/classrooms", class: "classrooms-footer" %>
                   </div>
                 </div>
@@ -133,14 +133,14 @@
 
               <div class="footer-column">
                 <div class="about-section">
-                  <div class="header-contact">
+                  <div class="about-section-title">
                     <p class="about">About</p>
                   </div>
                   <div class="about-text">
                     <%= link_to 'About', "/about/1/bio", method: :get %>
                     <%= link_to 'Contact', "/about/1/contact", method: :get %>
                     <%= link_to 'FAQ', about_index_path, method: :get %>
-                  </div><br><br><br><br>
+                  </div><br>
 
                   <nav class="social">
                     <div class="social-links">
@@ -175,33 +175,12 @@
                   <div class="header-contact">
                     <p class="kit">Keep in Touch!</p>
                   </div>
-                  <div class="about-text">
+                  <section class="subscription-text">
                     Be the first to know whats <br>
                     going on in Karin's Community!<br>
-                  </div>
+                  </section>
 
                   <div class="subscribe-form", id="subscribe-form"
-                    <%# <%= form_tag '/emails' do %>
-                      <%# <%= text_field_tag :name, nil, class: 'form-inline', placeholder: 'Your name' %>
-                      <%# <%= email_field_tag :email_address, nil, class: 'form-inline', placeholder: 'email@example.com' %>
-                      <%# <%= submit_tag "Subscribe" %>
-                    <%# <% end %>
-
-                    <%# <%= form_tag '/emails' do %>
-                      <%# <%= label_tag :name %>
-                      <%# <%= text_field_tag :name, nil, class: 'form-inline', placeholder: 'your name' %>
-
-                      <%# <%= label_tag :email_address %>
-                      <%# <%= text_field_tag :email_address, nil, class: 'form-inline', placeholder: 'email@example.com' %>
-                      <%# <%= submit_tag "Join" %>
-                    <%# <% end %>
-
-                    <%# <%= form_tag '/emails' do %>
-                      <%# <%= label_tag :name %>
-                      <%# <%= text_field_tag :name %>
-
-                      <%# <%= label_tag :email_address %>
-                      <%# <%= text_field_tag :email_address %>
                       <%= submit_tag "Join Karin's Community" %>
                     <%# <% end %>
 
