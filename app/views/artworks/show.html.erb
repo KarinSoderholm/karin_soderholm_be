@@ -31,5 +31,8 @@
       <%= number_to_currency(@artwork.cost) %>
     </section>
   </div>
+
+  <div class="artwork-button-show">
+    <%= button_to 'Buy Me!', "/cart/artwork/#{@artwork.id}", method: :post %>
+  </div>
 </div>
-<%= button_to 'Buy Me!', "/cart/artwork/#{@artwork.id}", method: :post %>
