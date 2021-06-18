@@ -25,13 +25,11 @@ class Admin::ClothingsController < Admin::BaseController
 
   def create
     @clothing = Clothing.new(clothing_params)
-    binding.pry
+
     if @clothing.save
-      binding.pry
       flash[:success] = "Hooray! You have successfully added a Garment to the Collection!"
       redirect_to admin_clothings_path
     else
-      binding.pry
       flash.now[:alert] = "Please check to make sure the fields are all filled in properly. Try again"
       render :new
     end

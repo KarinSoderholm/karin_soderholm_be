@@ -27,9 +27,8 @@ class Admin::Workshop::ToolsController < Admin::BaseController
     # @tool = Tool.find(params[:id])
   end
   def update
-    # if @tool.update(tool_params)
     something = {}
-    something[:name] = params["/admin/workshop/tools.7"][:name]
+    something[:name] = params["/admin/workshop/tools/#{@tool.id}/edit/#{@tool.classroom.id}"][:name]
     if @tool.update(something)
       flash[:success] = "You updated the tool!"
       redirect_to admin_classroom_path(@classroom)
@@ -40,6 +39,7 @@ class Admin::Workshop::ToolsController < Admin::BaseController
   end
 
   def destroy
+    binding.pry
     classroom = @tool.classroom
     if @tool.destroy
       flash[:success] = "The tool was deleted from #{classroom.name}"
