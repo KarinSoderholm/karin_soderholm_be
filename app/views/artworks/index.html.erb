@@ -17,18 +17,16 @@
                 <h3><%= artwork.name %></h3>
               </section>
               <% if artwork.available && artwork.photos.attached? %>
-                <% artwork.photos.map do |photo| %>
-                  <section class="artwork-image">
-                    <p><%= link_to(image_tag(photo), artwork_path(artwork), id: 'artwork') %></p>
-                  </section>
-                <% end %>
+                <section class="artwork-image">
+                  <p><%= link_to(image_tag(artwork.photos.first), artwork_path(artwork), id: 'artwork') %></p>
+                </section>
               <% elsif artwork.available && !artwork.photos.attached? %>
                 <section class="artwork-image-no-image">
                   <p style="display: flex;"><%= link_to 'Image coming soon!', artwork_path(artwork), id: 'artwork' %></p>
                 </section>
               <% elsif !artwork.available && artwork.photos.attached? %>
                 <section class="artwork-image-special">
-                  <p id='artwork'><%= image_tag(artwork.image) %></p>
+                  <p id='artwork'><%= image_tag(artwork.photos.first) %></p>
                 </section>
               <% else %>
                 <section class="artwork-image-no-image">
