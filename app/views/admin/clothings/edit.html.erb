@@ -3,7 +3,7 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %>  / <%= link_to  "#{@clothing.name}", admin_clothing_path(@clothing) %> / <%= link_to  'my garments', admin_clothings_path %> 
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>  / <%= link_to  "#{@clothing.name}", admin_clothing_path(@clothing) %> / <%= link_to  'my garments', admin_clothings_path %>
 </div><br>
 <%= form_for ([:admin, @clothing]) do |f| %>
 
@@ -17,6 +17,7 @@
   <%= f.text_field :url %><br>
 
   <%= f.label 'Category of Garment: '%><br>
+  <%# <% binding.pry %>
   <%= f.select :category, @clothings.map { |clothing| [clothing.category] }, include_blank: true %><br>
 
   <%= f.label 'Garment is available (yes/no): '%>
@@ -31,8 +32,8 @@
   <%= f.label 'Cost: '%><br>
   <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>
 
-  <%= f.label 'Image of Garment: '%><br>
-  <%= f.file_field :image %><br>
+  <%# <%= f.label 'Image of Garment: '%>
+  <%# <%= f.file_field :photos %>
 
   <%= f.submit 'Update Garment' %>
 <% end %>

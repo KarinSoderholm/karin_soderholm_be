@@ -34,6 +34,8 @@
         <td><%= clothing.description %></td>
         <% if clothing.image.attached? %>
           <td><%= image_tag(clothing.image) %></td>
+        <% elsif clothing.photos.attached? %>
+          <td><%= image_tag(clothing.photos.first) %>(<%= clothing.photos.count%>)</td>
         <% else %>
           <td>No image to display</td>
         <% end %>
@@ -56,8 +58,8 @@
 
 
 <div class="import-csv">
-  <%= form_tag import_admin_clothings_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag 'Import Spreadsheet' %>
-  <% end %>
+  <%# <%= form_tag import_admin_clothings_path, multipart: true do %> 
+    <%# <%= file_field_tag :file %>
+    <%# <%= submit_tag 'Import Spreadsheet' %>
+  <%# <% end %>
 </div>
