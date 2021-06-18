@@ -15,9 +15,9 @@
               <div class="collection-artwork-header">
                 <%= link_to "#{ artwork.name }", "/artworks/#{ artwork.id }", method: :get %><br>
               </div>
-                <% if artwork.image.attached? %>
+                <% if artwork.photos.attached? %>
                   <div class="collection-artwork-image">
-                    <%= link_to image_tag(artwork.image), "/artworks/#{ artwork.id }", method: :get %><br>
+                    <%= link_to image_tag(artwork.photos.first), "/artworks/#{ artwork.id }", method: :get %><br>
                   </div>
                 <% else %>
                   <div class="collection-artwork-no-image">
