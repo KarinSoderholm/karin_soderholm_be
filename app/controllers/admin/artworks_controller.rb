@@ -64,7 +64,6 @@ class Admin::ArtworksController < Admin::BaseController
       flash[:success] = 'You did it! You edited your artwork data!'
       redirect_to admin_artworks_path
     else
-      binding.pry
       flash.now[:error] = "Cannot leave manditory fields empty. Please try again"
       render :edit
     end
