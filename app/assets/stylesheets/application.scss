@@ -1623,6 +1623,24 @@
     max-width: 45%;
   }
 
+
+  // admin#cv#show
+  .admin-cv-details-file{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .admin-cv-details-text{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
 /* classrooms#index */
   // .classrooms-layout{
   //   display: flex;
