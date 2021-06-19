@@ -7,7 +7,6 @@
 </div><br>
 <section id='navigation-links-individual'>
   <%= link_to 'Edit Garment', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
-  <%= link_to 'Delete Garment', "/admin/clothings/#{@clothing.id}", method: :delete, data: { confirm: "Are you sure?" } %>
 </section><br><br>
 
 <section class="admin-garment-details">
@@ -101,6 +100,10 @@
 
 <section class="add-photos">
   <p><%= button_to "Add Image", "/admin/clothings/#{@clothing.id}/add_photos", method: :get %></p>
+</section>
+
+<section class="remove-garment-button-show">
+  <p><%= button_to "Delete #{ @clothing.name }", "/admin/clothings/#{@clothing.id}", method: :delete %></p>
 </section>
 
 <section id="add-pattern">
