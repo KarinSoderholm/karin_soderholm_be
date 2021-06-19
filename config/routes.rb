@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
     resources :cv do
       collection { post :import }
+      delete '/remove_file/:cv_file_id' => :remove_file
     end
     resources :patterns
     resources :fabrics
