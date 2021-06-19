@@ -17,7 +17,6 @@
   <%= f.text_field :url %><br>
 
   <%= f.label 'Category of Garment: '%><br>
-  <%# <% binding.pry %>
   <%= f.select :category, @clothings.map { |clothing| [clothing.category] }, include_blank: true %><br>
 
   <%= f.label 'Garment is available (yes/no): '%>

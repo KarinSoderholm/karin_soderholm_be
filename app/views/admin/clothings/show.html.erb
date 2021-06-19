@@ -7,7 +7,7 @@
 </div><br>
 <section id='navigation-links-individual'>
   <%= link_to 'Edit Garment', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
-  <%= link_to 'Delete Garment', "/admin/clothings/#{@clothing.id}", method: :delete %>
+  <%= link_to 'Delete Garment', "/admin/clothings/#{@clothing.id}", method: :delete, data: { confirm: "Are you sure?" } %>
 </section><br><br>
 
 <section class="admin-garment-details">

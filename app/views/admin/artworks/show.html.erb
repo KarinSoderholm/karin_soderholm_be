@@ -8,7 +8,7 @@
 
 <section id='navigation-links-individual'>
   <%= link_to "Edit #{@artwork.name}", "/admin/artworks/#{@artwork.id}/edit", method: :get %>
-  <%= link_to "Delete #{@artwork.name}", "/admin/artworks/#{@artwork.id}", method: :delete %>
+  <%= link_to "Delete #{@artwork.name}", "/admin/artworks/#{@artwork.id}", method: :delete, data: { confirm: "Are you sure?" } %>
 </section><br><br>
 
 <section class="admin-artwork-details">

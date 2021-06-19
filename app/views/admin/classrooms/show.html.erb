@@ -7,7 +7,7 @@
 
 <section id='navigation-links-individual'>
   <%= link_to 'Edit Workshop', "/admin/classrooms/#{@classroom.id}/edit", method: :get %>
-  <%= link_to 'Delete Workshop', "/admin/classrooms/#{@classroom.id}", method: :delete %>
+  <%= link_to 'Delete Workshop', "/admin/classrooms/#{@classroom.id}", method: :delete, data: { confirm: "Are you sure?" } %>
 </section><br>
 
 <section class="admin-classroom-details">
