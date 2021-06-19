@@ -2,7 +2,7 @@ class StudentWork < ApplicationRecord
   validates :title, presence: false
   validates :description, presence: false
 
-  has_one_attached :image
+  has_one_attached :image, dependent: :destroy
 
   enum age_category: { young_adult: 'young_adult', adult: 'adult' }
 
@@ -20,12 +20,18 @@ class StudentWork < ApplicationRecord
   def remove_image(params)
     binding.pry
     if self.image.attached?
+      self.image.purge
+    else
+      return params
     end
   end
 
   def set_image(params)
     binding.pry
-    if params[:student_work][:image]
+    if params[:image]
+      self.image.attach(params[:image])
+    else
+      return params
     end
   end
 end

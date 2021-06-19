@@ -26,8 +26,8 @@
       <% @student_works.each do |student_work| %>
       <tr>
         <td><%= link_to "#{student_work.title}",  admin_student_work_path(student_work), method: :get%></td>
-        <td><%= link_to 'Edit Garment', edit_admin_student_work_path(student_work), method: :get %></td>
-        <td><%= link_to 'Delete Garment', admin_student_work_path(student_work), method: :get %></td>
+        <td><%= link_to 'Edit StudentWork', edit_admin_student_work_path(student_work), method: :get %></td>
+        <td><%= link_to 'Delete StudentWork', "/admin/student_works/#{student_work.id }", method: :delete, data: { confirm: "Are you sure?" } %></td>
         <td><%= student_work.description %></td>
         <% if student_work.image.attached? %>
           <td><%= image_tag(student_work.image) %></td>
@@ -37,10 +37,10 @@
         <td><%= student_work.age_category %></td>
       </tr>
       <% end %>
-    <% else %>
-      <tr>There are no student works currently in the system! Please add some!</tr>
-    <% end %>
   </tbody>
+  <% else %>
+  <tr>There are no student works currently in the system! Please add some!</tr>
+  <% end %>
 </table>
 
 <section class="new-student-work-button">

@@ -1,0 +1,23 @@
+<section class="page-title">
+  <h2><%= @student_work.title %> Edit Page</h2>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{@student_work.title}", admin_student_work_path(@student_work) %> / <%= link_to "my student works", admin_student_works_path%>
+</div><br>
+<%= form_for ([:admin, @student_work]) do |f| %>
+
+  <%= f.label 'Name of Garment: '%><br>
+  <%= f.text_field :title %><br>
+
+  <%= f.label 'Description of Garment: '%><br>
+  <%= f.text_field :description %><br>
+
+  <%= f.label 'Category of Garment: '%><br>
+  <%= f.select :age_category, @student_works.map { |student_work| [student_work.age_category] }.uniq%><br>
+
+  <%= f.label 'Image of StudentWork: '%><br>
+  <%= f.file_field :image %><br>
+
+  <%= f.submit 'Update StudentWork' %>
+<% end %>

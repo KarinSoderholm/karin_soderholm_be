@@ -3,11 +3,11 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my art', admin_artworks_path, method: :get %> / <%= link_to 'my collections', admin_collections_path, method: :get %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my art', admin_artworks_path, method: :get %> / <%= link_to 'my collections', admin_collections_path, method: :get %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my student works', admin_student_works_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 
 <section class="admin-student-work">
-  <%= form_tag '/admin/student_work' do %>
+  <%= form_tag '/admin/student_works' do %>
 
     <%= label_tag 'Title of the StudentWork: '%><br>
     <%= text_field_tag :title %><br>
@@ -16,13 +16,7 @@
     <%= text_field_tag :description %><br>
 
     <%= label_tag 'Age category of the StudentWork: '%><br>
-    <%# <% binding.pry %>
-    <%# <%= select_tag :age_category %>
-    <%# <%= select_tag :age_category options_for_select([['young_adult','young_adult'],['adult','adult']], params[:age_category] ), class:"select")%>
-    <%# <%= select_tag :age_category, @student_works.map { |student_work| [student_work.age_category] }%>
-    <%= select_tag :age_category, @student_works.age_categories.map { |k,v| [k,v] } %><br>
-
-    <%# <%= select_tag :age_category options_for_select(['young_adult','young_adult'],['adult','adult'], params[:age_category]))%>
+    <%= select_tag :age_category, options_from_collection_for_select(@student_works, "age_category", "age_category") %><br>
 
     <%= label_tag 'Upload image of the StudentWork (.pdf or .png files only): '%><br>
     <%= file_field_tag :image %><br>

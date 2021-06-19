@@ -3,11 +3,11 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>  / <%= link_to  'my student works', admin_student_works_path %>
 </div><br>
 <section id='navigation-links-individual'>
-  <%= link_to 'Edit Garment', "/admin/student_works/#{@student_work.id}/edit", method: :get %>
-  <%= link_to 'Delete Garment', "/admin/student_works/#{@student_work.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+  <%= link_to 'Edit StudentWork', "/admin/student_works/#{@student_work.id}/edit", method: :get %>
+  <%# <%= link_to 'Delete StudentWork', "/admin/student_works/#{@student_work.id}", method: :delete, data: { confirm: "Are you sure?" } %>
 </section><br><br>
 
 <section class="admin-student-work-details-show">
@@ -28,4 +28,8 @@
     Age Category:
   </section>
   <p class="admin-student-work-details-text-show"><%= @student_work.age_category %></p>
+
+  <section class="admin-student-work-remove-button">
+    <%= button_to 'Delete StudentWork', "/admin/student_works/#{@student_work.id}", method: :delete, data: { confirm: "Are you sure?" }  %>
+  </section>
 </section>
