@@ -1,0 +1,31 @@
+<section class="page-title">
+  <h1>StudentWork: <%= @student_work.title %></h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
+<section id='navigation-links-individual'>
+  <%= link_to 'Edit Garment', "/admin/student_works/#{@student_work.id}/edit", method: :get %>
+  <%= link_to 'Delete Garment', "/admin/student_works/#{@student_work.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+</section><br><br>
+
+<section class="admin-student-work-details-show">
+  <section class="admin-student-work-detail-category-show">
+    StudentWork Description:
+  </section>
+  <p class="admin-student-work-details-text-show"><%= @student_work.description %></p>
+
+  <% if @student_work.image.attached? %>
+    <section class="admin-student-work-details-images-show">
+      <p class="admin-student-work-details-image-show"><%= image_tag(@student_work.image) %></p>
+    </section>
+  <% else %>
+    <h5>There is no image uploaded, yet for this StudentWork!</h5>
+  <% end %>
+
+  <section class="admin-student-work-detail-category-show">
+    Age Category:
+  </section>
+  <p class="admin-student-work-details-text-show"><%= @student_work.age_category %></p>
+</section>

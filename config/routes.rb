@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       post '/workshop/requirements/:id/edit/:classroom_id' => :update
       delete '/workshop/requirements/:id' => :destroy
     end
+    resources :student_works
     resources :cv do
       collection { post :import }
       delete '/remove_file/:cv_file_id' => :remove_file

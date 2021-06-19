@@ -1,0 +1,34 @@
+<section class="page-title">
+  <h2>Create a new StudentWork</h2>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my art', admin_artworks_path, method: :get %> / <%= link_to 'my collections', admin_collections_path, method: :get %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
+
+<section class="admin-student-work">
+  <%= form_tag '/admin/student_work' do %>
+
+    <%= label_tag 'Title of the StudentWork: '%><br>
+    <%= text_field_tag :title %><br>
+
+    <%= label_tag 'Description of the StudentWork: '%><br>
+    <%= text_field_tag :description %><br>
+
+    <%= label_tag 'Age category of the StudentWork: '%><br>
+    <%# <% binding.pry %>
+    <%# <%= select_tag :age_category %>
+    <%# <%= select_tag :age_category options_for_select([['young_adult','young_adult'],['adult','adult']], params[:age_category] ), class:"select")%>
+    <%# <%= select_tag :age_category, @student_works.map { |student_work| [student_work.age_category] }%>
+    <%= select_tag :age_category, @student_works.age_categories.map { |k,v| [k,v] } %><br>
+
+    <%# <%= select_tag :age_category options_for_select(['young_adult','young_adult'],['adult','adult'], params[:age_category]))%>
+
+    <%= label_tag 'Upload image of the StudentWork (.pdf or .png files only): '%><br>
+    <%= file_field_tag :image %><br>
+
+    <section class="submit-admin-student-work-button">
+      <%= submit_tag 'Add StudentWork' %>
+    </section>
+  <% end %>
+</section>
