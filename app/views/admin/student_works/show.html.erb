@@ -31,6 +31,8 @@
   <p class="admin-student-work-details-text-show"><%= @student_work.age_category %></p>
 
   <section class="admin-student-work-remove-button">
+      <%# <%= button_to "Destroy", "/admin/student_works/#{@student_work.id}", method: :delete,
+          :confirm => "Are you sure?"%> 
       <%= button_to 'Delete StudentWork', "/admin/student_works/#{@student_work.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
   </section>
 </section>

@@ -14,7 +14,7 @@
   <%= f.text_field :description %><br>
 
   <%= f.label 'Category of Garment: '%><br>
-  <%= f.select :age_category, @student_works.map { |student_work| [student_work.age_category] }.uniq%><br>
+  <%= f.select :age_category, options_for_select(StudentWork.age_categories.map { |category| category }) %><br>
 
   <%= f.label 'Image of StudentWork: '%><br>
   <%= f.file_field :image %><br>

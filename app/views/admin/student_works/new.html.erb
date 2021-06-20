@@ -7,7 +7,7 @@
 </div><br>
 
 <section class="admin-student-work">
-  <%= form_tag '/admin/student_works' do %>
+  <%= form_tag '/admin/student_works', multipart: true do %>
 
     <%= label_tag 'Title of the StudentWork: '%><br>
     <%= text_field_tag :title %><br>
@@ -16,7 +16,8 @@
     <%= text_field_tag :description %><br>
 
     <%= label_tag 'Age category of the StudentWork: '%><br>
-    <%= select_tag :age_category, options_from_collection_for_select(@student_works, "age_category", "age_category") %><br>
+    <%= select_tag :age_category, options_for_select(StudentWork.age_categories.map { |category| category }) %><br>
+    <%# <%= select_tag :age_category, options_from_collection_for_select(@student_works, "age_category", "age_category") %>
 
     <%= label_tag 'Upload image of the StudentWork (.pdf or .png files only): '%><br>
     <%= file_field_tag :image %><br>

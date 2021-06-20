@@ -15,10 +15,10 @@
     <tr>
       <th>Title</th>
       <th>Link to Edit</th>
-      <th>Link to Delete</th>
       <th>Description</th>
       <th>Image</th>
       <th>Age Category</th>
+      <th>Link to Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -27,7 +27,6 @@
       <tr>
         <td><%= link_to "#{student_work.title}",  admin_student_work_path(student_work), method: :get%></td>
         <td><%= link_to 'Edit StudentWork', edit_admin_student_work_path(student_work), method: :get %></td>
-        <td><%= link_to 'Delete StudentWork', "/admin/student_works/#{student_work.id }", method: :delete, data: { confirm: "Are you sure?" } %></td>
         <td><%= student_work.description %></td>
         <% if student_work.image.attached? %>
           <td><%= image_tag(student_work.image) %></td>
@@ -35,6 +34,7 @@
           <td>No image to display</td>
         <% end %>
         <td><%= student_work.age_category %></td>
+        <td><%= button_to 'Delete', "/admin/student_works/#{student_work.id }", method: :delete, data: { confirm: "Are you sure?" } %></td>
       </tr>
       <% end %>
   </tbody>
