@@ -3,7 +3,7 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my art', admin_artworks_path, method: :get %> / <%= link_to 'my collections', admin_collections_path, method: :get %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my art', admin_artworks_path %> / <%= link_to 'my collections', admin_collections_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 
 <h3>Total Number of StudentWorks: <%= @student_works.total_student_works %></h3>
