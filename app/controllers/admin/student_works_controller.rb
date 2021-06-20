@@ -39,7 +39,6 @@ class Admin::StudentWorksController < Admin::BaseController
   end
 
   def destroy
-    binding.pry
     @student_work.remove_image(params)
     if @student_work.destroy
       flash[:success] = "The StudentWork was successfully deleted!"
