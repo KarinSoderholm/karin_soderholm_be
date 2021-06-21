@@ -46,6 +46,13 @@ class Admin::ArtworkStatementsController < Admin::BaseController
     end
 
     def artwork_statement_params
-      params.require(:artwork_statement).permit(:statement, :artwork_id)
+      if params[:artwork]
+        params.require(:artwork_statement).permit(:statement, :artwork_id)
+      else
+        hash = {}
+        hash[:description] = params[:description]
+        hash[:artwork_id] = params[:artwork_id]
+        return hash
+      end
     end
 end
