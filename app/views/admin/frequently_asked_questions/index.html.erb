@@ -13,6 +13,7 @@
     <tr>
       <th>Question</th>
       <th>Answer</th>
+      <th>Desired Order</th>
       <th>Link to Edit</th>
       <th>Link to Delete</th>
     </tr>
@@ -23,6 +24,7 @@
       <tr>
         <td><%= link_to "#{faq.question}", admin_frequently_asked_question_path(faq) %></td>
         <td><%= faq.answer %></td>
+        <td><%= faq.faq_order %></td>
         <td><%= link_to 'Edit FAQ', edit_admin_frequently_asked_question_path(faq) %></td>
         <td><%= button_to 'Delete', "/admin/frequently_asked_questions/#{faq.id }", method: :delete, data: { confirm: "Are you sure?" } %></td>
       </tr>
@@ -33,6 +35,13 @@
   <% end %>
 </table>
 
+<section>
+  <% if @faqs.is_ordered_properly? %>
+    <h5 class="faq-proper-index">All the FAQ's are ordered properly!</h5>
+  <% else %>
+    <h1 class="faq-improper-index">There repeat numbers in the FAQ Order. Please update before moving on!</h1>
+  <% end %>
+</section>
 <section class="new-faq-work-button">
   <p><%= button_to 'Add a FAQ', new_admin_frequently_asked_question_path, method: :get %></p>
 </section>

@@ -7,11 +7,15 @@
 </div>
 <%= form_for ([:admin, @faq]) do |f| %>
 
-  <%= f.label "FAQ Question: "%><br>
+  <%= f.label "FAQ Question: " %><br>
   <%= f.text_field :question %><br>
 
-  <%= f.label "FAQ Answer: "%><br>
+  <%= f.label "FAQ Answer: " %><br>
   <%= f.text_field :answer %><br>
+
+  <%= f.label "Desired Order: " %><br>
+  <%= f.label "*Make sure each question/answer has a unique number*"%><br>
+  <%= f.number_field :faq_order %><br>
 
   <%= f.submit 'Update FAQ' %>
 <% end %>

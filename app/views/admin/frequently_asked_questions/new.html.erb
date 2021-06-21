@@ -16,6 +16,11 @@
     <%= label_tag "FAQ Answer: " %><br>
     <%= text_field_tag :answer %><br>
 
+    <%= label_tag "Desired Order: " %><br>
+    <%= label_tag "*Make sure each question/answer has a unique number*" %><br>
+    <%= label_tag "*It's ok if you can't remember, you can always edit this*" %><br>
+    <%= text_field_tag :faq_order %><br>
+
     <section class="submit-admin-FAQ-button">
       <%= submit_tag 'Add FAQ' %>
     </section>
