@@ -126,6 +126,7 @@ Rails.application.routes.draw do
     get '/bio', :action => :bio
     get '/contact', :action => :contact
     get '/cv', :action => :cv
+    get '/faq', :action => :faq
   end
   resources :socials
   resources :commission_blooming_maps
