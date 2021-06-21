@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_19_030211) do
+ActiveRecord::Schema.define(version: 2021_06_20_174740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2021_06_19_030211) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "collection_type"
+    t.index ["collection_type"], name: "index_collections_on_collection_type"
   end
 
   create_table "commission_blooming_maps", force: :cascade do |t|
@@ -176,6 +178,15 @@ ActiveRecord::Schema.define(version: 2021_06_19_030211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artwork_id"], name: "index_materials_on_artwork_id"
+  end
+
+  create_table "object_collections", force: :cascade do |t|
+    t.bigint "clothing_id"
+    t.bigint "collection_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clothing_id"], name: "index_object_collections_on_clothing_id"
+    t.index ["collection_id"], name: "index_object_collections_on_collection_id"
   end
 
   create_table "order_artworks", force: :cascade do |t|
@@ -289,6 +300,8 @@ ActiveRecord::Schema.define(version: 2021_06_19_030211) do
   add_foreign_key "cvs", "users"
   add_foreign_key "fabrics", "clothings"
   add_foreign_key "materials", "artworks"
+  add_foreign_key "object_collections", "clothings"
+  add_foreign_key "object_collections", "collections"
   add_foreign_key "order_artworks", "artworks"
   add_foreign_key "order_artworks", "orders"
   add_foreign_key "order_classrooms", "classrooms"
