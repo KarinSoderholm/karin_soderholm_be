@@ -1,43 +1,43 @@
 <section class="page-title">
   <h1><%= @clothing.name %></h1>
 </section>
-<!-- <div class="clothing-container"> -->
-  <div class="clothing-image-container">
-    <section class="clothing-image">
-      <%= image_tag(@clothing.image) %>
-    </section>
+
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'art', artworks_path %> / <%= link_to 'objects', clothings_path %> / <%= link_to 'workshops', classrooms_path %>
+</div>
+
+<div class="clothing-container-show">
+  <div class="clothing-information-container-show">
+    <!-- <div class="clothing-image-container-show"> -->
+      <section class="clothing-images-show">
+        <% if @clothing.photos.attached?%>
+          <% @clothing.photos.map do |photo| %>
+            <section class="clothing-image-show">
+              <%= image_tag(photo) %>
+            </section>
+          <% end %>
+        <% else %>
+        <section class="clothing-image-no-image-show">
+          <p class="clothing-text-show">Image coming soon!</p>
+        </section>
+        <% end %>
+      </section>
+    <!-- </div> -->
+    <div class="clothing-description-container">
+      <section class="clothing-description-show">
+        <p class="clothing-text-show"><%= @clothing.description %></p>
+      </section>
+    </div>
   </div>
-
-  <div class="clothing-description-container">
-    <section class="clothing-description">
-      <%= @clothing.description %>
-    </section>
-  </div>
-
-  <!-- <div class="clothing-date-container">
-    <section class="clothing-date">
-      <%# <%= (@clothing.date).strftime("%A, %b %d %Y") %> %>
-    </section>
-  </div> -->
-
-  <!-- <div class="clothing-time-container">
-    <section class="clothing-time">
-      <%# <%= (@clothing.time).strftime("%I : %M %p" ) %> %>
-    </section>
-  </div> -->
-
-  <!-- <div class="clothing-location-container">
-    <section class="clothing-location">
-      <%# <%= @clothing.location %> %>
-    </section>
-  </div> -->
 
   <div class="clothing-cost-container">
     <section class="clothing-cost">
-      <%= number_to_currency(@clothing.cost) %>
+      <p class="clothing-text-show"><%= number_to_currency(@clothing.cost) %></p>
     </section>
   </div>
-<!-- </div> -->
+</div>
 
 <!-- <button type "submit" class="btn btn-outline-info" aria-pressed="true">Enroll</button> -->
-<%= button_to 'Buy Me!', "/cart/clothing/#{@clothing.id}", method: :post %>
+<section class="clothing-button-show">
+  <%= button_to 'Buy Me!', "/cart/clothing/#{@clothing.id}", method: :post %>
+</section>

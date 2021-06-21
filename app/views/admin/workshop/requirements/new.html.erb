@@ -10,9 +10,8 @@
   <%= form_tag "/admin/workshop/requirements/new/#{@classroom.id}" do %>
   <%= label_tag :name %>
   <%= select_tag :name, options_from_collection_for_select(@classrooms, "name", "name"), include_blank: true %><br>
-  <%# <%= text_field_tag :name %>
 
-  <%= hidden_field_tag "#{@classroom.id}"%>
+  <%= hidden_field_tag "#{@classroom.id}" %>
 
   <section class="new-email-button">
     <%= submit_tag 'Add this requirement to the list' %>

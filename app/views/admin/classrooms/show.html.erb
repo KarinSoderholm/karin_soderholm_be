@@ -2,53 +2,102 @@
   <h1>Workshop: <%= @classroom.name%></h1>
 </section>
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_classrooms_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 
 <section id='navigation-links-individual'>
   <%= link_to 'Edit Workshop', "/admin/classrooms/#{@classroom.id}/edit", method: :get %>
-  <%= link_to 'Delete Workshop', "/admin/classrooms/#{@classroom.id}", method: :delete %>
+  <%= link_to 'Delete Workshop', "/admin/classrooms/#{@classroom.id}", method: :delete, data: { confirm: "Are you sure?" } %>
 </section><br>
 
 <section class="admin-classroom-details">
   <section class="admin-classroom-detail-category">
     <strong>Workshop Description:</strong>
   </section>
-    <%= @classroom.description %><br><br>
-
+    <p class="admin-classroom-details-text"><%= @classroom.description %></p>
   <section class="admin-classroom-detail-category">
     <strong>Workshop Image:</strong>
   </section>
-    <% if @classroom.image.attached? %>
-      <%= image_tag(@classroom.image) %><br><br>
-    <% else %>
-      <p>There is no image uploaded, yet!</p><br>
+  <% if @classroom.photos.attached?  && @classroom.image.attached? %>
+    <section class="admin-classroom-details-images">
+      <section class="admin-classroom-details-image">
+        <p><%= image_tag(@classroom.image)%></p>
+        <section class="remove-photos" style="display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: flex-end;
+        justify-content: flex-end;
+        align-items: flex-end;">
+          <p><%= button_to "Remove Image", "/admin/classrooms/#{@classroom.id}/remove_photo/#{@classroom.image.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
+        </section>
+      </section>
+      <% @classroom.photos.map do |photo| %>
+        <section class="admin-classroom-details-image">
+          <p><%= image_tag(photo)%></p>
+          <section class="remove-photos" style="display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          align-content: flex-end;
+          justify-content: flex-end;
+          align-items: flex-end;">
+            <p><%= button_to "Remove Image", "/admin/classrooms/#{@classroom.id}/remove_photo/#{photo.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
+          </section>
+        </section>
+      <% end %>
+    </section>
+  <% elsif @classroom.photos.attached? %>
+    <% @classroom.photos.map do |photo| %>
+      <section class="admin-classroom-details-image">
+        <p><%= image_tag(photo) %></p>
+        <section class="remove-photos" style="display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: flex-end;
+        justify-content: flex-end;
+        align-items: flex-end;">
+          <p><%= button_to "Remove Image", "/admin/classrooms/#{@classroom.id}/remove_photo/#{photo.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
+        </section>
+      </section>
     <% end %>
-
+  <% elsif @classroom.image.attached? %>
+    <section class="admin-classroom-details-image">
+      <p><%= image_tag(@classroom.image) %></p>
+      <section class="remove-photos" style="display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-content: flex-end;
+      justify-content: flex-end;
+      align-items: flex-end;">
+        <p><%= button_to "Remove Image", "/admin/classrooms/#{@classroom.id}/remove_photo/#{@classroom.image.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
+      </section>
+    </section>
+  <% else %>
+    <h5>There is no image uploaded, yet!</h5>
+  <% end %>
   <section class="admin-classroom-detail-category">
     <strong>Workshop Date:</strong>
   </section>
-    <%= (@classroom.date).strftime("%A, %d %b %Y") %><br><br>
+    <p class="admin-garment-details-text"><%= (@classroom.date).strftime("%A, %d %b %Y") %></p>
 
   <section class="admin-classroom-detail-category">
     <strong>Workshop Time:</strong>
   </section>
-    <%= (@classroom.time).strftime("%I : %M %p") %><br><br>
+    <p class="admin-garment-details-text"><%= (@classroom.time).strftime("%I : %M %p") %></p>
 
   <section class="admin-classroom-detail-category">
     <strong>Workshop Location:</strong>
   </section>
-    <%= @classroom.location %><br><br>
+    <p class="admin-garment-details-text"><%= @classroom.location %></p>
 
   <section class="admin-classroom-detail-category">
     <strong>Workshop's availability:</strong>
   </section>
-    <%= @classroom.active_status %><br><br>
+    <p class="admin-garment-details-text"><%= @classroom.active_status %></p>
 
   <section class="admin-classroom-detail-category">
     <strong>Workshop's Cost:</strong>
   </section>
-    <%= number_to_currency(@classroom.cost) %><br><br>
+    <p class="admin-garment-details-text"><%= number_to_currency(@classroom.cost) %></p>
 
 
   <section class="admin-classroom-detail-category">
@@ -57,14 +106,14 @@
   <section class="admin-classrooms-tools">
     <% if !@classroom.tools.empty? %>
       <% @classroom.tools.each do |tool| %>
-        <%= link_to tool.name, "/admin/workshop/tools/#{tool.id}" %><br>
+        <p class="admin-garment-details-text"><%= link_to tool.name, "/admin/workshop/tools/#{tool.id}" %></p>
       <% end %>
     <% else %>
-      <p>There are no required tools needed for <%= @classroom.name %></p>
-      <p>(Add tools so they can be added to the Workshop! 😎)</p>
+      <p class="admin-garment-details-text">There are no required tools needed for <%= @classroom.name %></p>
+      <p class="admin-garment-details-text">(Add tools so they can be added to the Workshop! 😎)</p>
     <% end %>
   </section>
-  
+
 
   <section class="admin-add-tools-button">
     <p><%= button_to 'Add a Tool', "/admin/workshop/tools/new/#{@classroom.id}", method: :get %></p>
@@ -77,15 +126,19 @@
   <section class="admin-classrooms-requirements">
     <% if !@classroom.requirements.empty? %>
       <% @classroom.requirements.each do |requirement| %>
-        <%= link_to requirement.name, "/admin/workshop/requirements/#{requirement.id}" %><br>
+        <p class="admin-garment-details-text"><%= link_to requirement.name, "/admin/workshop/requirements/#{requirement.id}" %></p>
       <% end %>
     <% else %>
-      <p>There are no required requirements needed for <%= @classroom.name %></p>
-      <p>(Add requirements so they can be added to the Workshop! 😎)</p>
+      <p class="admin-garment-details-text">There are no required requirements needed for <%= @classroom.name %></p>
+      <p class="admin-garment-details-text">(Add requirements so they can be added to the Workshop! 😎)</p>
     <% end %>
   </section>
 
   <section class="admin-add-requirements-button">
-    <%= button_to 'Add a Requirement', "/admin/workshop/requirements/new/#{@classroom.id}", method: :get  %>
+    <p><%= button_to 'Add a Requirement', "/admin/workshop/requirements/new/#{@classroom.id}", method: :get  %></p>
   </section>
+</section>
+
+<section class="add-photos">
+  <p><%= button_to "Add Image", "/admin/classrooms/#{@classroom.id}/add_photos", method: :get %></p>
 </section>

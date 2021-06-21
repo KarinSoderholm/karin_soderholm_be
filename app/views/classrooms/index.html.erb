@@ -3,7 +3,7 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %> / <%= link_to 'artwork', artworks_path, method: :get %> / <%= link_to 'garments', clothings_path, method: :get %>
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'art', artworks_path %> / <%= link_to 'objects', clothings_path %>
 </div>
 
 <div class="classroom-container-index">
@@ -17,12 +17,12 @@
               <h2><%= classroom.name %></h2>
             </div>
             <div class="classroom-card-index">
-              <% if classroom.active && classroom.image.attached? %>
-                <p class="classroom-image"><%= link_to(image_tag(classroom.image), classroom_path(classroom), id: 'classroom') %></p>
-              <% elsif classroom.active && !classroom.image.attached? %>
-                <p class="classroom-image"><%= link_to 'Image coming soon!', classroom_path(classroom), id: 'classroom' %></p>
-              <% elsif !classroom.active && !classroom.image.attached? %>
-                <p class="classroom-image">Workshop is unavailable</p>
+              <% if classroom.active && classroom.photos.attached? %>
+                <p class="classroom-image"><%= link_to(image_tag(classroom.photos.first), classroom_path(classroom), id: 'classroom') %></p>
+              <% elsif classroom.active && !classroom.photos.attached? %>
+                <p class="classroom-no-image"><%= link_to 'Image coming soon!', classroom_path(classroom), id: 'classroom' %></p>
+              <% elsif !classroom.active && !classroom.photos.attached? %>
+                <p class="classroom-no-image">Workshop is unavailable</p>
               <% else %>
                 <p class="classroom-image"><%= image_tag(classroom.image) %></p>
               <% end%>

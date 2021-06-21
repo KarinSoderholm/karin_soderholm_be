@@ -1,0 +1,19 @@
+<section class="page-title">
+  <h1>Edit <%= @cv.name %>'s CV:</h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{current_user.name}'s CV", admin_cv_path(current_user.cv)%>
+</div><br>
+
+<%= form_for ([:admin, @cv]) do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label 'Upload CV: '%><br>
+  <%= f.file_field :cv_file %><br>
+
+  <%= f.hidden_field :user_id %>
+
+  <%= f.submit 'Update Email' %>
+<% end %>

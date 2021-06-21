@@ -8,54 +8,90 @@
 
 <section id='navigation-links-individual'>
   <%= link_to "Edit #{@artwork.name}", "/admin/artworks/#{@artwork.id}/edit", method: :get %>
-  <%= link_to "Delete #{@artwork.name}", "/admin/artworks/#{@artwork.id}", method: :delete %>
 </section><br><br>
 
 <section class="admin-artwork-details">
   <section class="admin-artwork-details-category" >
     Art Description:
   </section>
-    <p><%= @artwork.description %></p><br>
+  <p class="admin-artwork-details-text"><%= @artwork.description %></p>
 
   <section class="admin-artwork-details-category" >
-    Art Image:
+    Art Image(s): <%= @artwork.photos.count %>
   </section>
-    <% if @artwork.image.attached? %>
+    <% if @artwork.photos.attached? && @artwork.image.attached? %>
+      <section class="admin-artwork-details-images">
+        <p class="admin-artwork-details-image"><%= image_tag(@artwork.image) %></p>
+        <% @artwork.photos.map do |photo| %>
+        <%# <% binding.pry %>
+          <p class="admin-artwork-details-image"><%= image_tag(photo) %></p>
+        <% end %>
+      </section>
+    <% elsif @artwork.photos.attached? %>
+      <% @artwork.photos.map do |photo| %>
+        <section class="admin-artwork-details-image">
+          <p><%= image_tag(photo) %></p>
+          <section class="remove-photos" style="display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          align-content: flex-end;
+          justify-content: flex-end;
+          align-items: flex-end;">
+            <p><%= button_to "Remove Image", "/admin/artworks/#{@artwork.id}/remove_photo/#{photo.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
+          </section>
+        </section>
+      <% end %>
+    <% elsif @artwork.image.attached? %>
       <p><%= image_tag(@artwork.image) %></p>
+      <section class="remove-photos" style="display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-content: flex-end;
+      justify-content: flex-end;
+      align-items: flex-end;">
+        <p><%= button_to "Remove Image", "/admin/artworks/#{@artwork.id}/remove_photo/#{@artwork.image.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
+      </section>
     <% else %>
-      <h5>There is no image for this Art, yet!</h5><br>
+      <h5>There is no image for this Art, yet!</h5>
     <% end %>
 
     <section class="admin-artwork-details-category" >
       <%= @artwork.name %> Creation Date:
     </section>
-      <p><%= (@artwork.create_date).strftime("%A, %d %b %Y") %></p><br>
+      <p class="admin-artwork-details-text"><%= (@artwork.create_date).strftime("%A, %d %b %Y") %></p>
 
     <section class="admin-artwork-details-category" >
       <%= @artwork.name %> Sell Date:
     </section>
       <% if !@artwork.sell_date.nil? %>
-        <p><%= (@artwork.sell_date).strftime("%A, %d %b %Y") %></p><br>
+        <p class="admin-artwork-details-text"><%= (@artwork.sell_date).strftime("%A, %d %b %Y") %></p>
       <% else %>
-        <p>This Art has not been sold!</p><br>
+        <p class="admin-artwork-details-text">This Art has not been sold!</p>
       <% end %>
 
     <section class="admin-artwork-details-category" >
       Art's availability:
     </section>
-      <p><%= @artwork.availability? %></p><br>
+      <p class="admin-artwork-details-text"><%= @artwork.availability? %></p>
 
     <section class="admin-artwork-details-category" >
       Art's MSRP:
     </section>
-      <p><%= number_to_currency(@artwork.cost) %></p><br>
+      <p class="admin-artwork-details-text"><%= number_to_currency(@artwork.cost) %></p>
 
+</section>
+
+<section id="add-photos">
+  <p><%= button_to "Add Image", "/admin/artworks/#{@artwork.id}/add_photos", method: :get %></p>
+</section>
+<section id="remove-artwork-button">
+  <p><%= button_to "Delete #{ @artwork.name }", "/admin/artworks/#{@artwork.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
 </section>
 
 <section id="add-artshows">
-  <p><%= button_to "Add Artshows" %></p>
+  <!-- <p><%= button_to "Add Artshows" %></p> -->
 </section>
 
 <section id="add-materials">
-  <p><%= button_to "Add Materials"%></p>
+  <!-- <p><%= button_to "Add Materials"%></p> -->
 </section>

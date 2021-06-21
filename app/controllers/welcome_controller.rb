@@ -3,7 +3,8 @@ class WelcomeController < ApplicationController
     @clothings = Clothing.all
     @artworks = Artwork.all
     @classrooms = Classroom.all
-    @social = Social.find_by(user_id: 4)
+    # check Postico for Karin's user_id
+    @social = Social.find_by(user_id: 2)
     # instagram_data = InstagramService.get_instagram_account
     # @instagram_user = InstagramUser.new(instagram_data)
     # @instagram_user = InstagramFacade.new.get_instagram_account

@@ -11,6 +11,11 @@
   <%# <%= button_to 'All Profiles', "/admin/users", method: :get %>
   <%= button_to 'Edit Profile', "/admin/users/#{@user.id}/edit", method: :get %>
   <%= button_to 'Edit Password', "/admin/users/#{@user.id}/edit_password", method: :get %>
-  <%= button_to 'Delete Profile', "/admin/users/#{@user.id}", method: :delete %>
+  <%= button_to 'Delete Profile', "/admin/users/#{@user.id}", method: :delete, data: { confirm: "Are you sure?" } %>
   <%= button_to 'Social Links', admin_social_path, method: :get %>
+  <% if Cv.all.count == 0 %>
+    <%= button_to 'Add CV', new_admin_cv_path, method: :get %>
+  <% else %>
+    <%= button_to 'View CV', admin_cv_path(@user.cv), method: :get %>
+  <% end %>
 </section>

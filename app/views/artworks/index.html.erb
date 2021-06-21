@@ -1,9 +1,9 @@
 <section class="page-title">
-  <h1>Artwork</h1>
+  <h1>All Art</h1>
 </section>
 
 <div class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %> / <%= link_to 'collections', collections_path, method: :get %> / <%= link_to 'garments', clothings_path, method: :get %> / <%= link_to 'workshops', classrooms_path, method: :get %>
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'art collections', artwork_collections_path %> / <%= link_to 'objects', clothings_path %> / <%= link_to 'workshops', classrooms_path %>
 </div>
 
 <div class="artworks-layout-index">
@@ -16,25 +16,24 @@
               <section class="artwork-card-index-title">
                 <h3><%= artwork.name %></h3>
               </section>
-              <% if artwork.available && artwork.image.attached? %>
+              <% if artwork.available && artwork.photos.attached? %>
                 <section class="artwork-image">
-                  <p><%= link_to(image_tag(artwork.image), artwork_path(artwork), id: 'artwork') %></p>
+                  <p><%= link_to(image_tag(artwork.photos.first), artwork_path(artwork), id: 'artwork') %></p>
                 </section>
-              <% elsif artwork.available && !artwork.image.attached? %>
+              <% elsif artwork.available && !artwork.photos.attached? %>
                 <section class="artwork-image-no-image">
                   <p style="display: flex;"><%= link_to 'Image coming soon!', artwork_path(artwork), id: 'artwork' %></p>
                 </section>
-              <% elsif !artwork.available && artwork.image.attached? %>
+              <% elsif !artwork.available && artwork.photos.attached? %>
                 <section class="artwork-image-special">
-                  <p id='artwork'><%= image_tag(artwork.image) %></p>
+                  <p id='artwork'><%= image_tag(artwork.photos.first) %></p>
                 </section>
               <% else %>
                 <section class="artwork-image-no-image">
                   <p>Art is unavailable!</p>
                 </section>
               <% end %>
-              <!-- <h3>Description: <%= artwork.description %></h3> -->
-              <div class="availability"><h4>This piece is <%= artwork.availability? %></div></h4>
+              <div class="artwork-availability"><h4>This piece is <%= artwork.availability? %></h4></div>
               <% if artwork.available %>
                 <h5>Click the picture for more details!</h5>
                 <h3>Cost: <div class="cost"><%= number_to_currency(artwork.cost) %></div></h3>

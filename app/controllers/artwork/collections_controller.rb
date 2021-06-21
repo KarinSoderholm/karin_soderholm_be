@@ -1,7 +1,7 @@
-class CollectionsController < ApplicationController
+class Artwork::CollectionsController < ApplicationController
   def index
     @artworks = Artwork.all
-    @collections = Collection.all
+    @collections = Collection.find_artworks
   end
 
   def show

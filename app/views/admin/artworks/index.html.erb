@@ -21,7 +21,7 @@
       <th>Create Date</th>
       <th>Sell Date</th>
       <th>Cost</th>
-      <th>Available</th>
+      <th>Availability</th>
       <th>Collection(s)</th>
     </tr>
   </thead>
@@ -35,8 +35,8 @@
         <td><%= artwork.description %></td>
         <% if artwork.image.attached? %>
           <td><%= image_tag(artwork.image) %></td>
-        <%# <% elsif artwork.images.attached? %>
-          <%# <!-- <td><%= image_tag(artwork.images[0]) %>
+        <% elsif artwork.photos.attached? %>
+          <td><%= image_tag(artwork.photos.first) %>(<%= artwork.photos.count %>)</td>
         <% else %>
           <td>There is no image to display </td>
         <% end %>
@@ -47,7 +47,7 @@
           <td><%= artwork.sell_date %></td>
         <% end %>
         <td><%= number_to_currency(artwork.cost) %></td>
-        <td><%= artwork.available %></td>
+        <td><%= artwork.availability? %></td>
         <% artwork.collections.each do |collection| %>
           <td><%= collection.name %></td>
         <% end %>
@@ -66,8 +66,8 @@
 </section>
 
 <div class="import-csv">
-  <%= form_tag import_admin_artworks_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= submit_tag 'Import Spreadsheet' %>
-  <% end %>
+  <%# <%= form_tag import_admin_artworks_path, multipart: true do %>
+    <%# <%= file_field_tag :file %>
+    <%# <%= submit_tag 'Import Spreadsheet' %>
+  <%# <% end %>
 </div>

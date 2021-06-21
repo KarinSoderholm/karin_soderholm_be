@@ -11,19 +11,17 @@ class Artwork < ApplicationRecord
   has_many :orders, through: :order_artworks, dependent: :destroy
   has_many :artwork_collections, dependent: :destroy
   has_many :collections, through: :artwork_collections, dependent: :destroy
-  # has_many_attached :images
+  has_many_attached :photos
   has_one_attached :image
 
   validates :name, presence: true
   validates :description, presence: true
-  validates :image, presence: false
   validates :create_date, presence: true
   validates :sell_date, presence: false
   validates :cost, presence: true
   validates :available, inclusion: [true, false]
-  validates :images, presence: false
   validate :acceptable_image
-  # validates :collection, presence: false
+
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
@@ -63,6 +61,27 @@ class Artwork < ApplicationRecord
       params[:artwork][:available] = true
       self.available = true
       return params
+    end
+  end
+
+  def set_images(params)
+    if params[:artwork][:photos]
+      self.photos.attach(params[:artwork][:photos])
+    end
+  end
+
+  def acceptable_photos
+    return unless photos.attached?
+
+    photos.map do |photo|
+      unless photo.byte_size <= 1.megabyte
+        errors.add(:photos, "is too big")
+      end
+    end
+
+    acceptable_types = ["image/jpeg", "image/png"]
+    unless acceptable_types.include?(image.content_type)
+      errors.add(:photos, "must be a JPEG or PNG")
     end
   end
 end

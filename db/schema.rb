@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_191722) do
+ActiveRecord::Schema.define(version: 2021_06_21_152854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,25 +76,20 @@ ActiveRecord::Schema.define(version: 2021_05_26_191722) do
   create_table "artworks", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "image"
     t.date "create_date"
     t.date "sell_date"
     t.float "cost"
     t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "images", default: [], array: true
   end
 
   create_table "classrooms", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "image"
     t.date "date"
     t.time "time"
     t.string "location"
-    t.string "requirements"
-    t.string "tools_needed"
     t.float "cost"
     t.boolean "active"
     t.datetime "created_at", null: false
@@ -118,10 +113,28 @@ ActiveRecord::Schema.define(version: 2021_05_26_191722) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "collection_type"
+    t.index ["collection_type"], name: "index_collections_on_collection_type"
   end
 
-# Could not dump table "commission_blooming_maps" because of following StandardError
-#   Unknown type 'commission_status' for column 'commission_status'
+  create_table "commission_blooming_maps", force: :cascade do |t|
+    t.string "customer_name"
+    t.string "customer_email"
+    t.string "customer_phone"
+    t.string "message"
+    t.string "map_city"
+    t.string "map_state"
+    t.string "map_country"
+    t.string "map_flower"
+    t.string "map_color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "notes"
+    t.string "commission_payment", default: "not_paid"
+    t.float "price"
+    t.string "commission_status", default: "not_started"
+    t.index ["commission_payment"], name: "index_commission_blooming_maps_on_commission_payment"
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string "name"
@@ -132,6 +145,14 @@ ActiveRecord::Schema.define(version: 2021_05_26_191722) do
     t.datetime "updated_at", null: false
     t.string "message_status", default: "unread"
     t.index ["message_status"], name: "index_contacts_on_message_status"
+  end
+
+  create_table "cvs", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cvs_on_user_id"
   end
 
   create_table "emails", force: :cascade do |t|
@@ -150,6 +171,14 @@ ActiveRecord::Schema.define(version: 2021_05_26_191722) do
     t.index ["clothing_id"], name: "index_fabrics_on_clothing_id"
   end
 
+  create_table "frequently_asked_questions", force: :cascade do |t|
+    t.string "question"
+    t.string "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "faq_order", default: 1
+  end
+
   create_table "materials", force: :cascade do |t|
     t.string "name"
     t.string "category"
@@ -157,6 +186,15 @@ ActiveRecord::Schema.define(version: 2021_05_26_191722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["artwork_id"], name: "index_materials_on_artwork_id"
+  end
+
+  create_table "object_collections", force: :cascade do |t|
+    t.bigint "clothing_id"
+    t.bigint "collection_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["clothing_id"], name: "index_object_collections_on_clothing_id"
+    t.index ["collection_id"], name: "index_object_collections_on_collection_id"
   end
 
   create_table "order_artworks", force: :cascade do |t|
@@ -232,6 +270,14 @@ ActiveRecord::Schema.define(version: 2021_05_26_191722) do
     t.index ["user_id"], name: "index_socials_on_user_id"
   end
 
+  create_table "student_works", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "age_category", default: "young_adult"
+  end
+
   create_table "tools", force: :cascade do |t|
     t.string "name"
     t.bigint "classroom_id"
@@ -259,8 +305,11 @@ ActiveRecord::Schema.define(version: 2021_05_26_191722) do
   add_foreign_key "artshow_artworks", "artworks"
   add_foreign_key "artwork_collections", "artworks"
   add_foreign_key "artwork_collections", "collections"
+  add_foreign_key "cvs", "users"
   add_foreign_key "fabrics", "clothings"
   add_foreign_key "materials", "artworks"
+  add_foreign_key "object_collections", "clothings"
+  add_foreign_key "object_collections", "collections"
   add_foreign_key "order_artworks", "artworks"
   add_foreign_key "order_artworks", "orders"
   add_foreign_key "order_classrooms", "classrooms"

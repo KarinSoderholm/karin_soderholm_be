@@ -2,7 +2,7 @@
   <h1>Tool: <%= @tool.name%></h1>
 </section>
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  "#{@classroom.id}", admin_classroom_path(@classroom) %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  "#{@classroom.name}", admin_classroom_path(@classroom) %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 
 <section id='navigation-links-individual'>

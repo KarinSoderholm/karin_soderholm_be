@@ -1,3 +1,17 @@
 <section class="page-title">
   <h2><%= @collection.name %> Edit Page</h2>
 </section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>  /  <%= link_to "#{ @collection.name }", admin_collection_path(@collection) %> /  <%= link_to 'my collections', admin_collections_path %>
+</div>
+<%= form_for ([:admin, @collection]) do |f| %>
+
+  <%= f.label 'Name of Artwork*: '%><br>
+  <%= f.text_field :name %><br>
+
+  <%= f.label 'Type of Collection: '%><br>
+  <%= f.select :collection_type, options_for_select(Collection.collection_types.map { |type| type }) %><br>
+
+  <%= f.submit "Update #{ @collection.name }" %>
+<% end %>

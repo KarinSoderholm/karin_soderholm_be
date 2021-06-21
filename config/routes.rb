@@ -22,7 +22,12 @@ Rails.application.routes.draw do
       post '/workshop/requirements/:id/edit/:classroom_id' => :update
       delete '/workshop/requirements/:id' => :destroy
     end
-
+    resources :student_works
+    resources :frequently_asked_questions
+    resources :cv do
+      collection { post :import }
+      delete '/remove_file/:cv_file_id' => :remove_file
+    end
     resources :patterns
     resources :fabrics
     resources :artshow_artworks
@@ -32,14 +37,23 @@ Rails.application.routes.draw do
     resources :classrooms do
       collection { post :import }
       get '/alert' => :alert
+      get '/add_photos' => :add_photos
+      patch '/photo_update' => :photo_update
+      delete '/remove_photo/:photo_id' => :remove_photo
     end
     resources :artworks do
       collection { post :import }
+      get '/add_photos' => :add_photos
+      patch '/photo_update' => :photo_update
+      delete '/remove_photo/:photo_id' => :remove_photo
       get '/alert' => :alert
     end
     resources :clothings do
       collection { post :import }
       get '/alert' => :alert
+      get '/add_photos' => :add_photos
+      patch '/photo_update' => :photo_update
+      delete '/remove_photo/:photo_id' => :remove_photo
     end
     resources :users do
       get '/edit_password' => :edit_password
@@ -98,15 +112,24 @@ Rails.application.routes.draw do
     delete ':item_id', :action => 'remove_item'
   end
 
+  namespace :artwork do
+    resources :collections
+  end
+  namespace :physical_object do
+    resources :collections
+  end
+
   resources :classrooms
   resources :artworks
   resources :clothings
   resources :emails
-  resources :collections
   resources :about do
     get '/bio', :action => :bio
     get '/contact', :action => :contact
+    get '/cv', :action => :cv
+    get '/faq', :action => :faq
   end
   resources :socials
   resources :commission_blooming_maps
+  resources :student_works
 end

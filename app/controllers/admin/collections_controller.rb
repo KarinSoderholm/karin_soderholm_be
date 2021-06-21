@@ -1,5 +1,5 @@
 class Admin::CollectionsController < Admin::BaseController
-  before_action :set_collection, only: [:show, :update, :destroy]
+  before_action :set_collection, only: [:show, :edit, :update, :destroy]
   def show
   end
 
@@ -7,7 +7,17 @@ class Admin::CollectionsController < Admin::BaseController
     @collections = Collection.all
   end
 
+  def edit
+  end
+
   def update
+    if @collection.update(collection_params)
+      flash[:message] = "The Collection was successfully updated!"
+      redirect_to admin_collections_path
+    else
+      flash.now[:message] = "Something went wrong. That request can't be handled at this time."
+      render :edit
+    end
   end
 
   def new
@@ -42,10 +52,11 @@ class Admin::CollectionsController < Admin::BaseController
 
   def collection_params
     if !params[:collection].nil?
-      params.require(:collection).permit(:name)
+      params.require(:collection).permit(:name, :collection_type)
     else
       hash = {}
       hash[:name] = params[:name]
+      hash[:collection_type] = params[:collection_type]
       return hash
     end
   end

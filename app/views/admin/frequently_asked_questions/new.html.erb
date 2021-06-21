@@ -1,0 +1,28 @@
+<section class="page-title">
+  <h2>Create a new FAQ</h2>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "all FAQ's", admin_frequently_asked_questions_path %>
+</div><br>
+
+<section class="admin-FAQ">
+  <%# '/admin/cv' %>
+  <%= form_tag '/admin/frequently_asked_questions' do %>
+
+    <%= label_tag "FAQ Question: " %><br>
+    <%= text_field_tag :question %><br>
+
+    <%= label_tag "FAQ Answer: " %><br>
+    <%= text_field_tag :answer %><br>
+
+    <%= label_tag "Desired Order: " %><br>
+    <%= label_tag "*Make sure each question/answer has a unique number*" %><br>
+    <%= label_tag "*It's ok if you can't remember, you can always edit this*" %><br>
+    <%= text_field_tag :faq_order %><br>
+
+    <section class="submit-admin-FAQ-button">
+      <%= submit_tag 'Add FAQ' %>
+    </section>
+  <% end %>
+</section>

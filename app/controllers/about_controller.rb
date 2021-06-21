@@ -7,7 +7,16 @@ class AboutController < ApplicationController
     @socials = Social.all
   end
 
+  def cv
+    user = User.find_by(name: 'Karin Soderholm')
+    @cv = user.cv
+  end
+
   def new
+  end
+
+  def faq
+    @faqs = FrequentlyAskedQuestion.order(faq_order: :asc)
   end
 
   def create

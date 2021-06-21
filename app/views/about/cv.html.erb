@@ -1,0 +1,22 @@
+<section class="page-title">
+  <h1>Karin's CV</h1>
+</section>
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'about the maker', '/about/1/bio' %> /  <%= link_to 'contact the maker', '/about/1/contact' %> / <%= link_to 'FAQ', '/about/1/faq' %>
+</div>
+
+<section>
+  <!-- <h5>Title: </h5><br> -->
+  <!-- <p class="admin-cv-details-text"><%= @cv.name%></p> -->
+<!-- </section> -->
+<section>
+  <br>
+  <!-- <h5>Document: </h5> -->
+  <% if @cv.cv_file.attached? %>
+    <section class="admin-cv-details-file">
+      <iframe src="<%= rails_blob_path(@cv.cv_file, disposition: :inline) %>" height="1000" width="1000"></iframe>
+    </section>
+  <% else %>
+    <p class="admin-cv-details-text">There is no file uploaded yet!</p>
+  <% end %>
+</section>

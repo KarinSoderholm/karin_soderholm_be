@@ -34,11 +34,11 @@
   <%# <%= f.label 'Add required tools to the Workshop' %>
   <%# <%= f.select :tools_needed, options_for_select(["Sewing Machine", "Crochet Hooks", "Sewing Needles", "Yarn", "Fabric", "Elastic"]), include_blank: true, mulitple: true %>
 
-  <%= f.label 'Add requirements for the Workshop' %><br>
-  <%= f.select :requirements, options_from_collection_for_select(@classrooms, "id", "name"), include_blank: true, multiple: true %><br>
+  <%# <%= f.label 'Add requirements for the Workshop' %>
+  <%# <%= f.select :requirements, options_from_collection_for_select(@classrooms, "id", "name"), include_blank: true, multiple: true %>
 
   <%= f.label 'Image for Workshop: '%><br>
-  <%= f.file_field :image %>
+  <%= f.file_field :photos %>
 
 
   <br>

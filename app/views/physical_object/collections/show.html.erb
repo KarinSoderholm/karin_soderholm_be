@@ -1,0 +1,35 @@
+<section class="page-title">
+  <h1><%= @collection.name %></h1>
+</section>
+<section class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'art collections', artwork_collections_path %> / <%= link_to 'object collections', physical_object_collections_path %>
+</section>
+
+<div class="physical-object-collection-layout-show">
+    <div class="physical-object-collection-container-show">
+      <div class="physical-object-collection-container-row-show">
+        <% @collection.clothings.each do |object| %>
+          <!-- <div class="physical-object-collection-object-column-show"> -->
+            <%# <% binding.pry %>
+            <div class="physical-object-collection-card-show">
+              <div class="physical-object-collection-object-header-show">
+                <%= link_to "#{ object.name }", "/clothings/#{ object.id }", method: :get %><br>
+              </div>
+                <% if object.photos.attached? %>
+                  <div class="physical-object-collection-object-image-show">
+                    <%= link_to image_tag(object.photos.first), "/clothings/#{ object.id }", method: :get %><br>
+                  </div>
+                <% else %>
+                  <div class="physical-object-collection-object-no-image-show">
+                    <%= link_to 'Image coming soon!', "/clothings/#{ object.id }", method: :get, style: 'font-alighn: center' %><br>
+                  </div>
+                <% end %>
+              <div class="physical-object-collection-object-cost-show">
+                <%= number_to_currency(object.cost) %><br>
+              </div>
+            </div>
+          <!-- </div> -->
+        <% end %>
+      </div>
+    </div>
+</div>

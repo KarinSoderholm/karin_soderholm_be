@@ -5,38 +5,40 @@
   <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'artwork', artworks_path %>  /  <%= link_to 'all collections', artworks_path %>
 </div>
 
-<%= form_tag '/commission_blooming_maps' do %>
-  <%= label_tag 'Your Name: *' %><br>
-  <%= text_field_tag :customer_name %><br>
+<div class="commission-new-map">
+  <%= form_tag '/commission_blooming_maps' do %>
+    <%= label_tag 'Your Name: *' %>
+    <%= text_field_tag :customer_name %><br>
 
-  <%= label_tag 'Your email address: *' %><br>
-  <%= text_field_tag :customer_email %><br>
+    <%= label_tag 'Your email address: *' %>
+    <%= text_field_tag :customer_email %><br>
 
-  <%= label_tag 'Your phone number: *' %><br>
-  <%= telephone_field_tag :customer_phone, nil, placeholder: '(000)000-000' %><br>
+    <%= label_tag 'Your phone number: *' %>
+    <%= telephone_field_tag :customer_phone, nil, placeholder: '(000)000-000' %><br>
 
-  <%= label_tag 'A message to the Maker: *' %><br>
-  <%= text_area_tag :message, nil, rows: 20, cols: 50 %><br>
+    <%= label_tag 'A message to the Maker: *' %>
+    <%= text_area_tag :message, nil, rows: 20, cols: 50 %><br>
 
-  <%= label_tag 'Please let the Maker know the particulars!' %><br><br>
+    <%= label_tag 'Please let the Maker know the particulars!' %><br>
 
-  <%= label_tag 'The city of your map: ' %><br>
-  <%= text_field_tag :map_city %><br>
+    <%= label_tag 'The city of your map: ' %>
+    <%= text_field_tag :map_city %><br>
 
-  <%= label_tag 'The state of your map: ' %><br>
-  <%= text_field_tag :map_state %><br>
+    <%= label_tag 'The state of your map: ' %>
+    <%= text_field_tag :map_state %><br>
 
-  <%= label_tag 'The country of your map: ' %><br>
-  <%= text_field_tag :map_country %><br>
+    <%= label_tag 'The country of your map: ' %>
+    <%= text_field_tag :map_country %><br>
 
-  <%= label_tag 'The flower included in your map: ' %><br>
-  <%= text_field_tag :map_flower %><br>
+    <%= label_tag 'The flower included in your map: ' %>
+    <%= text_field_tag :map_flower %><br>
 
-  <%= label_tag "Are there colors you'd like included in your map? " %><br>
-  <%= text_field_tag :map_color %><br>
+    <%= label_tag "Are there colors you'd like included in your map? " %>
+    <%= text_field_tag :map_color %><br>
 
-  <%= hidden_field_tag :commission_status, :not_started %>
+    <%= hidden_field_tag :commission_status, :not_started %>
 
 
-  <%= submit_tag 'Submit Your Map Idea!' %>
-<% end %>
+    <%= submit_tag 'Submit Your Map Idea!' %>
+  <% end %>
+</div>

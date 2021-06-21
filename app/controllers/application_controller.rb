@@ -1,4 +1,3 @@
-# class ApplicationController < ActionController::API
 class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
@@ -43,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_linked_in
-    social = Social.first
+    social = find_social
     if !social.linked_in.nil?
       return true
     else
@@ -52,7 +51,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_twitter
-    social = Social.first
+    social = find_social
     if !social.twitter.nil?
       return true
     else
@@ -61,7 +60,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_instagram
-    social = Social.first
+    social = find_social
     if !social.instagram.nil?
       @instagram = social.instagram
       return @instagram
@@ -72,12 +71,16 @@ class ApplicationController < ActionController::Base
   end
 
   def find_pinterest
-    social = Social.first
+    social = find_social
     if !social.pinterest.nil?
       @pinterest = social.pinterest
       return @pinterest
     else
       return false
     end
+  end
+
+  def find_social
+    Social.first
   end
 end

@@ -3,28 +3,28 @@ require "rails_helper"
 RSpec.describe RequirementsController, type: :routing do
   describe "routing" do
     it "routes to #index" do
-      expect(get: "/requirements").to route_to("requirements#index")
+      expect(get: "/admin/workshop/requirements").to route_to("admin/workshop/requirements#index")
     end
 
     it "routes to #show" do
-      expect(get: "/requirements/1").to route_to("requirements#show", id: "1")
+      expect(get: "/admin/workshop/requirements/1").to route_to("admin/workshop/requirements#show", id: "1")
     end
 
 
     it "routes to #create" do
-      expect(post: "/requirements").to route_to("requirements#create")
+      expect(post: "/admin/workshop/requirements/new/3").to route_to("admin/workshop/requirements#create", classroom_id: "3")
     end
 
-    it "routes to #update via PUT" do
-      expect(put: "/requirements/1").to route_to("requirements#update", id: "1")
+    it "routes to #edit" do
+      expect(get: "/admin/workshop/requirements/1/edit/3").to route_to("admin/workshop/requirements#edit", id: "1", classroom_id: "3")
     end
 
     it "routes to #update via PATCH" do
-      expect(patch: "/requirements/1").to route_to("requirements#update", id: "1")
+      expect(post: "/admin/workshop/requirements/1/edit/3").to route_to("admin/workshop/requirements#update", id: "1", classroom_id: "3")
     end
 
     it "routes to #destroy" do
-      expect(delete: "/requirements/1").to route_to("requirements#destroy", id: "1")
+      expect(delete: "/admin/workshop/requirements/1").to route_to("admin/workshop/requirements#destroy", id: "1")
     end
   end
 end

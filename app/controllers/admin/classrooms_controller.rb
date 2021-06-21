@@ -38,13 +38,17 @@ class Admin::ClassroomsController < Admin::BaseController
   end
 
   def create
+    @classrooms = Classroom.all
     binding.pry
     classroom = Classroom.new(classroom_params)
     if classroom.save
-      if !params[:requirements].nil?
-        find_requirement = Classroom.find(params[:requirements])
-        requirement = Requirement.create({name: find_requirement.name, classroom_id: classroom.id })
-      end
+      binding.pry
+      # if params[:requirements]
+      #   requirement = Requirement.create({name: params[:requirements], classroom_id: classroom.id })
+      # end
+      # if params[:tools_needed]
+      #   tool = Tool.create({name: params[:tools_needed], classroom_id: classroom.id })
+      # end
       flash[:success] = 'Congrats! A new Workshop was created!'
       redirect_to admin_classrooms_path
     else
@@ -59,11 +63,15 @@ class Admin::ClassroomsController < Admin::BaseController
 
   def update
     binding.pry
-    if Requirement.find_by(classroom_id: Classroom.find(params[:classroom][:requirements])).nil?
-      requirement = Requirement.new(name: Classroom.find(params[:classroom][:requirements]).name, classroom_id: @classroom.id )
-    end
+    # if Requirement.find_by(classroom_id: Classroom.find(params[:classroom][:requirements])).nil?
+    #   requirement = Requirement.new(name: Classroom.find(params[:classroom][:requirements]).name, classroom_id: @classroom.id )
+    # end
+    @classroom.set_availability(params)
+    @classroom.acceptable_photos
+    @classroom.set_images(params)
+
     if @classroom.update(classroom_params)
-      requirement.save
+      # requirement.save
       flash[:success] = 'Congrats! The Workshop was updated!'
       redirect_to admin_classrooms_path
     else
@@ -83,22 +91,54 @@ class Admin::ClassroomsController < Admin::BaseController
     end
   end
 
+  def add_photos
+    @classroom = Classroom.find(params[:classroom_id])
+  end
+
+  def photo_update
+    @classroom = Classroom.find(classroom_photos_params[:classroom_id])
+    if classroom_photos_params[:photo]
+      @classroom.photos.attach(classroom_photos_params[:photo])
+      flash[:success] = "A photo was successfully added to #{@classroom.name}"
+      redirect_to admin_classroom_path(@classroom)
+    else
+      flash.now[:error] = 'Please try again. Unable to process that request'
+      render :add_photos
+    end
+  end
+
+  def remove_photo
+    classroom = Classroom.find(params[:classroom_id])
+    if classroom
+      classroom.photos.find(params[:photo_id]).purge
+      flash[:success] = "A photo was successfully deleted from #{classroom.name}"
+      redirect_to admin_classroom_path(classroom)
+    else
+      flash.now[:error] = 'Please try again. Unable to process that request'
+      render :show
+    end
+  end
   private
     def set_classroom
       @classroom = Classroom.find(params[:id])
     end
 
+    def classroom_photos_params
+      hash = {}
+      hash[:classroom_id] = params[:classroom_id].to_i
+      hash[:photo] = params[:classroom][:photos]
+      return hash
+    end
+
     def classroom_params
       if !params[:classroom].nil?
-        # binding.pry
-        # params[:classroom][:requirements] = (params.dig(:classroom, :requirements) || {}).values
-        # params[:classroom][:tools_needed] = (params.dig(:classroom, :tools_needed) || {}).values
-        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :cost, :active, :photo, requirements: [], tools: [])
+        params.require(:classroom).permit(:name, :description, :image, :date, :time, :location, :cost, :active, photos: [])
       else
         hash = {}
         hash[:name] = params[:name]
         hash[:description] = params[:description]
-        hash[:image] = params[:image]
+        # hash[:image] = params[:image]
+        hash[:photos] = params[:photos]
         hash[:date] = params[:date]
         hash[:time] = params[:time]
         hash[:location] = params[:location]

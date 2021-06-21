@@ -1,10 +1,9 @@
 class EmailsController < ApplicationController
   def new
-    binding.pry
+
   end
 
   def create
-    binding.pry
     email_params = {}
     email_params[:email_address] = params[:email_address]
     email_params[:name] = params[:name]

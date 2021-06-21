@@ -1,0 +1,35 @@
+<section class="page-title">
+  <h1>FAQ: <%= @faq.question %></h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>  / <%= link_to  "my FAQ's", admin_frequently_asked_questions_path %>
+</div><br>
+<section id='navigation-links-individual'>
+  <%= link_to 'Edit FAQ', "/admin/frequently_asked_questions/#{@faq.id}/edit", method: :get %>
+  <%# <!-- <p><%= link_to 'Delete FAQ', admin_frequently_asked_question_path(@frequently_asked_question), method: :delete, remote: true, id: 'remove-FAQ', data: { disable_with: "Wait..." }, data: { confirm: 'Are you sure?' } %>
+  <%# <%= link_to 'Delete FAQ', "/admin/frequently_asked_questions/#{@frequently_asked_question.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+</section><br><br>
+
+<section class="admin-FAQ-details-show">
+  <section class="admin-FAQ-detail-category-show">
+    FAQ Question:
+  </section>
+  <p class="admin-FAQ-details-text-show"><%= @faq.question %></p>
+
+  <section class="admin-FAQ-detail-category-show">
+    FAQ Answer:
+  </section>
+  <p class="admin-FAQ-details-text-show"><%= @faq.answer %></p>
+
+  <section class="admin-FAQ-detail-category-show">
+    FAQ Order:
+  </section>
+  <p class="admin-FAQ-details-text-show"><%= @faq.faq_order %></p>
+
+  <section class="admin-FAQ-remove-button">
+      <%# <%= button_to "Destroy", "/admin/frequently_asked_questions/#{@frequently_asked_question.id}", method: :delete,
+          :confirm => "Are you sure?"%>
+      <%= button_to 'Delete FAQ', "/admin/frequently_asked_questions/#{@faq.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
+  </section>
+</section>
