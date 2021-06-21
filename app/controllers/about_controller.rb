@@ -8,10 +8,15 @@ class AboutController < ApplicationController
   end
 
   def cv
-    # @cv = CV.find(params[:cv_id])
+    user = User.find_by(name: 'Karin Soderholm')
+    @cv = user.cv
   end
 
   def new
+  end
+
+  def faq
+    
   end
 
   def create
