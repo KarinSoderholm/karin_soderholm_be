@@ -110,7 +110,7 @@
                     <%= link_to 'Artwork', "/artworks", class: "artworks-footer" %>
                   </div>
                   <div class="collections-section-commission">
-                    <%= link_to 'Commission a Blooming Map', new_commission_blooming_map_path, method: :get %>
+                    <%= link_to 'Commission a Blooming Map', new_commission_blooming_map_path %>
                   </div>
 
                   <div class="collections-section-collection">
@@ -120,6 +120,9 @@
                     <%= link_to 'Garments', "/clothings", class: "clothings-footer" %>
                   </div>
 
+                  <div class="collections-section-student-work">
+                    <%= link_to 'Student Works', student_works_path, class: "student-works-footer" %>
+                  </div>
                   <div class="collections-section-classroom">
                     <%= link_to 'Workshops', "/classrooms", class: "classrooms-footer" %>
                   </div>
@@ -132,10 +135,10 @@
                     <p class="about">About</p>
                   </div>
                   <div class="about-text">
-                    <%= link_to 'About', "/about/1/bio", method: :get %>
-                    <%= link_to 'Contact', "/about/1/contact", method: :get %>
-                    <%= link_to 'FAQ', about_index_path, method: :get %>
-                    <%= link_to 'CV', about_index_path, method: :get %>
+                    <%= link_to 'About', "/about/1/bio" %>
+                    <%= link_to 'Contact', "/about/1/contact" %>
+                    <%= link_to 'FAQ', about_index_path %>
+                    <%= link_to 'CV', about_index_path %>
                   </div><br>
 
                   <nav class="social">
