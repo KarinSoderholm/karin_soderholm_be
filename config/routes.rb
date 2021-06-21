@@ -111,11 +111,17 @@ Rails.application.routes.draw do
     delete ':item_id', :action => 'remove_item'
   end
 
+  namespace :artwork do
+    resources :collections
+  end
+  namespace :physical_object do
+    resources :collections
+  end
+
   resources :classrooms
   resources :artworks
   resources :clothings
   resources :emails
-  resources :collections
   resources :about do
     get '/bio', :action => :bio
     get '/contact', :action => :contact
