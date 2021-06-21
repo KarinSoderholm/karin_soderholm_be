@@ -123,24 +123,42 @@
            </div>
         </section>
       </section>
-      <section class="welcome-artwork-button">
+      <section class="welcome-object-button">
         <%= button_to 'Objects', physical_object_collections_path, method: :get %>
+      </section>
+    </section>
+
+    <section class="welcome-classroom-layout">
+      <section class="welcome-classroom-card">
+        <section class="welcome-classroom-text">
+          <p>Some words of introduction...</p>
+          <p> All customizable to what you'd like to say</p>
+        </section>
+        <section class="welcome-introduction-classroom-image">
+          <%= image_tag('paper-art1.png', class: 'welcome-classroom-image')%>
+
+        </section>
+      </section>
+      <section class="welcome-classroom-button">
+        <%= button_to 'Workshops', classrooms_path, method: :get %>
       </section>
     </section>
 
 
 
-   <section class="introduction-layout2">
-     <section class="story-part-1">
-       <section class="story-part-1-text">
-         <p>Some words...</p><br>
-       </section>
-       <%= image_tag('embrodery3.png', class: 'embrodery3')%> <%= image_tag('embrodery4.png', class: 'embrodery4')%> <%= image_tag('embrodery5.png', class: 'embrodery5')%>
-       <section class="story-part-1-text">
-         <p> All customizable to what you'd like to say</p><br>
-       </section>
-     </section>
-   </section>
+   <!-- <section class="introduction-layout2"> -->
+     <!-- <section class="story-part-1"> -->
+       <!-- <section class="story-part-1-text"> -->
+         <!-- <p>Some words...</p><br> -->
+       <!-- </section> -->
+       <%# <%= image_tag('embrodery3.png', class: 'embrodery3')%>
+       <%# <%= image_tag('embrodery4.png', class: 'embrodery4')%>
+       <%# <%= image_tag('embrodery5.png', class: 'embrodery5')%>
+       <!-- <section class="story-part-1-text"> -->
+         <!-- <p> All customizable to what you'd like to say</p><br> -->
+       <!-- </section> -->
+     <!-- </section> -->
+   <!-- </section> -->
 
    <section class="introduction-layout3">
      <section class="commission-layout">
