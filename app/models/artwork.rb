@@ -6,7 +6,7 @@ class Artwork < ApplicationRecord
   has_many :artshow_artworks, dependent: :destroy
   has_many :artshows, through: :artshow_artworks
   has_many :materials, dependent: :destroy
-  has_one :artist_statement, dependent: :destroy
+  has_one :artwork_statement, dependent: :destroy
   has_many :order_artworks, dependent: :destroy
   has_many :orders, through: :order_artworks, dependent: :destroy
   has_many :artwork_collections, dependent: :destroy

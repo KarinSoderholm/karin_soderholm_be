@@ -1,4 +1,4 @@
-class ArtistStatement < ApplicationRecord
+class ArtworkStatement < ApplicationRecord
   require 'csv'
   belongs_to :artwork
 
