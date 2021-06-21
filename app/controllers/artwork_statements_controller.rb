@@ -14,6 +14,6 @@ class ArtworkStatementsController < ApplicationController
     end
 
     def artwork_statement_params
-      params.require(:artwork_statement).permit(:name, :statement, :artwork_id)
+      params.require(:artwork_statement).permit(:statement, :artwork_id)
     end
 end
