@@ -1442,6 +1442,11 @@
     min-width: 400px;
     margin: 50px auto;
   }
+  .welcome-object-carousel-container {
+    width: 400px;
+    min-width: 400px;
+    margin: 50px auto;
+  }
 
   @include carousel(5);
 
@@ -1464,7 +1469,7 @@
     justify-content: center;
     align-items: center;
   }
-  .welcome-introduction-images{
+  .welcome-introduction-artwork-images{
     display: flex;
   }
   .welcome-artwork-text{
@@ -1477,6 +1482,46 @@
     padding: 2em;
   }
   .welcome-artwork-button{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .welcome-object-layout{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #b8b19c;
+    padding: 2em 2em 2em;
+    margin: 2em 0 2em;
+  }
+  .welcome-object-card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .welcome-introduction-object-images{
+    display: flex;
+  }
+  .welcome-object-text{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+  }
+  .welcome-object-button{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
