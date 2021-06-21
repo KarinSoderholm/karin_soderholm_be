@@ -55,11 +55,12 @@ class Admin::FrequentlyAskedQuestionsController < Admin::BaseController
 
   def faq_params
     if params[:frequently_asked_question]
-      params.require(:frequently_asked_question).permit(:question, :answer)
+      params.require(:frequently_asked_question).permit(:question, :answer, :faq_order)
     else
       hash = {}
       hash[:question] = params[:question]
       hash[:answer] = params[:answer]
+      hash[:faq_order] = params[:faq_order]
       return hash
     end
   end
