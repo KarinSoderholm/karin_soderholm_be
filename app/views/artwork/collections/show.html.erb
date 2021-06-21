@@ -1,0 +1,35 @@
+<section class="page-title">
+  <h1><%= @collection.name %></h1>
+</section>
+<section class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %>/<%= link_to 'collections', collections_path, method: :get %>
+</section>
+
+<div class="artwork-collection-layout-show">
+    <div class="artwork-collection-container-show">
+      <div class="artwork-collection-container-row-show">
+        <% @collection.artworks.each do |artwork| %>
+          <!-- <div class="collection-artwork-column"> -->
+            <%# <% binding.pry %>
+            <div class="artwork-collection-card-show">
+              <div class="artwork-collection-artwork-header-show">
+                <%= link_to "#{ artwork.name }", "/artworks/#{ artwork.id }", method: :get %><br>
+              </div>
+                <% if artwork.photos.attached? %>
+                  <div class="artwork-collection-artwork-image-show">
+                    <%= link_to image_tag(artwork.photos.first), "/artworks/#{ artwork.id }", method: :get %><br>
+                  </div>
+                <% else %>
+                  <div class="artwork-collection-artwork-no-image-show">
+                    <%= link_to 'Image coming soon!', "/artworks/#{ artwork.id }", method: :get, style: 'font-alighn: center' %><br>
+                  </div>
+                <% end %>
+              <div class="artwork-collection-artwork-cost-show">
+                <%= number_to_currency(artwork.cost) %><br>
+              </div>
+            </div>
+          <!-- </div> -->
+        <% end %>
+      </div>
+    </div>
+</div>

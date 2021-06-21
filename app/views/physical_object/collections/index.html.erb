@@ -1,0 +1,68 @@
+<section class="page-title">
+  <h1>Objects: By Collections</h1>
+</section>
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'all objects', clothings_path %>
+</div>
+
+<div class="physical-object-collections-layout-index">
+  <section class='physical-object-collection-row-index'>
+    <section class="physical-object-collection-types-index">
+      <% @collections.each do |collection| %>
+        <% if !collection.clothings.empty?%>
+          <section class="physical-object-collection-column-index">
+            <section class="physical-object-collection-title-index">
+              <p><%= link_to "#{collection.name}", physical_object_collection_path(collection) %></p>
+            </section>
+            <section class="physical-object-collection-card-index">
+              <section class="physical-object-collections-index">
+                <section class="physical-object-collections-column-index">
+                  <% collection.clothings.each do |clothing| %>
+                    <% if clothing.photos.attached? %>
+                      <section class="physical-object-collection-object-card-index">
+                        <% if clothing.photos.count >= 2%>
+                            <%# <% clothing.photos.map do |photo| %>
+                            <!-- <div class="bg-image hover-overlay hover-zoom hover-shadow ripple"> -->
+                              <%# <%= link_to image_tag(clothing.photos.second, style: 'height:10em;width:10em'), clothing_path(clothing) %>
+                              <!-- <a href="#!"> -->
+                                <!-- <div class="mask" style="background-color: rgba(57, 192, 237, 0.2)"></div> -->
+                              <!-- </a> -->
+                            <!-- </div> -->
+                              <div class="collection-clothing-card-image-closed-box">
+                                <%= image_tag(clothing.photos.first, style: 'height:10em;width:10em') %>
+                                <%# <%= image_tag(photo, style: 'height:10em;width:10em') %>
+                              </div>
+                              <div class="physical-object-collection-object-card-title-inde">
+                                <%= image_tag(clothing.photos.second, style: 'height:10em,width:10em') %>
+                              </div>
+                            <%# <% end %>
+                        <% else %>
+                          <section class="physical-object-collection-object-card-index">
+                            <%= image_tag(clothing.photos.first, style: 'height:10em;width:10em') %>
+                          </section>
+                        <% end %>
+                        <section class="physical-object-collection-object-card-title-index">
+                          <h3><%= link_to clothing.name, clothing_path(clothing) %></h3>
+                        </section>
+                      </section>
+                    <% else %>
+                      <section class="physical-object-collection-object-card-index ">
+                        <section class="physical-object-collection-object-card-image-no-image-index">
+                          <p style="text-align: center;">Image coming soon!</p>
+                        </section>
+                        <section class="physical-object-collection-object-card-title-index">
+                          <h3><%= link_to clothing.name, clothing_path(clothing) %></h3>
+                        </section>
+                      </section>
+                    <% end %>
+                  <% end  %>
+                </section>
+              </section>
+            </section>
+          </section>
+        <% end %>
+    </section>
+      <% end %>
+      <br>
+  </section>
+</div>

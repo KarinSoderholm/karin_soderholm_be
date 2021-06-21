@@ -1,0 +1,68 @@
+<section class="page-title">
+  <h1>Art: By Collections</h1>
+</section>
+<div class="quicknav-content">
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'all art', artworks_path %>
+</div>
+
+<div class="artwork-collections-layout-index">
+  <section class='artwork-collection-row-index'>
+    <section class="artwork-collection-types-index">
+      <% @collections.each do |collection| %>
+        <% if !collection.artworks.empty?%>
+          <section class="artwork-collection-column-index">
+            <section class="artwork-collection-title-index">
+              <p><%= link_to "#{collection.name}", "/collections/#{collection.id}", method: :get %></p>
+            </section>
+            <section class="artwork-collection-card-index">
+              <section class="artwork-collections-index">
+                <section class="artwork-collections-column-index">
+                  <% collection.artworks.each do |artwork| %>
+                    <% if artwork.photos.attached? %>
+                      <section class="artwork-collection-artwork-card-index">
+                        <% if artwork.photos.count >= 2%>
+                            <%# <% artwork.photos.map do |photo| %>
+                            <!-- <div class="bg-image hover-overlay hover-zoom hover-shadow ripple"> -->
+                              <%# <%= link_to image_tag(artwork.photos.second, style: 'height:10em;width:10em'), artwork_path(artwork) %>
+                              <!-- <a href="#!"> -->
+                                <!-- <div class="mask" style="background-color: rgba(57, 192, 237, 0.2)"></div> -->
+                              <!-- </a> -->
+                            <!-- </div> -->
+                              <div class="artwork-collection-artwork-card-image-closed-box-index">
+                                <%= image_tag(artwork.photos.first, style: 'height:10em;width:10em') %>
+                                <%# <%= image_tag(photo, style: 'height:10em;width:10em') %>
+                              </div>
+                              <div class="artwork-collection-artwork-card-image-open-box-index">
+                                <%= image_tag(artwork.photos.second, style: 'height:10em,width:10em') %>
+                              </div>
+                            <%# <% end %>
+                        <% else %>
+                          <section class="artwork-collection-artwork-card-image-index">
+                            <%= image_tag(artwork.photos.first, style: 'height:10em;width:10em') %>
+                          </section>
+                        <% end %>
+                        <section class="artwork-collection-artwork-card-title-index">
+                          <h3><%= link_to artwork.name, artwork_path(artwork) %></h3>
+                        </section>
+                      </section>
+                    <% else %>
+                      <section class="artwork-collection-artwork-card-index">
+                        <section class="artwork-collection-artwork-card-image-no-image-index">
+                          <p style="text-align: center;">Image coming soon!</p>
+                        </section>
+                        <section class="artwork-collection-artwork-card-title-index">
+                          <h3><%= link_to artwork.name, artwork_path(artwork) %></h3>
+                        </section>
+                      </section>
+                    <% end %>
+                  <% end  %>
+                </section>
+              </section>
+            </section>
+          </section>
+        <% end %>
+    </section>
+      <% end %>
+      <br>
+  </section>
+</div>
