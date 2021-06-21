@@ -3,7 +3,7 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %> / <%= link_to 'collections', collections_path %> / <%= link_to 'objects', clothings_path %> / <%= link_to 'workshops', classrooms_path, method: :get %>
+  <%= link_to 'home', welcome_index_path %> / <%= link_to 'art collections', artwork_collections_path %> / <%= link_to 'objects', clothings_path %> / <%= link_to 'workshops', classrooms_path %>
 </div>
 
 <div class="artworks-layout-index">
@@ -33,8 +33,7 @@
                   <p>Art is unavailable!</p>
                 </section>
               <% end %>
-              <!-- <h3>Description: <%= artwork.description %></h3> -->
-              <div class="artwork-availability"><h4>This piece is <%= artwork.availability? %></div></h4>
+              <div class="artwork-availability"><h4>This piece is <%= artwork.availability? %></h4></div>
               <% if artwork.available %>
                 <h5>Click the picture for more details!</h5>
                 <h3>Cost: <div class="cost"><%= number_to_currency(artwork.cost) %></div></h3>
