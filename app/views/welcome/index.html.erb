@@ -161,12 +161,15 @@
    <!-- </section> -->
 
    <section class="introduction-layout3">
-     <section class="commission-layout">
-       <section class="commission-link">
+     <section class="welcome-commission-layout">
+       <section class="welcome-commission-title">
          <h3><%= link_to 'Commission Your own Map!', new_commission_blooming_map_path, method: :get %></h3>
        </section>
-       <section class="commission-image">
+       <section class="welcome-commission-image">
          <%= image_tag('commission-map.png', class: 'commission-map')%>
+       </section>
+       <section class="welcome-commission-button">
+         <%= button_to 'Commission a Map!', new_commission_blooming_map_path, method: :get %>
        </section>
      </section>
    </section>

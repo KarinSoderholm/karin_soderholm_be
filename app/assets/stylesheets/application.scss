@@ -1174,16 +1174,6 @@
     justify-content: center;
     padding: 2em;
   }
-  .introduction-layout3{
-    background-color: transparent;
-    display: flex;
-    align-content: stretch;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    padding-top: 2em;
-    padding-bottom: 2em;
-  }
 
   .welcome-introduction-layout{
     background-color: #b8b19c;
@@ -1643,7 +1633,18 @@
     display: flex;
     z-index: 2;
   }
-  .commission-layout{
+  .introduction-layout3{
+    background-color: #b8b19c;
+    display: flex;
+    align-content: stretch;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  .welcome-commission-layout{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -1651,7 +1652,7 @@
     justify-content: center;
     align-items: center;
   }
-  .commission-link{
+  .welcome-commission-title{
     display: flex;
     z-index: 2;
     flex-direction: row;
@@ -1662,7 +1663,7 @@
     text-decoration: none;
     color: #825647;
   }
-  .commission-link a{
+  .welcome-commission-title a{
     text-decoration: none;
     color: #825647;
     text-decoration: none;
@@ -1672,13 +1673,12 @@
     font-weight: 600;
     z-index: 6;
   }
-  .commission-link a:hover{
+  .welcome-commission-title a:hover{
     text-decoration: none;
     color: #825647;
   }
-  .commission-image{
+  .welcome-commission-image{
     display: flex;
-    z-index: -9999;
     flex-direction: row;
     flex-wrap: nowrap;
     align-content: center;
@@ -1688,6 +1688,14 @@
   .commission-map{
     display: flex;
   }
+  .welcome-commission-button{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    flex-wrap: wrap;
+    align-items: stretch;
+  }
+
   .story-part-2{
     display: flex;
   }
@@ -3207,10 +3215,24 @@
     align-content: flex-end;
     justify-content: space-between;
     align-items: center;
-    background-color: #51677e;
-    margin: 1em;
-  }
 
+  }
+  .physical-object-initial-information{
+    display: flex;
+    background-color: white;
+    border-radius: 1em;
+    margin: 2em;
+    /* padding: 2em 10em 2em; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .physical-object-information-title{
+    display: flex;
+  }
+  .physical-object-text-index{
+    display: flex;
+  }
   .physical-object-collection-types-index {
     // display: flex;
   }
@@ -3241,12 +3263,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    background-color: #51677e;
+    margin: 0 0 2em;
   }
   .physical-object-collection-column-index {
     display: flex;
+    // background-color: #51677e;
+    // margin: 1em;
     flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
+    // flex-basis: 100%;
+    // flex: 1;
   }
   .physical-object-collection-card-index {
     display: flex;
@@ -3728,17 +3754,28 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    background-color: #b8b19c;
+    // background-color: #b8b19c;
   }
-  .maker-bio{
+  .about-maker-bio{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-content: center;
-    justify-content: center;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #b8b19c;
+    padding: 2em;
+    margin: 2em 0 2em;
+  }
+  .about-maker-card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-content: stretch;
     align-items: center;
   }
-  .maker-bio-text{
+  .about-maker-bio-text{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -3753,11 +3790,45 @@
     align-content: center;
     justify-content: center;
     align-items: center;
+    padding: 2em;
   }
-  .maker-layout{
+  .about-maker-image{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2em;
+    max-width: 50%;
+    border-radius: 1em;
   }
-  .maker-image{
+  .about-maker-image img{
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 #5d5959;
+  }
+  // .maker-image img:hover{
+  //   // width: 100%;
+  //   display: flex;
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+  //   align-content: flex-start;
+  //   justify-content: center;
+  //   align-items: center;
+  //   width: 100%;
+  // }
+  .about-story-maker-layout{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #b8b19c;
+    padding: 2em;
+    margin: 2em 0 2em;
+  }
+  .about-maker-story-header{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -3765,21 +3836,79 @@
     justify-content: center;
     align-items: center;
     padding: 2em;
-    // border-radius: 1em;
   }
-  .maker-image img{
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 #5d5959;
-  }
-  .maker-image img:hover{
-    // width: 100%;
+  .about-story-maker-card{
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+  }
+  .about-story-maker-image{
+    display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-content: flex-start;
+    align-content: flex-end;
     justify-content: center;
     align-items: center;
-    width: 100%;
+  }
+  .about-story-maker-image img {
+    border-radius: 1em;
+    box-shadow: 0 4px 8px 0 #5d5959;
+  }
+  .about-maker-story-text{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-maker-artist-statement-layout{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #b8b19c;
+    padding: 2em;
+    margin: 2em 0 2em;
+  }
+  .about-maker-artist-statement-header{
+    display: flex;
+  }
+  .about-maker-artist-statement-card{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+  .about-maker-artist-statement-text{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    align-items: flex-end;
+    justify-content: space-evenly;
+  }
+  .about-maker-artist-statement-image{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .about-maker-artist-statement-image img {
+    border-radius: 1em;
+    box-shadow: 0 4px 8px 0 #5d5959;
+  }
+  .maker-layout{
+    display: flex;
   }
   .maker-history{
     display: flex;
