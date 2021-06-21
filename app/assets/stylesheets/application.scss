@@ -1165,16 +1165,6 @@
 
 
   // Welcome Page styling
-
-  .introduction-layout{
-    background-color: #b8b19c;
-    display: flex;
-    align-content: stretch;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    padding: 2em;
-  }
   .introduction-layout2{
     background-color: #b8b19c;
     display: flex;
@@ -1195,10 +1185,35 @@
     padding-bottom: 2em;
   }
 
+  .welcome-introduction-layout{
+    background-color: #b8b19c;
+    display: flex;
+    align-content: stretch;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2em;
+  }
+  .welcome-introduction-image{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .welcome-introduction-card{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+  }
   .welcome-karin-image{
     display: flex;
     border-radius: 1em;
     box-shadow: 0 4px 8px 0 #5d5959;
+    width: 20%;
   }
   .welcome-note-from-karin{
     display: flex;
@@ -1209,6 +1224,30 @@
     align-items: center;
     padding: 2em;
 
+  }
+  .welcome-introduction-button{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .welcome-artwork-layout{
+    display: flex;
+  }
+  .welcome-artwork-card{
+    display: flex;
+  }
+  .welcome-introduction-images{
+    display: flex;
+  }
+  .welcome-artwork-text{
+    display: flex;
+  }
+  .welcome-artwork-button{
+    display: flex;
   }
   .embrodery1{
     display: flex;
