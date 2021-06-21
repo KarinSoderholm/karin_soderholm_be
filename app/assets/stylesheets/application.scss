@@ -626,7 +626,6 @@
     align-content: center;
     // padding-top: 2em;
     padding-left: 2em;
-    padding-bottom: 2em;
     text-decoration: none;
   }
   .collections-section-student-work a {
@@ -3406,6 +3405,68 @@
     align-items: center;
   }
 
+
+  //about#faq
+  .faq-layout{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #51677e;
+    padding: 2em;
+    margin: 2em;
+    border: 1em;
+  }
+  .faq-row{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .faq-column{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1em;
+  }
+  .faq-card{
+    display: flex;
+    background-color: white;
+    border-radius: 1em;
+    margin: 1em;
+    padding: 2em;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .faq-question{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .faq-answer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .faq-no-questions-created{
+    display: flex;
+  }
 
   //slideshow stylying
   * {box-sizing:border-box}
