@@ -1,5 +1,5 @@
 class Admin::ArtworkStatementsController < Admin::BaseController
-  before_action :set_artwork_statement, only: [:show, :update, :destroy]
+  before_action :set_artwork_statement, only: [:show, :edit, :update, :destroy]
   def index
     @artwork_statements = ArtworkStatement.all
   end
@@ -9,20 +9,35 @@ class Admin::ArtworkStatementsController < Admin::BaseController
 
   def create
     @artwork_statement = ArtworkStatement.new(artwork_statement_params)
-
+    artwork = Artwork.find(artwork_statement_params[:artwork_id])
     if @artwork_statement.save
+      flash[:success] = "Hooray, you have saved a Statement to #{artwork}"
     else
+      flash.now[:error] = "Please make sure the field is filled out. Please try again"
+      render :new
     end
+  end
+
+  def edit
+
   end
 
   def update
     if @artwork_statement.update(artwork_statement_params)
+      flash[:success] = "Hooray, you have updated your Artwork Statement"
     else
+      flash.now[:error] = "Please make sure the field is filled out. Please try again"
+      render :edit
     end
   end
 
   def destroy
-    @artwork_statement.destroy
+    if @artwork_statement.destroy
+      flash[:success] = "Hooray, you have deleted your Artwork Statement"
+    else
+      flash.now[:error] = "The Artwork Statement was not deleted. Please try again"
+      render :show
+    end
   end
 
   private
@@ -31,6 +46,6 @@ class Admin::ArtworkStatementsController < Admin::BaseController
     end
 
     def artwork_statement_params
-      params.require(:artwork_statement).permit(:name, :statement, :artwork_id)
+      params.require(:artwork_statement).permit(:statement, :artwork_id)
     end
 end
