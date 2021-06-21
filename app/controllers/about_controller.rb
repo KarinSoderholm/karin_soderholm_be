@@ -16,7 +16,7 @@ class AboutController < ApplicationController
   end
 
   def faq
-    
+    @faqs = FrequentlyAskedQuestion.order(faq_order: :asc)
   end
 
   def create
