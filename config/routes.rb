@@ -129,4 +129,5 @@ Rails.application.routes.draw do
   end
   resources :socials
   resources :commission_blooming_maps
+  resources :student_works
 end
