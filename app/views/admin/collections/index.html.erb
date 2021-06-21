@@ -3,13 +3,14 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %> 
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my objects', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
+      <th>Collection Type</th>
       <th>Edit Collection</th>
       <th>Delete Collection</th>
     </tr>
@@ -18,9 +19,10 @@
     <% if @collections %>
       <% @collections.each do |collection| %>
       <tr>
-        <td><%= link_to "#{collection.name}",  "/admin/collections/#{collection.id}", method: :get%></td>
-        <td><%= link_to 'Edit Collection', "/admin/collections/#{collection.id}/edit", method: :get %></td>
-        <td><%= link_to 'Delete Collection', "/admin/collections/#{collection.id}/alert", method: :get %></td>
+        <td><%= link_to "#{collection.name}",  "/admin/collections/#{collection.id}" %></td>
+        <td><%= collection.collection_type %></td>
+        <td><%= link_to 'Edit Collection', "/admin/collections/#{collection.id}/edit" %></td>
+        <td><%= link_to 'Delete Collection', "/admin/collections/#{collection.id}/alert" %></td>
       </tr>
       <% end %>
     <% else %>

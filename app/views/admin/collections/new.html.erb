@@ -8,8 +8,12 @@
 
 <section class="add-collection">
   <%= form_tag '/admin/collections' do %>
+
   <%= label_tag 'Name of new Collection: '%><br>
   <%= text_field_tag :name %><br>
+
+  <%= label_tag 'Type of Collection: '%><br>
+  <%= select_tag :collection_type, options_for_select(Collection.collection_types.map { |type| type }) %><br>
 
   <section class="submit-collection-button">
     <%= submit_tag 'Submit Collection' %>
