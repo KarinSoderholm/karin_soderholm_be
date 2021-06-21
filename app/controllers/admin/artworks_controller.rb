@@ -18,7 +18,7 @@ class Admin::ArtworksController < Admin::BaseController
     @tools = Tool.all
     @requirements = Requirement.all
     @artworks = Artwork.all
-    @collections = Collection.all
+    @collections = Collection.find_artworks
   end
 
   def create
@@ -40,7 +40,7 @@ class Admin::ArtworksController < Admin::BaseController
   end
 
   def edit
-    @collections = Collection.all
+    @collections = Collection.find_artworks
     @artwork = Artwork.find(params[:id])
   end
 
@@ -130,13 +130,10 @@ class Admin::ArtworksController < Admin::BaseController
     def artwork_params
       if !params[:artwork].nil?
         params.require(:artwork).permit(:name, :description, :materials, :create_date, :sell_date, :cost, :available, :art_shows, photos: [])
-        # params.require(:artwork).permit!
       else
         hash = {}
         hash[:name] = params[:name]
         hash[:description] = params[:description]
-        # hash[:image] = params[:image]
-        # hash[:photos] = params[:photos]
         hash[:create_date] = params[:create_date]
         hash[:sell_date] = params[:sell_date]
         hash[:cost] = params[:cost]
