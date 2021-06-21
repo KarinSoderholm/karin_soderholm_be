@@ -5,6 +5,8 @@ class Clothing < ApplicationRecord
   has_many :patterns, dependent: :destroy
   has_many :order_clothings, dependent: :destroy
   has_many :orders, through: :order_clothings, dependent: :destroy
+  has_many :object_collections, dependent: :destroy
+  has_many :collections, through: :object_collections, dependent: :destroy
   has_one_attached :image
   has_many_attached :photos
 
@@ -39,5 +41,9 @@ class Clothing < ApplicationRecord
 
   def self.total_available
     where(available: true).count
+  end
+
+  def find_object_collection(physical_object)
+    physical_object.collections.first.collection_type
   end
 end

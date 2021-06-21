@@ -16,14 +16,12 @@ class Artwork < ApplicationRecord
 
   validates :name, presence: true
   validates :description, presence: true
-  # validates :image, presence: false
   validates :create_date, presence: true
   validates :sell_date, presence: false
   validates :cost, presence: true
   validates :available, inclusion: [true, false]
-  # validates :images, presence: false
   validate :acceptable_image
-  # validates :collection, presence: false
+
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
