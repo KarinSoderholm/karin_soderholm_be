@@ -26,43 +26,56 @@
       </section>
     </section><br><br>
 
-  <div class="welcome-artwork-container">
-    <div class="carousel">
-      <input type="radio" id="carousel-1" name="carousel[]" checked>
-      <input type="radio" id="carousel-2" name="carousel[]">
-      <input type="radio" id="carousel-3" name="carousel[]">
-      <input type="radio" id="carousel-4" name="carousel[]">
-      <input type="radio" id="carousel-5" name="carousel[]">
-      <ul class="carousel__items">
-        <li class="carousel__item"><%= image_tag("welcome-img1.png")%></li>
-        <li class="carousel__item"><%= image_tag("welcome-img2.png")%></li>
-        <li class="carousel__item"><%= image_tag("welcome-img3.png")%></li>
-        <li class="carousel__item"><%= image_tag("welcome-img4.png")%></li>
-        <li class="carousel__item"><%= image_tag("welcome-img5.png")%></li>
-      </ul>
-       <div class="carousel__prev">
-        <label for="carousel-1"></label>
-        <label for="carousel-2"></label>
-        <label for="carousel-3"></label>
-        <label for="carousel-4"></label>
-        <label for="carousel-5"></label>
-       </div>
-       <div class="carousel__next">
-         <label for="carousel-1"></label>
-         <label for="carousel-2"></label>
-         <label for="carousel-3"></label>
-         <label for="carousel-4"></label>
-         <label for="carousel-5"></label>
-       </div>
-       <div class="carousel__nav">
-         <label for="carousel-1"></label>
-         <label for="carousel-2"></label>
-         <label for="carousel-3"></label>
-         <label for="carousel-4"></label>
-         <label for="carousel-5"></label>
-       </div>
-     </div>
-   </div>
+    <section class="welcome-artwork-layout">
+      <section class="welcome-artwork-card">
+        <section class="welcome-artwork-text">
+          <p>Some words of introduction...</p>
+          <p> All customizable to what you'd like to say</p>
+        </section>
+        <section class="welcome-introduction-images">
+          <div class="welcome-artwork-carousel-container">
+            <div class="carousel">
+              <input type="radio" id="carousel-1" name="carousel[]" checked>
+              <input type="radio" id="carousel-2" name="carousel[]">
+              <input type="radio" id="carousel-3" name="carousel[]">
+              <input type="radio" id="carousel-4" name="carousel[]">
+              <input type="radio" id="carousel-5" name="carousel[]">
+              <ul class="carousel__items">
+                <li class="carousel__item"><%= image_tag("welcome-artworks-img1.png")%></li>
+                <li class="carousel__item"><%= image_tag("welcome-artworks-img2.png")%></li>
+                <li class="carousel__item"><%= image_tag("welcome-artworks-img3.png")%></li>
+                <li class="carousel__item"><%= image_tag("welcome-artworks-img4.png")%></li>
+                <li class="carousel__item"><%= image_tag("welcome-artworks-img5.png")%></li>
+              </ul>
+               <div class="carousel__prev">
+                <label for="carousel-1"></label>
+                <label for="carousel-2"></label>
+                <label for="carousel-3"></label>
+                <label for="carousel-4"></label>
+                <label for="carousel-5"></label>
+               </div>
+               <div class="carousel__next">
+                 <label for="carousel-1"></label>
+                 <label for="carousel-2"></label>
+                 <label for="carousel-3"></label>
+                 <label for="carousel-4"></label>
+                 <label for="carousel-5"></label>
+               </div>
+               <div class="carousel__nav">
+                 <label for="carousel-1"></label>
+                 <label for="carousel-2"></label>
+                 <label for="carousel-3"></label>
+                 <label for="carousel-4"></label>
+                 <label for="carousel-5"></label>
+               </div>
+             </div>
+           </div>
+        </section>
+      </section>
+      <section class="welcome-artwork-button">
+        <%= button_to 'Art', artwork_collections_path, method: :get %>
+      </section>
+    </section>
 
    <section class="introduction-layout2">
      <section class="story-part-1">
