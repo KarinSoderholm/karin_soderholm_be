@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_152854) do
+ActiveRecord::Schema.define(version: 2021_06_21_231857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,15 +34,6 @@ ActiveRecord::Schema.define(version: 2021_06_21_152854) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "artist_statements", force: :cascade do |t|
-    t.string "name"
-    t.text "statement"
-    t.bigint "artwork_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["artwork_id"], name: "index_artist_statements_on_artwork_id"
   end
 
   create_table "artshow_artworks", force: :cascade do |t|
@@ -71,6 +62,14 @@ ActiveRecord::Schema.define(version: 2021_06_21_152854) do
     t.datetime "updated_at", null: false
     t.index ["artwork_id"], name: "index_artwork_collections_on_artwork_id"
     t.index ["collection_id"], name: "index_artwork_collections_on_collection_id"
+  end
+
+  create_table "artwork_statements", force: :cascade do |t|
+    t.text "statement"
+    t.bigint "artwork_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artwork_id"], name: "index_artwork_statements_on_artwork_id"
   end
 
   create_table "artworks", force: :cascade do |t|
@@ -300,11 +299,11 @@ ActiveRecord::Schema.define(version: 2021_06_21_152854) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "artist_statements", "artworks"
   add_foreign_key "artshow_artworks", "artshows"
   add_foreign_key "artshow_artworks", "artworks"
   add_foreign_key "artwork_collections", "artworks"
   add_foreign_key "artwork_collections", "collections"
+  add_foreign_key "artwork_statements", "artworks"
   add_foreign_key "cvs", "users"
   add_foreign_key "fabrics", "clothings"
   add_foreign_key "materials", "artworks"

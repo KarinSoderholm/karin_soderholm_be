@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     resources :fabrics
     resources :artshow_artworks
     resources :artshows
-    resources :artist_statements
+    resources :artwork_statements
     resources :materials
     resources :classrooms do
       collection { post :import }
