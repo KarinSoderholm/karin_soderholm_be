@@ -1,0 +1,17 @@
+<section class="page-title">
+  <h2><%= @faq.question %> Edit Page</h2>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{@faq.question}", admin_frequently_asked_question_path(@faq) %> / <%= link_to "all FAQ's", admin_frequently_asked_questions_path %>
+</div>
+<%= form_for ([:admin, @faq]) do |f| %>
+
+  <%= f.label "FAQ Question: "%><br>
+  <%= f.text_field :question %><br>
+
+  <%= f.label "FAQ Answer: "%><br>
+  <%= f.text_field :answer %><br>
+
+  <%= f.submit 'Update FAQ' %>
+<% end %>
