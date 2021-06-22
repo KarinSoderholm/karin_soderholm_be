@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_one :social
   has_one :cv
   has_one :artist_statement
+  has_one :artist_story
 
   has_one_attached :avatar
 
