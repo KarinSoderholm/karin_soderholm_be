@@ -1,5 +1,5 @@
 <section class="page-title">
-  <h1>Create a new Garment!</h1>
+  <h1>Create a new Object!</h1>
 </section>
 
 <div class="quicknav-content">
@@ -7,37 +7,40 @@
 </div><br>
 
 <%= form_tag '/admin/clothings', multipart: true    do %>
-  <%= label_tag 'Name of Garment: '%><br>
+  <%= label_tag 'Name of Object: '%><br>
   <%= text_field_tag :name %><br>
 
-  <%= label_tag 'Description of Garment: '%><br>
+  <%= label_tag 'Description of Object: '%><br>
   <%= text_field_tag :description %><br>
 
 
-  <%= label_tag 'Link to Garment (optional): '%><br>
+  <%= label_tag 'Link to Object (optional): '%><br>
   <%= text_field_tag :url %><br>
 
-  <%= label_tag 'Category of Garment: '%><br>
+  <%= label_tag 'Category of Object: '%><br>
   <%# <%= select_tag :category %>
-  <%# <%= select_tag 'Categorgies', raw("<option>Outer Wear</option><option>Dress</option><option>Shirt</option><option>Under Garments</option><option>Pants</option>"), multiple: true, prompt: "Select something" %>
-  <%= select_tag(:category, options_for_select([["Outer Wear","Outer Wear"],["Dress", "Dress"],["Shirt","Shirt"],["Pant","Pant"],["Intimate","Intimate"]], params[:category] ), class:"select") %><br>
+  <%# <%= select_tag 'Categorgies', raw("<option>Outer Wear</option><option>Dress</option><option>Shirt</option><option>Under Objects</option><option>Pants</option>"), multiple: true, prompt: "Select something" %>
+  <%= select_tag(:category, options_for_select([["Outer Wear","Outer Wear"],["Dress", "Dress"],["Shirt","Shirt"],["Pant","Pant"],["Intimate","Intimate"],['Sculpture','Sculpture'],["Dyed Fabric","Dyed Fabric"],["Textile","Textile"],["Embroidery","Embroidery"]], params[:category] ), class:"select") %><br>
 
-  <%= label_tag 'Garment is available (yes / no): '%>
+  <%= label_tag 'Object is available (yes / no): '%>
   <%= label_tag 'Yes'%>
   <%= radio_button_tag :available, true %>
   <%= label_tag 'No'%>
   <%= radio_button_tag :available, false %><br>
   <br>
-  <%= label_tag 'Garment was created on: '%><br>
+  <%= label_tag 'Object was created on: '%><br>
   <%= date_field_tag :origin_date %><br>
   <br>
   <%= label_tag 'Cost: '%>
   <%= number_field_tag :cost, nil, min: 1, max: 100000, placeholder: '$' %>
   <br>
-  <%= label_tag 'Image of Garment: '%><br>
+  <%= label_tag 'Object Collection: '%><br>
+  <%= select_tag :collection, options_from_collection_for_select(@collections.find_objects, "id", "name"), include_blank: true %><br>
+  <br>
+  <%= label_tag 'Image of Object: '%><br>
   <%= file_field_tag :photos %><br>
   <%# <%= file_field_tag :images %><br>
 
-  <%= submit_tag 'Submit Garment' %>
+  <%= submit_tag 'Submit Object' %>
 <% end %>
 <h3></h3>

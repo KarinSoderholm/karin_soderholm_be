@@ -1,22 +1,22 @@
 <section class="page-title">
-  <h1>Garment: <%= @clothing.name %></h1>
+  <h1>Object: <%= @clothing.name %></h1>
 </section>
 
 <div class="quicknav-content">
   <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> /<%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 <section id='navigation-links-individual'>
-  <%= link_to 'Edit Garment', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
+  <%= link_to 'Edit Object', "/admin/clothings/#{@clothing.id}/edit", method: :get %>
 </section><br><br>
 
 <section class="admin-garment-details">
   <section class="admin-garment-detail-category">
-    Garment Description:
+    Object Description:
   </section>
   <p class="admin-garment-details-text"><%= @clothing.description %></p>
 
   <section class="admin-garment-detail-category">
-    Garment Image(s): <%= @clothing.photos.count %>
+    Object Image(s): <%= @clothing.photos.count %>
   </section>
   <% if @clothing.photos.attached? && @clothing.image.attached? %>
     <section class="admin-garment-details-images">
@@ -66,34 +66,38 @@
       <p><%= button_to "Remove Image", "/admin/clothings/#{@clothing.id}/remove_photo/#{@clothing.image.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
     </section>
   <% else %>
-    <h5>There is no image uploaded, yet for this Garment!</h5>
+    <h5>There is no image uploaded, yet for this Object!</h5>
   <% end %>
+  <section class="admin-garment-detail-category">
+    Collection Name:
+  </section>
+  <p class="admin-garment-details-text"><%= @clothing.find_object_collection(@clothing) %></p>
   <section class="admin-garment-detail-category">
     Link to Etsy url:
   </section>
-    <% if @clothing.url.nil? %>
+    <% if @clothing.url.empty? %>
       <p class="admin-garment-details-text">There is not a link available</p>
     <% else %>
       <p class="admin-garment-details-text"><%= @clothing.url %></p>
     <% end %>
 
   <section class="admin-garment-detail-category">
-    Garment Category:
+    Object Category:
   </section>
   <p class="admin-garment-details-text"><%= @clothing.category %></p>
 
   <section class="admin-garment-detail-category">
-    Garment is
+    <%= @clothing.name %> is
   </section>
   <p class="admin-garment-details-text"><%= @clothing.availability? %></p>
 
   <section class="admin-garment-detail-category">
-    Garment's creation date:
+    Object's creation date:
   </section>
   <p class="admin-garment-details-text"><%= (@clothing.origin_date).strftime("%A, %d %b %Y") %></p>
 
   <section class="admin-garment-detail-category">
-    Garment's MSRP:
+    Object's MSRP:
   </section>
   <p class="admin-garment-details-text"><%= number_to_currency(@clothing.cost) %></p>
 </section>

@@ -17,7 +17,8 @@
   <%= f.text_field :url %><br>
 
   <%= f.label 'Category of Garment: '%><br>
-  <%= f.select :category, @clothings.map { |clothing| [clothing.category] }, include_blank: true %><br>
+  <%# <%= f.select :category, @clothings.map { |clothing| [clothing.category] }, include_blank: true %>
+  <%= f.select(:category, options_for_select([["Outer Wear","Outer Wear"],["Dress", "Dress"],["Shirt","Shirt"],["Pant","Pant"],["Intimate","Intimate"],['Sculpture','Sculpture'],["Dyed Fabric","Dyed Fabric"],["Textile","Textile"],["Embroidery","Embroidery"]], params[:category] ), class:"select") %><br>
 
   <%= f.label 'Garment is available (yes/no): '%>
   <%= f.label 'Yes'%>
@@ -31,6 +32,10 @@
   <%= f.label 'Cost: '%><br>
   <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>
 
+  <%= f.label 'Object Collection: '%><br>
+  <%= select_tag :collection, options_from_collection_for_select(@collections, "id", "name") %><br>
+
+  <%= %>
   <%# <%= f.label 'Image of Garment: '%>
   <%# <%= f.file_field :photos %>
 
