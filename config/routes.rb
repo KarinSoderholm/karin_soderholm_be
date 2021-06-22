@@ -24,9 +24,9 @@ Rails.application.routes.draw do
     end
     scope controller: :artwork_statements, module: 'art' do
       get '/art/:artwork_id/artwork_statement/:id' => :show
-      get '/art/artwork_statement' => :index
       get '/art/:artwork_id/artwork_statement/new' => :new
-      post '/art/:artwork_id/artwork_statement/new' => :create
+      get '/art/artwork_statement' => :index
+      post '/art/:artwork_id/artwork_statement' => :create
       get '/art/:artwork_id/artwork_statement/:id/edit' => :edit
       post '/art/:artwork_id/artwork_statement/:id/edit' => :update
       delete '/art/:artwork_id/artwork_statement/:id' => :destroy
