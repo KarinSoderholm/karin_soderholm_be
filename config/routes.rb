@@ -133,9 +133,6 @@ Rails.application.routes.draw do
 
   namespace :artwork do
     resources :collections
-    # resources :artwork_statements do
-    #   get '/:artwork_id' => :index
-    # end
   end
   namespace :physical_object do
     resources :collections
