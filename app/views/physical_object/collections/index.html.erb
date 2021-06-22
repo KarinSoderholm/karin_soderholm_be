@@ -1,8 +1,48 @@
 <section class="page-title">
   <h1>Objects: By Collections</h1>
 </section>
+
 <div class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %> / <%= link_to 'all objects', clothings_path %>
+  <div class="quicknav-dropdown">
+    <ul class="dropdown-row">
+      <li class="page-collection">
+        <%= link_to 'home', welcome_index_path %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'art', artwork_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all art', artworks_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to '100 Day Project: Maps', "/artwork/collections/1" %>
+            </li>
+            <li class="page-collection">
+              <%= link_to '100 Day Project: Embroidery', "/artwork/collections/3" %>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'all objects', clothings_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'Garments', "/physical_object/collections/5" %>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'workshops', classrooms_path %>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <div class="physical-object-collections-layout-index">
