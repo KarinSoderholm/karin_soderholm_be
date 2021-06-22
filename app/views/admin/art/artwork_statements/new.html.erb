@@ -8,8 +8,8 @@
 
 <section class="admin-artwork-statement-new">
   <%= form_tag "/admin/art/#{@artwork.id}/artwork_statement/new", method: 'post', :class => 'admin-form-inline' do %>
-      <%= text_field_tag :statement, nil, class: 'admin-form-inline', placeholder: 'your artwork statement' %>
-      <%= hidden_field_tag "#{@artwork.id}" %>
+      <%= text_area_tag :statement, nil, class: 'admin-form-inline', placeholder: 'your artwork statement' %>
+      <!-- <%= hidden_field_tag "#{@artwork.id}" %> -->
 
       <section class="admin-new-artwork-statment-button">
         <%= submit_tag 'Add Artwork Statement' %>
