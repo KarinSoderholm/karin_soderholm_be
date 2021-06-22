@@ -54,7 +54,17 @@
     <% else %>
       <h5>There is no image for this Art, yet!</h5>
     <% end %>
+    <section class="admin-artwork-details-category" >
+      Artwork Statement:
+    </section>
+    <section class="admin-artwork-details-text">
 
+      <% if @artwork.artwork_statement %>
+        <%= @artwork.artwork_statement.statement %><br>
+      <% else %>
+        <h5>There is no Artwork Statement for this Art, yet!</h5>
+      <% end %><br>
+    </section>
     <section class="admin-artwork-details-category" >
       <%= @artwork.name %> Creation Date:
     </section>
@@ -84,6 +94,11 @@
 <section id="add-photos">
   <p><%= button_to "Add Image", "/admin/artworks/#{@artwork.id}/add_photos", method: :get %></p>
 </section>
+
+<section class="add-new-artwork-statement-button">
+  <p><%= button_to 'Add a New Artwork Statement', "/admin/art/#{@artwork.id}/artwork_statement/new", method: :get  %></p>
+</section>
+
 <section id="remove-artwork-button">
   <p><%= button_to "Delete #{ @artwork.name }", "/admin/artworks/#{@artwork.id}", method: :delete, data: { confirm: "Are you sure?" } %></p>
 </section>
