@@ -22,6 +22,15 @@ Rails.application.routes.draw do
       post '/workshop/requirements/:id/edit/:classroom_id' => :update
       delete '/workshop/requirements/:id' => :destroy
     end
+    scope controller: :artwork_statements, module: 'art' do
+      get '/art/:artwork_id/artwork_statement/:id' => :show
+      get '/art/artwork_statement' => :index
+      get '/art/:artwork_id/artwork_statement/new' => :new
+      post '/art/:artwork_id/artwork_statement/new' => :create
+      get '/art/:artwork_id/artwork_statement/:id/edit' => :edit
+      post '/art/:artwork_id/artwork_statement/:id/edit' => :update
+      delete '/art/:artwork_id/artwork_statement/:id' => :destroy
+    end
     resources :student_works
     resources :frequently_asked_questions
     resources :cv do
@@ -32,7 +41,6 @@ Rails.application.routes.draw do
     resources :fabrics
     resources :artshow_artworks
     resources :artshows
-    resources :artwork_statements
     resources :materials
     resources :classrooms do
       collection { post :import }
@@ -114,6 +122,9 @@ Rails.application.routes.draw do
 
   namespace :artwork do
     resources :collections
+    # resources :artwork_statements do
+    #   get '/:artwork_id' => :index
+    # end
   end
   namespace :physical_object do
     resources :collections
@@ -132,4 +143,5 @@ Rails.application.routes.draw do
   resources :socials
   resources :commission_blooming_maps
   resources :student_works
+  resources :artwork_statements
 end
