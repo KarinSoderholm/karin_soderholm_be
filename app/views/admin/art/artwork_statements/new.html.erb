@@ -3,12 +3,12 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my artwork statements', "/admin/art/#{@artwork.id}/artwork_statement" %> / <%= link_to "#{ @artwork.name }", admin_artwork_path(@artwork) %>
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my artwork statements', "/admin/art/artwork_statement" %> / <%= link_to "#{ @artwork.name }", admin_artwork_path(@artwork) %>
 </div><br>
 
 <section class="admin-artwork-statement-new">
   <%= form_tag "/admin/art/#{@artwork.id}/artwork_statement/new", method: 'post', :class => 'admin-form-inline' do %>
-      <%= text_area_tag :statement, nil, class: 'admin-form-inline', placeholder: 'your artwork statement' %>
+      <%= text_area_tag :statement, nil, rows: 20, cols: 50, class: 'admin-form-inline', placeholder: 'your artwork statement' %>
       <!-- <%= hidden_field_tag "#{@artwork.id}" %> -->
 
       <section class="admin-new-artwork-statment-button">
