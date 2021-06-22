@@ -1,0 +1,18 @@
+<section class="page-title">
+  <h1>Create a new Artwork Statement for <%= @artwork.name %>!</h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to  'my artwork statements', "/admin/art/#{@artwork.id}/artwork_statement" %> / <%= link_to "#{ @artwork.name }", admin_artwork_path(@artwork) %>
+</div><br>
+
+<section class="admin-artwork-statement-new">
+  <%= form_tag "/admin/art/#{@artwork.id}/artwork_statement/new", method: 'post', :class => 'admin-form-inline' do %>
+      <%= text_field_tag :statement, nil, class: 'admin-form-inline', placeholder: 'your artwork statement' %>
+      <%= hidden_field_tag "#{@artwork.id}" %>
+
+      <section class="admin-new-artwork-statment-button">
+        <%= submit_tag 'Add Artwork Statement' %>
+      </section>
+  <% end %>
+</section>
