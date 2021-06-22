@@ -1,5 +1,5 @@
 class Admin::ClothingsController < Admin::BaseController
-  before_action :set_clothing, only: [:show, :update, :destroy]
+  before_action :set_clothing, only: [:show, :edit, :update, :destroy]
 
   def import
     Clothing.import(params[:file])
@@ -9,7 +9,7 @@ class Admin::ClothingsController < Admin::BaseController
   def index
     @clothings = Clothing.all
     if @clothings.nil?
-      flash[:message] = "There are no garments in your collection! Please add some!"
+      flash[:message] = "There are no objects in your collection! Please add some!"
       redirect_to admin_dashboard_index
     end
   end
@@ -17,18 +17,29 @@ class Admin::ClothingsController < Admin::BaseController
   def show
     set_clothing
     if @clothing.nil?
-      flash[:message] = "That garment is no longer available."
+      flash[:message] = "That object is no longer available."
       redirect_to admin_clothings_path
     end
   end
 
+  def new
+    @clothings = Clothing.all
+    @collections = Collection.find_objects
+  end
 
   def create
     @clothing = Clothing.new(clothing_params)
-
+    collection = Collection.find(params[:collection])
+    @clothing.set_images(params)
     if @clothing.save
-      flash[:success] = "Hooray! You have successfully added a Garment to the Collection!"
-      redirect_to admin_clothings_path
+      if !collection.nil?
+        object_collection = ObjectCollection.new(clothing_id: @clothing.id, collection_id: collection.id)
+      end
+      if !@clothing.collections.include?(collection) && !collection.nil?
+        object_collection.save({clothing_id: @clothing.id, collection_id: collection.id})
+        flash[:success] = "Hooray! You have successfully added an Object to the Collection!"
+        redirect_to admin_clothings_path
+      end
     else
       flash.now[:alert] = "Please check to make sure the fields are all filled in properly. Try again"
       render :new
@@ -37,14 +48,17 @@ class Admin::ClothingsController < Admin::BaseController
 
   def edit
     @clothings = Clothing.all
-    @clothing = Clothing.find(params[:id])
-
+    @collections = Collection.find_objects
   end
 
   def update
     @clothings = Clothing.all
-    if @clothing.update(clothing_params)
-      flash[:success] = "Hooray! You have successfully updated your Garment!"
+    @clothing.set_availability(params)
+    @clothing.set_images(params)
+    collection = Collection.find(params[:collection])
+
+    if @clothing.update(clothing_params) && @clothing.object_collections.first.update({name: collection.name, collection_type: collection.collection_type})
+      flash[:success] = "Hooray! You have successfully updated your Object!"
       redirect_to admin_clothings_path
     else
       flash.now[:alert] = "Please check to make sure the fields are all filled in properly. Try again"
@@ -58,8 +72,11 @@ class Admin::ClothingsController < Admin::BaseController
 
   def destroy
     if @clothing.destroy
-      flash[:notice] = "You have successfully destroyed your Garment from the Collection"
+      flash[:notice] = "You have successfully destroyed your Object from the Collection"
       redirect_to admin_clothings_path
+    else
+      flash.now[:error] = "Something went wrong. The object was not deleted. Try again"
+      render :show
     end
   end
 
@@ -90,6 +107,7 @@ class Admin::ClothingsController < Admin::BaseController
       render :show
     end
   end
+
   private
     def set_clothing
       @clothing = Clothing.find(params[:id])
@@ -104,7 +122,7 @@ class Admin::ClothingsController < Admin::BaseController
 
     def clothing_params
       if !params[:clothing].nil?
-        params.require(:clothing).permit(:name, :description, :fabric, :url, :category, :available, :pattern_name, :origin_date, :pattern_cost, :cost,  :image, photos: [])
+        params.require(:clothing).permit(:name, :description, :fabric, :url, :category, :available, :pattern_name, :origin_date, :pattern_cost, :cost, :image, photos: [])
       else
         hash = {}
         hash[:name] = params[:name]
@@ -113,8 +131,6 @@ class Admin::ClothingsController < Admin::BaseController
         hash[:available] = params[:available]
         hash[:origin_date] = params[:origin_date]
         hash[:cost] = params[:cost]
-        hash[:image] = params[:image]
-        hash[:photos] = params[:photos]
         return hash
       end
     end

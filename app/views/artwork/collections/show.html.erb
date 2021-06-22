@@ -1,9 +1,55 @@
 <section class="page-title">
   <h1><%= @collection.name %></h1>
 </section>
-<section class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %>/<%= link_to 'all collections', artwork_collections_path %>
-</section>
+
+<div class="quicknav-content">
+  <div class="quicknav-dropdown">
+    <ul class="dropdown-row">
+      <li class="page-collection">
+        <%= link_to 'home', welcome_index_path %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'art', artwork_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all art', artworks_path %>
+            </li>
+            <% if @collection.name == '100 Day Project: Maps'%>
+              <li class="page-collection">
+                <%= link_to '100 Day Project: Embroidery', "/artwork/collections/3" %>
+              </li>
+            <% elsif @collection.name == '100 Day Project: Embroidery' %>
+              <li class="page-collection">
+                <%= link_to '100 Day Project: Maps', "/artwork/collections/1" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'objects', physical_object_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all objects', clothings_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'Garments', "/physical_object/collections/5" %>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'workshops', classrooms_path %>
+      </li>
+    </ul>
+  </div>
+</div>
 
 <div class="artwork-collection-layout-show">
     <div class="artwork-collection-container-show">

@@ -2744,8 +2744,9 @@
 
   .artwork-image-show{
     display: flex;
+    width: 100%;
     /* width: 400px; */
-    max-width: 40%;
+    // max-width: 40%;
     align-content: flex-end;
     justify-content: space-evenly;
     align-items: stretch;
@@ -2767,7 +2768,7 @@
     align-content: flex-start;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    // width: 100%;
     box-shadow: 0 4px 8px 0 #5d5959;
   }
   .artwork-no-image-show{
@@ -3206,8 +3207,8 @@
   .physical-object-initial-information{
     display: flex;
     background-color: white;
-    border-radius: 1em;
-    margin: 2em;
+    // border-radius: 1em;
+    // margin: 2em;
     /* padding: 2em 10em 2em; */
     flex-direction: column;
     justify-content: center;
@@ -3230,7 +3231,10 @@
     align-content: center;
     justify-content: center;
     align-items: center;
-    padding-top: 2em;
+    // padding-top: 2em;
+    font-variant-caps: all-petite-caps;
+    font-stretch: ultra-expanded;
+    font-size: 50px;
   }
 
   .physical-object-collection-title-index a{
