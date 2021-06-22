@@ -7,7 +7,7 @@
 </div><br>
 
 <section id='navigation-links-individual'>
-  <%= link_to 'Edit Statement', "/admin/user/#{current_user.id}/artist_statement/#{@artist_statement.id}/edit", method: :get %>
+  <%= link_to 'Edit Statement', "/admin/user/#{current_user.id}/artist_statements/#{@artist_statement.id}/edit", method: :get %>
 </section><br>
 
 <section class="admin-artist-statement-layout">
@@ -19,5 +19,5 @@
 </section>
 
 <section class="admin-artist-statement-delete-button">
-  <%= button_to 'Delete Statement', "/admin/user/#{current_user.id}/artist_statements/#{@artist_statement.id}", method: :delete %>
+  <%= button_to 'Delete Statement', "/admin/user/#{current_user.id}/artist_statement/#{@artist_statement.id}", method: :delete %>
 </section>
