@@ -1,0 +1,15 @@
+<section class="page-title">
+  <h1>Edit Artwork Statement:</h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{@artwork.name}", admin_artwork_path %>
+</div><br>
+
+<%= form_for "/admin/art/#{@artwork.id}/artwork_statement/#{@artwork_statement.id}/edit" do |f| %>
+  <%= f.label :statement %><br>
+  <%= f.text_field :statement %><br>
+
+  <% f.hidden_field "#{@artwork_statement.artwork_id}" %>
+  <%= f.submit 'Update Artwork Statment' %>
+<% end %>
