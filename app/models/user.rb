@@ -4,6 +4,8 @@ class User < ApplicationRecord
   has_many :orders
   has_one :social
   has_one :cv
+  has_one :artist_statement
+
   has_one_attached :avatar
 
   validates_presence_of :name,

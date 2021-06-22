@@ -1,23 +1,23 @@
 <section class="page-title">
-  <h1>Artwork Statment</h1>
+  <h1>Artwork Statement for <%= @artwork.name %></h1>
 </section>
 
 <div class="quicknav-content">
-  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to 'my art', admin_artworks_path %> / <%= link_to 'my artwork statements', "/admin/art/artwork_statement" %><%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{@artwork.name}", admin_artwork_path(@artwork) %>/ <%= link_to 'my art', admin_artworks_path %> / <%= link_to 'my artwork statements', "/admin/art/artwork_statement" %><%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
 </div><br>
 
 <section id='navigation-links-individual'>
-  <%= link_to 'Edit Tool', "/admin/art/#{@artwork.id}/artwork_statement/#{@artwork_statement.id}/edit", method: :get %>
+  <%= link_to 'Edit Statement', "/admin/art/#{@artwork.id}/artwork_statement/#{@artwork_statement.id}/edit", method: :get %>
 </section><br>
 
 <section class="admin-artwork-statement-layout">
   <section class="admin-artwork-statement-card">
-    <section class="admin-artwork-statement-description">
+    <section class="admin-artwork-statement-statement">
       <%= @artwork_statement.statement %>
     </section>
   </section>
 </section>
 
 <section class="admin-artwork-statement-delete-button">
-  <%= button_to 'Delete Tool', "/admin/art/#{@artwork.id}/artwork_statements/#{artwork_statement.id}", method: :delete %>
+  <%= button_to 'Delete Statement', "/admin/art/#{@artwork.id}/artwork_statements/#{@artwork_statement.id}", method: :delete %>
 </section>
