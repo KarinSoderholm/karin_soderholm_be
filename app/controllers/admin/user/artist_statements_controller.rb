@@ -15,9 +15,10 @@ class Admin::User::ArtistStatementsController < Admin::BaseController
 
   def create
     @artist_statement = ArtistStatement.new(artist_statement_params)
+
     if @artist_statement.save
-      flash[:success] = "Hooray, you have saved a Statement to #{@artist.name}' Profile"
-      redirect_to "/admin/user/#{@user.id}/artist_statement/#{@artist_statement.id}"
+      flash[:success] = "Hooray, you have saved a Statement to #{current_user.name}'s Profile"
+      redirect_to "/admin/user/#{current_user.id}/artist_statement/#{@artist_statement.id}"
     else
       flash.now[:error] = "Please make sure the field is filled out. Please try again"
       render :new
@@ -61,7 +62,6 @@ class Admin::User::ArtistStatementsController < Admin::BaseController
   end
 
   def set_artist_statement
-    binding.pry
     @artist_statement = ArtistStatement.find(params[:id])
   end
 

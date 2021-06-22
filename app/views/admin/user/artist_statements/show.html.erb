@@ -1,0 +1,23 @@
+<section class="page-title">
+  <h1>Artist Statement for <%= current_user.name %></h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{current_user.name}' profile", "/admin/users/#{current_user.id}" %>/ <%= link_to 'my art', admin_artworks_path %> / <%= link_to 'my artist statements', "/admin/user/artist_statement" %><%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
+
+<section id='navigation-links-individual'>
+  <%= link_to 'Edit Statement', "/admin/user/#{current_user.id}/artist_statement/#{@artist_statement.id}/edit", method: :get %>
+</section><br>
+
+<section class="admin-artist-statement-layout">
+  <section class="admin-artist-statement-card">
+    <section class="admin-artist-statement-statement">
+      <%= @artist_statement.statement %>
+    </section>
+  </section>
+</section>
+
+<section class="admin-artist-statement-delete-button">
+  <%= button_to 'Delete Statement', "/admin/user/#{current_user.id}/artist_statements/#{@artist_statement.id}", method: :delete %>
+</section>
