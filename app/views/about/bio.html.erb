@@ -7,58 +7,59 @@
 </div>
 
 <section class="bio-layout">
-  <section class="maker-image">
-    <%= image_tag 'maker-img1.png' %>
-  </section>
-  <section class="maker-image">
-    <%= image_tag 'map-img1.png' %>
-  </section>
+  <!-- <section class="maker-image"> -->
+    <%# <%= image_tag 'maker-img1.png' %>
+  <!-- </section> -->
+  <!-- <section class="maker-image"> -->
+    <%# <%= image_tag 'map-img1.png' %>
+  <!-- </section> -->
 
-  <section class="maker-bio">
+  <section class="about-maker-bio">
     <section class="maker-bio-header">
       <h3>Meet the maker at Quiet Joy Studio</h3>
     </section>
 
-    <section class="maker-layout">
-      <section class="maker-bio-text">
-
+    <section class="about-maker-card">
+      <section class="about-maker-image">
+        <%= image_tag 'maker-img1.png' %>
+      </section>
+      <section class="about-maker-bio-text">
+        <p>Some words about things.</p>
       </section>
     </section>
-
-
-    <section class="maker-layout">
-      <section class="maker-image">
-        <%= image_tag 'embrodery6.png' %>
-      </section>
-      <section class="maker-image">
-        <%= image_tag 'paper-art2.png' %>
-      </section>
-      <section class="maker-image">
-        <%= image_tag 'beautiful-thread.png' %>
-      </section>
-    </section>
+    <!-- <section class="about-maker-button"> -->
+      <%# <%= button_to 'About', , method: :get %>
+    <!-- </section> -->
   </section>
 
-  <section class="maker-history">
-    <section class="maker-history-header">
-      <h3>Karin's Journey</h3>
-    </section>
-    <section class="maker-history-text">
-
-    </section>
-    <section class="maker-layout">
-      <section class="maker-image">
-        <%= image_tag 'paper-art1.png' %>
+    <section class="about-story-maker-layout">
+      <section class="about-maker-story-header">
+        <h3>Karin's Story</h3>
       </section>
-      <section class="maker-image">
-        <%= image_tag 'map-img2.png' %>
+      <section class="about-story-maker-card">
+        <section class="about-maker-story-text">
+          <p>Some words about things.</p>
+        </section>
+        <section class="about-story-maker-image">
+          <%= image_tag 'beautiful-thread.png' %>
+        </section>
       </section>
     </section>
 
-    <section class="maker-layout">
-      <section class="maker-image">
-        <%= image_tag 'maker-img2.png' %>
+
+
+  <section class="about-maker-artist-statement-layout">
+    <section class="about-maker-artist-statement-header">
+      <h3>Artist Statement</h3>
+    </section>
+    <section class="about-maker-artist-statement-card">
+      <section class="about-maker-artist-statement-text">
+        <p>Some words</p>
+      </section>
+      <section class="about-maker-artist-statement-image">
+        <%= image_tag 'paper-art2.png' %>
       </section>
     </section>
+
   </section>
 </section>
