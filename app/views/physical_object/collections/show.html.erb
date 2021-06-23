@@ -17,12 +17,11 @@
             <li class="page-collection">
               <%= link_to 'all art', artworks_path %>
             </li>
-            <li class="page-collection">
-              <%= link_to '100 Day Project: Maps', "/artwork/collections/1" %>
-            </li>
-            <li class="page-collection">
-              <%= link_to '100 Day Project: Embroidery', "/artwork/collections/3" %>
-            </li>
+            <% Collection.find_artworks.map do |collection| %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+              </li>
+            <% end %>
           </ul>
         </div>
       </li>
@@ -34,6 +33,29 @@
           <ul>
             <li class="page-collection">
               <%= link_to 'all objects', clothings_path %>
+            </li>
+            <% Collection.find_objects.map do |collection| %>
+              <% if collection.name != @collection.name %>
+                <li class="page-collection">
+                  <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'student works', student_works_path %>
+          <!-- <p>student works</p> -->
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'adult student works', adult_student_work_student_works_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'youth student works', youth_student_work_student_works_path %>
             </li>
           </ul>
         </div>
