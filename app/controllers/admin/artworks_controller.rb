@@ -46,8 +46,8 @@ class Admin::ArtworksController < Admin::BaseController
 
   def update
     @artwork.set_availability(params)
-    @artwork.acceptable_image
-    @artwork.acceptable_photos
+    # @artwork.acceptable_image
+    # @artwork.acceptable_photos
     @artwork.set_images(params)
     # @collections = Collection.all
     # collection = Collection.where(name: params[:artwork][:collection][:name]).first

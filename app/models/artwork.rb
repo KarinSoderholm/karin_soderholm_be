@@ -11,6 +11,7 @@ class Artwork < ApplicationRecord
   has_many :orders, through: :order_artworks, dependent: :destroy
   has_many :artwork_collections, dependent: :destroy
   has_many :collections, through: :artwork_collections, dependent: :destroy
+  
   has_many_attached :photos
   has_one_attached :image
 
@@ -80,7 +81,7 @@ class Artwork < ApplicationRecord
     end
 
     acceptable_types = ["image/jpeg", "image/png"]
-    unless acceptable_types.include?(image.content_type)
+    unless acceptable_types.include?(photo.content_type)
       errors.add(:photos, "must be a JPEG or PNG")
     end
   end

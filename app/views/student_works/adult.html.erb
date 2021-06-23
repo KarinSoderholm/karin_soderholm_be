@@ -1,5 +1,5 @@
 <section class="page-title">
-  <h1><%= @artwork.name %></h1>
+  <h1>Adult Student Works</h1>
 </section>
 
 <div class="quicknav-content">
@@ -18,11 +18,9 @@
               <%= link_to 'all art', artworks_path %>
             </li>
             <% Collection.find_artworks.map do |collection| %>
-              <% if collection.name != @collection.name %>
-                <li class="page-collection">
-                  <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
-                </li>
-              <% end %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+              </li>
             <% end %>
           </ul>
         </div>
@@ -37,11 +35,9 @@
               <%= link_to 'all objects', clothings_path %>
             </li>
             <% Collection.find_objects.map do |collection| %>
-              <% if collection.name != @collection.name %>
-                <li class="page-collection">
-                  <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
-                </li>
-              <% end %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
+              </li>
             <% end %>
           </ul>
         </div>
@@ -53,9 +49,9 @@
         </div>
         <div class="quicknav-dropdown-content">
           <ul>
-            <li class="page-collection">
-              <%= link_to 'adult student works', adult_student_work_student_works_path %>
-            </li>
+            <!-- <li class="page-collection"> -->
+              <%# <%= link_to 'adult student works', adult_student_work_student_works_path %>
+            <!-- </li> -->
             <li class="page-collection">
               <%= link_to 'youth student works', youth_student_work_student_works_path %>
             </li>
@@ -69,34 +65,28 @@
   </div>
 </div>
 
-<div class="artwork-container-show">
-  <div class="artwork-image-container-show">
-    <% if @artwork.photos.attached? %>
-      <% @artwork.photos.map do |photo|%>
-          <section class="artwork-image-show">
-            <%= image_tag(photo) %>
+<section class="student-work-layout-index">
+  <section class="student-work-types-index">
+    <% @student_works.each do |student_work| %>
+      <% if student_work.image.attached? %>
+        <section class="student-work-card-index">
+          <section class="student-work-image-index">
+            <%= image_tag(student_work.image, style: 'height:10em;width:10em') %>
           </section>
+          <section class="student-work-card-title-index">
+            <h3><%= link_to student_work.title, student_work_path(student_work) %></h3>
+          </section>
+        </section>
+      <% else %>
+        <section class="student-work-card-index ">
+          <section class="student-work-card-image-no-image-index">
+            <p style="text-align: center;">Image coming soon!</p>
+          </section>
+          <section class="student-work-card-title-index">
+            <h3><%= link_to student_work.title, student_work_path(student_work) %></h3>
+          </section>
+        </section>
       <% end %>
-    <% else %>
-      <section class="artwork-no-image-show">
-        <%= 'Image coming soon!' %>
-      </section>
     <% end %>
-  </div>
-
-  <div class="artwork-description-container-show">
-    <section class="artwork-description-show">
-      <%= @artwork.description %>
-    </section>
-  </div>
-
-  <div class="artwork-cost-container-show">
-    <section class="artwork-cost-show">
-      <%= number_to_currency(@artwork.cost) %>
-    </section>
-  </div>
-
-  <div class="artwork-button-show">
-    <%= button_to 'Buy Me!', "/cart/artwork/#{@artwork.id}", method: :post %>
-  </div>
-</div>
+  </section>
+</section>

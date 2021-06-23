@@ -5,7 +5,68 @@
       <h1 class="brand-name">Quiet Joy Studio</h1>
     </section>
 
-
+    <div class="quicknav-content">
+      <div class="quicknav-dropdown">
+        <ul class="dropdown-row">
+          <li class="page-collection">
+            <%= link_to 'home', welcome_index_path %>
+          </li>
+          <li class="folder-collection">
+            <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+              <%= link_to 'art', artwork_collections_path %>
+            </div>
+            <div class="quicknav-dropdown-content">
+              <ul>
+                <li class="page-collection">
+                  <%= link_to 'all art', artworks_path %>
+                </li>
+                <% Collection.find_artworks.map do |collection| %>
+                  <li class="page-collection">
+                    <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+          <li class="folder-collection">
+            <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+              <%= link_to 'objects', physical_object_collections_path %>
+            </div>
+            <div class="quicknav-dropdown-content">
+              <ul>
+                <li class="page-collection">
+                  <%= link_to 'all objects', clothings_path %>
+                </li>
+                <% Collection.find_objects.map do |collection| %>
+                  <li class="page-collection">
+                    <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+          <li class="folder-collection">
+            <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+              <%= link_to 'student works', student_works_path %>
+              <!-- <p>student works</p> -->
+            </div>
+            <div class="quicknav-dropdown-content">
+              <ul>
+                <li class="page-collection">
+                  <%= link_to 'adult student works', adult_student_work_student_works_path %>
+                </li>
+                <li class="page-collection">
+                  <%= link_to 'youth student works', youth_student_work_student_works_path %>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="page-collection">
+            <%= link_to 'workshops', classrooms_path %>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <section class="welcome-introduction-layout">
       <section class="welcome-introduction-card">
@@ -85,39 +146,39 @@
         </section>
         <section class="welcome-introduction-object-images">
           <div class="welcome-object-carousel-container">
-            <div class="carousel">
-              <input type="radio" id="carousel-1" name="carousel[]" checked>
-              <input type="radio" id="carousel-2" name="carousel[]">
-              <input type="radio" id="carousel-3" name="carousel[]">
-              <input type="radio" id="carousel-4" name="carousel[]">
-              <input type="radio" id="carousel-5" name="carousel[]">
-              <ul class="carousel__items">
-                <li class="carousel__item"><%= image_tag("welcome-artworks-img1.png")%></li>
-                <li class="carousel__item"><%= image_tag("welcome-artworks-img2.png")%></li>
-                <li class="carousel__item"><%= image_tag("welcome-artworks-img3.png")%></li>
-                <li class="carousel__item"><%= image_tag("welcome-artworks-img4.png")%></li>
-                <li class="carousel__item"><%= image_tag("welcome-artworks-img5.png")%></li>
+            <div class="object-carousel">
+              <input type="radio" id="object-carousel-1" name="object-carousel[]" checked>
+              <input type="radio" id="object-carousel-2" name="object-carousel[]">
+              <input type="radio" id="object-carousel-3" name="object-carousel[]">
+              <input type="radio" id="object-carousel-4" name="object-carousel[]">
+              <input type="radio" id="object-carousel-5" name="object-carousel[]">
+              <ul class="object-carousel__items">
+                <li class="object-carousel__item"><%= image_tag("embrodery1.png")%></li>
+                <li class="object-carousel__item"><%= image_tag("embrodery4.png")%></li>
+                <li class="object-carousel__item"><%= image_tag("embrodery2.png")%></li>
+                <li class="object-carousel__item"><%= image_tag("embrodery5.png")%></li>
+                <li class="object-carousel__item"><%= image_tag("embrodery3.png")%></li>
               </ul>
-               <div class="carousel__prev">
-                <label for="carousel-1"></label>
-                <label for="carousel-2"></label>
-                <label for="carousel-3"></label>
-                <label for="carousel-4"></label>
-                <label for="carousel-5"></label>
+               <div class="object-carousel__prev">
+                <label for="object-carousel-1"></label>
+                <label for="object-carousel-2"></label>
+                <label for="object-carousel-3"></label>
+                <label for="object-carousel-4"></label>
+                <label for="object-carousel-5"></label>
                </div>
-               <div class="carousel__next">
-                 <label for="carousel-1"></label>
-                 <label for="carousel-2"></label>
-                 <label for="carousel-3"></label>
-                 <label for="carousel-4"></label>
-                 <label for="carousel-5"></label>
+               <div class="object-carousel__next">
+                 <label for="object-carousel-1"></label>
+                 <label for="object-carousel-2"></label>
+                 <label for="object-carousel-3"></label>
+                 <label for="object-carousel-4"></label>
+                 <label for="object-carousel-5"></label>
                </div>
-               <div class="carousel__nav">
-                 <label for="carousel-1"></label>
-                 <label for="carousel-2"></label>
-                 <label for="carousel-3"></label>
-                 <label for="carousel-4"></label>
-                 <label for="carousel-5"></label>
+               <div class="object-carousel__nav">
+                 <label for="object-carousel-1"></label>
+                 <label for="object-carousel-2"></label>
+                 <label for="object-carousel-3"></label>
+                 <label for="object-carousel-4"></label>
+                 <label for="object-carousel-5"></label>
                </div>
              </div>
            </div>

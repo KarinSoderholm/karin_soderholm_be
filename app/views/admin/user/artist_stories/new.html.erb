@@ -1,0 +1,18 @@
+<section class="page-title">
+  <h1>Create a new Artist Story for <%= current_user.name %>!</h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>
+</div><br>
+
+<section class="admin-artist-story-new">
+  <%= form_tag "/admin/user/#{current_user.id}/artist_stories", method: 'post', :class => 'admin-form-inline' do %>
+      <%= text_area_tag :story, nil, rows: 20, cols: 50, class: 'admin-form-inline', placeholder: 'Write your Story!' %>
+      <%# <!-- <%= hidden_field_tag "#{@artist.id}" %>
+
+      <section class="admin-new-artist-story-button">
+        <%= submit_tag 'Add Artist Story' %>
+      </section>
+  <% end %>
+</section>

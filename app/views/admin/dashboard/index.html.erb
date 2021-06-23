@@ -28,9 +28,9 @@
 </div><br>
 <div class="quicknav-content">
   <% if current_user.artist_statement %>
-    <%= link_to 'my artist statement', "/admin/user/#{current_user.id}/artist_statement/#{current_user.artist_statement.id}"%> / <%= link_to  'my artwork statements', admin_art_artwork_statement_path %>
+    <%= link_to 'my artist statement', "/admin/user/#{current_user.id}/artist_statement/#{current_user.artist_statement.id}" %> / <%= link_to  'my artwork statements', admin_art_artwork_statement_path %> /<%= link_to 'my artist stories', "/admin/user/artist_stories" %>
   <% else %>
-    <%= link_to  'my artwork statements', admin_art_artwork_statement_path %>
+    <%= link_to  'my artwork statements', admin_art_artwork_statement_path %> / <%= link_to 'my artist stories', "/admin/user/artist_stories" %>
   <% end %>
 </div><br>
 

@@ -1,10 +1,18 @@
 class StudentWorksController < ApplicationController
-  before_action :set_student_work, only: [:show, :update, :destroy]
+  before_action :set_student_work, only: [:show]
   def index
     @student_works = StudentWork.all
   end
-  def show
 
+  def show
+  end
+
+  def youth
+    @student_works = StudentWork.find_youths
+  end
+
+  def adult
+    @student_works = StudentWork.find_adults
   end
 
   private
@@ -13,6 +21,6 @@ class StudentWorksController < ApplicationController
   end
 
   def student_work_params
-    params.require(:student_work).permit(:title, :description, :age_category, :image)
+    params.require(:student_work).permit(:title, :description)
   end
 end

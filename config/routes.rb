@@ -42,6 +42,16 @@ Rails.application.routes.draw do
       delete '/user/:user_id/artist_statement/:id' => :destroy
     end
 
+    scope controller: :artist_stories, module: 'user' do
+      get '/user/:user_id/artist_stories/new' => :new
+      get '/user/:user_id/artist_stories/:id' => :show
+      get '/user/artist_stories' => :index
+      post '/user/:user_id/artist_stories' => :create
+      get '/user/:user_id/artist_stories/:id/edit' => :edit
+      post '/user/:user_id/artist_stories/:id/edit' => :update
+      delete '/user/:user_id/artist_stories/:id' => :destroy
+    end
+
     resources :student_works
     resources :frequently_asked_questions
     resources :cv do
@@ -133,9 +143,6 @@ Rails.application.routes.draw do
 
   namespace :artwork do
     resources :collections
-    # resources :artwork_statements do
-    #   get '/:artwork_id' => :index
-    # end
   end
   namespace :physical_object do
     resources :collections
@@ -153,6 +160,18 @@ Rails.application.routes.draw do
   end
   resources :socials
   resources :commission_blooming_maps
-  resources :student_works
+  resources :student_works, only: [:show, :index], controller: 'student_works' do
+    collection do
+      get '/student_works/youth' => :youth, :as => :youth_student_work
+      get '/student_works/adult' => :adult, :as => :adult_student_work
+    end
+  end
+  # scope controller: :student_works do
+  #   get '/student_works/:id' => :show
+  #   get '/student_works' => :index
+  #   get '/student_works/youth' => :youth, :as => :youth_student_work
+  #   get '/student_works/adult' => :adult, :as => :adult_student_work
+  # end
+
   resources :artwork_statements
 end

@@ -34,4 +34,11 @@ class StudentWork < ApplicationRecord
       return params
     end
   end
+  def self.find_adults
+    where(age_category: 'adult')
+  end
+
+  def self.find_youths
+    where(age_category: 'young_adult')
+  end
 end

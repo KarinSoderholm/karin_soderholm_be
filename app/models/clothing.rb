@@ -44,6 +44,26 @@ class Clothing < ApplicationRecord
   end
 
   def find_object_collection(physical_object)
-    physical_object.collections.first.collection_type
+    physical_object.collections.first.name
+  end
+
+  def set_images(params)
+    if params[:photos]
+      self.photos.attach(params[:photos])
+    elsif params[:clothing][:photos]
+      self.photos.attach(params[:clothing][:photos])
+    end
+  end
+
+  def set_availability(params)
+    if !params[:clothing][:sell_date].nil?
+      params[:clothing][:available] = false
+      self.available = false
+      return params
+    else
+      params[:clothing][:available] = true
+      self.available = true
+      return params
+    end
   end
 end
