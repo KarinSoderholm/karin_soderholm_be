@@ -657,13 +657,15 @@
     align-items: center;
     align-content: center;
     flex-wrap: nowrap;
-    opacity: 50%;
+    // opacity: 50%;
     font-size: 15px;
     text-decoration: none;
     font-stretch: ultra-expanded;
+
   }
   .quicknav-content a{
     color: #5b4c18;
+    opacity: 50%;
     display: flex;
     flex-direction: rows;
     flex-wrap: nowrap;
@@ -677,7 +679,7 @@
     font-variant-caps: all-petite-caps;
     padding-left: 1em;
     padding-right: 1em;
-    // transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1) opacity;
+    transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1) opacity;
   }
   .quicknav-content a:hover {
     // color: #5b4c18;
@@ -1224,6 +1226,7 @@
     align-items: center;
   }
 
+// welcome-index#artwork section
   @mixin carousel($items, $animation: 'default') {
     .carousel {
       width: 100%;
@@ -1432,13 +1435,234 @@
     min-width: 400px;
     margin: 50px auto;
   }
-  .welcome-object-carousel-container {
-    width: 400px;
-    min-width: 400px;
-    margin: 50px auto;
-  }
+  // .welcome-object-carousel-container {
+  //   width: 400px;
+  //   min-width: 400px;
+  //   margin: 50px auto;
+  // }
 
   @include carousel(5);
+
+
+// welcome#index#objection section
+
+@mixin object-carousel($items, $animation: 'default') {
+  .object-carousel {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1em;
+
+    > input[type="radio"] {
+      position: absolute;
+      left: 0;
+      opacity: 0;
+      top: 0;
+
+      &:checked {
+        ~ .object-carousel__items .object-carousel__item,
+        ~ .object-carousel__prev > label,
+        ~ .object-carousel__next > label {
+          opacity: 0;
+        }
+      }
+
+      @for $i from 1 through $items {
+        &:nth-child(#{$i}) {
+          &:checked {
+            ~ .object-carousel__items .object-carousel__item {
+              @if $animation == 'default' {
+                &:nth-child(#{$i}) {
+                  opacity: 1;
+                }
+              }
+            }
+
+            ~ .object-carousel__prev {
+              > label {
+                @if $i == 1 {
+                  &:nth-child(#{$items}) {
+                    @extend %animation-default;
+                  }
+                } @else if $i == $items {
+                  &:nth-child(#{$items - 1}) {
+                    @extend %animation-default;
+                  }
+                } @else {
+                  &:nth-child(#{$i - 1}) {
+                    @extend %animation-default;
+                  }
+                }
+              }
+            }
+
+            ~ .object-carousel__next {
+              > label {
+                @if $i == $items {
+                  &:nth-child(1) {
+                    @extend %animation-default;
+                  }
+                } @else {
+                  &:nth-child(#{$i + 1}) {
+                    @extend %animation-default;
+                  }
+                }
+              }
+            }
+
+            ~ .object-carousel__nav {
+              > label {
+                &:nth-child(#{$i}) {
+                  background: #ccc;
+                  cursor: default;
+                  pointer-events: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__items {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      width: 100%;
+      height: 400px;
+      position: relative;
+    }
+
+    &__item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      transition: opacity 2s;
+      -webkit-transition: opacity 2s;
+
+      img {
+        width: 100%;
+        vertical-align: middle;
+      }
+    }
+
+    &__prev,
+    &__next {
+      > label {
+        border: 1px solid #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        display: block;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transition: all .3s ease;
+        -webkit-transition: all .3s ease;
+        opacity: 0;
+        z-index: 2;
+
+        &:hover,
+        &:focus {
+          opacity: .5 !important;
+        }
+
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          width: inherit;
+          height: inherit;
+        }
+
+        &:before {
+          background: linear-gradient(to top, #fff 0%, #fff 10%, rgba(51, 51, 51, 0) 10%),
+                      linear-gradient(to left, #fff 0%, #fff 10%, rgba(51, 51, 51, 0) 10%);
+          width: 60%;
+          height: 60%;
+          top: 20%;
+        }
+      }
+    }
+
+    &__prev {
+      > label {
+        left: 2%;
+
+        &:before {
+          left: 35%;
+          top: 20%;
+          transform: rotate(135deg);
+          -webkit-transform: rotate(135deg);
+        }
+      }
+    }
+
+    &__next {
+      > label {
+        right: 2%;
+
+        &:before {
+          left: 10%;
+          transform: rotate(315deg);
+          -webkit-transform: rotate(315deg);
+        }
+      }
+    }
+
+    &__nav {
+      position: absolute;
+      bottom: 3%;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      z-index: 3;
+
+      > label {
+        border: 1px solid #fff;
+        display: inline-block;
+        border-radius: 50%;
+        cursor: pointer;
+        margin: 0 .125%;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+body {
+  background: #fcfcfc;
+  margin: 0;
+}
+
+// .welcome-artwork-carousel-container {
+//   width: 400px;
+//   min-width: 400px;
+//   margin: 50px auto;
+// }
+.welcome-object-carousel-container {
+  width: 400px;
+  min-width: 400px;
+  margin: 50px auto;
+}
+
+@include object-carousel(5);
+//end of welcome#index#objection section carousel
+
 
   .welcome-artwork-layout{
     display: flex;
@@ -4275,6 +4499,7 @@
   position: absolute;
   font-family: LTCKennerley;
   font-size: smaller;
+  // background-color: white;
   background-color: #f1f1f1;
   // min-width: 160px;
   // min-height: 250px;
@@ -4299,7 +4524,7 @@
 }
 
 /* Change color of dropdown links on hover */
-.quicknav-dropdown-content a:hover {background-color: white}
+.quicknav-dropdown-content a:hover {background-color: white;}
 
 /* Show the dropdown menu on hover */
 .folder-collection:hover .quicknav-dropdown-content {display: block;}
@@ -4312,13 +4537,15 @@
   padding: 0px;
 }
 .folder-collection{
-  background-color: white;
+  // background-color: white;
 }
 .folder-collection a{
-  background-color: white;
+  // background-color: white;
 }
 .folder-collection a:hover{
-  opacity: 50%;
+  opacity: 25%;
+  border-radius: 1em;
+  // background-color: red;
 }
 .page-collection{
 
@@ -4326,7 +4553,8 @@
 .quicknav-menu-bar-container {
   display: inline-block;
   cursor: pointer;
-  background-color: #51677e;
+  background-color: white;
+  // background-color: #51677e;
   z-index: 1;
 }
 //Dropdown Navigation
