@@ -8,7 +8,16 @@
 
 <section id='admin-profile-links'>
   <%# I added the link above to 'all users' which takes the place of this button. I think the link makes more sense. %>
-  <%= button_to 'Add an Artist Statement', "/admin/user/#{@user.id}/artist_statement/new", method: :get %>
+  <% if !@user.artist_story %>
+    <%= button_to 'Add your Story', "/admin/user/#{@user.id}/artist_stories/new", method: :get %>
+  <% else %>
+    <%= button_to 'Edit your Story', "/admin/user/#{@user.id}/artist_stories/#{@user.artist_story.id}/edit", method: :get %>
+  <% end %>
+  <% if !@user.artist_statement %>
+    <%= button_to 'Add an Artist Statement', "/admin/user/#{@user.id}/artist_statement/new", method: :get %>
+  <% else %>
+    <%= button_to 'Edit your Artist Statement', "/admin/user/#{@user.id}/artist_statement/#{@user.artist_statement.id}/edit", method: :get %>
+  <% end %>
   <%= button_to 'Edit Profile', "/admin/users/#{@user.id}/edit", method: :get %>
   <%= button_to 'Edit Password', "/admin/users/#{@user.id}/edit_password", method: :get %>
   <%= button_to 'Delete Profile', "/admin/users/#{@user.id}", method: :delete, data: { confirm: "Are you sure?" } %>
