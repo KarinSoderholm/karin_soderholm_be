@@ -3207,12 +3207,12 @@
   .physical-object-initial-information{
     display: flex;
     background-color: white;
-    // border-radius: 1em;
-    // margin: 2em;
     /* padding: 2em 10em 2em; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 2em 0;
+    border-radius: 1em;
   }
   .physical-object-information-title{
     display: flex;
@@ -3253,16 +3253,16 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    background-color: #51677e;
+    // background-color: #51677e;
     margin: 0 0 2em;
   }
   .physical-object-collection-column-index {
     display: flex;
-    // background-color: #51677e;
-    // margin: 1em;
+    background-color: #51677e;
     flex-direction: column;
-    // flex-basis: 100%;
-    // flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    margin: 1em;
   }
   .physical-object-collection-card-index {
     display: flex;
