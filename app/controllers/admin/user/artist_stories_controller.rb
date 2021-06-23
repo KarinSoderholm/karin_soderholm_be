@@ -31,7 +31,7 @@ class Admin::User::ArtistStoriesController < Admin::BaseController
   def update
     if @artist_story.update(artist_story_params)
       flash[:success] = "Hooray, you have updated your Artist Story"
-      redirect_to "/admin/user/#{@user.id}/artist_story/#{@artist_story.id}"
+      redirect_to "/admin/user/#{@user.id}/artist_stories/#{@artist_story.id}"
     else
       flash.now[:error] = "Please make sure the field is filled out. Please try again"
       render :edit
