@@ -160,6 +160,18 @@ Rails.application.routes.draw do
   end
   resources :socials
   resources :commission_blooming_maps
-  resources :student_works
+  resources :student_works, only: [:show, :index], controller: 'student_works' do
+    collection do
+      get '/student_works/youth' => :youth, :as => :youth_student_work
+      get '/student_works/adult' => :adult, :as => :adult_student_work
+    end
+  end
+  # scope controller: :student_works do
+  #   get '/student_works/:id' => :show
+  #   get '/student_works' => :index
+  #   get '/student_works/youth' => :youth, :as => :youth_student_work
+  #   get '/student_works/adult' => :adult, :as => :adult_student_work
+  # end
+
   resources :artwork_statements
 end
