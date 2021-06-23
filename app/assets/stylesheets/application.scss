@@ -3646,7 +3646,7 @@ body {
       /* width: 300px; */
       padding: 50px;
       margin: 20px;
-      z-index: 3;
+      // z-index: 3;
       flex-direction: row;
       flex-wrap: wrap;
       align-content: center;
@@ -3958,9 +3958,9 @@ body {
     padding: 2em;
     margin: 1em;
   }
-  .student-work-card-index{
-    display: flex;
-  }
+  // .student-work-card-index{
+  //   display: flex;
+  // }
   .student-work-card-index{
     display: flex;
     flex-direction: column;
@@ -3977,6 +3977,16 @@ body {
     display: flex;
     box-shadow: 0 4px 8px 0 #5d5959;
     margin: 1em;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .student-work-image-index a img {
+
+  }
+  .student-work-image-index img:hover {
+
   }
   .student-work-card-title-index{
     display: flex;
@@ -3985,13 +3995,25 @@ body {
     align-content: center;
     justify-content: center;
     align-items: center;
+
+
+    position: absolute;
+    text-align: center;
   }
   .student-work-card-title-index a {
     text-decoration: none;
     color: #51677e;
+    opacity: 0%;
   }
   .student-work-card-title-index a:hover {
-    color: black;
+    color: #5b4c18;
+    opacity: 100%;
+    background-color: white;
+    font-size: 25px;
+    font-weight: 600;
+    border-radius: .25em;
+    padding: 1em;
+    box-shadow: 0 4px 8px 0 #5d5959;
   }
   .student-work-card-image-no-image-index{
     display: flex;
