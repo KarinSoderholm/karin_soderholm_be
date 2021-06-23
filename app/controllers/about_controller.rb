@@ -1,6 +1,8 @@
 class AboutController < ApplicationController
   def bio
     @socials = Social.all
+    @artist_statement = ArtistStatement.all.first
+    @artist_story = ArtistStory.all.first
   end
 
   def contact
