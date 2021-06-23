@@ -42,6 +42,16 @@ Rails.application.routes.draw do
       delete '/user/:user_id/artist_statement/:id' => :destroy
     end
 
+    scope controller: :artist_stories, module: 'user' do
+      get '/user/:user_id/artist_stories/new' => :new
+      get '/user/:user_id/artist_stories/:id' => :show
+      get '/user/artist_stories' => :index
+      post '/user/:user_id/artist_stories' => :create
+      get '/user/:user_id/artist_stories/:id/edit' => :edit
+      post '/user/:user_id/artist_stories/:id/edit' => :update
+      delete '/user/:user_id/artist_stories/:id' => :destroy
+    end
+
     resources :student_works
     resources :frequently_asked_questions
     resources :cv do

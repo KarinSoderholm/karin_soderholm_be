@@ -1,5 +1,5 @@
 class ArtistStory < ApplicationRecord
   belongs_to :user
-  
-  validates :statement, presence: true
+
+  validates :story, presence: true
 end

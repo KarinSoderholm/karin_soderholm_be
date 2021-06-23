@@ -1,0 +1,23 @@
+<section class="page-title">
+  <h1>Artist Story for <%= current_user.name %></h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{current_user.name}' profile", "/admin/users/#{current_user.id}" %>/ <%= link_to 'my art', admin_artworks_path %> / <%= link_to  'my garments', admin_clothings_path %> / <%= link_to  'my workshops', admin_classrooms_path %>
+</div><br>
+
+<section id='navigation-links-individual'>
+  <%= link_to 'Edit Story', "/admin/user/#{current_user.id}/artist_stories/#{@artist_story.id}/edit", method: :get %>
+</section><br>
+
+<section class="admin-artist-story-layout">
+  <section class="admin-artist-story-card">
+    <section class="admin-artist-story-story">
+      <%= @artist_story.story %>
+    </section>
+  </section>
+</section>
+
+<section class="admin-artist-story-delete-button">
+  <%= button_to 'Delete Story', "/admin/user/#{current_user.id}/artist_story/#{@artist_story.id}", method: :delete %>
+</section>
