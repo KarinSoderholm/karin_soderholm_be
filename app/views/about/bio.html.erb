@@ -3,7 +3,58 @@
 </section>
 
 <div class="quicknav-content">
-  <%= link_to 'home', welcome_index_path %>  /  <%= link_to 'contact the maker', '/about/1/contact' %> / <%= link_to 'CV', '/about/1/cv' %> / <%= link_to 'commission a blooming map', new_commission_blooming_map_path %> / <%= link_to 'FAQ', '/about/1/faq' %>
+  <div class="quicknav-dropdown">
+    <ul class="dropdown-row">
+      <li class="page-collection">
+        <%= link_to 'home', welcome_index_path %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'contact the maker', '/about/1/contact' %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'CV', '/about/1/cv' %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'commission a blooming map', new_commission_blooming_map_path %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'FAQ', '/about/1/faq' %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'all art', artworks_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to '100 Day Project: Maps', "/artwork/collections/1"%>
+            </li>
+            <li class="page-collection">
+              <%= link_to '100 Day Project: Embroidery', "/artwork/collections/3"%>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'objects', physical_object_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all objects', clothings_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'Garments', "/physical_object/collections/5" %>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'workshops', classrooms_path %>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <section class="bio-layout">
@@ -38,6 +89,7 @@
       </section>
       <section class="about-story-maker-card">
         <section class="about-maker-story-text">
+          <%= @artist_story.story %>
           <p>Some words about things.</p>
         </section>
         <section class="about-story-maker-image">
@@ -53,11 +105,12 @@
       <h3>Artist Statement</h3>
     </section>
     <section class="about-maker-artist-statement-card">
-      <section class="about-maker-artist-statement-text">
-        <p>Some words</p>
-      </section>
       <section class="about-maker-artist-statement-image">
         <%= image_tag 'paper-art2.png' %>
+      </section>
+      <section class="about-maker-artist-statement-text">
+        <p><%= @artist_statement.statement %></p>
+        <!-- <p>Some words</p> -->
       </section>
     </section>
 
