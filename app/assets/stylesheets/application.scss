@@ -3713,6 +3713,73 @@
     padding: 8px;
   }
 
+  // student_work#index
+  .student-work-layout-index{
+    display: flex;
+    background-color: #51677e;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    // padding: 20em;
+  }
+  .student-work-types-index{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    padding: 2em;
+    margin: 1em;
+  }
+  .student-work-card-index{
+    display: flex;
+  }
+  .student-work-card-index{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 2em;
+    margin: 1em;
+    border-radius: 1em;
+  }
+  .student-work-image-index{
+    display: flex;
+    box-shadow: 0 4px 8px 0 #5d5959;
+    margin: 1em;
+  }
+  .student-work-card-title-index{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .student-work-card-title-index a {
+    text-decoration: none;
+    color: #51677e;
+  }
+  .student-work-card-title-index a:hover {
+    color: black;
+  }
+  .student-work-card-image-no-image-index{
+    display: flex;
+    // border-style: solid;
+    border-radius: .15em;
+    padding: 2em;
+    box-shadow: 0 4px 8px 0 #5d5959;
+    margin: 1em;
+  }
+  // student_work#show
+
+
 
   // social#art_show
   .social-details-links{
@@ -3872,26 +3939,30 @@
   }
   .about-maker-artist-statement-card{
     display: flex;
-    flex-wrap: wrap;
-    align-content: stretch;
+    flex-wrap: nowrap;
+    align-content: center;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     flex-direction: column;
   }
   .about-maker-artist-statement-text{
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
-    align-content: space-around;
-    align-items: flex-end;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
   }
   .about-maker-artist-statement-image{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    align-content: center;
+    width: 50%;
+    padding: 1em 1em 2em;
   }
   .about-maker-artist-statement-image img {
     border-radius: 1em;
@@ -4177,40 +4248,6 @@
 
 // Quick Navigation dropdown
 
-// this is just for reference to help build
-// .quicknav-content {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   align-content: center;
-//   flex-wrap: nowrap;
-//   opacity: 50%;
-//   font-size: 15px;
-//   text-decoration: none;
-//   font-stretch: ultra-expanded;
-// }
-// .quicknav-content a{
-//   color: #5b4c18;
-//   display: flex;
-//   flex-direction: rows;
-//   flex-wrap: nowrap;
-//   justify-content: center;
-//   align-items: space-between;
-//   align-content: space-around;
-//   overflow: hidden;
-//   pointer-events: cursor;
-//   text-decoration: none;
-//   background-color: transparent;
-//   font-variant-caps: all-petite-caps;
-//   padding-left: 1em;
-//   padding-right: 1em;
-//   // transition: 0.15s cubic-bezier(0.4, 0, 0.2, 1) opacity;
-// }
-// .quicknav-content a:hover {
-  // color: #5b4c18;
-  // font-size: 20px;
-// }
 .quicknav-top-menu{
   background-color: #51677e;
   display: flex;
