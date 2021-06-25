@@ -5,8 +5,8 @@ class Clothing < ApplicationRecord
   has_many :patterns, dependent: :destroy
   has_many :order_clothings, dependent: :destroy
   has_many :orders, through: :order_clothings, dependent: :destroy
-  has_many :object_collections, dependent: :destroy
-  has_many :collections, through: :object_collections, dependent: :destroy
+  has_many :object_collections, dependent: :delete_all
+  has_many :collections, through: :object_collections, dependent: :delete_all
   has_one_attached :image
   has_many_attached :photos
 
@@ -64,6 +64,16 @@ class Clothing < ApplicationRecord
       params[:clothing][:available] = true
       self.available = true
       return params
+    end
+  end
+
+  def translate_date
+    (self.origin_date).strftime("%b %Y")
+  end
+
+  def remove_photo
+    if self.photos.attached?
+      self.photos.purge_later
     end
   end
 end

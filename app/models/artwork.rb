@@ -11,7 +11,7 @@ class Artwork < ApplicationRecord
   has_many :orders, through: :order_artworks, dependent: :destroy
   has_many :artwork_collections, dependent: :destroy
   has_many :collections, through: :artwork_collections, dependent: :destroy
-  
+
   has_many_attached :photos
   has_one_attached :image
 
@@ -66,7 +66,9 @@ class Artwork < ApplicationRecord
   end
 
   def set_images(params)
-    if params[:artwork][:photos]
+    if params[:photos]
+      self.photos.attach(params[:photos])
+    elsif params[:artwork][:photos]
       self.photos.attach(params[:artwork][:photos])
     end
   end
@@ -84,5 +86,9 @@ class Artwork < ApplicationRecord
     unless acceptable_types.include?(photo.content_type)
       errors.add(:photos, "must be a JPEG or PNG")
     end
+  end
+
+  def translate_date
+    (self.create_date).strftime("%b %Y")
   end
 end
