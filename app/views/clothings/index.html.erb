@@ -63,6 +63,9 @@
 </div>
 
 <div class="clothings-layout">
+  <div class="clothings-about-text-index">
+    <p>Some words about all the Objects.</p>
+  </div>
   <div class="clothing-row">
     <% if !@clothings.empty? %>
       <% @clothings.each do |clothing| %>
@@ -82,15 +85,15 @@
             <p class="clothing-image">Garment Unavailable</p>
           <% end %>
           <!-- <h3>Description: <%= clothing.description %></h3> -->
-            <div class="clothing-text">
-              <h3>This garment is <div class="availability"><%= clothing.availability? %></div></h3>
-              <% if clothing.available %>
-                <h5>Click the picture for more details!</h5>
-                <h3>Cost: <div class="cost"><%= number_to_currency(clothing.cost) %></div></h3>
-              <% else %>
-                <h5>It was so popular, we don't have any more at this time. Check back soon for more inventory.</h5>
-              <% end %>
-            </div>
+            <!-- <div class="clothing-text"> -->
+              <!-- <h3>This garment is <div class="availability"><%= clothing.availability? %></div></h3> -->
+              <%# <% if clothing.available %>
+                <!-- <h5>Click the picture for more details!</h5> -->
+                <!-- <h3>Cost: <div class="cost"><%= number_to_currency(clothing.cost) %></div></h3> -->
+              <%# <% else %>
+                <!-- <h5>It was so popular, we don't have any more at this time. Check back soon for more inventory.</h5> -->
+              <%# <% end %>
+            <!-- </div> -->
           </div>
         </div>
           <br>

@@ -18,11 +18,13 @@
               <%= link_to 'all art', artworks_path %>
             </li>
             <% Collection.find_artworks.map do |collection| %>
-              <% if collection.name != @collection.name %>
+              <%# <% if collection.name != @artwork.collections.first.name %>
+              <%# <% binding.pry%>
+              <%# <% if !@collections.include?(collection) %>
                 <li class="page-collection">
                   <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
                 </li>
-              <% end %>
+              <%# <% end %>
             <% end %>
           </ul>
         </div>
