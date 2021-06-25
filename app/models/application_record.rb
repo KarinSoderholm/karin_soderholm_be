@@ -29,5 +29,10 @@ class ApplicationRecord < ActiveRecord::Base
     unless acceptable_types.include?(image.content_type)
       errors.add(:image, "must be a JPEG or PNG")
     end
-  end 
+  end
+
+  # def translate_date
+  #   binding.pry
+  #   self.strftime("%b %Y")
+  # end
 end
