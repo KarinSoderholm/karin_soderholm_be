@@ -41,6 +41,22 @@
           </ul>
         </div>
       </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'student works', student_works_path %>
+          <!-- <p>student works</p> -->
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'adult student works', adult_student_work_student_works_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'youth student works', youth_student_work_student_works_path %>
+            </li>
+          </ul>
+        </div>
+      </li>
       <li class="page-collection">
         <%= link_to 'workshops', classrooms_path %>
       </li>
@@ -55,11 +71,17 @@
         <% if !collection.artworks.empty?%>
           <section class="artwork-collection-column-index">
             <section class="artwork-collection-title-index">
-              <p><%= link_to "#{collection.name}", "/collections/#{collection.id}", method: :get %></p>
+              <p><%= link_to "#{collection.name}", artwork_collection_path(collection), method: :get %></p>
             </section>
+            <div class="artwork-collection-about-text-index">
+              <p>Some words about each collection of art.</p>
+            </div>
             <section class="artwork-collection-card-index">
               <section class="artwork-collections-index">
                 <section class="artwork-collections-column-index">
+                  <section class="outlayer-image-one">
+                    <%= image_tag 'Poppies.png' %>
+                  </section>
                   <% collection.artworks.each do |artwork| %>
                     <% if artwork.photos.attached? %>
                       <section class="artwork-collection-artwork-card-index">
