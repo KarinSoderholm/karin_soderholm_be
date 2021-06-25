@@ -51,6 +51,15 @@ Rails.application.routes.draw do
       post '/user/:user_id/artist_stories/:id/edit' => :update
       delete '/user/:user_id/artist_stories/:id' => :destroy
     end
+    scope controller: :tags, module: 'posts' do
+      get '/posts/:blog_post_id/tags/new' => :new, :as => :post_tag_new
+      get '/posts/:blog_post_id/tags/:id' => :show, :as => :post_tag
+      get '/posts/tags' => :index, :as => :post_tags
+      post '/posts/:blog_post_id/tags' => :create, :as => :post_tag_create
+      get '/posts/:blog_post_id/tags/:id/edit' => :edit, :as => :post_tag_edit
+      post '/posts/:blog_post_id/tags/:id/edit' => :update, :as => :post_tag_update
+      delete '/posts/:blog_post_id/tags/:id' => :destroy, :as => :post_tag_delete
+    end
 
     resources :student_works
     resources :frequently_asked_questions
@@ -107,6 +116,11 @@ Rails.application.routes.draw do
       get '/messages' => :messages
     end
     resources :commission_blooming_maps
+    resources :blog_posts do
+      get '/add_photos' => :add_photos
+      patch '/photo_update' => :photo_update
+      delete '/remove_photo/:photo_id' => :remove_photo
+    end
   end
 
   scope controller: :sessions do
@@ -166,12 +180,6 @@ Rails.application.routes.draw do
       get '/student_works/adult' => :adult, :as => :adult_student_work
     end
   end
-  # scope controller: :student_works do
-  #   get '/student_works/:id' => :show
-  #   get '/student_works' => :index
-  #   get '/student_works/youth' => :youth, :as => :youth_student_work
-  #   get '/student_works/adult' => :adult, :as => :adult_student_work
-  # end
-
   resources :artwork_statements
+  resources :posts
 end
