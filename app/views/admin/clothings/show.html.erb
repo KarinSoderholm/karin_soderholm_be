@@ -75,10 +75,10 @@
   <section class="admin-garment-detail-category">
     Link to Etsy url:
   </section>
-    <% if @clothing.url.empty? %>
-      <p class="admin-garment-details-text">There is not a link available</p>
-    <% else %>
+    <% if @clothing.url %>
       <p class="admin-garment-details-text"><%= @clothing.url %></p>
+    <% else %>
+      <p class="admin-garment-details-text">There is not a link available</p>
     <% end %>
 
   <section class="admin-garment-detail-category">
@@ -94,7 +94,8 @@
   <section class="admin-garment-detail-category">
     Object's creation date:
   </section>
-  <p class="admin-garment-details-text"><%= (@clothing.origin_date).strftime("%A, %d %b %Y") %></p>
+  <!-- <p class="admin-garment-details-text"><%= (@clothing.origin_date).strftime("%A, %d %b %Y") %></p> -->
+  <p class="admin-garment-details-text"><%= @clothing.translate_date %></p>
 
   <section class="admin-garment-detail-category">
     Object's MSRP:

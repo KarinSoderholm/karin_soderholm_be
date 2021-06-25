@@ -40,11 +40,11 @@
         <% else %>
           <td>There is no image to display </td>
         <% end %>
-        <td><%= artwork.create_date.strftime("%A, %d %b %Y") %></td>
+        <td><%= artwork.translate_date %></td>
         <% if !artwork.sell_date.nil?%>
-          <td><%= artwork.sell_date.strftime("%A, %d %b %Y") %></td>
+          <td><%= artwork.translate_date %></td>
         <% else %>
-          <td><%= artwork.sell_date %></td>
+          <td>---</td>
         <% end %>
         <td><%= number_to_currency(artwork.cost) %></td>
         <td><%= artwork.availability? %></td>
