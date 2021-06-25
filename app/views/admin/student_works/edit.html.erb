@@ -5,19 +5,31 @@
 <div class="quicknav-content">
   <%= link_to  'admin dashboard', admin_dashboard_index_path %> / <%= link_to "#{@student_work.title}", admin_student_work_path(@student_work) %> / <%= link_to "my student works", admin_student_works_path%>
 </div><br>
-<%= form_for ([:admin, @student_work]) do |f| %>
 
-  <%= f.label 'Name of Garment: '%><br>
-  <%= f.text_field :title %><br>
+<section class="admin-student-work-layout-edit">
+  <section class="admin-student-work-card-edit">
+    <section class="admin-student-work-image-edit">
+      <% if @student_work.image.attached? %>
+        <p><%= image_tag(@student_work.image) %></p>
+      <% end %>
+    </section>
+    <section class="admin-student-work-form-edit">
+      <%= form_for ([:admin, @student_work]) do |f| %>
 
-  <%= f.label 'Description of Garment: '%><br>
-  <%= f.text_field :description %><br>
+      <%= f.label 'Name of StudentWork: '%><br>
+      <%= f.text_field :title %><br>
 
-  <%= f.label 'Category of Garment: '%><br>
-  <%= f.select :age_category, options_for_select(StudentWork.age_categories.map { |category| category }) %><br>
+      <%= f.label 'Description of StudentWork: '%><br>
+      <%= f.text_field :description %><br>
 
-  <%= f.label 'Image of StudentWork: '%><br>
-  <%= f.file_field :image %><br>
+      <%= f.label 'Category of StudentWork: '%><br>
+      <%= f.select :age_category, options_for_select(StudentWork.age_categories.map { |category| category }) %><br>
 
-  <%= f.submit 'Update StudentWork' %>
-<% end %>
+      <%= f.label 'Image of StudentWork: '%><br>
+      <%= f.file_field :image %><br>
+
+      <%= f.submit 'Update StudentWork' %>
+      <% end %>
+    </section>
+  </section>
+</section>

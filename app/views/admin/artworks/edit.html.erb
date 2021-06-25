@@ -5,35 +5,49 @@
 <div class="quicknav-content">
   <%= link_to  'admin dashboard', admin_dashboard_index_path %>  /  <%= link_to "#{ @artwork.name }", admin_artwork_path(@artwork) %> /  <%= link_to 'my art', admin_artworks_path %>
 </div>
-<%= form_for ([:admin, @artwork]) do |f| %>
 
-  <%= f.label 'Name of Artwork*: '%><br>
-  <%= f.text_field :name %><br>
+<section class="admin-artwork-layout-edit">
+  <section class="admin-artwork-card-edit">
+    <section class="admin-artwork-image-edit">
+      <% if @artwork.photos.attached? %>
+        <p><%= image_tag(@artwork.photos.first) %></p>
+      <% else %>
+        <p>There isn't an image uploaded, yet!</p>
+      <% end %>
+    </section>
+    <section class="admin-artwork-form-edit">
+      <%= form_for ([:admin, @artwork]) do |f| %>
 
-  <%= f.label 'Description of Artwork*: '%><br>
-  <%= f.text_field :description %><br>
+        <%= f.label 'Name of Artwork*: '%><br>
+        <%= f.text_field :name %><br>
 
-  <%= f.label 'Artwork was created on*: '%><br>
-  <%= f.date_field :create_date %><br>
+        <%= f.label 'Description of Artwork*: '%><br>
+        <%= f.text_area :description, rows: 10, cols: 30 %><br>
 
-  <%= f.label 'Artwork was sold on: '%><br>
-  <%= f.date_field :sell_date %><br>
-  <br>
+        <%= f.label 'Artwork was created on*: '%><br>
+        <%= f.date_field :create_date %><br>
 
-  <%= f.label 'Artwork Collection: '%><br>
-  <%= select_tag :collection, options_from_collection_for_select(@collections, "id", "name"), include_blank: true %><br>
+        <%= f.label 'Artwork was sold on: '%><br>
+        <%= f.date_field :sell_date %><br>
+        <br>
 
-  <%= f.label 'Cost *: '%><br>
-  <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>
-  <br>
-  <%= f.label 'Artwork is available (yes/no)*: '%>
-  <%= f.label 'Yes'%>
-  <%= f.radio_button :available, true %>
-  <%= f.label 'No'%>
-  <%= f.radio_button :available, false %><br>
+        <%= f.label 'Artwork Collection: '%><br>
+        <%= select_tag :collection, options_from_collection_for_select(@collections, "id", "name"), include_blank: true %><br>
 
-  <%# <%= f.label 'Image of Artwork: '%><br>
-  <%# <%= f.file_field :photos %><br>
+        <%= f.label 'Cost *: '%><br>
+        <%= f.number_field :cost, value: number_to_currency(f.object.cost.to_f, delimiter: '', unit: ''), step: :any %><br>
+        <br>
+        <%= f.label 'Artwork is available (yes/no)*: '%>
+        <%= f.label 'Yes'%>
+        <%= f.radio_button :available, true %>
+        <%= f.label 'No'%>
+        <%= f.radio_button :available, false %><br>
 
-  <%= f.submit 'Update Artwork' %>
-<% end %>
+        <%# <%= f.label 'Image of Artwork: '%><br>
+        <%# <%= f.file_field :photos %><br>
+
+        <%= f.submit 'Update Artwork' %>
+      <% end %>
+    </section>
+  </section>
+</section>
