@@ -69,6 +69,12 @@
 
 <div class="physical-object-collection-layout-show">
     <div class="physical-object-collection-container-show">
+      <div class="physical-object-collection-about-text-show">
+        <p>Some words about what it means to have young adult students</p>
+      </div>
+      <div class="physical-object-collection-about-text-show">
+        <p>Some words about <%= @collection.name %></p>
+      </div>
       <div class="physical-object-collection-container-row-show">
         <% @collection.clothings.each do |object| %>
           <!-- <div class="physical-object-collection-object-column-show"> -->
