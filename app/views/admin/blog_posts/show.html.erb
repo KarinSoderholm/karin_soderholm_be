@@ -1,0 +1,52 @@
+<section class="page-title">
+  <h1>Blog Post: <%= @blog_post.title %></h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>  / <%= link_to  'my blog_posts', admin_blog_posts_path %>
+</div><br>
+<section id='navigation-links-individual'>
+  <%= link_to 'Edit Post', "/admin/blog_posts/#{@blog_post.id}/edit", method: :get %>
+  <%# <!-- <p><%= link_to 'Delete Post', admin_blog_post_path(@blog_post), method: :delete, remote: true, id: 'remove-blog_post', data: { disable_with: "Wait..." }, data: { confirm: 'Are you sure?' } %>
+  <%# <%= link_to 'Delete Post', "/admin/blog_posts/#{@blog_post.id}", method: :delete, data: { confirm: "Are you sure?" } %>
+</section><br><br>
+
+<section class="admin-blog-post-details-show">
+  <section class="admin-blog-post-detail-category-show">
+    Blog Post Body:
+  </section>
+  <p class="admin-blog-post-details-text-show"><%= @blog_post.body %></p>
+
+  <% if @blog_post.photos.attached? %>
+    <section class="admin-blog-post-details-images-show">
+      <section class="admin-blog-post-details-image-show">
+        <% @blog_post.photos.map do |photo| %>
+          <p class="admin-blog-post-details-image-show"><%= image_tag(photo) %></p>
+          <%= button_to 'Delete Photo', "/admin/blog_posts/#{@blog_post.id}/remove_photo/#{photo.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
+        <% end %>
+      </section>
+    </section>
+  <% else %>
+    <h5>There is no image uploaded, yet for this Post!</h5>
+  <% end %>
+
+  <section class="admin-blog-post-detail-category-show">
+    Tags for <%= @blog_post.title %>:
+  </section>
+  <% @blog_post.tags.map do |tag| %>
+    <p class="admin-blog-post-details-text-show"><%= tag.title %></p>
+    <%= button_to 'Delete Tag', "/admin/posts/#{@blog_post.id}/tags/#{tag.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
+  <% end %>
+
+  <section class="admin-blog-post-add-tag-button">
+    <%= button_to "Add tag to #{@blog_post.title}", "/admin/posts/#{@blog_post.id}/tags/new", method: :get %>
+  </section>
+
+  <section class="admin-blog-post-add-image-button">
+    <%= button_to "Add image to #{@blog_post.title}", "/admin/blog_posts/#{@blog_post.id}/add_photos", method: :get %>
+  </section>
+
+  <section class="admin-blog-post-remove-button">
+    <%= button_to 'Delete Post', "/admin/blog_posts/#{@blog_post.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
+  </section>
+</section>

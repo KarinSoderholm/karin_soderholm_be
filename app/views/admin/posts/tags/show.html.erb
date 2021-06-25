@@ -1,0 +1,15 @@
+<section class="page-title">
+  <h1>Tag: <%= @tag.title %></h1>
+</section>
+
+<div class="quicknav-content">
+  <%= link_to  'admin dashboard', admin_dashboard_index_path %>  / <%= link_to  'my tags', admin_tags_path %>
+</div><br>
+<section id='navigation-links-individual'>
+  <%= link_to 'Edit Tag', "/admin/post/#{@post.id}/tags/#{@tag.id}/edit", method: :get %>
+</section><br><br>
+
+
+<section class="admin-tag-remove-button">
+  <%= button_to 'Delete Tag', "/admin/post/#{@post.id}/tags/#{@tag.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
+</section>

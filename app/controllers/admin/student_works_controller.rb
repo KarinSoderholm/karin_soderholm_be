@@ -49,15 +49,6 @@ class Admin::StudentWorksController < Admin::BaseController
     end
   end
 
-  def add_image
-  end
-
-  def update_image
-  end
-
-  def remove_image
-  end
-
   private
 
   def set_student_work

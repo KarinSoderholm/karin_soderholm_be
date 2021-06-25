@@ -71,6 +71,12 @@ class Admin::ClothingsController < Admin::BaseController
   end
 
   def destroy
+    @clothing.remove_photo
+    binding.pry
+    @clothing.object_collections.each do |collection|
+      collection.destroy
+    end
+    binding.pry
     if @clothing.destroy
       flash[:notice] = "You have successfully destroyed your Object from the Collection"
       redirect_to admin_clothings_path
