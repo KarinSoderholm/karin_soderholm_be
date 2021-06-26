@@ -3,6 +3,6 @@ class Tag < ApplicationRecord
   has_many :blog_posts, through: :tag_posts, dependent: :destroy
 
   def self.find_names
-    Tag.pluck(:title)
+    Tag.pluck(:title, :id)
   end
 end
