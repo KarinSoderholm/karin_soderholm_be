@@ -14,6 +14,9 @@ class Admin::BlogPostsController < Admin::BaseController
 
   def update
     if @blog_post.update(blog_post_params)
+      if !TagPost.exists?(blog_post_id: @blog_post.id, tag_id: params[:blog_post][:tags])
+        TagPost.create({blog_post_id: @blog_post.id, tag_id: params[:blog_post][:tags]})
+      end
       flash[:success] = "You updated your BlogPost! Congrats"
       redirect_to admin_blog_post_path(@blog_post)
     else
@@ -29,10 +32,18 @@ class Admin::BlogPostsController < Admin::BaseController
   def create
     blog_post = BlogPost.new(blog_post_params)
     if blog_post.save
-      blog_post.tags.create({title: params[:tag]})
-      blog_post.set_image(params)
-      flash[:success] = "You created a new BlogPost! Congrats"
-      redirect_to admin_blog_posts_path
+      total_tags = Tag.distinct.pluck(:title)
+      if !total_tags.include?(params[:tag])
+        blog_post.tags.create({title: params[:tag]})
+        blog_post.set_image(params)
+        flash[:success] = "You created a new BlogPost! Congrats"
+        redirect_to admin_blog_posts_path
+      else
+        already_tag = Tag.find_by(title: params[:tag])
+        TagPost.create({blog_post_id: blog_post.id, tag_id: already_tag.id})
+        flash[:success] = "You created a new BlogPost! Congrats"
+        redirect_to admin_blog_posts_path
+      end
     else
       flash.now[:error] = 'Cannot create the BlogPost. Please fill out manditory fields and try again'
       render :new

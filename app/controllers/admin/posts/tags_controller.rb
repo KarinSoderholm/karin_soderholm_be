@@ -30,9 +30,21 @@ class Admin::Posts::TagsController < Admin::BaseController
   def create
     tag = Tag.new(tag_params)
     blog_post = BlogPost.find(params[:blog_post_id])
-    if tag.save
+    # total_tags = Tag.distinct.pluck(:title)
+
+    if !Tag.where(title: tag.title).any?
+    # if !total_tags.include?(tag.title)
+      tag.save
       blog_post.tag_posts.create({ tag_id: tag.id, blog_post_id: blog_post.id })
-      # TagPost.create({ tag_id: tag.id, blog_post_id: blog_post.id })
+      flash[:success] = "You created a new Tag! Congrats"
+      redirect_to admin_blog_post_path(blog_post)
+    elsif BlogPost.joins(:tags).where(id: blog_post.id).pluck("tags.title").include?(tag.title)
+      flash[:message] = "You already tagged this Post with that tag."
+      redirect_to admin_blog_post_path(blog_post)
+    elsif Tag.where(title: tag.title).any?
+    # elsif total_tags.include(tag.title)
+      already_tag = Tag.find_by(title: tag.title)
+      blog_post.tag_posts.create({ tag_id: already_tag.id, blog_post_id: blog_post.id })
       flash[:success] = "You created a new Tag! Congrats"
       redirect_to admin_blog_post_path(blog_post)
     else
@@ -54,7 +66,6 @@ class Admin::Posts::TagsController < Admin::BaseController
   private
 
   def set_tag
-    binding.pry
     @tag = Tag.find(params[:id])
   end
 
