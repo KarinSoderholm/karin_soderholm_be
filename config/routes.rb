@@ -181,5 +181,8 @@ Rails.application.routes.draw do
     end
   end
   resources :artwork_statements
-  resources :posts
+  resources :blog_posts, only: [:index, :show], controller: 'blog_posts' do
+    # get '/:id', => :show
+    get '/blog_type/:tag_id', :action => :blog_type, :as => :blog_type
+  end
 end
