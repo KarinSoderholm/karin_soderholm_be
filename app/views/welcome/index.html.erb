@@ -70,14 +70,12 @@
             </div>
             <div class="quicknav-dropdown-content">
               <ul>
-                <li class="page-collection">
-                  <%= link_to 'all objects', blog_posts_path %>
-                </li>
-                <%# <% Collection.find_objects.map do |collection| %>
-                  <!-- <li class="page-collection"> -->
-                    <%# <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %> 
-                  <!-- </li> -->
-                <%# <% end %>
+                <%# <% binding.pry %> 
+                <% BlogPost.format_monthly_blog_date.uniq.map do |month_of_post| %>
+                  <li class="page-collection">
+                    <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>
+                  </li>
+                <% end %>
               </ul>
             </div>
           </li>
