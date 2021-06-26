@@ -47,6 +47,7 @@ gem 'jquery-rails'
 gem 'webpacker'
 gem 'flash_rails_messages'
 gem 'jquery-turbolinks'
+gem 'groupdate', '~> 2.5', '>= 2.5.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
