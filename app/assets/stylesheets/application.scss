@@ -1211,7 +1211,7 @@
   }
 
   .welcome-introduction-layout{
-    // background-color: #b8b19c;
+    background-color: #b8b19c;
     display: flex;
     align-content: stretch;
     flex-wrap: wrap;
@@ -4382,26 +4382,24 @@ body {
   // }
   .student-work-card-index{
     display: flex;
-    // position: relative;
-    flex-direction: column;
-    flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-content: center;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     background-color: white;
     padding: 2em;
     margin: 1em;
-    border-radius: 1em;
+    border-radius: .25em;
   }
   .student-work-image-index{
     display: flex;
-    // position: relative;
     box-shadow: 0 4px 8px 0 #5d5959;
-    margin: 1em;
+    // margin: 1em;
     position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
   }
   .student-work-image-index a img {
 
@@ -4409,6 +4407,78 @@ body {
   .student-work-image-index img:hover {
 
   }
+  .student-work-youth-image-index {
+    display: flex;
+  }
+  .student-work-youth-image-index img {
+    width: 20em;
+    height: 20em;
+    box-shadow: 0 4px 8px 0 #5d5959;
+  }
+  .student-work-card-adult-button{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .student-work-card-adult-button form {
+    width: 20em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+  .student-work-card-adult-button input {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 #5d5959;
+    max-width: 15em;
+    background-color: white;
+  }
+
+  .student-work-card-young-adult-button form {
+    width: 20em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .student-work-card-young-adult-button input {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 #5d5959;
+    max-width: 15em;
+  }
+  .student-work-card-young-adult-button{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
   .student-work-card-title-index{
     display: flex;
     flex-direction: column;
@@ -5009,9 +5079,13 @@ body {
   align-items: flex-start;
   align-content: stretch;
   padding: 2em 0 0 2em;
+  height: 9em;
 }
 .logo-link{
   padding: 0 28em 0;
+}
+.logo-link p a{
+
 }
 /* Dropdown Button */
 .dropbtn {
