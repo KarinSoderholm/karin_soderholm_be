@@ -18,13 +18,9 @@
               <%= link_to 'all art', artworks_path %>
             </li>
             <% Collection.find_artworks.map do |collection| %>
-              <%# <% if collection.name != @artwork.collections.first.name %>
-              <%# <% binding.pry%>
-              <%# <% if !@collections.include?(collection) %>
-                <li class="page-collection">
-                  <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
-                </li>
-              <%# <% end %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+              </li>
             <% end %>
           </ul>
         </div>
@@ -51,7 +47,6 @@
       <li class="folder-collection">
         <div class="quicknav-menu-bar-container" hover="myFunction(this)">
           <%= link_to 'student works', student_works_path %>
-          <!-- <p>student works</p> -->
         </div>
         <div class="quicknav-dropdown-content">
           <ul>
@@ -66,6 +61,20 @@
       </li>
       <li class="page-collection">
         <%= link_to 'workshops', classrooms_path %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'blog posts', blog_posts_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <% BlogPost.format_monthly_blog_date.uniq.map do |month_of_post| %>
+              <li class="page-collection">
+                <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </li>
     </ul>
   </div>
