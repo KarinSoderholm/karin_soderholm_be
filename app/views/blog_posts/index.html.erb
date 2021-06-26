@@ -1,0 +1,124 @@
+<section class="page-title">
+  <h1>All Blog Posts</h1>
+</section>
+
+<div class="quicknav-content">
+  <div class="quicknav-dropdown">
+    <ul class="dropdown-row">
+      <li class="page-collection">
+        <%= link_to 'home', welcome_index_path %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'art', artwork_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all art', artworks_path %>
+            </li>
+            <% Collection.find_artworks.map do |collection| %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'objects', physical_object_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all objects', clothings_path %>
+            </li>
+            <% Collection.find_objects.map do |collection| %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'student works', student_works_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'adult student works', adult_student_work_student_works_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'youth student works', youth_student_work_student_works_path %>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'workshops', classrooms_path %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'blog posts', blog_posts_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <% BlogPost.format_monthly_blog_date.uniq.map do |month_of_post| %>
+              <li class="page-collection">
+                <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<section class="blog-layout-index">
+  <section class="blog-row-container-index">
+    <section class="">
+
+    </section>
+      <% if @blog_posts %>
+
+        <% @blog_posts.map do |blog| %>
+          <section class="blog-column-container-index">
+            <section class="blog-card-index">
+              <section class="blog-title-index">
+                <%= blog.title.downcase %>
+              </section>
+              <section class="blog-author-index">
+                <%= link_to blog.author.downcase, about_bio_path(1) %>
+              </section>
+              <section class="blog-date-index">
+                <%= blog.created_at.strftime("%b %d, %Y") %>
+
+              </section>
+            </section>
+            <section class="blog-body-index">
+              <%= blog.body %>
+            </section>
+            <section class="blog-images-index">
+              <% if blog.photos.attached? %>
+                <% blog.photos.map do |photo| %>
+                  <p><%= image_tag photo %></p>
+                <% end %>
+              <% end %>
+            </section>
+            <section class="blog-tags-index">
+              <% if blog.tags %>
+                <% blog.tags.map do |tag| %>
+                    <p><%= link_to tag.title, "/blog_posts/#{blog.id}/blog_type/#{tag.id}" %></p>
+                <% end %>
+              <% else %>
+              <% end %>
+            </section>
+          </section>
+        <% end %>
+      <% end %>
+  </section>
+</section>

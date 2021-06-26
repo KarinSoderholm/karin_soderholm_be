@@ -61,28 +61,33 @@
           <% end %>
         </div>
       </div>
-      <% if current_admin? %>
-        <% if current_user.avatar.attached?%>
-          <section class="link-profile">
-            <p class="link-profile"><%= link_to image_tag(current_user.avatar), admin_dashboard_index_path %></p><br>
-          </section>
-        <% else %>
-          <section class="link-profile">
-            <p class="link-profile"><%= link_to "#{current_user.name}", "/admin/users/#{current_user.id}" %></p><br>
-          </section>
-        <% end %>
-      <section class="unfinished-commissioned-work">
-        <p style="border-radius: 50%; background-color: red; padding: .75em; margin: .75em; border: .75em"><%= CommissionBloomingMap.find_all_unfinished_commissed_maps %></p>
+      <section class="logo-link">
+        <p><%= link_to image_tag("KarinBestLogo.png", class: 'logo-image'), welcome_index_path %></p>
       </section>
+      <% if current_admin? %>
+        <section class="header-card-admin">
+          <% if current_user.avatar.attached?%>
+            <!-- <section class="link-profile"> -->
+              <p class="link-profile"><%= link_to image_tag(current_user.avatar), admin_dashboard_index_path %></p><br>
+            <!-- </section> -->
+          <% else %>
+            <!-- <section class="link-profile"> -->
+              <p class="link-profile"><%= link_to "#{current_user.name}", "/admin/users/#{current_user.id}" %></p><br>
+            <!-- </section> -->
+          <% end %>
+          <section class="unfinished-commissioned-work">
+            <p style="border-radius: 50%; background-color: red; padding: .75em; margin: .75em; border: .75em"><%= CommissionBloomingMap.find_all_unfinished_commissed_maps %></p>
+          </section>
+        </section>
       <% elsif current_user %>
         <section class="link-profile">
           <p class="link-profile"><%= link_to "#{current_user.name}", profile_path %></p><br>
         </section>
       <% end %>
     </div>
-    <nav class = 'topnav'>
-      <p><%= link_to image_tag("KarinBestLogo.png", class: 'logo-image'), welcome_index_path %></p>
-    </nav>
+    <!-- <nav class = 'topnav'> -->
+      <!-- <p><%= link_to image_tag("KarinBestLogo.png", class: 'logo-image'), welcome_index_path %></p> -->
+    <!-- </nav> -->
 <!-- </nav> -->
     <% flash.each do |type, message| %>
       <% if type == 'alert'%>

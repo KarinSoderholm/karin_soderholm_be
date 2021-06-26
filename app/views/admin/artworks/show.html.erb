@@ -68,13 +68,13 @@
     <section class="admin-artwork-details-category" >
       <%= @artwork.name %> Creation Date:
     </section>
-      <p class="admin-artwork-details-text"><%= (@artwork.create_date).strftime("%A, %d %b %Y") %></p>
+      <p class="admin-artwork-details-text"><%= (@artwork.translate_date) %></p>
 
     <section class="admin-artwork-details-category" >
       <%= @artwork.name %> Sell Date:
     </section>
       <% if !@artwork.sell_date.nil? %>
-        <p class="admin-artwork-details-text"><%= (@artwork.sell_date).strftime("%A, %d %b %Y") %></p>
+        <p class="admin-artwork-details-text"><%= @artwork.translate_date %></p>
       <% else %>
         <p class="admin-artwork-details-text">This Art has not been sold!</p>
       <% end %>

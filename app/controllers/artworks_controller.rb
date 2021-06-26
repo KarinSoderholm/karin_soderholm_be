@@ -5,5 +5,6 @@ class ArtworksController < ApplicationController
 
   def show
     @artwork = Artwork.find(params[:id])
+    @collection = @artwork.collections.first
   end
 end

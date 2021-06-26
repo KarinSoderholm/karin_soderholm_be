@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_one :social
   has_one :cv
   has_one :artist_statement

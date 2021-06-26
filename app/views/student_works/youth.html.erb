@@ -45,27 +45,43 @@
       <li class="folder-collection">
         <div class="quicknav-menu-bar-container" hover="myFunction(this)">
           <%= link_to 'student works', student_works_path %>
-          <!-- <p>student works</p> -->
         </div>
         <div class="quicknav-dropdown-content">
           <ul>
             <li class="page-collection">
               <%= link_to 'adult student works', adult_student_work_student_works_path %>
             </li>
-            <!-- <li class="page-collection"> -->
-              <%# <%= link_to 'youth student works', youth_student_work_student_works_path %> 
-            <!-- </li> -->
+            <li class="page-collection">
+              <%= link_to 'youth student works', youth_student_work_student_works_path %>
+            </li>
           </ul>
         </div>
       </li>
       <li class="page-collection">
         <%= link_to 'workshops', classrooms_path %>
       </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'blog posts', blog_posts_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <% BlogPost.format_monthly_blog_date.uniq.map do |month_of_post| %>
+              <li class="page-collection">
+                <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
 
 <section class="student-work-layout-index">
+  <div class="student-work-about-text-index">
+    <p>Some words about what it means to have young adult students</p>
+  </div>
   <section class="student-work-types-index">
     <% @student_works.each do |student_work| %>
       <% if student_work.image.attached? %>

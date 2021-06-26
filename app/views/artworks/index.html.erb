@@ -41,6 +41,20 @@
       <li class="page-collection">
         <%= link_to 'workshops', classrooms_path %>
       </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'blog posts', blog_posts_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <% BlogPost.format_monthly_blog_date.uniq.map do |month_of_post| %>
+              <li class="page-collection">
+                <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
@@ -48,6 +62,9 @@
 <div class="artworks-layout-index">
   <% if !@artworks.empty? %>
     <section class="artwork-container-index">
+      <div class="artwork-about-text-index">
+        <p>Some words about what it means to have young adult students</p>
+      </div>
       <section class="artwork-row-index">
         <% @artworks.each do |artwork| %>
           <section class="artwork-column-index">
@@ -72,13 +89,13 @@
                   <p>Art is unavailable!</p>
                 </section>
               <% end %>
-              <div class="artwork-availability"><h4>This piece is <%= artwork.availability? %></h4></div>
-              <% if artwork.available %>
-                <h5>Click the picture for more details!</h5>
+              <!-- <div class="artwork-availability"><h4>This piece is <%= artwork.availability? %></h4></div> -->
+              <%# <% if artwork.available %>
+                <!-- <h5>Click the picture for more details!</h5> -->
                 <h3>Cost: <div class="cost"><%= number_to_currency(artwork.cost) %></div></h3>
-              <% else %>
-                <h5>Someone else was able to snatch this beauty up!</h5>
-              <% end %>
+              <%# <% else %>
+                <!-- <h5>Someone else was able to snatch this beauty up!</h5> -->
+              <%# <% end %>
             </section>
           </section>
         <br>

@@ -1,8 +1,8 @@
 class Collection < ApplicationRecord
-  has_many :artwork_collections
-  has_many :artworks, through: :artwork_collections
-  has_many :object_collections
-  has_many :clothings, through: :object_collections
+  has_many :artwork_collections, dependent: :destroy
+  has_many :artworks, through: :artwork_collections, dependent: :destroy
+  has_many :object_collections, dependent: :destroy
+  has_many :clothings, through: :object_collections, dependent: :destroy
 
   validates :name, presence: true
 

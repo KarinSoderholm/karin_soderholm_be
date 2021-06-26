@@ -24,6 +24,7 @@ class Admin::ArtworksController < Admin::BaseController
   def create
     artwork = Artwork.new(artwork_params)
     collection = Collection.find(params[:collection])
+    artwork.set_images(params)
     if artwork.save
       if !collection.nil?
         artwork_collection = ArtworkCollection.new(artwork_id: artwork.id, collection_id: collection.id)
