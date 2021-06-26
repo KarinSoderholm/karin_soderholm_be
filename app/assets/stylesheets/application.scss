@@ -3381,6 +3381,7 @@ body {
     justify-content: center;
     align-items: center;
     align-items: stretch;
+    position: relative;
   }
   .artwork-collection-artwork-card-index{
     display: flex;
@@ -3449,7 +3450,7 @@ body {
     box-shadow: 0 4px 8px 0 #5d5959;
   }
   .outlayer-image-one{
-    position: relative;
+    position: absolute;
   }
 
   // artwork#collection#show
@@ -4136,9 +4137,84 @@ body {
       justify-content: center;
       align-items: center;
     }
+
+  // blog#index
+  .blog-layout-index{
+
+  }
+  .blog-row-container-index{
+
+  }
+  .blog-column-container-index{
+    border-bottom: 1px solid;
+  }
+  .blog-card-index{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 .5em 1em;
+  }
+  .blog-title-index{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 50px;
+    // font: small-caption;
+    font-stretch: ultra-expanded;
+    padding: 1em 0 1em;
+  }
+  .blog-author-index{
+  }
+  .blog-author-index a{
+    text-decoration: none;
+    color: #51677e;
+  }
+  .blog-author-index a:hover{
+
+  }
+  .blog-date-index{
+
+  }
+  .blog-body-index{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: flex-end;
+    align-items: stretch;
+    padding: 0 2em 1em;
+  }
+  .blog-images-index{
+    display: flex;
+    padding: 0 2em 1em;
+  }
+  .blog-tags-index{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-end;
+    padding: 0 2em 0;
+    text-decoration: none;
+  }
+  .blog-tags-index p a {
+    padding: .5em;
+    border: 1px solid;
+    margin: 0 .25em .25em 0;
+    // color: #956f63;
+    color: #51677e;
+    text-decoration: none;
+  }
+  .blog-tags-index p:hover a:hover{
+    color: #956f63;
+  }
   // about#contact
-
-
   .btn-outline-info{
     /* font-style: normal;
     font-size-adjust: auto;
