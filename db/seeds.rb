@@ -167,7 +167,7 @@ artwork_collection1 = ArtworkCollection.create!(artwork_id: crazy_calm.id,
                                                 collection_id: maps_project_collection.id
 )
 
-# physical_object_collections
+# object_collections
 object_collection1 = ObjectCollection.create!(clothing_id: gizzelle_dress.id,
                                             collection_id: garment_collection.id,
 )
@@ -192,6 +192,10 @@ sally_student_work = StudentWork.create!(title: 'Paper Mache Sculpture',
                                           description: 'A 7th graders work',
                                           age_category: 'young_adult'
 )
+danny_student_work = StudentWork.create!(title: 'Crochet Sushi',
+                                          description: 'University student work',
+                                          age_category: 'adult'
+)
 
 # BlogPost
 blog_post = BlogPost.create!(title: 'Another Post',
@@ -199,13 +203,33 @@ blog_post = BlogPost.create!(title: 'Another Post',
                               author: karin1.name,
                               user_id: karin1.id
 )
+blog_post1 = BlogPost.create!(title: 'Post',
+                              body: "Post about an artshow",
+                              author: karin1.name,
+                              user_id: karin1.id
+)
 
 # Tag
-map_tag = Tag.create!(title: 'stitching')
+stitching_tag = Tag.create!(title: 'stitching')
+daily_post_tag = Tag.create!(title: 'daily post')
+map_tag = Tag.create!(title: 'maps')
+connection_tag = Tag.create!(title: 'connection')
 
 # TagPost
 tag_post = TagPost.create!(tag_id: map_tag.id,
                           blog_post_id: blog_post.id
+)
+tag_post1 = TagPost.create!(tag_id: stitching_tag.id,
+                          blog_post_id: blog_post.id
+)
+tag_post2 = TagPost.create!(tag_id: connection_tag.id,
+                          blog_post_id: blog_post1.id
+)
+tag_post3 = TagPost.create!(tag_id: daily_post_tag.id,
+                          blog_post_id: blog_post1.id
+)
+tag_post4 = TagPost.create!(tag_id: map_tag.id,
+                          blog_post_id: blog_post1.id
 )
 
 # tool
