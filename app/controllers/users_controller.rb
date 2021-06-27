@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      UserMailer.welcome_email(@user).deliver_now
+      # UserMailer.welcome_email(@user).deliver_now
       session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.name}! Check #{@user.email} for a fun message!"
       redirect_to profile_path
