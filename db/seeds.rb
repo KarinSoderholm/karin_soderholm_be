@@ -15,13 +15,14 @@ august = User.create!(name: "August",
                       email: "august@example.com",
                       password_digest: "test"
 )
-karin = User.create!(name: "Karin Soderholm",
+karin1 = User.create!(name: "Karin Soderholm",
                       address: "1234 Main St.",
                       city: "Wheat Ridge",
                       state: "CO",
                       zip: 12345,
                       email: "karin@example.com",
-                      password_digest: "test"
+                      password_digest: "SEED_ADMIN_EMAIL_PASSWORD"
+)                     role: 1
 )
 sylvia = User.create!(name: "Sylvia",
                       address: "1234 Main St.",
