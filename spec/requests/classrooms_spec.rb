@@ -40,7 +40,6 @@ RSpec.describe "/classrooms", type: :request do
     # DOWNLOAD_CACHE_PATH = "lib/dummy_classroom".to_s
     CLASSROOM_PATH = './lib/tasks/dummy_class.csv'
     setup do
-      # binding.pry
       # File.delete(CLASSROOM_PATH)
     #   # File.delete(DOWNLOAD_CACHE_PATH)
     end
@@ -52,7 +51,6 @@ RSpec.describe "/classrooms", type: :request do
       # File.read(CLASSROOM_PATH, page.body)
       # File.write(CLASSROOM_PATH, page.body)
       csv = CSV.open(CLASSROOM_PATH)
-      binding.pry
     end
   end
 

@@ -113,7 +113,6 @@ class Admin::ArtworksController < Admin::BaseController
     def set_artwork
       if params[:file]
         CSV.foreach(params[:file].tempfile, headers: true) do |row|
-          binding.pry
           Artwork.create row.to_h
         end
       else

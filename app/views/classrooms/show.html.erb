@@ -143,7 +143,6 @@
 
           <% @classroom.find_all_requirements.each_with_index do |requirement, index| %>
             <% reference_classroom_id = @classroom.find_reference_classroom_id(requirement).id %>
-            <%# <% binding.pry %>
             <p><%= index + 1 %>: <%= link_to requirement.capitalize, classroom_path(reference_classroom_id) %></p>
             <!-- <p><%= index + 1 %>: <%= link_to requirement.capitalize, "/classrooms/#{reference_classroom_id}" %></p> -->
           <% end %>

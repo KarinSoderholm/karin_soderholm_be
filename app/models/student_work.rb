@@ -28,7 +28,7 @@ class StudentWork < ApplicationRecord
 
   def set_image(params)
     if params[:image]
-      binding.pry
+
       self.image.attach(params[:image])
     else
       return params

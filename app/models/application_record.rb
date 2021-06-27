@@ -32,7 +32,6 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   # def translate_date
-  #   binding.pry
   #   self.strftime("%b %Y")
   # end
 end

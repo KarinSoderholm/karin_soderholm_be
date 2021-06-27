@@ -70,7 +70,6 @@
             </div>
             <div class="quicknav-dropdown-content">
               <ul>
-                <%# <% binding.pry %> 
                 <% BlogPost.format_monthly_blog_date.uniq.map do |month_of_post| %>
                   <li class="page-collection">
                     <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>

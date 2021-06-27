@@ -68,7 +68,6 @@ RSpec.describe "/artworks", type: :request do
       expect(json[0][:cost]).to eq(350.00)
       expect(json[0][:cost]).to_not eq(450.00)
       expect(json[0][:available]).to eq(true)
-      # binding.pry
     end
   end
 
@@ -145,7 +144,6 @@ RSpec.describe "/artworks", type: :request do
         post artworks_url,
              params: { artwork: peaceful_prairie }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
-        # binding.pry
         expect(response.content_type).to match(a_string_including("application/json"))
         json = JSON.parse(response.body, symbolize_names: true)
 

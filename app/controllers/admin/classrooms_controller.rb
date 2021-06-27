@@ -39,10 +39,8 @@ class Admin::ClassroomsController < Admin::BaseController
 
   def create
     @classrooms = Classroom.all
-    binding.pry
     classroom = Classroom.new(classroom_params)
     if classroom.save
-      binding.pry
       # if params[:requirements]
       #   requirement = Requirement.create({name: params[:requirements], classroom_id: classroom.id })
       # end
@@ -62,7 +60,6 @@ class Admin::ClassroomsController < Admin::BaseController
   end
 
   def update
-    binding.pry
     # if Requirement.find_by(classroom_id: Classroom.find(params[:classroom][:requirements])).nil?
     #   requirement = Requirement.new(name: Classroom.find(params[:classroom][:requirements]).name, classroom_id: @classroom.id )
     # end

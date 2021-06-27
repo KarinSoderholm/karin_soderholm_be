@@ -1,7 +1,7 @@
 class InstagramUser
   attr_reader :name, :photo, :width, :height
   def initialize(data)
-    binding.pry
+
     @name = data[:author_name]
     @photo = data[:thumbnail_url]
     @width = data[:thumbnail_width]
