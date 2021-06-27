@@ -20,7 +20,6 @@
     <% if @artwork_statements %>
       <% @artwork_statements.each do |artwork_statement| %>
       <tr>
-        <%# <% binding.pry%>
         <td><%= link_to "#{artwork_statement.find_artwork.name}", "/admin/artworks/#{artwork_statement.find_artwork.id}" %></td>
         <td><%= link_to "#{artwork_statement.id}", "/admin/art/#{artwork_statement.find_artwork.id}/artwork_statement/#{artwork_statement.id}", method: :get %></td>
         <td><%= artwork_statement.statement %></td>

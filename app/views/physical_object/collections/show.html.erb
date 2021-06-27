@@ -89,7 +89,6 @@
       <div class="physical-object-collection-container-row-show">
         <% @collection.clothings.each do |object| %>
           <!-- <div class="physical-object-collection-object-column-show"> -->
-            <%# <% binding.pry %>
             <div class="physical-object-collection-card-show">
               <div class="physical-object-collection-object-header-show">
                 <%= link_to "#{ object.name }", "/clothings/#{ object.id }", method: :get %><br>

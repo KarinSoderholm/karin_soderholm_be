@@ -90,7 +90,6 @@
       <div class="artwork-collection-container-row-show">
         <% @collection.artworks.each do |artwork| %>
           <!-- <div class="collection-artwork-column"> -->
-            <%# <% binding.pry %>
             <div class="artwork-collection-card-show">
               <div class="artwork-collection-artwork-header-show">
                 <%= link_to "#{ artwork.name }", "/artworks/#{ artwork.id }", method: :get %><br>

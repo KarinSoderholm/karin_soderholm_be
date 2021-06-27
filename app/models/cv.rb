@@ -12,7 +12,6 @@ class Cv < ApplicationRecord
   end
 
   def delete_file(params)
-    binding.pry
     if self.cv_file.attached?
       self.cv_file.purge
     end

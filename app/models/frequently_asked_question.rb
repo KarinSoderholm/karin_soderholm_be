@@ -9,7 +9,7 @@ class FrequentlyAskedQuestion < ApplicationRecord
 
   def self.is_ordered_properly?
     all_orders = FrequentlyAskedQuestion.select(:faq_order, :id)
-    binding.pry
+
     if all_orders.length == all_orders.uniq.length
       return true
     else

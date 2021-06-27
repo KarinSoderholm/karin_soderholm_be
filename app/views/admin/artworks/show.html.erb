@@ -23,7 +23,6 @@
       <section class="admin-artwork-details-images">
         <p class="admin-artwork-details-image"><%= image_tag(@artwork.image) %></p>
         <% @artwork.photos.map do |photo| %>
-        <%# <% binding.pry %>
           <p class="admin-artwork-details-image"><%= image_tag(photo) %></p>
         <% end %>
       </section>

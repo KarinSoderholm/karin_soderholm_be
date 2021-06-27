@@ -39,7 +39,6 @@ class Admin::Workshop::ToolsController < Admin::BaseController
   end
 
   def destroy
-    binding.pry
     classroom = @tool.classroom
     if @tool.destroy
       flash[:success] = "The tool was deleted from #{classroom.name}"

@@ -1,5 +1,5 @@
 class Admin::EmailsController < Admin::BaseController
-  def import  
+  def import
     Email.import(params[:file])
     redirect_to admin_dashboard_index_path, notice: "Email Data Imported Successfully!"
   end
@@ -35,7 +35,6 @@ class Admin::EmailsController < Admin::BaseController
 
   def update
     @email = Email.find(params[:id])
-    # binding.pry
     if @email.update(email_params)
       flash[:success] = 'Email has been updated!'
       redirect_to admin_emails_path

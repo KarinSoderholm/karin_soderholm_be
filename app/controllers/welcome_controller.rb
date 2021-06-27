@@ -8,16 +8,13 @@ class WelcomeController < ApplicationController
     # instagram_data = InstagramService.get_instagram_account
     # @instagram_user = InstagramUser.new(instagram_data)
     # @instagram_user = InstagramFacade.new.get_instagram_account
-    # binding.pry
 
     # @instagram_user = InstagramUser.new(self.get_instagram_account)
     # @instagram_user = web_post #this should be an array although it isn't named with that inference
     # @instagram_user = profile_home_page #this should be an array although it isn't named with that inference
-    # binding.pry
   end
 
   def profile_home_page
-    binding.pry
     get_instagram_account(ENV['KARIN_INSTAGRAM_HOME_URL'])
   end
   def web_post
@@ -28,7 +25,7 @@ class WelcomeController < ApplicationController
     instagram_posts << ENV['INSTAGRAM_URL4']
     instagram_posts << ENV['INSTAGRAM_URL5']
     instagram_posts << ENV['INSTAGRAM_URL6']
-    binding.pry
+
     instagram_posts.each do |url|
       InstagramUser.new(get_instagram_account(url))
     end
