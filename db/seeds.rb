@@ -50,12 +50,12 @@ crazy_calm = Artwork.create!(name: "Crazy Calm",
 
 # Artist Statement
 artist_statement = ArtistStatement.create!(statement: 'This is my artist statement!',
-                                            user_id: karin.id
+                                            user_id: karin1.id
 )
 
 # Artist Stories
 artist_story = ArtistStory.create!(story: 'This is my story!',
-                                    user_id: karin.id
+                                    user_id: karin1.id
 )
 
 # Artwork Statement
@@ -159,7 +159,7 @@ email = Email.create!(email_address: 'gary@example.com',
 social = Social.create!(instagram: 'https://www.instagram.com/so__karin/',
                         pinterest: 'pinterest.com/krsoderholm/_saved/',
                         email: 'karin@example.com',
-                        user_id: karin.id
+                        user_id: karin1.id
                       )
 
 # artwork_collections
@@ -177,8 +177,8 @@ requirement = Requirement.create!(name: crochet_101.name,
 )
 
 # CVs
-karin_cv = Cv.create!(name: karin.name,
-                      user_id: karin.id
+karin_cv = Cv.create!(name: karin1.name,
+                      user_id: karin1.id
 )
 
 # FAQ
@@ -196,8 +196,8 @@ sally_student_work = StudentWork.create!(title: 'Paper Mache Sculpture',
 # BlogPost
 blog_post = BlogPost.create!(title: 'Another Post',
                               body: "Another daily Post",
-                              author: karin.name,
-                              user_id: karin.id
+                              author: karin1.name,
+                              user_id: karin1.id
 )
 
 # Tag
