@@ -182,7 +182,6 @@ Rails.application.routes.draw do
   end
   resources :artwork_statements
   resources :blog_posts, only: [:index, :show]
-  # resources :blog_posts, only: [:index, :show], controller: 'blog_posts' do
   scope controller: :blog_posts, only: [:index, :show] do
     get '/blog_posts/:id/blog_type/:tag_id', :action => :blog_type, :as => :blog_type
     get '/blog_posts/monthly_blogs/:month_id/:year_id', :action => :monthly_blogs, :as => :monthly_blogs
