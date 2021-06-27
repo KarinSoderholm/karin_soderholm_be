@@ -49,10 +49,10 @@
         <div class="quicknav-dropdown-content">
           <ul>
             <li class="page-collection">
-              <%= link_to 'adult student works', adult_student_work_student_works_path %>
+              <%= link_to 'adult student works', adult_student_work_path %>
             </li>
             <li class="page-collection">
-              <%= link_to 'youth student works', youth_student_work_student_works_path %>
+              <%= link_to 'youth student works', youth_student_work_path %>
             </li>
           </ul>
         </div>
@@ -99,7 +99,7 @@
             <p style="text-align: center;">Image coming soon!</p>
           </section>
           <section class="student-work-card-title-index">
-            <h3><%= link_to student_work.title, student_work_path(student_work) %></h3>
+            <h3><%= link_to student_work.title, "/student_works/#{student_work.id}" %></h3>
           </section>
         </section>
       <% end %>

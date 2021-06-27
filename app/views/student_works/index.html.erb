@@ -49,10 +49,10 @@
         <div class="quicknav-dropdown-content">
           <ul>
             <li class="page-collection">
-              <%= link_to 'adult student works', adult_student_work_student_works_path %>
+              <%= link_to 'adult student works', adult_student_work_path %>
             </li>
             <li class="page-collection">
-              <%= link_to 'youth student works', youth_student_work_student_works_path %>
+              <%= link_to 'youth student works', youth_student_work_path %>
             </li>
           </ul>
         </div>
@@ -83,68 +83,71 @@
     <p>Some words about having Students and why working with them is your passion (one of them 😍)</p>
   </div>
   <section class="student-work-types-index">
-      <% if @student_works.find_adults.first.image.attached? %>
-        <section class="student-work-card-index">
-          <section class="student-work-age-title-index">
-            <!-- <h3>Examples of Adult Student Works</h3> -->
+      <% if !@student_works.find_adults.empty? %>
+        <% if @student_works.find_adults.first.image.attached? %>
+          <section class="student-work-card-index">
+            <section class="student-work-age-title-index">
+              <!-- <h3>Examples of Adult Student Works</h3> -->
+            </section>
+            <div class="student-work-image-index">
+              <%= image_tag(@student_works.find_adults.first.image, style: 'height:20em;width:20em') %>
+            </div>
+            <div class="student-work-card-title-index">
+              <h3><%= link_to @student_works.find_adults.first.title, "/student_works/#{@student_works.find_adults.first.id}" %></h3>
+            </div>
+            <section class="student-work-card-adult-button">
+              <%= button_to "Adults' Work", "/student_works/adult", method: :get %>
+            </section>
           </section>
-          <div class="student-work-image-index">
-            <%= image_tag(@student_works.find_adults.first.image, style: 'height:20em;width:20em') %>
-          </div>
-          <div class="student-work-card-title-index">
-            <h3><%= link_to @student_works.find_adults.first.title, "/student_works/#{@student_works.find_adults.first.id}" %></h3>
-          </div>
-          <section class="student-work-card-adult-button">
-            <%= button_to "Adults' Work", "/student_works/adult", method: :get %>
+        <% else %>
+          <section class="student-work-card-index">
+            <section class="student-work-age-title-index">
+              <!-- <h3>Examples of Adult Student Works</h3> -->
+            </section>
+            <section class="student-work-card-image-no-image-index">
+              <p style="display:flex;justify-content:center;flex-direction:column;text-align: center; height:15em; width:15em">Image coming soon!</p>
+            </section>
+            <section class="student-work-card-title-index">
+              <h3><%= link_to @student_works.find_adults.first.title, "/student_works/#{@student_works.find_adults.first.id}" %></h3>
+            </section>
+            <section class="student-work-card-adult-button">
+              <%= button_to "Adults' Work", "/student_works/adult", method: :get %>
+            </section>
           </section>
-        </section>
-      <% else %>
-        <section class="student-work-card-index">
-          <section class="student-work-age-title-index">
-            <!-- <h3>Examples of Adult Student Works</h3> -->
-          </section>
-          <section class="student-work-card-image-no-image-index">
-            <p style="display:flex;justify-content:center;flex-direction:column;text-align: center; height:15em; width:15em">Image coming soon!</p>
-          </section>
-          <section class="student-work-card-title-index">
-            <h3><%= link_to @student_works.find_adults.first.title, "/student_works/#{@student_works.find_adults.first.id}" %></h3>
-          </section>
-          <section class="student-work-card-adult-button">
-            <%= button_to "Adults' Work", "/student_works/adult", method: :get %>
-          </section>
-        </section>
+        <% end %>
       <% end %>
-
-      <% if @student_works.find_youths.first.image.attached? %>
-        <section class="student-work-card-index">
-          <section class="student-work-age-title-index">
-            <!-- <h3>Examples of Young-Adult Student Works</h3> -->
+      <% if !@student_works.find_youths.empty? %>
+        <% if @student_works.find_youths.first.image.attached? %>
+          <section class="student-work-card-index">
+            <section class="student-work-age-title-index">
+              <!-- <h3>Examples of Young-Adult Student Works</h3> -->
+            </section>
+            <section class="student-work-youth-image-index">
+              <%= image_tag (@student_works.find_youths.first.image) %>
+            </section>
+            <section class="student-work-card-title-index">
+              <h3><%= link_to @student_works.find_youths.first.title, "/student_works/#{@student_works.find_youths.first.id}" %></h3>
+            </section>
+            <section class="student-work-card-young-adult-button">
+              <%= button_to "Kids' Work", "/student_works/adult", method: :get %>
+            </section>
           </section>
-          <section class="student-work-youth-image-index">
-            <%= image_tag (@student_works.find_youths.first.image) %>
+        <% else %>
+          <section class="student-work-card-index">
+            <section class="student-work-age-title-index">
+              <!-- <h3>Examples of Young-Adult Student Works</h3> -->
+            </section>
+            <section class="student-work-card-image-no-image-index">
+              <p style="display:flex;justify-content:center;flex-direction:column;text-align: center; height:15em; width:15em">Image coming soon!</p>
+            </section>
+            <section class="student-work-card-title-index">
+              <%= link_to @student_works.find_youths.first.title, "/student_works/#{@student_works.find_youths.first.id}" %>
+            </section>
+            <section class="student-work-card-young-adult-button">
+              <%= button_to "Kids' Work", "/student_works/youth", method: :get %>
+            </section>
           </section>
-          <section class="student-work-card-title-index">
-            <h3><%= link_to @student_works.find_youths.first.title, "/student_works/#{@student_works.find_youths.first.id}" %></h3>
-          </section>
-          <section class="student-work-card-young-adult-button">
-            <%= button_to "Kids' Work", "/student_works/adult", method: :get %>
-          </section>
-        </section>
-      <% else %>
-        <section class="student-work-card-index">
-          <section class="student-work-age-title-index">
-            <!-- <h3>Examples of Young-Adult Student Works</h3> -->
-          </section>
-          <section class="student-work-card-image-no-image-index">
-            <p style="display:flex;justify-content:center;flex-direction:column;text-align: center; height:15em; width:15em">Image coming soon!</p>
-          </section>
-          <section class="student-work-card-title-index">
-            <%= link_to @student_works.find_youths.first.title, "/student_works/#{@student_works.find_youths.first.id}" %>
-          </section>
-          <section class="student-work-card-young-adult-button">
-            <%= button_to "Kids' Work", "/student_works/youth", method: :get %>
-          </section>
-        </section>
+        <% end %>
       <% end %>
   </section>
 </section>
