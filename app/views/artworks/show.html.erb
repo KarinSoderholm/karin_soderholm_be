@@ -35,7 +35,6 @@
               <%= link_to 'all objects', clothings_path %>
             </li>
             <% Collection.find_objects.map do |collection| %>
-              <% if collection.name != @collection.name %>
                 <li class="page-collection">
                   <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
                 </li>
