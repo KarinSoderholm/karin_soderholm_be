@@ -161,9 +161,9 @@
 
 <!-- <button type "submit" class="btn btn-outline-info" aria-pressed="true">Enroll</button> -->
   <% if current_user && session[:cart].nil? %>
-    <div class="btn-classroom-sign-up-show">
-      <%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %>
-    </div>
+    <!-- <div class="btn-classroom-sign-up-show"> -->
+      <%# <%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %> 
+    <!-- </div> -->
   <% elsif current_user && session[:cart].include?({classroom: @classroom.id}) %>
     <p>You have already signed up for this Workshop!</p>
   <% else %>

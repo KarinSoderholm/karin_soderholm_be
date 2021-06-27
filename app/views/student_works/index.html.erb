@@ -126,7 +126,7 @@
               <%= image_tag (@student_works.find_youths.first.image) %>
             </section>
             <section class="student-work-card-title-index">
-              <h3><%= link_to @student_works.find_youths.first.title, "/student_works/#{@student_works.find_youths.first.id}" %></h3>
+              <%# <!-- <h3><%= link_to @student_works.find_youths.first.title, "/student_works/#{@student_works.find_youths.first.id}" %>
             </section>
             <section class="student-work-card-young-adult-button">
               <%= button_to "Kids' Work", "/student_works/adult", method: :get %>
@@ -138,10 +138,10 @@
               <!-- <h3>Examples of Young-Adult Student Works</h3> -->
             </section>
             <section class="student-work-card-image-no-image-index">
-              <p style="display:flex;justify-content:center;flex-direction:column;text-align: center; height:15em; width:15em">Image coming soon!</p>
+              <p style="display:flex;justify-content:center;flex-direction:column;text-align: center; height:15em; width:15em"></p>
             </section>
             <section class="student-work-card-title-index">
-              <%= link_to @student_works.find_youths.first.title, "/student_works/#{@student_works.find_youths.first.id}" %>
+              <%# <%= link_to @student_works.find_youths.first.title, "/student_works/#{@student_works.find_youths.first.id}" %>
             </section>
             <section class="student-work-card-young-adult-button">
               <%= button_to "Kids' Work", "/student_works/youth", method: :get %>
