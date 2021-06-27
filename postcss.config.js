@@ -2,7 +2,7 @@
 //   plugins: [
 //     require('tailwindcss')('./app/javascript/stylesheets/tailwindcss.config.js'),
 //     require('postcss-import'),
-//     require('postcss-flexbugs-fixes'),
+//     require('postcss-flexbugs-fixes
 //     require('postcss-preset-env')({
 //       autoprefixer: {
 //         flexbox: 'no-2009'
@@ -34,11 +34,12 @@ module.exports = {
     require('tailwindcss')('./app/javascript/stylesheets/tailwind.config.js'),
     require('postcss-import'),
     require('postcss-flexbugs-fixes'),
-    require('postcss-present-env')({
-      autoprefixer: {
-        flexbox: 'no-2009'
-      },
-      stage: 3
-    })
+    require ('autoprefixer'),
+    // require('postcss-present-env')({
+    //   autoprefixer: {
+    //     flexbox: 'no-2009'
+    //   },
+    //   stage: 3
+    // })
   ]
 }
