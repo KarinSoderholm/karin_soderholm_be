@@ -120,27 +120,22 @@
             <section class="blog-all-responses-to-post-index">
               <% if !blog.post_comments.empty?%>
                 <% blog.post_comments.map do |post_comment| %>
-                  <p><%= post_comment.comment %></p>
-                  <p><%= post_comment.guest_name %></p>
-                  <p><%= post_comment.created_at %></p>
+                  <section class="blog-comment-card">
+                    <p class="blog-comment-card-comment-body"><%= post_comment.comment %></p>
+                    <p>commented by: <%= post_comment.guest_name %> <%= post_comment.created_at.strftime("%b %d, %Y @ %l:%M %P") %></p>
+                  </section>
                 <% end %>
               <% else %>
               <% end %>
             </section>
             <section class="blog-add-a-comment-index">
-              <section class="comment-blog-form", id="comment-form"
-                <%= form_tag "/blog_post/#{blog.id}/post_comments", method: :post do %>
-                  <%= label_tag 'comment on the blog post' %><br>
+              <section class="comment-blog-form", id="comment-form">
+                <%= form_tag "/blog_post/#{blog.id}/post_comments", remote: true do %>
                   <%= text_area_tag :comment, nil, placeholder: 'comment on the blog post', rows: 3, cols: 70 %><br>
-
-                  <%= label_tag 'your name' %><br>
                   <%= text_field_tag :guest_name, nil, placeholder: 'your name' %><br>
-
-                  <%= label_tag 'your email adress' %><br>
                   <%= text_field_tag :guest_email, nil, placeholder: 'email@example.com' %><br>
                   <%= submit_tag "comment" %>
                 <% end %>
-
               </section>
             </section>
           </section>
