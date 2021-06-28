@@ -3025,6 +3025,179 @@ body {
     margin: 2em;
   }
 
+  //admin#blog_post#show
+  .admin-blog-post-details-show{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #51677e;
+  }
+  .admin-blog-post-detail-category-show{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    // font-style: oblique;
+    font-size: x-large;
+    color: white;
+  }
+  .admin-blog-post-detail-image-groups-show{
+    display: flex;
+    border: .25em solid;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 1em;
+    // box-shadow: 0 4px 8px 0 #5d5959;
+    border-radius: .25em;
+  }
+  .admin-blog-post-details-body-show {
+    background-color: white;
+    border-radius: .25em;
+    padding: 3em;
+    margin: 2em;
+  }
+  .admin-blog-post-detail-category-show h3{
+    font-style: oblique;
+    color: white;
+    font-size: 50px;
+  }
+  .admin-blog-post-details-text-show{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+  }
+  .admin-blog-post-details-images-show{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    font-style: oblique;
+    font-size: x-large;
+    color: white;
+  }
+  .admin-blog-post-details-card-show{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    background-color: white;
+    padding: .5em 1em .5em;
+    margin: 1em;
+    border-radius: .25em;
+  }
+  .admin-blog-post-details-card-show img {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    width: 35%;
+    align-items: center;
+    padding: 0 2em 0;
+  }
+  .admin-blog-post-details-card-show input{
+
+  }
+  // .admin-blog-post-details-image-show{
+  //   display: flex;
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+  //   align-content: center;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+  .admin-blog-post-details-tags{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+    background-color: white;
+    padding: .5em 1em .5em;
+    margin: 1em;
+    border-radius: .25em;
+  }
+  .admin-blog-post-details-tags form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .admin-blog-post-details-tags input {
+    display: flex;
+    width: 7em;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    box-shadow: 0 4px 8px 0 #5d5959;
+  }
+  .admin-blog-post-detail-tag-groups-show{
+    display: flex;
+    border: .25em solid;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    margin: 1em;
+    // box-shadow: 0 4px 8px 0 #5d5959;
+    border-radius: .25em;
+  }
+  .admin-blog-post-detail-tag-groups-show input {
+
+  }
+  .admin-blog-post-details-tag-show{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    border: 1px solid;
+    padding: 1em;
+  }
+  .admin-blog-post-add-tag-button{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .admin-blog-post-add-image-button{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-end;
+  }
+  .admin-blog-post-remove-button {
+    // display: flex;
+  }
+  .admin-blog-post-remove-button .button_to input {
+    // display: flex;
+  }
+
   // admin#art#artwork_statement#show
   .admin-artwork-statement-layout{
     display: flex;
