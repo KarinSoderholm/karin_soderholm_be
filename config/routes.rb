@@ -61,6 +61,16 @@ Rails.application.routes.draw do
       delete '/posts/:blog_post_id/tags/:id' => :destroy, :as => :post_tag_delete
     end
 
+    scope controller: :post_comments, module: 'posts' do
+      # get '/posts/:blog_post_id/post_comments/new' => :new, :as => :post_post_comment_new
+      get '/posts/:blog_post_id/post_comments/:id' => :show, :as => :post_post_comment
+      get '/posts/post_comments' => :index, :as => :post_post_comments
+      # post '/posts/:blog_post_id/post_comments' => :create, :as => :post_post_comment_create
+      get '/posts/:blog_post_id/post_comments/:id/edit' => :edit, :as => :post_post_comment_edit
+      post '/posts/:blog_post_id/post_comments/:id/edit' => :update, :as => :post_post_comment_update
+      delete '/posts/:blog_post_id/post_comments/:id' => :destroy, :as => :post_post_comment_delete
+    end
+
     resources :student_works
     resources :frequently_asked_questions
     resources :cv do
