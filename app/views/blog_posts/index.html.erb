@@ -105,7 +105,7 @@
             <section class="blog-images-index">
               <% if blog.photos.attached? %>
                 <% blog.photos.map do |photo| %>
-                  <p><%= image_tag photo %></p>
+                  <p><%= image_tag photo.variant(resize: "700x700") %></p>
                 <% end %>
               <% end %>
             </section>
