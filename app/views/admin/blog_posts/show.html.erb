@@ -48,9 +48,23 @@
     </section>
     <% @blog_post.tags.map do |tag| %>
       <section class="admin-blog-post-details-tags">
-      <p class="admin-blog-post-details-tag-show"><%= tag.title %></p>
+        <p class="admin-blog-post-details-tag-show"><%= tag.title %></p>
       <!-- <p class="admin-blog-post-details-delete-tag-button"> -->
       <%= button_to 'Delete', "/admin/posts/#{@blog_post.id}/tags/#{tag.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
+      </section>
+    <% end %>
+  </section>
+
+  <section class="admin-blog-post-detail-tag-groups-show">
+    <section class="admin-blog-post-detail-category-show">
+      <p style="padding:1em 1em 0;">Comments for <h3><%= @blog_post.title %></h3>:</p>
+    </section>
+    <% @blog_post.post_comments.map do |comment| %>
+      <section class="admin-blog-post-details-comments">
+        <p class="admin-blog-post-details-tag-show"><%= comment.comment %></p>
+        <%= comment.guest_name %>
+        <%= comment.created_at.strftime("%b %d, %Y @ %l:%M %P")%>
+        <%= button_to 'Delete', "/admin/posts/#{@blog_post.id}/post_comments/#{comment.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
       </section>
     <% end %>
   </section>
