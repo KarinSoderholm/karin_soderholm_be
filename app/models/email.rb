@@ -6,6 +6,7 @@ class Email < ApplicationRecord
                 :uniqueness => true
                 # :email => true
   validates :name, :presence => true
+  # validates :email_address, email: true
 
   def self.import(path)
 
@@ -21,5 +22,9 @@ class Email < ApplicationRecord
     else
       return false
     end
+  end
+
+  def self.find_all_emails
+    Email.select(:email_address).pluck(:email_address)
   end
 end

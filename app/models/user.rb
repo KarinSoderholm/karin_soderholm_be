@@ -18,7 +18,7 @@ class User < ApplicationRecord
                         :email
 
   validates_uniqueness_of :email
-  # validates :my_email_attribute, email: true
+  # validates :email, email: true
 
 
   enum role: ['default', 'admin']
