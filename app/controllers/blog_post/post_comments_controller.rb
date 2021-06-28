@@ -3,10 +3,13 @@ class BlogPost::PostCommentsController < ApplicationController
   end
 
   def create
-    binding.pry
-    email = Email.create(name: params[:guest_name],
-                          email_address: params[:guest_email]
-    )
+    if Email.find_all_emails.include?(params[:guest_email])
+      email = Email.find_by(email_address: params[:guest_email])
+    else
+      email = Email.create(name: params[:guest_name],
+                            email_address: params[:guest_email])
+    end
+
     if email
       comment = PostComment.new(comment_params)
       if comment.save
@@ -14,11 +17,11 @@ class BlogPost::PostCommentsController < ApplicationController
         redirect_to blog_posts_path
       else
         flash.now[:error] = "you must not leave any fields blank"
-        redirect_to'/blog_posts'
+        redirect_to '/blog_posts'
       end
     else
       flash.now[:error] = "you must enter a valid  email address"
-      render blog_posts_path
+      redirect_to '/blog_posts'
     end
   end
 
