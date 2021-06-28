@@ -174,19 +174,25 @@ Rails.application.routes.draw do
   end
   resources :socials
   resources :commission_blooming_maps
-  # resources :student_works, only: [:show, :index], controller: 'student_works' do
-  #   collection do
   scope controller: :student_works do
     get '/student_works/youth' => :youth, :as => :youth_student_work
     get '/student_works/adult' => :adult, :as => :adult_student_work
     get '/student_works' => :index
     get '/student_works/:id' => :show
-    # end
   end
   resources :artwork_statements
   resources :blog_posts, only: [:index, :show]
   scope controller: :blog_posts, only: [:index, :show] do
     get '/blog_posts/:id/blog_type/:tag_id', :action => :blog_type, :as => :blog_type
     get '/blog_posts/monthly_blogs/:month_id/:year_id', :action => :monthly_blogs, :as => :monthly_blogs
+  end
+  scope controller: :post_comments, module: 'blog_post' do
+    get '/blog_post/:blog_post_id/post_comments/new' => :new, :as => :blog_post_comments_new
+    get '/blog_post/:blog_post_id/post_comments/:id' => :show, :as => :blog_post_comment
+    get '/blog_post/post_comments' => :index, :as => :blog_post_comments
+    post '/blog_post/:blog_post_id/post_comments' => :create, :as => :blog_post_comments_create
+    get '/blog_post/:blog_post_id/post_comments/:id/edit' => :edit, :as => :blog_post_comments_edit
+    post '/blog_post/:blog_post_id/post_comments/:id/edit' => :update, :as => :blog_post_comments_update
+    delete '/blog_post/:blog_post_id/post_comments/:id' => :destroy, :as => :blog_post_comments_delete
   end
 end

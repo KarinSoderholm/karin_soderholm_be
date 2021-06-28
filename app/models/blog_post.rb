@@ -7,9 +7,8 @@ class BlogPost < ApplicationRecord
 
   has_many :tag_posts, dependent: :destroy
   has_many :tags, through: :tag_posts, dependent: :destroy
-  has_many :responses, dependent: :destroy 
+  has_many :post_comments, dependent: :destroy
   belongs_to :user
-  # has_many :responses
 
   def self.total_blog_posts
     BlogPost.all.count

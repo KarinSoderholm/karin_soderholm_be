@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_28_030629) do
+ActiveRecord::Schema.define(version: 2021_06_28_172146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -273,22 +273,22 @@ ActiveRecord::Schema.define(version: 2021_06_28_030629) do
     t.index ["clothing_id"], name: "index_patterns_on_clothing_id"
   end
 
+  create_table "post_comments", force: :cascade do |t|
+    t.text "comment"
+    t.string "guest_name"
+    t.string "guest_email"
+    t.bigint "blog_post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_post_id"], name: "index_post_comments_on_blog_post_id"
+  end
+
   create_table "requirements", force: :cascade do |t|
     t.string "name"
     t.bigint "classroom_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["classroom_id"], name: "index_requirements_on_classroom_id"
-  end
-
-  create_table "responses", force: :cascade do |t|
-    t.text "response"
-    t.string "guest_name"
-    t.string "guest_email"
-    t.bigint "blog_post_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["blog_post_id"], name: "index_responses_on_blog_post_id"
   end
 
   create_table "socials", force: :cascade do |t|
@@ -367,8 +367,8 @@ ActiveRecord::Schema.define(version: 2021_06_28_030629) do
   add_foreign_key "order_clothings", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "patterns", "clothings"
+  add_foreign_key "post_comments", "blog_posts"
   add_foreign_key "requirements", "classrooms"
-  add_foreign_key "responses", "blog_posts"
   add_foreign_key "socials", "users"
   add_foreign_key "tag_posts", "blog_posts"
   add_foreign_key "tag_posts", "tags"
