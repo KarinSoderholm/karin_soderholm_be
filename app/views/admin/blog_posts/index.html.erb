@@ -23,7 +23,7 @@
     <% if @blog_posts %>
       <% @blog_posts.each do |blog_post| %>
       <tr>
-        <td><%= link_to "#{blog_post.title}",  admin_blog_post_path(blog_post), method: :get%></td>
+        <td style="font-size: 30px; color: #51677e; text-decoration: none;"><%= link_to "#{blog_post.title}",  admin_blog_post_path(blog_post), method: :get%></td>
         <td><%= link_to 'Edit BlogPost', edit_admin_blog_post_path(blog_post), method: :get %></td>
         <td><%= blog_post.body %></td>
         <% if blog_post.photos.attached? %>
