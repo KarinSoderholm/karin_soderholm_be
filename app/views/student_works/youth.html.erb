@@ -87,10 +87,10 @@
       <% if student_work.image.attached? %>
         <section class="student-work-card-index">
           <section class="student-work-image-index">
-            <%= image_tag(student_work.image, style: 'height:10em;width:10em') %>
+            <%= image_tag(student_work.image, style: 'height:30em;width:30em') %>
           </section>
           <section class="student-work-card-title-index">
-            <h3><%= link_to student_work.title, student_work_path(student_work) %></h3>
+            <h3><%= student_work.title %></h3>
           </section>
         </section>
       <% else %>
@@ -99,7 +99,7 @@
             <p style="text-align: center;">Image coming soon!</p>
           </section>
           <section class="student-work-card-title-index">
-            <h3><%= link_to student_work.title, "/student_works/#{student_work.id}" %></h3>
+            <h3><%= student_work.title %></h3>
           </section>
         </section>
       <% end %>
