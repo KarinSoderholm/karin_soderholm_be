@@ -33,13 +33,13 @@ Rails.application.routes.draw do
     end
 
     scope controller: :artist_statements, module: 'user' do
-      get '/user/:user_id/artist_statement/new' => :new
-      get '/user/:user_id/artist_statement/:id' => :show
-      get '/user/artist_statement' => :index
-      post '/user/:user_id/artist_statement' => :create
-      get '/user/:user_id/artist_statement/:id/edit' => :edit
-      post '/user/:user_id/artist_statement/:id/edit' => :update
-      delete '/user/:user_id/artist_statement/:id' => :destroy
+      get '/user/:user_id/artist_statements/new' => :new
+      get '/user/:user_id/artist_statements/:id' => :show
+      get '/user/artist_statements' => :index
+      post '/user/:user_id/artist_statements' => :create
+      get '/user/:user_id/artist_statements/:id/edit' => :edit
+      post '/user/:user_id/artist_statements/:id/edit' => :update
+      delete '/user/:user_id/artist_statements/:id' => :destroy
     end
 
     scope controller: :artist_stories, module: 'user' do
