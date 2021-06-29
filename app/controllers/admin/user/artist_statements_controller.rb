@@ -18,7 +18,7 @@ class Admin::User::ArtistStatementsController < Admin::BaseController
 
     if @artist_statement.save
       flash[:success] = "Hooray, you have saved a Statement to #{current_user.name}'s Profile"
-      redirect_to "/admin/user/#{current_user.id}/artist_statement/#{@artist_statement.id}"
+      redirect_to "/admin/user/#{current_user.id}/artist_statements/#{@artist_statement.id}"
     else
       flash.now[:error] = "Please make sure the field is filled out. Please try again"
       render :new
@@ -31,7 +31,7 @@ class Admin::User::ArtistStatementsController < Admin::BaseController
   def update
     if @artist_statement.update(artist_statement_params)
       flash[:success] = "Hooray, you have updated your Artist Statement"
-      redirect_to "/admin/user/#{@user.id}/artist_statement/#{@artist_statement.id}"
+      redirect_to "/admin/user/#{@user.id}/artist_statements/#{@artist_statement.id}"
     else
       flash.now[:error] = "Please make sure the field is filled out. Please try again"
       render :edit
