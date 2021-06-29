@@ -15,14 +15,15 @@
         <div class="quicknav-dropdown-content">
           <ul>
             <li class="page-collection">
+              <%= link_to 'art: by collection', artwork_collections_path %>
+            </li>
+            <li class="page-collection">
               <%= link_to 'all art', artworks_path %>
             </li>
             <% Collection.find_artworks.map do |collection| %>
-              <% if collection.name != @collection.name %>
-                <li class="page-collection">
-                  <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
-                </li>
-              <% end %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+              </li>
             <% end %>
           </ul>
         </div>
@@ -34,30 +35,16 @@
         <div class="quicknav-dropdown-content">
           <ul>
             <li class="page-collection">
+              <%= link_to 'objects: by collection', clothings_path %>
+            </li>
+            <li class="page-collection">
               <%= link_to 'all objects', clothings_path %>
             </li>
             <% Collection.find_objects.map do |collection| %>
-              <% if collection.name != @collection.name %>
-                <li class="page-collection">
-                  <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
-                </li>
-              <% end %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
+              </li>
             <% end %>
-          </ul>
-        </div>
-      </li>
-      <li class="folder-collection">
-        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
-          <%= link_to 'student works', student_works_path %>
-        </div>
-        <div class="quicknav-dropdown-content">
-          <ul>
-            <li class="page-collection">
-              <%= link_to 'adult student works', adult_student_work_path %>
-            </li>
-            <li class="page-collection">
-              <%= link_to 'youth student works', youth_student_work_path %>
-            </li>
           </ul>
         </div>
       </li>
@@ -75,6 +62,24 @@
                 <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>
               </li>
             <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'student works', student_works_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all student works', student_works_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'adult student works', adult_student_work_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'youth student works', youth_student_work_path %>
+            </li>
           </ul>
         </div>
       </li>
