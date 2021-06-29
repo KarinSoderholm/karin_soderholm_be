@@ -57,11 +57,11 @@
 
   <section class="admin-blog-post-detail-tag-groups-show">
     <section class="admin-blog-post-detail-category-show">
-      <p style="padding:1em 1em 0;">Comments for <h3><%= @blog_post.title %></h3>:</p>
+      <p style="padding:1em 1em 0; width:100%; display: flex; justify-content: flex-start;">Comments for <h3><%= @blog_post.title %></h3>:</p>
     </section>
     <% @blog_post.post_comments.map do |comment| %>
       <section class="admin-blog-post-details-comments">
-        <p class="admin-blog-post-details-tag-show"><%= comment.comment %></p>
+        <p class="admin-blog-post-details-comment-show"><%= comment.comment %></p>
         <%= comment.guest_name %>
         <%= comment.created_at.strftime("%b %d, %Y @ %l:%M %P")%>
         <%= button_to 'Delete', "/admin/posts/#{@blog_post.id}/post_comments/#{comment.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>

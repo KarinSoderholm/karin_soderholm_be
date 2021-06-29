@@ -28,7 +28,7 @@
 </div><br>
 <div class="quicknav-content">
   <% if current_user.artist_statement %>
-    <%= link_to 'my artist statement', "/admin/user/#{current_user.id}/artist_statement/#{current_user.artist_statement.id}" %> / <%= link_to  'my artwork statements', admin_art_artwork_statement_path %> /<%= link_to 'my artist stories', "/admin/user/artist_stories" %>
+    <%= link_to 'my artist statement', "/admin/user/#{current_user.id}/artist_statements/#{current_user.artist_statement.id}" %> / <%= link_to  'my artwork statements', admin_art_artwork_statement_path %> /<%= link_to 'my artist stories', "/admin/user/artist_stories" %>
   <% else %>
     <%= link_to  'my artwork statements', admin_art_artwork_statement_path %> / <%= link_to 'my artist stories', "/admin/user/artist_stories" %>
   <% end %>
@@ -45,14 +45,19 @@
       <section class="admin-dashboard-art-layout">
         <% @artworks.each do |artwork| %>
           <% if artwork.photos.attached? %>
-            <section class="admin-dashboard-art-card"
+            <section class="admin-dashboard-art-card">
               <p class="admin-dashboard-art-image"><%= link_to image_tag(artwork.photos.first), admin_artwork_path(artwork) %></p>
               <section class="admin-dashboard-art-name">
                 <%= artwork.name %>
               </section>
             </section>
           <% else %>
-            <p class="admin-dashboard-art-image-no-image"><%= link_to 'Image coming soon!', admin_artwork_path(artwork), style: 'color: white'%></p>
+            <section class="admin-dashboard-art-card">
+              <p class="admin-dashboard-art-image-no-image"><%= link_to artwork.name, admin_artwork_path(artwork), style: 'color: white'%></p>
+              <!-- <section class="admin-dashboard-art-name">
+                <%# <%= artwork.name %> %>
+              </section> -->
+            </section>
           <% end %>
         <% end %>
       </section>
@@ -76,7 +81,7 @@
         <% end %>
       </section>
       <section class="all-my-garments-button">
-        <p class="admin-dashboard-garment-button"><%= button_to 'My Garments', admin_clothings_path, method: :get %></p>
+        <p class="admin-dashboard-garment-button"><%= button_to 'My Objects', admin_clothings_path, method: :get %></p>
       </section>
     </li>
     <li>
