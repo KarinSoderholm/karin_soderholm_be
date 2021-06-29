@@ -12,9 +12,17 @@ class BlogPost::PostCommentsController < ApplicationController
 
     if email
       comment = PostComment.new(comment_params)
+      blog_post = BlogPost.find(params[:blog_post_id])
       if comment.save
         flash.now[:success] = "you commented"
-        redirect_to blog_posts_path
+        if params[:route_back_to] == 'monthly'
+          array = blog_post.find_month_year
+          redirect_to monthly_blogs_path(array[0], array[1])
+        elsif params[:route_back_to] == 'blog_type'
+          redirect_to blog_type_path(blog_post, comment.blog_post_id)
+        else
+          redirect_to blog_posts_path
+        end
       else
         flash.now[:error] = "you must not leave any fields blank"
         redirect_to '/blog_posts'
