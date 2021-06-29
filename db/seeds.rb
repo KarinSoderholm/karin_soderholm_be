@@ -141,6 +141,9 @@ garment_collection = Collection.create!(name: 'Garment',
 artwork_collection = ArtworkCollection.create!(artwork_id: crazy_calm.id,
                                               collection_id: maps_project_collection.id
 )
+artwork_collection2 = ArtworkCollection.create!(artwork_id: peaceful_prairie.id,
+                                              collection_id: maps_project_collection.id
+)
 
 # Contacts
 contact = Contact.create!(name: 'Brian',
@@ -169,6 +172,9 @@ artwork_collection1 = ArtworkCollection.create!(artwork_id: crazy_calm.id,
 
 # object_collections
 object_collection1 = ObjectCollection.create!(clothing_id: gizzelle_dress.id,
+                                            collection_id: garment_collection.id,
+)
+object_collection2 = ObjectCollection.create!(clothing_id: uppsalla_jacket.id,
                                             collection_id: garment_collection.id,
 )
 
