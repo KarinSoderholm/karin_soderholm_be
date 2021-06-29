@@ -2071,23 +2071,31 @@ body {
     align-content: flex-end;
   }
   .admin-dashboard-art-card {
+    display: flex;
     position: relative;
     text-align: center;
     font-size: 24px;
     color: white;
     width: 50%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    align-items: center;
   }
   .admin-dashboard-art-image{
     display: absolute;
     justify-content: center;
     max-width: 20em;
-    width: 60%;
+    // width: 60%;
     margin-top: 1em;
     opacity: 50%;
     border-radius: 1em;
   }
   .admin-dashboard-art-image a img{
     justify-content: center;
+    // width: 17em;
+    // height: 17em;
     margin-top: 1em;
     box-shadow: 0 4px 8px 0 #ecd6d6;
   }
@@ -2100,17 +2108,18 @@ body {
   .admin-dashboard-art-image-no-image{
     display: flex;
     justify-content: center;
-    width: 40%;
     margin-top: 1em;
     opacity: 50%;
-    border-radius: 1em;
+    border-radius: .10em;
     text-decoration: none;
     color: white;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: flex-start;
     align-items: center;
-    padding-left: 3em;
+    padding: 3em;
+    box-shadow: 0 4px 8px 0 #ecd6d6;
+    margin: 3em;
   }
 
   .admin-dashboard-workshop-layout{
@@ -2142,7 +2151,9 @@ body {
     margin-top: 1em;
     opacity: 50%;
     border-radius: 1em;
+
   }
+
   .admin-dashboard-workshop-name{
     position: absolute;
     top: 50%;
@@ -3267,7 +3278,9 @@ body {
     flex-wrap: wrap;
     align-items: center;
   }
-
+  .admin-blog-post-details-comment-show{
+    width: 100%;
+  }
   // admin#art#artwork_statement#show
   .admin-artwork-statement-layout{
     display: flex;
@@ -4620,9 +4633,7 @@ body {
     padding: 2em;
     margin: 1em;
   }
-  // .student-work-card-index{
-  //   display: flex;
-  // }
+
   .student-work-card-index{
     display: flex;
     flex-direction: row;
@@ -4638,14 +4649,10 @@ body {
   .student-work-image-index{
     display: flex;
     box-shadow: 0 4px 8px 0 #5d5959;
-    // margin: 1em;
-    position: relative;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%);
   }
-  .student-work-image-index a img {
-
+  .student-work-image-index img {
+    height: 30em;
+    width: 30em;
   }
   .student-work-image-index img:hover {
 
@@ -4729,17 +4736,17 @@ body {
     align-content: center;
     justify-content: center;
     align-items: center;
-
-
     position: absolute;
     text-align: center;
   }
-  .student-work-card-title-index a {
+  .student-work-card-title-index h3 {
     text-decoration: none;
     color: #51677e;
     opacity: 0%;
   }
-  .student-work-card-title-index a:hover {
+
+  .student-work-card-title-index h3:hover {
+    display: flex;
     color: #5b4c18;
     opacity: 75%;
     background-color: white;
