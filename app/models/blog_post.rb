@@ -50,4 +50,9 @@ class BlogPost < ApplicationRecord
   def self.find_blogs_by_tag(tag_id)
     BlogPost.joins(:tags).where(tags: {id: tag_id})
   end
+
+  def find_month_year
+    binding.pry
+    self.created_at.strftime("%m %Y").split
+  end
 end
