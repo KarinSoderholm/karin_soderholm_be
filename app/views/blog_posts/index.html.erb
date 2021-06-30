@@ -122,12 +122,13 @@
                 <% blog.post_comments.map do |post_comment| %>
                   <section class="blog-comment-card">
                     <p class="blog-comment-card-comment-body"><%= post_comment.comment %></p>
-                    <p>commented by: <%= post_comment.guest_name %> <%= post_comment.created_at.strftime("%b %d, %Y @ %l:%M %P") %></p>
-                    <p>commented by: <%= post_comment.guest_name %> <%= post_comment.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%b %d, %Y @ %l:%M %P") %>
-                      <%# <% Time.use_zone("Mountain Time (US & Canada)") do %>
-                        <%# <%= post_comment.created_at.zone %>
-                    <%# .use_zone("Sydney") do %>
-                      <%# <% end %>
+                    <% if current_user %>
+                      <p>commented by: <%= post_comment.guest_name %> <%= post_comment.created_at.strftime("%b %d, %Y @ %l:%M %P") %></p>
+                    <% else %>
+                      <p>commented by: <%= post_comment.guest_name %> <%= post_comment.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%b %d, %Y @ %l:%M %P") %>
+                    <% end %>
+                    <!-- <p>commented by: <%= post_comment.guest_name %> <%= (post_comment.created_at.in_time_zone(current_user.time_zone)).strftime("%b %d, %Y @ %l:%M %P") %> -->
+                      <%# <%= time.in_time_zone(current_user.time_zone) %>
                   </section>
                 <% end %>
               <% else %>
