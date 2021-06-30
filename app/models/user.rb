@@ -15,7 +15,8 @@ class User < ApplicationRecord
                         :city,
                         :state,
                         :zip,
-                        :email
+                        :email,
+                        :time_zone
 
   validates_uniqueness_of :email
   # validates :email, email: true

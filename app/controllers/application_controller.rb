@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
+  around_action :set_time_zone, if: :current_user
 
   helper_method :cart,
                 :current_user,
@@ -82,5 +83,11 @@ class ApplicationController < ActionController::Base
 
   def find_social
     Social.first
+  end
+
+  private
+
+  def set_time_zone(&block)
+    Time.use_zone(current_user.time_zone, &block)
   end
 end

@@ -17,7 +17,7 @@ class Admin::UsersController < Admin::BaseController
 
   def profile_edit
     @user = User.find(params[:user_id])
-    @user_roles = User.all.map{ |u| [ u.role ] }.uniq
+    @user_roles = User.all.map{ |user| [ user.role ] }.uniq
   end
 
   def edit
@@ -60,6 +60,6 @@ class Admin::UsersController < Admin::BaseController
 
   def user_params
     # params.require(:user).permit(:name, :address, :city, :state, :zip, :email, :password)
-    params.permit(:name, :address, :city, :state, :zip, :email, :password)
+    params.permit(:name, :address, :city, :state, :zip, :email, :password, :time_zone)
   end
 end
