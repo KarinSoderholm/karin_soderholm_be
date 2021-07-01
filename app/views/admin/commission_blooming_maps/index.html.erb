@@ -21,13 +21,6 @@
       <th>Completion Date</th>
       <th>Customer Email</th>
       <th>Customer Phone</th>
-      <!-- <th>Message</th> -->
-      <!-- <th>Map City</th> -->
-      <!-- <th>Map State</th> -->
-      <!-- <th>Map Country</th> -->
-      <!-- <th>Map Flower</th> -->
-      <!-- <th>Map Color</th> -->
-      <!-- <th>Notes</th> -->
       <th>Date of Commission</th>
     </tr>
   </thead>
@@ -65,13 +58,6 @@
           <% end %>
           <td><%= commission.customer_email %></td>
           <td><%= commission.customer_phone %></td>
-          <%# <!-- <td><%= commission.message %>
-          <%# <!-- <td><%= commission.map_city %>
-          <%# <!-- <td><%= commission.map_state %>
-          <%# <!-- <td><%= commission.map_country %>
-          <%# <!-- <td><%= commission.map_flower %>
-          <%# <!-- <td><%= commission.map_color %>
-          <%# <!-- <td><%= commission.notes %>
           <td><%= (commission.created_at).strftime("%A, %d %b %Y") %></td>
         </tr>
       <% end %>
@@ -95,7 +81,7 @@
   <section class="commission-info-text">
     * Red: means no deposit has been paid by the Customer
   </section>
-  <section class="commission-info-text">    
+  <section class="commission-info-text">
     * Purple: means that the deposit has been paid by the Customer
   </section>
   <section class="commission-info-text">

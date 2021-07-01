@@ -14,8 +14,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Link to Edit</th>
-      <th>Link to Delete</th>
       <th>Description</th>
       <th>Image</th>
       <th>Create Date</th>
@@ -23,6 +21,8 @@
       <th>Cost</th>
       <th>Availability</th>
       <th>Collection(s)</th>
+      <!-- <th>Link to Edit</th>
+      <th>Link to Delete</th> -->
     </tr>
   </thead>
   <tbody>
@@ -30,9 +30,7 @@
       <% @artworks.each do |artwork| %>
       <tr>
         <td><%= link_to "#{artwork.name}", "/admin/artworks/#{artwork.id}", method: :get %></td>
-        <td><%= link_to "Edit #{artwork.name}", "/admin/artworks/#{artwork.id}/edit", method: :get %></td>
-        <td><%= link_to "Delete #{artwork.name}", "/admin/artworks/#{artwork.id}/alert", method: :get %></td>
-        <td><%= artwork.description %></td>
+        <td><%= truncate(artwork.description, length: 40, omission: '... (continued)') { link_to 'Read More', admin_artwork_path(artwork) } %></td>
         <% if artwork.image.attached? %>
           <td><%= image_tag(artwork.image) %></td>
         <% elsif artwork.photos.attached? %>
@@ -51,6 +49,8 @@
         <% artwork.collections.each do |collection| %>
           <td><%= collection.name %></td>
         <% end %>
+        <td><%= link_to "Edit", "/admin/artworks/#{artwork.id}/edit", method: :get %></td>
+        <td><%= link_to "Delete", "/admin/artworks/#{artwork.id}/alert", method: :get %></td>
       </tr>
       <% end %>
     <% end %>
