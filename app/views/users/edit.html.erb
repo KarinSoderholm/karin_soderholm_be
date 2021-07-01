@@ -25,5 +25,8 @@
   <%= f.label :email %><br>
   <%= f.email_field :email %><br>
 
+  <%= f.label 'Your time zone: '%><br>
+  <%= f.select :time_zone, options_for_select(ActiveSupport::TimeZone::MAPPING.map { |k, v| v }) %><br>
+
   <%= f.submit 'Update Profile' %>
 <% end %>
