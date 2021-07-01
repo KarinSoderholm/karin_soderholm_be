@@ -77,17 +77,80 @@
  #cart-image{
    width:50px;
  }
+
+ // admin#users#show
   #admin-profile-links{
     display: flex;
     text-align: center;
     font-family: LTCKennerley;
     flex-wrap: wrap;
-    justify-content: flex-end;
-    align-content: flex-end;
-    align-items: flex-end;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
     flex-direction: column;
   }
-
+.admin-profile-profile-specifics{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  width: 50em;
+  padding: 1em;
+  margin: 1em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.admin-profile-profile-specifics input[data-confirm="Are you sure?"][style=submit][value='Delete Profile'] {
+  background-color: red;
+  color: red;
+}
+.admin-profile-social-links{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  width: 50em;
+  padding: 1em;
+  margin: 1em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.admin-profile-story{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  width: 50em;
+  padding: 1em;
+  margin: 1em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.admin-profile-artist-statement{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  width: 50em;
+  padding: 1em;
+  margin: 1em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.admin-profile-cv{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  align-items: center;
+  justify-content: center;
+  width: 50em;
+  padding: 1em;
+  margin: 1em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
  section[id*='review'] {
    background-color: #DCDCDC;
  }

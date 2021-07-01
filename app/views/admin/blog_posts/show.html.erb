@@ -50,7 +50,7 @@
       <section class="admin-blog-post-details-tags">
         <p class="admin-blog-post-details-tag-show"><%= tag.title %></p>
       <!-- <p class="admin-blog-post-details-delete-tag-button"> -->
-      <%= button_to 'Delete', "/admin/posts/#{@blog_post.id}/tags/#{tag.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
+        <%= button_to 'Delete', "/admin/posts/#{@blog_post.id}/tags/#{tag.id}", method: :delete, data: { disable_with: "Wait..." }, data: { confirm: "Are you sure?" }  %>
       </section>
     <% end %>
   </section>

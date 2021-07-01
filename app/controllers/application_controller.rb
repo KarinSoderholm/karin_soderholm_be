@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
+  include CurrentUserConcern
   skip_before_action :verify_authenticity_token
   around_action :set_time_zone, if: :current_user
 
@@ -16,9 +17,15 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
+    # super || guest_user
+    # super || @current_user ||= User.find(session[:user_id]) if session[:user_id]
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+  def guest_user
+    @guest ||= Guest.new(name: 'Guest User', email: 'guest@example.com')
+    # OpenStruct.new(name: "Guest User", first_name: "Guest", last_name: "User", email: "guest@example.com")
+  end
   def current_admin?
     current_user && current_user.admin?
   end

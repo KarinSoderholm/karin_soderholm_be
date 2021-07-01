@@ -73,7 +73,7 @@
             <!-- </section> -->
           <% else %>
             <!-- <section class="link-profile"> -->
-              <p class="link-profile"><%= link_to "#{current_user.name}", "/admin/users/#{current_user.id}" %></p><br>
+              <p class="link-profile"><%= link_to "#{current_user.first_name}", "/admin/users/#{current_user.id}" %></p><br>
             <!-- </section> -->
           <% end %>
           <section class="unfinished-commissioned-work">
@@ -82,7 +82,7 @@
         </section>
       <% elsif current_user %>
         <section class="link-profile">
-          <p class="link-profile"><%= link_to "#{current_user.name}", profile_path %></p><br>
+          <p class="link-profile"><%= link_to "#{current_user.first_name}", profile_path %></p><br>
         </section>
       <% end %>
     </div>
