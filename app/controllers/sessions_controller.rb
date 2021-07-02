@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    if user.authenticate(params[:password]) #user &&
       login_redirect(user)
     else
       flash.now[:notice] = 'Your email or password was incorrect!'
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
   def login_redirect(user)
     session[:user_id] = user.id
     if current_admin?
-      redirect_to admin_dashboard_index_path
+      redirect_to rails_admin_path
     else
       redirect_to profile_path
     end

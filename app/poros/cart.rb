@@ -7,28 +7,24 @@ class Cart
   end
 
   def find_item(item_hash)
-    # binding.pry
     if item_hash.keys.include?(:classroom)
-      find_clasroom
-     # item = Classroom.find(item_hash[:classroom])
+      find_clasroom(item_hash)
     elsif item_hash.keys.include?(:artwork)
-      find_artwork
-     # item = Artwork.find(item_hash[:artwork])
+      find_artwork(item_hash)
     elsif item_hash.keys.include?(:clothing)
-      find_object
-      # item = Clothing.find(item_hash[:clothing])
+      find_object(item_hash)
     end
   end
 
-  def find_classroom
+  def find_classroom(item_hash)
     Classroom.find(item_hash[:classroom])
   end
 
-  def find_artwork
+  def find_artwork(item_hash)
     Artwork.find(item_hash[:artwork])
   end
 
-  def find_object
+  def find_object(item_hash)
     Clothing.find(item_hash[:clothing])
   end
 

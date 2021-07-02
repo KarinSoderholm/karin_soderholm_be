@@ -92,7 +92,7 @@
                 <%= blog.title.downcase %>
               </section>
               <section class="blog-author-index">
-                <%= link_to blog.author.downcase, about_bio_path(1) %>
+                <%= link_to blog.author.downcase, about_path %>
               </section>
               <section class="blog-date-index">
                 <%= blog.created_at.strftime("%b %d, %Y") %>
@@ -136,7 +136,7 @@
               <% end %>
             </section>
             <section class="blog-add-a-comment-index">
-              <% if !current_user || !guest_user %>
+              <% if !current_user || !guest_user || !current_admin? %>
                 <section class="comment-blog-form", id="comment-form">
                   <%= form_tag "/blog_post/#{blog.id}/post_comments", remote: true do %>
                     <%= text_area_tag :comment, nil, placeholder: 'comment on the blog post', rows: 3, cols: 70 %><br>

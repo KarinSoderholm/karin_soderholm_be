@@ -1,0 +1,123 @@
+<section class="page-title">
+  <h1>FAQ</h1>
+</section>
+
+<div class="quicknav-content">
+  <div class="quicknav-dropdown">
+    <ul class="dropdown-row">
+      <li class="page-collection">
+        <%= link_to 'home', welcome_index_path %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'about the maker', '/about/bio' %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'commission a blooming map', new_commission_blooming_map_path %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'contact the maker', '/about/contact' %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'cv', '/about/contact' %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'art', artwork_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'art: by collection', artwork_collections_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'all art', artworks_path %>
+            </li>
+            <% Collection.find_artworks.map do |collection| %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'objects', physical_object_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'objects: by collection', clothings_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'all objects', clothings_path %>
+            </li>
+            <% Collection.find_objects.map do |collection| %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'workshops', classrooms_path %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'blog posts', blog_posts_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <% BlogPost.format_monthly_blog_date.uniq.map do |month_of_post| %>
+              <li class="page-collection">
+                <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'student works', student_works_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all student works', student_works_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'adult student works', adult_student_work_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'youth student works', youth_student_work_path %>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<section class="faq-layout">
+  <% if !@faqs.nil? %>
+    <section class="faq-row">
+      <% @faqs.map do |faq_pair| %>
+        <section class="faq-column">
+          <section class="faq-card">
+            <section class="faq-question">
+              <h3><%= faq_pair.question %></h3>
+            </section>
+            <section class="faq-answer">
+              <h6><%= faq_pair.answer %></h6>
+            </section>
+          </section>
+        </section>
+      <% end %>
+    </section>
+  <% else %>
+    <section class="faq-no-questions-created">
+      <h3>Things must be very clear, because there are no pressing questions to answer</h3>
+    </section>
+  <% end %>
+</section>

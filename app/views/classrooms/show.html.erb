@@ -157,13 +157,14 @@
     </div>
 
 <!-- <button type "submit" class="btn btn-outline-info" aria-pressed="true">Enroll</button> -->
-  <% if current_user && session[:cart].nil? %>
-    <!-- <div class="btn-classroom-sign-up-show"> -->
-      <%# <%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %>
-    <!-- </div> -->
-  <% elsif current_user && session[:cart].include?({classroom: @classroom.id}) %>
-    <p>You have already signed up for this Workshop!</p>
+  <% if !current_admin? && current_user %>
+    <div class="btn-classroom-sign-up-show">
+      <%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %>
+    </div>
+  <%# # <% elsif current_user && session[:cart].include?({classroom: @classroom.id})  %>
   <% else %>
+    <p>Workshop is not available!</p>
+  <%# <% else %>
   <% end %>
   </div>
 </div>
