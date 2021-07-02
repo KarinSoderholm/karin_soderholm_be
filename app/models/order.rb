@@ -35,16 +35,12 @@ class Order < ApplicationRecord
     end
   end
 
-  def count_of_items
-    order_items.sum(:quantity)
-  end
-
   def self.by_status
     order(:status)
   end
 
   def count_of_items
-    order_items.sum(:quantity)
+    order_clothings.sum(:quantity) + order_classrooms.sum(:quantity) + order_artworks.sum(:quantity)
   end
 
   def cancel
@@ -58,16 +54,57 @@ class Order < ApplicationRecord
     if !order_artworks.empty?
       order_update(order_artworks)
     end
-    # flash[:success] = "The order was successfully cancelled"
   end
 
   def order_update(order_type)
+    # binding.pry
     order_type.each do |item_hash|
       item_hash.update(fulfilled: false)
+      if item_hash.class == OrderClothing
+        clothing = Clothing.find(item_hash.clothing_id)
+        inventory = clothing.inventory
+        clothing.update(inventory: (inventory + item_hash.quantity))
+        clothing.set_availability_based_on_inventory
+      elsif item_hash.class == OrderArtwork
+        artwork = Artwork.find(item_hash.artwork_id)
+        inventory = artwork.inventory
+        artwork.update(inventory: (inventory + item_hash.quantity))
+        artwork.set_availability_based_on_inventory
+        if !artwork.available?
+          artwork.set_sell_date
+        end
+      end
+      # binding.pry
     end
   end
 
   def is_packaged?
     update(status: 1) if order_items.distinct.pluck(:fulfilled) == [true]
+  end
+
+  def find_user
+    User.find(self.user_id)
+  end
+
+  def date_fulfilled
+    if self.status == 'fulfilled'
+      return self.updated_at.strftime("%A, %d %b %Y")
+    else
+      return "-------"
+    end
+  end
+
+  def subtotals
+    # binding.pry
+    self.order_artworks.sub_total(self) + self.order_classrooms.sub_total(self) + self.order_clothings.sub_total(self)
+
+  #   classroom_price = self.order_classrooms.sum do |order_classroom|
+  #     order_classroom.price
+  #   end
+  #
+  #   clothing_price = self.order_clothings.sum do |order_clothing|
+  #     order_clothing.price
+  #   end
+  #   clothing_price + classroom_price + artwork_price
   end
 end

@@ -21,6 +21,7 @@ class Artwork < ApplicationRecord
   validates :sell_date, presence: false
   validates :cost, presence: true
   validates :available, inclusion: [true, false]
+  validates :inventory, presence: true
   validate :acceptable_image
 
 
@@ -41,6 +42,14 @@ class Artwork < ApplicationRecord
     end
   end
 
+  def available?
+    if self.available
+      return true
+    else
+      return false
+    end
+  end
+
   def self.total_sold
     where(available: false).count
   end
@@ -54,6 +63,7 @@ class Artwork < ApplicationRecord
   end
 
   def set_availability(params)
+
     if !params[:artwork][:sell_date].empty?
       params[:artwork][:available] = false
       self.available = false
@@ -63,6 +73,11 @@ class Artwork < ApplicationRecord
       self.available = true
       return params
     end
+  end
+
+  def set_sell_date
+    binding.pry
+    self.update(sell_date: Time.now.utc.iso8601)
   end
 
   def set_images(params)

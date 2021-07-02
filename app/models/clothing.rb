@@ -17,6 +17,7 @@ class Clothing < ApplicationRecord
   validates :available, inclusion: [true, false]
   validates :origin_date, presence: true
   validates :cost, presence: true
+  validates :inventory, presence: true
   validate :acceptable_image
 
   def self.import(file)
@@ -66,6 +67,12 @@ class Clothing < ApplicationRecord
       return params
     end
   end
+
+  # def set_availability_based_on_inventory
+  #   if self.inventory == 0
+  #     self.update(available: false)
+  #   end
+  # end
 
   def translate_date
     (self.origin_date).strftime("%b %Y")
