@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_171732) do
+ActiveRecord::Schema.define(version: 2021_07_01_204121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2021_06_29_171732) do
     t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "inventory", default: 1
   end
 
   create_table "blog_posts", force: :cascade do |t|
@@ -122,7 +123,6 @@ ActiveRecord::Schema.define(version: 2021_06_29_171732) do
   create_table "clothings", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "image"
     t.string "url"
     t.string "category"
     t.boolean "available"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2021_06_29_171732) do
     t.float "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "inventory", default: 1
   end
 
   create_table "collections", force: :cascade do |t|
