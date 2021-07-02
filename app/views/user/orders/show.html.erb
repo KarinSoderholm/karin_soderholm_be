@@ -5,6 +5,97 @@
   <%= link_to 'My Orders', '/profile/orders' %>
 </section>
 
+<div class="quicknav-content">
+  <div class="quicknav-dropdown">
+    <ul class="dropdown-row">
+      <li class="page-collection">
+        <%= link_to 'home', welcome_index_path %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'art', artwork_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'art: by collection', artwork_collections_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'all art', artworks_path %>
+            </li>
+            <% Collection.find_artworks.map do |collection| %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'objects', physical_object_collections_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'objects: by collection', clothings_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'all objects', clothings_path %>
+            </li>
+            <% Collection.find_objects.map do |collection| %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/physical_object/collections/#{collection.id}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'workshops', classrooms_path %>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'blog posts', blog_posts_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <% BlogPost.format_monthly_blog_date.uniq.map do |month_of_post| %>
+              <li class="page-collection">
+                <%= link_to month_of_post[0], "/blog_posts/monthly_blogs/#{month_of_post[1]}/#{month_of_post[2]}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'student works', student_works_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all student works', student_works_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'adult student works', adult_student_work_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'youth student works', youth_student_work_path %>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'my orders', '/profile/orders' %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'my cart', cart_path %>
+      </li>
+    </ul>
+  </div>
+</div>
+
 <section class="order-status">
   <p>Total Number of Items in Order: <%= @order.order_artworks.count + @order.order_clothings.count + @order.order_classrooms.count %></p>
   <p>Total: <%= number_to_currency(@order.grand_total) %></p><br>
@@ -22,7 +113,13 @@
       <% @order.order_artworks.each do |order_artwork| %>
       <section id='order-artwork-<%= order_artwork.id %>'>
         <h3><%= link_to order_artwork.artwork.name, artwork_path(order_artwork.artwork) %></h3>
-        <%= image_tag(order_artwork.artwork.image, style: 'height:10%;width:10%') %>
+        <% if order_artwork.artwork.image.attached? %>
+          <%= image_tag(order_artwork.artwork.image, style: 'height:10%;width:10%') %>
+        <% elsif order_artwork.artwork.photos.attached? %>
+          <% order_artwork.artwork.photos.map do |photo| %>
+            <%= image_tag(photo, style: 'height:10%;width:10%')  %>
+          <% end %>
+        <% end %>
         <p><%= order_artwork.artwork.description %></p>
         <p>Quantity: <%= order_artwork.quantity %></p>
         <p>Price: <%= number_to_currency(order_artwork.price) %></p>
@@ -39,7 +136,13 @@
         <% @order.order_classrooms.each do |order_classroom| %>
           <section id='order-classroom-<%= order_classroom.id %>'>
             <h3><%= link_to order_classroom.classroom.name, classroom_path(order_classroom.classroom) %></h3>
-            <%= image_tag(order_classroom.classroom.image, style: 'height:10%;width:10%') %>
+            <% if order_classroom.classroom.image.attached? %>
+              <%= image_tag(order_classroom.classroom.image, style: 'height:10%;width:10%') %>
+            <% elsif order_classroom.classroom.photos.attached? %>
+              <% order_classroom.classroom.photos.map do |photo| %>
+                <%= image_tag(photo, style: 'height:10%;width:10%')  %>
+              <% end %>
+            <% end %>
             <p><%= order_classroom.classroom.description %></p>
             <p>Quantity: <%= order_classroom.quantity %></p>
             <p>Price: <%= number_to_currency(order_classroom.price) %></p>
@@ -56,7 +159,13 @@
         <% @order.order_clothings.each do |order_clothing| %>
           <section id='order-clothing-<%= order_clothing.id %>'>
             <h3><%= link_to order_clothing.clothing.name, clothing_path(order_clothing.clothing) %></h3>
-            <%= image_tag(order_clothing.clothing.image, style: 'height:10%;width:10%') %>
+            <% if order_clothing.clothing.image.attached? %>
+              <%= image_tag(order_clothing.clothing.image, style: 'height:10%;width:10%') %>
+            <% elsif order_clothing.clothing.photos.attached? %>
+              <% order_clothing.clothing.photos.map do |photo| %>
+                <%= image_tag(photo, style: 'height:10%;width:10%')  %>
+              <% end %>
+            <% end %>
             <p><%= order_clothing.clothing.description %></p>
             <p>Quantity: <%= order_clothing.quantity %></p>
             <p>Price: <%= number_to_currency(order_clothing.price) %></p>
