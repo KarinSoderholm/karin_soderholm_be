@@ -1,4 +1,4 @@
-class AboutController < ApplicationController
+class AboutsController < ApplicationController
   def bio
     @socials = Social.all
     @artist_statement = ArtistStatement.all.first
@@ -26,7 +26,7 @@ class AboutController < ApplicationController
     if @contact.save
       AboutMailer.with(contact: @contact).contact_email.deliver_later
       flash[:success] = 'Your message has been sent. Karin will get back with you shortly!'
-      redirect_to '/about/1/bio'
+      redirect_to '/about/bio'
     else
       flash.now[:error] = "All fields must be filled in to send an email. Please try again!"
       render :contact

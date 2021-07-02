@@ -20,7 +20,7 @@
           <div class="bar3"></div>
         </div>
         <div class="dropdown-content">
-          <%= link_to 'About', '/about/1/bio' %>
+          <%= link_to 'About', '/about/bio' %>
           <%= link_to 'Art', artwork_collections_path %>
           <%= link_to 'Home', '/' %>
           <%= link_to 'Objects', physical_object_collections_path %>
@@ -31,7 +31,7 @@
             <%= link_to image_tag("bag.svg").html_safe, cart_path unless current_user && current_admin? %>
             <% if current_admin? %>
               <%= "_____________________________" %>
-              <%# <%= link_to 'Profile', "/admin/users/#{current_user.id}" %> 
+              <%# <%= link_to 'Profile', "/admin/users/#{current_user.id}" %>
             <% else %>
               <%= link_to 'Profile', profile_path %>
             <% end %>
@@ -95,24 +95,21 @@
               <div class="footer-column">
                 <div class="collections-section">
                   <div class="collections-section-artwork">
-                    <%= link_to 'Art', "/artworks", class: "artworks-footer" %>
+                    <%= link_to 'Art', artwork_collections_path, class: "artworks-footer" %>
                   </div>
                   <div class="collections-section-commission">
                     <%= link_to 'Commission a Blooming Map', new_commission_blooming_map_path %>
                   </div>
 
-                  <div class="collections-section-collection">
-                    <%= link_to 'Collections', "/collections", class: "collections-footer" %>
-                  </div>
                   <div class="collections-section-clothing">
-                    <%= link_to 'Objects', "/clothings", class: "clothings-footer" %>
+                    <%= link_to 'Objects', physical_object_collections_path, class: "clothings-footer" %>
                   </div>
 
                   <div class="collections-section-student-work">
                     <%= link_to 'Student Works', student_works_path, class: "student-works-footer" %>
                   </div>
                   <div class="collections-section-classroom">
-                    <%= link_to 'Workshops', "/classrooms", class: "classrooms-footer" %>
+                    <%= link_to 'Workshops', classrooms_path, class: "classrooms-footer" %>
                   </div>
                 </div>
               </div>
@@ -123,10 +120,10 @@
                     <p class="about">About</p>
                   </div>
                   <div class="about-text">
-                    <%= link_to 'About', "/about/1/bio" %>
-                    <%= link_to 'Contact', "/about/1/contact" %>
-                    <%= link_to 'FAQ', '/about/1/faq' %>
-                    <%= link_to 'CV', '/about/1/cv' %>
+                    <%= link_to 'About', "/about/bio" %>
+                    <%= link_to 'Contact', "/about/contact" %>
+                    <%= link_to 'FAQ', '/about/faq' %>
+                    <%= link_to 'CV', '/about/cv' %>
                   </div><br>
 
                   <nav class="social">

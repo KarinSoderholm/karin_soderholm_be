@@ -15,7 +15,7 @@ class CommissionBloomingMapsController < ApplicationController
     commission = CommissionBloomingMap.new(commission_params)
     if commission.save
       flash[:success] = 'Thank you for interest in a custom piece of art. Karin will reach out to you shortly!!'
-      redirect_to "/collections/#{ map_collection.id }"
+      redirect_to "/artwork/collections/#{ map_collection.id }"
     else
       flash[:error] = 'Please make sure that all the mandatory fields are filled out, so we can start this magical process!'
       render :new

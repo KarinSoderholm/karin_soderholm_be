@@ -1,5 +1,5 @@
 <section class="page-title">
-  <h1>Behind the Scences at Quiet Joy Studio</h1>
+  <h1>Contact Quiet Joy Studio</h1>
 </section>
 
 <div class="quicknav-content">
@@ -9,16 +9,16 @@
         <%= link_to 'home', welcome_index_path %>
       </li>
       <li class="page-collection">
-        <%= link_to 'contact the maker', '/about/1/contact' %>
-      </li>
-      <li class="page-collection">
-        <%= link_to 'CV', '/about/1/cv' %>
+        <%= link_to 'about the maker', '/about/bio' %>
       </li>
       <li class="page-collection">
         <%= link_to 'commission a blooming map', new_commission_blooming_map_path %>
       </li>
       <li class="page-collection">
-        <%= link_to 'FAQ', '/about/1/faq' %>
+        <%= link_to 'cv', '/about/contact' %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'FAQ', '/about/faq' %>
       </li>
       <li class="folder-collection">
         <div class="quicknav-menu-bar-container" hover="myFunction(this)">
@@ -99,63 +99,25 @@
   </div>
 </div>
 
+<div class="contact-layout"
+  <div class="contact-form">
+    <%= form_tag about_path do %>
+      <%= label_tag :your_name %><br>
+      <%= text_field_tag :name, nil, placeholder: 'your name' %><br>
 
-<section class="bio-layout">
-  <!-- <section class="maker-image"> -->
-    <%# <%= image_tag 'maker-img1.png' %>
-  <!-- </section> -->
-  <!-- <section class="maker-image"> -->
-    <%# <%= image_tag 'map-img1.png' %>
-  <!-- </section> -->
+      <%= label_tag :your_email_address %><br>
+      <%= email_field_tag :customer_email_address, nil, placeholder: 'your_email@example.com'  %><br>
 
-  <section class="about-maker-bio">
-    <section class="maker-bio-header">
-      <h3>Meet the maker at Quiet Joy Studio</h3>
-    </section>
+      <%= label_tag :subject %><br>
+      <%= text_field_tag :subject, nil, placeholder: 'subject of email' %><br>
 
-    <section class="about-maker-card">
-      <section class="about-maker-image">
-        <%= image_tag 'maker-img1.png' %>
-      </section>
-      <section class="about-maker-bio-text">
-        <p>Some words about things.</p>
-      </section>
-    </section>
-    <!-- <section class="about-maker-button"> -->
-      <%# <%= button_to 'About', , method: :get %>
-    <!-- </section> -->
-  </section>
+      <%# <%= label_tag :maker_email_address %>
+      <%# <%= email_field_tag :email_address, nil, placeholder: 'email@example.com' %>
 
-    <section class="about-story-maker-layout">
-      <section class="about-maker-story-header">
-        <h3>Karin's Story</h3>
-      </section>
-      <section class="about-story-maker-card">
-        <section class="about-maker-story-text">
-          <%= @artist_story.story %>
-          <p>Some words about things.</p>
-        </section>
-        <section class="about-story-maker-image">
-          <%= image_tag 'beautiful-thread.png' %>
-        </section>
-      </section>
-    </section>
+      <%= label_tag :compose %><br>
+      <%= text_area_tag :message, nil, rows: 20, cols: 50, placeholder: 'A note to QuietJoyStudio' %><br>
 
-
-
-  <section class="about-maker-artist-statement-layout">
-    <section class="about-maker-artist-statement-header">
-      <h3>Artist Statement</h3>
-    </section>
-    <section class="about-maker-artist-statement-card">
-      <section class="about-maker-artist-statement-image">
-        <%= image_tag 'paper-art2.png' %>
-      </section>
-      <section class="about-maker-artist-statement-text">
-        <p><%= @artist_statement.statement %></p>
-        <!-- <p>Some words</p> -->
-      </section>
-    </section>
-
-  </section>
-</section>
+      <%= submit_tag 'Send Email' %>
+    <% end %>
+  </div>
+</div>

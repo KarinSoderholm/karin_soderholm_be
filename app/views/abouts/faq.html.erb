@@ -1,6 +1,7 @@
 <section class="page-title">
-  <h1>Karin's CV</h1>
+  <h1>FAQ</h1>
 </section>
+
 <div class="quicknav-content">
   <div class="quicknav-dropdown">
     <ul class="dropdown-row">
@@ -8,16 +9,16 @@
         <%= link_to 'home', welcome_index_path %>
       </li>
       <li class="page-collection">
-        <%= link_to 'about the maker', '/about/1/bio' %>
-      </li>
-      <li class="page-collection">
-        <%= link_to 'contact the maker', '/about/1/contact' %>
+        <%= link_to 'about the maker', '/about/bio' %>
       </li>
       <li class="page-collection">
         <%= link_to 'commission a blooming map', new_commission_blooming_map_path %>
       </li>
       <li class="page-collection">
-        <%= link_to 'FAQ', '/about/1/faq' %>
+        <%= link_to 'contact the maker', '/about/contact' %>
+      </li>
+      <li class="page-collection">
+        <%= link_to 'cv', '/about/contact' %>
       </li>
       <li class="folder-collection">
         <div class="quicknav-menu-bar-container" hover="myFunction(this)">
@@ -98,18 +99,25 @@
   </div>
 </div>
 
-<section>
-  <!-- <h5>Title: </h5><br> -->
-  <!-- <p class="admin-cv-details-text"><%= @cv.name%></p> -->
-<!-- </section> -->
-<section>
-  <br>
-  <!-- <h5>Document: </h5> -->
-  <% if @cv.cv_file.attached? %>
-    <section class="admin-cv-details-file">
-      <iframe src="<%= rails_blob_path(@cv.cv_file, disposition: :inline) %>" height="1000" width="1000"></iframe>
+<section class="faq-layout">
+  <% if !@faqs.nil? %>
+    <section class="faq-row">
+      <% @faqs.map do |faq_pair| %>
+        <section class="faq-column">
+          <section class="faq-card">
+            <section class="faq-question">
+              <h3><%= faq_pair.question %></h3>
+            </section>
+            <section class="faq-answer">
+              <h6><%= faq_pair.answer %></h6>
+            </section>
+          </section>
+        </section>
+      <% end %>
     </section>
   <% else %>
-    <p class="admin-cv-details-text">There is no file uploaded yet!</p>
+    <section class="faq-no-questions-created">
+      <h3>Things must be very clear, because there are no pressing questions to answer</h3>
+    </section>
   <% end %>
 </section>
