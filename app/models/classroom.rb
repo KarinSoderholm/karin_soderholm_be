@@ -6,7 +6,7 @@ class Classroom < ApplicationRecord
   has_many :order_classrooms, dependent: :destroy
   has_many :orders, through: :order_classrooms, dependent: :destroy
   has_many_attached :photos
-  has_one_attached :image
+  # has_one_attached :image
 
   validates :name, presence: true
   validates :description, presence: true

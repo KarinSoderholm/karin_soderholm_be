@@ -13,7 +13,7 @@ class Artwork < ApplicationRecord
   has_many :collections, through: :artwork_collections, dependent: :destroy
 
   has_many_attached :photos
-  has_one_attached :image
+  # has_one_attached :image
 
   validates :name, presence: true
   validates :description, presence: true

@@ -7,7 +7,7 @@ class Clothing < ApplicationRecord
   has_many :orders, through: :order_clothings, dependent: :destroy
   has_many :object_collections, dependent: :delete_all
   has_many :collections, through: :object_collections, dependent: :delete_all
-  has_one_attached :image
+  # has_one_attached :image
   has_many_attached :photos
 
   validates :name, presence: true
