@@ -22,8 +22,8 @@ karin1 = User.create!(name: "Karin Soderholm",
                       state: "CO",
                       zip: 12345,
                       email: "karin@example.com",
-                      password: "SEED_ADMIN_EMAIL_PASSWORD",
-                      password_confirmation: "SEED_ADMIN_EMAIL_PASSWORD",
+                      password: SEED_ADMIN_EMAIL_PASSWORD,
+                      password_confirmation: SEED_ADMIN_EMAIL_PASSWORD,
                       role: 1
 )
 sylvia = User.create!(name: "Sylvia",
