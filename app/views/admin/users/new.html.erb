@@ -22,8 +22,10 @@
   <%= f.label :zip %><br>
   <%= f.text_field :zip %><br>
 
+  <%= f.label 'Your time zone: '%><br>
+  <%= f.select :time_zone, options_for_select(ActiveSupport::TimeZone::MAPPING.map { |k, v| v }) %><br>
+
   <%= f.label :email %>
-  <!-- <input type="email" class="form-control" placeholder="Username" aria-describedby="sizing-addon1"> -->
   <%= f.email_field :email %><br>
 
   <%= f.label :password %><br>

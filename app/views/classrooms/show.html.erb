@@ -53,10 +53,10 @@
         <div class="quicknav-dropdown-content">
           <ul>
             <li class="page-collection">
-              <%= link_to 'adult student works', adult_student_work_student_works_path %>
+              <%= link_to 'adult student works', adult_student_work_path %>
             </li>
             <li class="page-collection">
-              <%= link_to 'youth student works', youth_student_work_student_works_path %>
+              <%= link_to 'youth student works', youth_student_work_path %>
             </li>
           </ul>
         </div>
@@ -144,7 +144,6 @@
           <% @classroom.find_all_requirements.each_with_index do |requirement, index| %>
             <% reference_classroom_id = @classroom.find_reference_classroom_id(requirement).id %>
             <p><%= index + 1 %>: <%= link_to requirement.capitalize, classroom_path(reference_classroom_id) %></p>
-            <!-- <p><%= index + 1 %>: <%= link_to requirement.capitalize, "/classrooms/#{reference_classroom_id}" %></p> -->
           <% end %>
         <% end %><br>
       </section>
@@ -156,14 +155,12 @@
         <%= number_to_currency(@classroom.cost) %>
       </section>
     </div>
-  <!-- </div> -->
-<!-- </div>
 
 <!-- <button type "submit" class="btn btn-outline-info" aria-pressed="true">Enroll</button> -->
   <% if current_user && session[:cart].nil? %>
-    <div class="btn-classroom-sign-up-show">
-      <%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %>
-    </div>
+    <!-- <div class="btn-classroom-sign-up-show"> -->
+      <%# <%= button_to 'Sign Me Up!', "/cart/classroom/#{@classroom.id}", method: :post %>
+    <!-- </div> -->
   <% elsif current_user && session[:cart].include?({classroom: @classroom.id}) %>
     <p>You have already signed up for this Workshop!</p>
   <% else %>

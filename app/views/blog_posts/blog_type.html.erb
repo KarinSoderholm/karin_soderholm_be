@@ -49,10 +49,10 @@
         <div class="quicknav-dropdown-content">
           <ul>
             <li class="page-collection">
-              <%= link_to 'adult student works', adult_student_work_student_works_path %>
+              <%= link_to 'adult student works', adult_student_work_path %>
             </li>
             <li class="page-collection">
-              <%= link_to 'youth student works', youth_student_work_student_works_path %>
+              <%= link_to 'youth student works', youth_student_work_path %>
             </li>
           </ul>
         </div>
@@ -84,7 +84,6 @@
 
     </section>
       <% if @blog_posts %>
-
         <% @blog_posts.map do |blog| %>
           <section class="blog-column-container-index">
             <section class="blog-card-index">
@@ -114,6 +113,44 @@
                     <p><%= link_to tag.title, "/blog_posts/#{blog.id}/blog_type/#{tag.id}" %></p>
                 <% end %>
               <% else %>
+              <% end %>
+            </section>
+            <section class="blog-all-responses-to-post-index">
+              <% if !blog.post_comments.empty?%>
+                <% blog.post_comments.map do |post_comment| %>
+                  <section class="blog-comment-card">
+                    <p class="blog-comment-card-comment-body"><%= post_comment.comment %></p>
+                    <% if current_user %>
+                      <p>commented by: <%= post_comment.guest_name %> <%= post_comment.created_at.strftime("%b %d, %Y @ %l:%M %P") %></p>
+                    <% else %>
+                      <p>commented by: <%= post_comment.guest_name %> <%= post_comment.created_at.in_time_zone("Mountain Time (US & Canada)").strftime("%b %d, %Y @ %l:%M %P") %>
+                    <% end %>
+                  </section>
+                <% end %>
+              <% else %>
+              <% end %>
+            </section>
+            <section class="blog-add-a-comment-index">
+              <% if !current_user || !guest_user%>
+                <section class="comment-blog-form", id="comment-form">
+                  <%= form_tag "/blog_post/#{blog.id}/post_comments", remote: true do %>
+                    <%= text_area_tag :comment, nil, placeholder: 'comment on the blog post', rows: 3, cols: 70 %><br>
+                    <%= text_field_tag :guest_name, nil, placeholder: 'your name' %><br>
+                    <%= text_field_tag :guest_email, nil, placeholder: 'email@example.com' %><br>
+                    <%= hidden_field_tag :route_back_to, 'blog_type' %>
+                    <%= submit_tag "comment" %>
+                  <% end %>
+                </section>
+              <% else %>
+                <section class="comment-blog-form", id="comment-form">
+                  <%= form_tag "/blog_post/#{blog.id}/post_comments", remote: true do %>
+                    <%= text_area_tag :comment, nil, placeholder: 'comment on the blog post', rows: 3, cols: 70 %><br>
+                    <%= hidden_field_tag :guest_name, current_user.name %><br>
+                    <%= hidden_field_tag :guest_email, current_user.email %><br>
+                    <%= hidden_field_tag :route_back_to, 'blog_type' %>
+                    <%= submit_tag "comment" %>
+                  <% end %>
+                </section>
               <% end %>
             </section>
           </section>

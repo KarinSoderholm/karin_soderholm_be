@@ -39,7 +39,6 @@ class Admin::User::ArtistStoriesController < Admin::BaseController
   end
 
   def destroy
-    # artist = Artist.find(artist_story_params[:user_id])
     if @artist_story.destroy
       flash[:success] = "Hooray, you have deleted your Artist Story"
       redirect_to "/admin/users/#{current_user.id}"

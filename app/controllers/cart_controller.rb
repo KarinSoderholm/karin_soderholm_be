@@ -18,7 +18,7 @@ class CartController < ApplicationController
     cart.add_item(helper_hash)
     session[:cart] = cart.contents
     flash[:notice] = "#{item.name} has been added to your cart!"
-  
+
     redirect_to cart_path
   end
 
@@ -39,7 +39,8 @@ class CartController < ApplicationController
     if params[:change] == "more"
       cart.add_item(params[:item_id])
     elsif params[:change] == "less"
-      cart.less_item(params[:item_id])
+      cart.less_item(params[:item_type], params[:item_id])
+      # cart.less_item(params[:item_id])
       return remove_item if cart.count_of(params[:item_id]) == 0
     end
     session[:cart] = cart.contents

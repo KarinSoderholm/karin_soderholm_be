@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_042030) do
+ActiveRecord::Schema.define(version: 2021_07_01_204121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 2021_06_24_042030) do
     t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "inventory", default: 1
   end
 
   create_table "blog_posts", force: :cascade do |t|
@@ -122,7 +123,6 @@ ActiveRecord::Schema.define(version: 2021_06_24_042030) do
   create_table "clothings", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "image"
     t.string "url"
     t.string "category"
     t.boolean "available"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 2021_06_24_042030) do
     t.float "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "inventory", default: 1
   end
 
   create_table "collections", force: :cascade do |t|
@@ -273,6 +274,16 @@ ActiveRecord::Schema.define(version: 2021_06_24_042030) do
     t.index ["clothing_id"], name: "index_patterns_on_clothing_id"
   end
 
+  create_table "post_comments", force: :cascade do |t|
+    t.text "comment"
+    t.string "guest_name"
+    t.string "guest_email"
+    t.bigint "blog_post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blog_post_id"], name: "index_post_comments_on_blog_post_id"
+  end
+
   create_table "requirements", force: :cascade do |t|
     t.string "name"
     t.bigint "classroom_id"
@@ -333,6 +344,7 @@ ActiveRecord::Schema.define(version: 2021_06_24_042030) do
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "time_zone", default: "UTC"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -357,6 +369,7 @@ ActiveRecord::Schema.define(version: 2021_06_24_042030) do
   add_foreign_key "order_clothings", "orders"
   add_foreign_key "orders", "users"
   add_foreign_key "patterns", "clothings"
+  add_foreign_key "post_comments", "blog_posts"
   add_foreign_key "requirements", "classrooms"
   add_foreign_key "socials", "users"
   add_foreign_key "tag_posts", "blog_posts"

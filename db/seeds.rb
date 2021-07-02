@@ -13,7 +13,8 @@ august = User.create!(name: "August",
                       state: "MN",
                       zip: 12345,
                       email: "august@example.com",
-                      password_digest: "test"
+                      password: "test",
+                      password_confirmation: "test"
 )
 karin1 = User.create!(name: "Karin Soderholm",
                       address: "1234 Main St.",
@@ -21,7 +22,8 @@ karin1 = User.create!(name: "Karin Soderholm",
                       state: "CO",
                       zip: 12345,
                       email: "karin@example.com",
-                      password_digest: "SEED_ADMIN_EMAIL_PASSWORD",
+                      password: "SEED_ADMIN_EMAIL_PASSWORD",
+                      password_confirmation: "SEED_ADMIN_EMAIL_PASSWORD",
                       role: 1
 )
 sylvia = User.create!(name: "Sylvia",
@@ -30,7 +32,8 @@ sylvia = User.create!(name: "Sylvia",
                       state: "MT",
                       zip: 12345,
                       email: "sylvia@example.com",
-                      password_digest: "test"
+                      password: "test",
+                      password_confirmation: "test"
 )
 # artworks
 peaceful_prairie = Artwork.create!(name: "Peaceful Prairie",
@@ -62,8 +65,11 @@ artist_story = ArtistStory.create!(story: 'This is my story!',
 artwork_statement = ArtworkStatement.create!(statement: 'This is an ArtworkStatement',
                                             artwork_id: crazy_calm.id
 )
+artwork_statement1 = ArtworkStatement.create!(statement: 'This is an ArtworkStatement',
+                                            artwork_id: peaceful_prairie.id
+)
 
-# clothings
+# clothings {objects}
 gizzelle_dress = Clothing.create!(name: "Gizzelle Dress",
                                   description: "A funky flowy dress designed to make you stand out!",
                                   category: "Dress",
@@ -119,6 +125,34 @@ blooming_map = CommissionBloomingMap.create!(customer_name: 'George Soderholm',
                                               commission_payment: 'paid_in_full',
                                               price: 234
 )
+blooming_map2 = CommissionBloomingMap.create!(customer_name: 'Kim Soderholm',
+                                              customer_email: 'kim@example.com',
+                                              customer_phone: '7203232761',
+                                              message: "A city that I would love to live in",
+                                              map_city: 'Omaha',
+                                              map_state: 'NE',
+                                              map_country: 'USA',
+                                              map_flower: 'Sunflower',
+                                              map_color: 'green,  blue, red',
+                                              commission_status: 'not_started',
+                                              notes: '',
+                                              commission_payment: 'not_paid',
+                                              price: 234
+)
+blooming_map3 = CommissionBloomingMap.create!(customer_name: 'Karley Berge',
+                                              customer_email: 'karley@example.com',
+                                              customer_phone: '7203232761',
+                                              message: "I love my city",
+                                              map_city: 'Rochester',
+                                              map_state: 'MN',
+                                              map_country: 'USA',
+                                              map_flower: 'Lily',
+                                              map_color: 'green,  blue, red',
+                                              commission_status: 'started',
+                                              notes: 'Make sure to highlight the north-eastern part of the city',
+                                              commission_payment: 'deposit_paid',
+                                              price: 234
+)
 
 # Materials
 # canvas = Material.create!(name: 'canvas',
@@ -141,6 +175,9 @@ garment_collection = Collection.create!(name: 'Garment',
 artwork_collection = ArtworkCollection.create!(artwork_id: crazy_calm.id,
                                               collection_id: maps_project_collection.id
 )
+artwork_collection2 = ArtworkCollection.create!(artwork_id: peaceful_prairie.id,
+                                              collection_id: maps_project_collection.id
+)
 
 # Contacts
 contact = Contact.create!(name: 'Brian',
@@ -149,10 +186,31 @@ contact = Contact.create!(name: 'Brian',
                           message: "Hey! What is the name of your Etsy Shop. Actually, do you have one? I'd love to shop more of your ware",
                           message_status: 'read'
 )
+contact1 = Contact.create!(name: 'Ruthanne',
+                          subject: 'Do you have any up coming shows?',
+                          customer_email_address: 'ruthanne@example.com',
+                          message: "Hey! What is the name of your Etsy Shop. Actually, do you have one? I'd love to shop more of your ware",
+                          message_status: 'unread'
+)
+contact2 = Contact.create!(name: 'Billy',
+                          subject: 'Looking for a place to buy your goods',
+                          customer_email_address: 'billy@example.com',
+                          message: "Hey! What is the name of your Etsy Shop. Actually, do you have one? I'd love to shop more of your ware",
+                          message_status: 'responeded'
+)
 
 # Email
-email = Email.create!(email_address: 'gary@example.com',
+gary_email = Email.create!(email_address: 'gary@example.com',
                       name: 'Gary Smith'
+)
+mary_email = Email.create!(email_address: 'Mary@example.com',
+                      name: 'Mary Smith'
+)
+cindy_email = Email.create!(email_address: 'cindy@example.com',
+                      name: 'Cindy Smith'
+)
+jenny_email = Email.create!(email_address: 'jenny@example.com',
+                      name: 'Jenny Smith'
 )
 
 # Social
@@ -166,9 +224,15 @@ social = Social.create!(instagram: 'https://www.instagram.com/so__karin/',
 artwork_collection1 = ArtworkCollection.create!(artwork_id: crazy_calm.id,
                                                 collection_id: maps_project_collection.id
 )
+artwork_collection2 = ArtworkCollection.create!(artwork_id: peaceful_prairie.id,
+                                                collection_id: maps_project_collection.id
+)
 
-# physical_object_collections
+# object_collections
 object_collection1 = ObjectCollection.create!(clothing_id: gizzelle_dress.id,
+                                            collection_id: garment_collection.id,
+)
+object_collection2 = ObjectCollection.create!(clothing_id: uppsalla_jacket.id,
                                             collection_id: garment_collection.id,
 )
 
@@ -192,6 +256,14 @@ sally_student_work = StudentWork.create!(title: 'Paper Mache Sculpture',
                                           description: 'A 7th graders work',
                                           age_category: 'young_adult'
 )
+danny_student_work = StudentWork.create!(title: 'Crochet Sushi',
+                                          description: 'University student work',
+                                          age_category: 'adult'
+)
+lonnie_student_work = StudentWork.create!(title: 'Illustrated Embrodery',
+                                          description: 'University student work',
+                                          age_category: 'adult'
+)
 
 # BlogPost
 blog_post = BlogPost.create!(title: 'Another Post',
@@ -199,13 +271,33 @@ blog_post = BlogPost.create!(title: 'Another Post',
                               author: karin1.name,
                               user_id: karin1.id
 )
+blog_post1 = BlogPost.create!(title: 'Post',
+                              body: "Post about an artshow",
+                              author: karin1.name,
+                              user_id: karin1.id
+)
 
 # Tag
-map_tag = Tag.create!(title: 'stitching')
+stitching_tag = Tag.create!(title: 'stitching')
+daily_post_tag = Tag.create!(title: 'daily post')
+map_tag = Tag.create!(title: 'maps')
+connection_tag = Tag.create!(title: 'connection')
 
 # TagPost
 tag_post = TagPost.create!(tag_id: map_tag.id,
                           blog_post_id: blog_post.id
+)
+tag_post1 = TagPost.create!(tag_id: stitching_tag.id,
+                          blog_post_id: blog_post.id
+)
+tag_post2 = TagPost.create!(tag_id: connection_tag.id,
+                          blog_post_id: blog_post1.id
+)
+tag_post3 = TagPost.create!(tag_id: daily_post_tag.id,
+                          blog_post_id: blog_post1.id
+)
+tag_post4 = TagPost.create!(tag_id: map_tag.id,
+                          blog_post_id: blog_post1.id
 )
 
 # tool

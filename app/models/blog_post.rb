@@ -7,8 +7,8 @@ class BlogPost < ApplicationRecord
 
   has_many :tag_posts, dependent: :destroy
   has_many :tags, through: :tag_posts, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
   belongs_to :user
-  # has_many :responses
 
   def self.total_blog_posts
     BlogPost.all.count
@@ -36,12 +36,11 @@ class BlogPost < ApplicationRecord
   end
 
   def self.format_monthly_blog
-    # BlogPost.select('blog_posts.*').group("date_trunc('day', created_at)", :id).pluck('blog_posts.*')
-    # self.find_by_month.uniq.map do |month_group|
-      # month_group.strftime("%B %Y")
-    # end
     blog_ids_by_date = {}
-    BlogPost.select(:created_at).group(:created_at).pluck(:created_at).map do |date|
+    BlogPost.select(:created_at)
+            .group(:created_at)
+            .pluck(:created_at)
+            .map do |date|
       blog_ids_by_date[(BlogPost.find_by(created_at: date)).id] = [date.strftime("%m"), date.strftime("%Y")]
     end
     return blog_ids_by_date
@@ -49,5 +48,9 @@ class BlogPost < ApplicationRecord
 
   def self.find_blogs_by_tag(tag_id)
     BlogPost.joins(:tags).where(tags: {id: tag_id})
+  end
+
+  def find_month_year
+    self.created_at.strftime("%m %Y").split
   end
 end

@@ -33,13 +33,13 @@ Rails.application.routes.draw do
     end
 
     scope controller: :artist_statements, module: 'user' do
-      get '/user/:user_id/artist_statement/new' => :new
-      get '/user/:user_id/artist_statement/:id' => :show
-      get '/user/artist_statement' => :index
-      post '/user/:user_id/artist_statement' => :create
-      get '/user/:user_id/artist_statement/:id/edit' => :edit
-      post '/user/:user_id/artist_statement/:id/edit' => :update
-      delete '/user/:user_id/artist_statement/:id' => :destroy
+      get '/user/:user_id/artist_statements/new' => :new
+      get '/user/:user_id/artist_statements/:id' => :show
+      get '/user/artist_statements' => :index
+      post '/user/:user_id/artist_statements' => :create
+      get '/user/:user_id/artist_statements/:id/edit' => :edit
+      post '/user/:user_id/artist_statements/:id/edit' => :update
+      delete '/user/:user_id/artist_statements/:id' => :destroy
     end
 
     scope controller: :artist_stories, module: 'user' do
@@ -51,6 +51,17 @@ Rails.application.routes.draw do
       post '/user/:user_id/artist_stories/:id/edit' => :update
       delete '/user/:user_id/artist_stories/:id' => :destroy
     end
+
+    # scope controller: :orders, module: 'user' do
+    #   get '/user/:user_id/orders/new' => :new
+    #   get '/user/:user_id/orders/:id' => :show
+    #   get '/user/orders' => :index
+    #   post '/user/:user_id/orders' => :create
+    #   get '/user/:user_id/orders/:id/edit' => :edit
+    #   post '/user/:user_id/orders/:id/edit' => :update
+    #   delete '/user/:user_id/orders/:id' => :destroy
+    # end
+
     scope controller: :tags, module: 'posts' do
       get '/posts/:blog_post_id/tags/new' => :new, :as => :post_tag_new
       get '/posts/:blog_post_id/tags/:id' => :show, :as => :post_tag
@@ -59,6 +70,16 @@ Rails.application.routes.draw do
       get '/posts/:blog_post_id/tags/:id/edit' => :edit, :as => :post_tag_edit
       post '/posts/:blog_post_id/tags/:id/edit' => :update, :as => :post_tag_update
       delete '/posts/:blog_post_id/tags/:id' => :destroy, :as => :post_tag_delete
+    end
+
+    scope controller: :post_comments, module: 'posts' do
+      # get '/posts/:blog_post_id/post_comments/new' => :new, :as => :post_post_comment_new
+      get '/posts/:blog_post_id/post_comments/:id' => :show, :as => :post_post_comment
+      get '/posts/post_comments' => :index, :as => :post_post_comments
+      # post '/posts/:blog_post_id/post_comments' => :create, :as => :post_post_comment_create
+      get '/posts/:blog_post_id/post_comments/:id/edit' => :edit, :as => :post_post_comment_edit
+      post '/posts/:blog_post_id/post_comments/:id/edit' => :update, :as => :post_post_comment_update
+      delete '/posts/:blog_post_id/post_comments/:id' => :destroy, :as => :post_post_comment_delete
     end
 
     resources :student_works
@@ -97,7 +118,7 @@ Rails.application.routes.draw do
       get '/edit_password' => :edit_password
       get '/profile_edit/:user_id' => :profile_edit
     end
-    resource :orders do
+    resources :orders do
       patch '/:id/ship', action: :ship
       get '/:id/fulfill/:order_item_id', action: :fulfill
     end
@@ -147,12 +168,12 @@ Rails.application.routes.draw do
   end
 
   resource :cart, only: [:show], controller: 'cart' do
-    post '/classroom/:classroom_id', :action => 'add_item'
-    post '/clothing/:clothing_id', :action => 'add_item'
-    post '/artwork/:artwork_id', :action => 'add_item'
+    post 'more/classroom/:classroom_id', :action => 'add_item'
+    patch 'more/clothing/:clothing_id', :action => 'add_item'
+    patch 'more/artwork/:artwork_id', :action => 'add_item'
     delete '', :action => 'empty'
-    patch ':change/:item_id', :action => 'update_quantity'
-    delete ':item_id', :action => 'remove_item'
+    patch ':change/:item_type/:item_id', :action => 'update_quantity'
+    delete '/:item_type/:item_id', :action => 'remove_item'
   end
 
   namespace :artwork do
@@ -174,16 +195,25 @@ Rails.application.routes.draw do
   end
   resources :socials
   resources :commission_blooming_maps
-  resources :student_works, only: [:show, :index], controller: 'student_works' do
-    collection do
-      get '/student_works/youth' => :youth, :as => :youth_student_work
-      get '/student_works/adult' => :adult, :as => :adult_student_work
-    end
+  scope controller: :student_works do
+    get '/student_works/youth' => :youth, :as => :youth_student_work
+    get '/student_works/adult' => :adult, :as => :adult_student_work
+    get '/student_works' => :index
+    get '/student_works/:id' => :show
   end
   resources :artwork_statements
   resources :blog_posts, only: [:index, :show]
   scope controller: :blog_posts, only: [:index, :show] do
     get '/blog_posts/:id/blog_type/:tag_id', :action => :blog_type, :as => :blog_type
     get '/blog_posts/monthly_blogs/:month_id/:year_id', :action => :monthly_blogs, :as => :monthly_blogs
+  end
+  scope controller: :post_comments, module: 'blog_post' do
+    get '/blog_post/:blog_post_id/post_comments/new' => :new, :as => :blog_post_comments_new
+    get '/blog_post/:blog_post_id/post_comments/:id' => :show, :as => :blog_post_comment
+    get '/blog_post/post_comments' => :index, :as => :blog_post_comments
+    post '/blog_post/:blog_post_id/post_comments' => :create, :as => :blog_post_comments_create
+    get '/blog_post/:blog_post_id/post_comments/:id/edit' => :edit, :as => :blog_post_comments_edit
+    post '/blog_post/:blog_post_id/post_comments/:id/edit' => :update, :as => :blog_post_comments_update
+    delete '/blog_post/:blog_post_id/post_comments/:id' => :destroy, :as => :blog_post_comments_delete
   end
 end
