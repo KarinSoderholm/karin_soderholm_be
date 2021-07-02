@@ -51,6 +51,17 @@ Rails.application.routes.draw do
       post '/user/:user_id/artist_stories/:id/edit' => :update
       delete '/user/:user_id/artist_stories/:id' => :destroy
     end
+
+    # scope controller: :orders, module: 'user' do
+    #   get '/user/:user_id/orders/new' => :new
+    #   get '/user/:user_id/orders/:id' => :show
+    #   get '/user/orders' => :index
+    #   post '/user/:user_id/orders' => :create
+    #   get '/user/:user_id/orders/:id/edit' => :edit
+    #   post '/user/:user_id/orders/:id/edit' => :update
+    #   delete '/user/:user_id/orders/:id' => :destroy
+    # end
+
     scope controller: :tags, module: 'posts' do
       get '/posts/:blog_post_id/tags/new' => :new, :as => :post_tag_new
       get '/posts/:blog_post_id/tags/:id' => :show, :as => :post_tag
@@ -107,7 +118,7 @@ Rails.application.routes.draw do
       get '/edit_password' => :edit_password
       get '/profile_edit/:user_id' => :profile_edit
     end
-    resource :orders do
+    resources :orders do
       patch '/:id/ship', action: :ship
       get '/:id/fulfill/:order_item_id', action: :fulfill
     end
@@ -157,12 +168,12 @@ Rails.application.routes.draw do
   end
 
   resource :cart, only: [:show], controller: 'cart' do
-    post '/classroom/:classroom_id', :action => 'add_item'
-    post '/clothing/:clothing_id', :action => 'add_item'
-    post '/artwork/:artwork_id', :action => 'add_item'
+    post 'more/classroom/:classroom_id', :action => 'add_item'
+    patch 'more/clothing/:clothing_id', :action => 'add_item'
+    patch 'more/artwork/:artwork_id', :action => 'add_item'
     delete '', :action => 'empty'
-    patch ':change/:item_id', :action => 'update_quantity'
-    delete ':item_id', :action => 'remove_item'
+    patch ':change/:item_type/:item_id', :action => 'update_quantity'
+    delete '/:item_type/:item_id', :action => 'remove_item'
   end
 
   namespace :artwork do
