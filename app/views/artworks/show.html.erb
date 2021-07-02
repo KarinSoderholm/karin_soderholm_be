@@ -114,7 +114,7 @@
     </section>
   </div>
 
-  <% if @artwork.available %>
+  <% if @artwork.available && !current_admin? %>
     <div class="artwork-button-show">
       <%= button_to 'Buy Me!', "/cart/more/artwork/#{@artwork.id}", method: :patch %>
     </div>

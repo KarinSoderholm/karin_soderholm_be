@@ -109,7 +109,7 @@
   </div>
 </div>
 
-  <% if @clothing.available %>
+  <% if @clothing.available && !current_admin? %>
     <section class="clothing-button-show">
       <%= button_to 'Buy Me!', "/cart/more/clothing/#{@clothing.id}", method: :patch %>
     </section>
