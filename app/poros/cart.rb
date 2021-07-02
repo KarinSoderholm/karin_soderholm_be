@@ -7,22 +7,39 @@ class Cart
   end
 
   def find_item(item_hash)
+    # binding.pry
     if item_hash.keys.include?(:classroom)
-     item = Classroom.find(item_hash[:classroom])
+      find_clasroom
+     # item = Classroom.find(item_hash[:classroom])
     elsif item_hash.keys.include?(:artwork)
-     item = Artwork.find(item_hash[:artwork])
+      find_artwork
+     # item = Artwork.find(item_hash[:artwork])
     elsif item_hash.keys.include?(:clothing)
-      item = Clothing.find(item_hash[:clothing])
+      find_object
+      # item = Clothing.find(item_hash[:clothing])
     end
+  end
+
+  def find_classroom
+    Classroom.find(item_hash[:classroom])
+  end
+
+  def find_artwork
+    Artwork.find(item_hash[:artwork])
+  end
+
+  def find_object
+    Clothing.find(item_hash[:clothing])
   end
 
   def add_item(item)
     # i want this 'item' to be a hash to tack the type of item i'm keeping
+    # example: item = {{:clothing=>1}=>2}. Which means that Clothing.id ==1 has 2 instances of that in the Cart
     @contents[item] += 1
   end
 
-  def less_item(item)
-    @contents[item] -= 1
+  def less_item(item_type, item_id)
+    @contents[{item_type.to_sym => item_id.to_i}] -= 1
   end
 
   def count
@@ -35,7 +52,6 @@ class Cart
     end
   end
 
-
   def grand_total
     grand_total = 0.0
     @contents.each do |item_hash, quantity|
@@ -45,16 +61,17 @@ class Cart
     grand_total
   end
 
-  def count_of(item)
-    @contents[item.to_s]
+  def count_of(item_hash)
+    @contents[item_hash]
   end
 
   def subtotal_of(item_hash)
     @contents[item_hash] * find_item(item_hash).cost
   end
 
-  def limit_reached?(item)
-    false
-    # count_of(item_id) == find_item(item_id).inventory
+  def limit_reached?(item_id, item_type)
+    hash = {}
+    hash[item_type.to_sym] = item_id.to_i
+    count_of(hash) >= find_item(hash).inventory
   end
 end

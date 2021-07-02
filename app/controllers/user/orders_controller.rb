@@ -19,6 +19,9 @@ class User::OrdersController < ApplicationController
             quantity: quantity,
             price: Artwork.find(item_hash[:artwork]).cost
             })
+          new_quantity = Artwork.find(item_hash[:artwork]).inventory - quantity
+          Artwork.find(item_hash[:artwork]).update(inventory: new_quantity)
+          Artwork.find(item_hash[:artwork]).set_availability_based_on_inventory
         elsif item_hash.keys.include?(:classroom)
           order.order_classrooms.create({
             classroom_id: Classroom.find(item_hash[:classroom]).id,
@@ -31,6 +34,9 @@ class User::OrdersController < ApplicationController
             quantity: quantity,
             price: Clothing.find(item_hash[:clothing]).cost
             })
+          new_quantity = Clothing.find(item_hash[:clothing]).inventory - quantity
+          Clothing.find(item_hash[:clothing]).update(inventory: new_quantity)
+          Clothing.find(item_hash[:clothing]).set_availability_based_on_inventory
         end
       end
     session.delete(:cart)
