@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
   def login
     user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    if user.authenticate(params[:password]) #user &&
       login_redirect(user)
     else
       flash.now[:notice] = 'Your email or password was incorrect!'

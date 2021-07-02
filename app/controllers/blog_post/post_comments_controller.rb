@@ -9,15 +9,14 @@ class BlogPost::PostCommentsController < ApplicationController
       email = Email.create(name: params[:guest_name],
                             email_address: params[:guest_email])
     end
-    if !current_user
-      binding.pry
-      guest_user = GuestUser.new
+    if !current_user ||!current_admin?
+      guest_user = GuestUser.new(params[:guest_name], params[:guest_email])
     end
 
     if email
       comment = PostComment.new(comment_params)
       blog_post = BlogPost.find(params[:blog_post_id])
-      binding.pry
+
       if comment.save
         flash.now[:success] = "you commented"
         if params[:route_back_to] == 'monthly'
