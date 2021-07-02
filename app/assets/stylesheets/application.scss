@@ -5669,6 +5669,63 @@ body {
   align-content: space-around;
   justify-content: center;
 }
+// admin#order#show
+.admin-order-layout-show{
+  display: flex;
+}
+.admin-order-order-number{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: flex-end;
+  justify-content: space-around;
+  align-items: center;
+}
+.admin-order-customer-details-show{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+}
+.admin-order-customer-name{
+  display: flex;
+}
+.admin-order-customer-email{
+  display: flex;
+}
+.admin-order-customer-address{
+  display: flex;
+}
+.admin-order-details-show{
+  display: flex;
+}
+.admin-order-type-show{
+
+}
+.admin-order-total{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: flex-end;
+}
+.admin-order-total text {
+  display: flex;
+}
+.admin-order-total h2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+  font-stretch: ultra-expanded;
+  font-weight: 700;
+}
+
 // admin artwork index
 .new-artwork-button{
   display: flex;
