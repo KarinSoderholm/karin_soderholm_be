@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
   def login_redirect(user)
     session[:user_id] = user.id
     if current_admin?
-      redirect_to admin_dashboard_index_path
+      redirect_to rails_admin_path
     else
       redirect_to profile_path
     end
