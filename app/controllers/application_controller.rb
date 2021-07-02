@@ -10,7 +10,8 @@ class ApplicationController < ActionController::Base
                 :find_twitter,
                 :find_instagram,
                 :find_linked_in,
-                :find_pinterest
+                :find_pinterest,
+                :guest_user
 
   def cart
     @cart ||= Cart.new(session[:cart])
@@ -23,8 +24,8 @@ class ApplicationController < ActionController::Base
   end
 
   def guest_user
-    @guest ||= Guest.new(name: 'Guest User', email: 'guest@example.com')
-    # OpenStruct.new(name: "Guest User", first_name: "Guest", last_name: "User", email: "guest@example.com")
+    @guest_user ||= GuestUser.new('Guest User', 'guest@example.com')
+    OpenStruct.new(name: "Guest User", first_name: "Guest", last_name: "User", email: "guest@example.com")
   end
   def current_admin?
     current_user && current_user.admin?
