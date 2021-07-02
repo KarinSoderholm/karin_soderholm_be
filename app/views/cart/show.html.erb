@@ -83,9 +83,11 @@
           </ul>
         </div>
       </li>
-      <li class="page-collection">
-        <%= link_to 'my orders', '/profile/orders' %>
-      </li>
+      <% if current_user %>
+        <li class="page-collection">
+          <%= link_to 'my orders', '/profile/orders' %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
