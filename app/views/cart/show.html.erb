@@ -118,16 +118,6 @@
         <% end %>
         <p><strong>Price:</strong> <%= number_to_currency(item.cost) %></p>
         <p><strong>Quantity:</strong> <%= quantity %></p>
-        <%# <% if cart.applied_discount(item) %>
-          <%# <!-- <p><strong>Merchant Discount: </strong><%= cart.applied_discount(item) %>
-        <%# <% elsif item.discounts.empty? %>
-          <!-- <p>There are no discounts available at this moment</p> -->
-        <%# <% else %>
-          <!-- <p><strong>Merchant Discount(s) Available:</strong></p> -->
-          <%# <% item.discounts.each do |discount| %>
-            <%# <!-- <p><%= discount.description %>
-          <%# <% end %>
-        <%# <% end %>
         <p>Subtotal: <%= number_to_currency(cart.subtotal_of(item_hash)) %></p>
 
         <%= button_to 'More of This!', "/cart/more/#{item.find_item_type}/#{item.id}", method: :patch unless cart.limit_reached?(item.id, item.find_item_type)  %>

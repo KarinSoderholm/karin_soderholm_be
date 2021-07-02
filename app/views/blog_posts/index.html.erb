@@ -136,7 +136,7 @@
               <% end %>
             </section>
             <section class="blog-add-a-comment-index">
-              <% if !current_user || !guest_user %>
+              <% if !current_user || !guest_user || !current_admin? %>
                 <section class="comment-blog-form", id="comment-form">
                   <%= form_tag "/blog_post/#{blog.id}/post_comments", remote: true do %>
                     <%= text_area_tag :comment, nil, placeholder: 'comment on the blog post', rows: 3, cols: 70 %><br>
