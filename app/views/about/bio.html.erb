@@ -22,16 +22,21 @@
       </li>
       <li class="folder-collection">
         <div class="quicknav-menu-bar-container" hover="myFunction(this)">
-          <%= link_to 'all art', artworks_path %>
+          <%= link_to 'art', artwork_collections_path %>
         </div>
         <div class="quicknav-dropdown-content">
           <ul>
             <li class="page-collection">
-              <%= link_to '100 Day Project: Maps', "/artwork/collections/1"%>
+              <%= link_to 'art: by collection', artwork_collections_path %>
             </li>
             <li class="page-collection">
-              <%= link_to '100 Day Project: Embroidery', "/artwork/collections/3"%>
+              <%= link_to 'all art', artworks_path %>
             </li>
+            <% Collection.find_artworks.map do |collection| %>
+              <li class="page-collection">
+                <%= link_to collection.name, "/artwork/collections/#{collection.id}" %>
+              </li>
+            <% end %>
           </ul>
         </div>
       </li>
@@ -41,6 +46,9 @@
         </div>
         <div class="quicknav-dropdown-content">
           <ul>
+            <li class="page-collection">
+              <%= link_to 'objects: by collection', clothings_path %>
+            </li>
             <li class="page-collection">
               <%= link_to 'all objects', clothings_path %>
             </li>
@@ -69,9 +77,28 @@
           </ul>
         </div>
       </li>
+      <li class="folder-collection">
+        <div class="quicknav-menu-bar-container" hover="myFunction(this)">
+          <%= link_to 'student works', student_works_path %>
+        </div>
+        <div class="quicknav-dropdown-content">
+          <ul>
+            <li class="page-collection">
+              <%= link_to 'all student works', student_works_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'adult student works', adult_student_work_path %>
+            </li>
+            <li class="page-collection">
+              <%= link_to 'youth student works', youth_student_work_path %>
+            </li>
+          </ul>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
+
 
 <section class="bio-layout">
   <!-- <section class="maker-image"> -->
