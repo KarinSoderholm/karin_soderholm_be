@@ -114,7 +114,11 @@
     </section>
   </div>
 
-  <!-- <div class="artwork-button-show"> -->
-    <%# <%= button_to 'Buy Me!', "/cart/artwork/#{@artwork.id}", method: :post %>
-  <!-- </div> -->
+  <% if @artwork.available %>
+    <div class="artwork-button-show">
+      <%= button_to 'Buy Me!', "/cart/more/artwork/#{@artwork.id}", method: :patch %>
+    </div>
+  <% else %>
+    <h3>This piece of art is not available at this time</h3>
+  <% end %>
 </div>
